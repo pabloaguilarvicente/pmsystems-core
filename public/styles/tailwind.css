@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@import "tailwindcss-primeui";
+@custom-variant dark (&:where(.app-dark, .app-dark *));
+
+@theme {
+    --font-sans: 
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --breakpoint-2xl: 1920px;
+
+    /* Green para success */
+    --color-green-50: #e6f9f1;
+    --color-green-100: #b3f0d7;
+    --color-green-200: #80e7bd;
+    --color-green-300: #4ddea3;
+    --color-green-400: #26d58f;
+    --color-green-500: #00c875;
+    --color-green-600: #00a660;
+    --color-green-700: #00944d;
+    --color-green-800: #007a3d;
+    --color-green-900: #00602e;
+    --color-green-950: #004621;
+
+    /* Orange para warn */
+    --color-orange-50: #fefbf3;
+    --color-orange-100: #fdf5dd;
+    --color-orange-200: #fbefc7;
+    --color-orange-300: #fae9b1;
+    --color-orange-400: #f9e3a0;
+    --color-orange-500: #f9d76f;
+    --color-orange-600: #f8cf4d;
+    --color-orange-700: #f7c72b;
+    --color-orange-800: #ddb025;
+    --color-orange-900: #b8911f;
+    --color-orange-950: #937319;
+
+    /* Red para danger */
+    --color-red-50: #fce8ea;
+    --color-red-100: #f7bfc5;
+    --color-red-200: #f296a0;
+    --color-red-300: #ed6d7b;
+    --color-red-400: #e94f61;
+    --color-red-500: #dc3545;
+    --color-red-600: #c82333;
+    --color-red-700: #bd2130;
+    --color-red-800: #a71d2a;
+    --color-red-900: #8b1824;
+    --color-red-950: #6f131d;
+}

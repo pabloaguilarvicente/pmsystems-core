@@ -1,0 +1,58 @@
+:root {
+    --primary-color: var(--p-primary-color);
+    --primary-color-text: var(--p-primary-contrast-color);
+    --text-color: var(--p-text-color);
+    --text-color-secondary: var(--p-text-muted-color);
+    --surface-border: var(--p-content-border-color);
+    --surface-card: var(--p-content-background);
+    --surface-hover: var(--p-content-hover-background);
+    --surface-overlay: var(--p-overlay-popover-background);
+    --transition-duration: var(--p-transition-duration);
+    --maskbg: var(--p-mask-background);
+    --border-radius: var(--p-content-border-radius);
+    --layout-section-transition-duration: 0.2s;
+    --focus-ring-shadow: var(--p-focus-ring-shadow);
+
+    /* Green */
+    --p-green-50: #e6f9f1 !important;
+    --p-green-100: #b3f0d7 !important;
+    --p-green-200: #80e7bd !important;
+    --p-green-300: #4ddea3 !important;
+    --p-green-400: #26d58f !important;
+    --p-green-500: #00c875 !important;
+    --p-green-600: #00a660 !important;
+    --p-green-700: #00944d !important;
+    --p-green-800: #007a3d !important;
+    --p-green-900: #00602e !important;
+    --p-green-950: #004621 !important;
+
+    /* orange */
+    --p-orange-50: #fefbf3 !important;
+    --p-orange-100: #fdf5dd !important;
+    --p-orange-200: #fbefc7 !important;
+    --p-orange-300: #fae9b1 !important;
+    --p-orange-400: #f9e3a0 !important;
+    --p-orange-500: #f9d76f !important;
+    --p-orange-600: #f8cf4d !important;
+    --p-orange-700: #f7c72b !important;
+    --p-orange-800: #ddb025 !important;
+    --p-orange-900: #b8911f !important;
+    --p-orange-950: #937319 !important;
+
+    /* Red */
+    --p-red-50: #fce8ea !important;
+    --p-red-100: #f7bfc5 !important;
+    --p-red-200: #f296a0 !important;
+    --p-red-300: #ed6d7b !important;
+    --p-red-400: #e94f61 !important;
+    --p-red-500: #dc3545 !important;
+    --p-red-600: #c82333 !important;
+    --p-red-700: #bd2130 !important;
+    --p-red-800: #a71d2a !important;
+    --p-red-900: #8b1824 !important;
+    --p-red-950: #6f131d !important;
+
+    /* Contrats */
+    --p-slate-950: #212121 !important;
+    --p-slate-700: #212121 !important;
+}
