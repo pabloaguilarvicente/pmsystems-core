@@ -28,9 +28,8 @@ interface Breadcrumb {
             </ol>
         </nav>
         <div class="layout-breadcrumb-buttons">
-            <button pButton pRipple type="button" icon="pi pi-cloud-upload" class="p-button-rounded p-button-text p-button-plain"></button>
-            <button pButton pRipple type="button" icon="pi pi-bookmark" class="p-button-rounded p-button-text p-button-plain"></button>
-            <button pButton pRipple type="button" icon="pi pi-power-off" class="p-button-rounded p-button-text p-button-plain"></button>
+            <button pButton pRipple type="button" icon="pi pi-calendar" class="p-button-rounded p-button-text p-button-plain"></button>
+            <button pButton pRipple type="button" icon="pi pi pi-print" class="p-button-rounded p-button-text p-button-plain"></button>
         </div>
     `,
     host: {

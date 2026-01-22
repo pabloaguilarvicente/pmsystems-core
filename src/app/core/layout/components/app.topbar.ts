@@ -13,6 +13,7 @@ import { BadgeModule } from 'primeng/badge';
 import { LayoutService } from '../service/layout.service';
 import { Notifications } from './app.notifications';
 import { Tools } from './app.tools';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: '[app-topbar]',
@@ -29,20 +30,31 @@ import { Tools } from './app.tools';
     BadgeModule,
     Notifications,
     Tools,
+    TooltipModule,
   ],
   template: `
     <div class="layout-topbar-start">
       <a class="layout-topbar-logo" routerLink="/">
         <div class="layout-topbar-logo-full flex items-center gap-2">
-          <img src="images/logos/BLUE01.svg" alt="logo" width="50" />
-          <span class="font-bold whitespace-nowrap">PM Systems</span>
+          <img src="images/logos/{{layoutService.isDarkTheme() ? 'WHITE01.svg' : 'BLUE01.svg'}}" alt="logo" width="50" />
+          <span class="font-bold whitespace-nowrap">PM SYSTEMS</span>
         </div>
 
         <div class="layout-topbar-logo-slim">
-          <img src="images/logos/BLUE01.svg" alt="logo" width="50" />
+          <img src="images/logos/{{layoutService.isDarkTheme() ? 'WHITE01.svg' : 'BLUE01.svg'}}" alt="logo" width="50" />
         </div>
       </a>
-      <a #menuButton class="layout-menu-button" (click)="onMenuButtonClick()">
+      <a
+        #menuButton
+        class="layout-menu-button"
+        (click)="onMenuButtonClick()"
+        pTooltip="Ocultar/Mostrar menú"
+        tooltipPosition="bottom"
+        showDelay="300"
+        [pTooltipPT]="{
+          arrow: { style: { display: 'none' } },
+        }"
+      >
         <i class="pi pi-bars"></i>
       </a>
 
@@ -66,13 +78,16 @@ import { Tools } from './app.tools';
               leaveActiveClass="animate-fadeout"
               [hideOnOutsideClick]="true"
               (click)="focusSearchInput()"
+              pTooltip="Buscar"
+              tooltipPosition="bottom"
+              showDelay="300"
             >
               <i class="pi pi-search"></i>
             </a>
 
             <div class="layout-search-panel !hidden p-input-filled">
               <i class="pi pi-search"></i>
-              <input #searchInput type="text" pInputText placeholder="Search" />
+              <input #searchInput type="text" pInputText placeholder="Buscar" />
               <button
                 pButton
                 pRipple
@@ -94,6 +109,9 @@ import { Tools } from './app.tools';
               leaveToClass="hidden"
               leaveActiveClass="animate-fadeout"
               [hideOnOutsideClick]="true"
+              pTooltip="Notificaciones"
+              tooltipPosition="bottom"
+              showDelay="300"
             >
               <i class="pi pi-bell !align-middle"></i>
             </a>
@@ -109,6 +127,9 @@ import { Tools } from './app.tools';
               leaveToClass="hidden"
               leaveActiveClass="animate-fadeout"
               [hideOnOutsideClick]="true"
+              pTooltip="Herramientas"
+              tooltipPosition="bottom"
+              showDelay="300"
             >
               <i class="pi pi-table"></i>
             </a>
@@ -117,7 +138,12 @@ import { Tools } from './app.tools';
             </div>
           </li>
           <li>
-            <a (click)="onRightMenuButtonClick()">
+            <a
+              (click)="onRightMenuButtonClick()"
+              pTooltip="Actividades"
+              tooltipPosition="bottom"
+              showDelay="300"
+            >
               <i class="pi pi-book"></i>
             </a>
           </li>

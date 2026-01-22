@@ -2,31 +2,20 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Pmsystems</title>
+    <title>PM SYSTEMS</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="styles/layout/preloading.css" />
   </head>
   <body>
     <app-root>
-      <div class="layout-preloader-container">
-        <div class="layout-preloader-content">
-          <svg
-            class="layout-preloader"
-            width="65px"
-            height="65px"
-            viewBox="0 0 66 66"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle
-              class="layout-preloader-path"
-              fill="none"
-              stroke-width="6"
-              stroke-linecap="round"
-              cx="33"
-              cy="33"
-              r="30"
-            ></circle>
+      <div class="preloader-container">
+        <div class="preloader-wrapper">
+          <img src="images/logos/BLUE01.svg" alt="Logo" class="preloader-image" />
+
+          <svg class="preloader-spinner" viewBox="0 0 100 100">
+            <circle class="preloader-circle" cx="50" cy="50" r="45" fill="none" stroke-width="6" />
           </svg>
         </div>
       </div>

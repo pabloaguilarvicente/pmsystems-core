@@ -38,6 +38,13 @@ const MainPreset = definePreset(Aura, {
       },
     },
   },
+  components: {
+    tooltip: {
+      root: {
+        padding: '0.2rem 0.7rem',
+      },
+    },
+  },
 });
 
 export default MainPreset;

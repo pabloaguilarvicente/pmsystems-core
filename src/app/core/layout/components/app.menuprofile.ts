@@ -20,12 +20,12 @@ import { LayoutService } from '../service/layout.service';
   standalone: true,
   imports: [CommonModule, TooltipModule, ButtonModule, RouterModule],
   template: `<button
-      class="cursor-pointer"
+      class="cursor-pointer flex items-center"
       (click)="toggleMenu()"
       pTooltip="Profile"
       [tooltipDisabled]="isTooltipDisabled()"
     >
-      <img src="images/logos/BLUE01.svg" alt="avatar" width="25" class="rounded-sm" />
+      <img src="images/user.jpg" alt="avatar" width="25" class="rounded-sm" />
       <span class="text-start">
         <strong>Pablo Aguilar</strong>
         <small>Software Developer</small>
@@ -33,39 +33,41 @@ import { LayoutService } from '../service/layout.service';
       <i
         class="layout-menu-profile-toggler pi pi-fw"
         [ngClass]="{
-          'pi-angle-down': menuProfilePosition() === 'start' || isHorizontal(),
-          'pi-angle-up': menuProfilePosition() === 'end' && !isHorizontal(),
+          'pi-angle-down':
+            (!menuProfileActive() && (menuProfilePosition() === 'start' || isHorizontal())) ||
+            (menuProfileActive() && menuProfilePosition() === 'end' && !isHorizontal()),
+          'pi-angle-up':
+            (menuProfileActive() && (menuProfilePosition() === 'start' || isHorizontal())) ||
+            (!menuProfileActive() && menuProfilePosition() === 'end' && !isHorizontal()),
         }"
       ></i>
     </button>
 
     <ul *ngIf="menuProfileActive()" [@menu]="isHorizontal() ? 'overlay' : 'inline'">
       <li
-        pTooltip="Settings"
+        pTooltip="Preferencias"
         [tooltipDisabled]="isTooltipDisabled()"
         [routerLink]="['/profile/create']"
       >
         <button class="cursor-pointer" (click)="toggleConfigSidebar()">
           <i class="pi pi-cog pi-fw"></i>
-          <span>Settings</span>
+          <span>Preferencias</span>
         </button>
       </li>
-      <li pTooltip="Profile" [tooltipDisabled]="isTooltipDisabled()">
+      <li pTooltip="Perfil" [tooltipDisabled]="isTooltipDisabled()">
         <button class="cursor-pointer" [routerLink]="['/documentation']">
-          <i class="pi pi-file-o pi-fw"></i>
-          <span>Profile</span>
+          <i class="pi pi-user pi-fw"></i>
+          <span>Perfil</span>
         </button>
       </li>
-      <li pTooltip="Support" [tooltipDisabled]="isTooltipDisabled()">
-        <button class="cursor-pointer" [routerLink]="['/documentation']">
-          <i class="pi pi-compass pi-fw"></i>
-          <span>Support</span>
-        </button>
-      </li>
-      <li pTooltip="Logout" [tooltipDisabled]="isTooltipDisabled()" [routerLink]="['/auth/login2']">
+      <li
+        pTooltip="Cerrar sesión"
+        [tooltipDisabled]="isTooltipDisabled()"
+        [routerLink]="['/auth/login2']"
+      >
         <button class="cursor-pointer" class="p-link">
           <i class="pi pi-power-off pi-fw"></i>
-          <span>Logout</span>
+          <span>Cerrar sesión</span>
         </button>
       </li>
     </ul>`,
