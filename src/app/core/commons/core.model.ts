@@ -7,12 +7,12 @@ export type MenuMode =
   | 'horizontal'
   | 'reveal'
   | 'drawer';
-export type MenuProfileMode = 'start' | 'end';
+export type MenuProfilePosition = 'start' | 'end';
 export type Language = 'es' | 'en';
 
 export interface AppSettings {
   colorScheme: ColorScheme;
   menuMode: MenuMode;
-  menuProfileMode: MenuProfileMode;
+  menuProfileMode: MenuProfilePosition;
   language: Language;
 }

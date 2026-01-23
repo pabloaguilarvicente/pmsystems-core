@@ -6,7 +6,7 @@
     width: 17rem;
     background: var(--menu-bg);
     box-shadow: none;
-    border-right: 1px solid rgba(0, 0, 0, 0.08);
+    border-right: 1px solid var(--border-layout-color);
     display: flex;
     flex-direction: column;
 
@@ -31,7 +31,7 @@
                 align-items: center;
                 font-size: 0.857rem;
                 text-transform: uppercase;
-                font-weight: 700;
+                font-weight: 500;
                 color: var(--root-menuitem-text-color);
                 padding: 1rem 1.5rem 1rem 1rem;
 
@@ -78,15 +78,20 @@
                 position: relative;
                 outline: 0 none;
                 color: var(--menuitem-text-color);
+                font-weight: 100;
+                text-transform: uppercase;
+                font-size: small;
                 cursor: pointer;
                 padding: 0.75rem 1.5rem;
                 transition:
                     background-color var(--transition-duration),
-                    box-shadow var(--transition-duration);
+                    box-shadow var(--transition-duration),
+                    color var(--transition-duration);
 
                 .layout-menuitem-icon {
                     margin-right: 0.5rem;
                     color: var(--menuitem-text-color);
+                    transition: color var(--transition-duration);
                 }
 
                 .layout-submenu-toggler {
@@ -97,8 +102,10 @@
 
                 &.active-route {
                     font-weight: 700;
+                    color: var(--active-menuitem-text-color);
                     .layout-menuitem-icon {
                         font-weight: bolder;
+                        color: var(--active-menuitem-text-color);
                     }
                 }
 

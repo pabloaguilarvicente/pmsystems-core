@@ -1,4 +1,4 @@
-@use '../_sass_variables' as *;
+@use "../_sass_variables" as *;
 
 @media screen and (min-width: $breakpoint) {
     .layout-container {
@@ -211,7 +211,7 @@
                         }
                     }
                 }
-                
+
                 .layout-root-menuitem {
                     margin: 0.75rem 0;
 
@@ -263,12 +263,16 @@
                         top: 0;
                         min-width: 15rem;
                         background-color: var(--menu-bg);
-                        border-radius: var(--border-radius);
+                        border-top-right-radius: var(--border-radius);
+                        border-bottom-right-radius: var(--border-radius);
                         padding: 0.5rem 0;
                         max-height: 20rem;
                         overflow: auto;
                         z-index: 999;
-                        box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+                        box-shadow: none;
+                        border-top: 1px solid var(--border-layout-color);
+                        border-bottom: 1px solid var(--border-layout-color);
+                        border-right: 1px solid var(--border-layout-color);
 
                         &::-webkit-scrollbar {
                             display: none;

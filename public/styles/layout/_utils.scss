@@ -4,8 +4,8 @@
     margin-bottom: 2rem;
     border-radius: 12px;
 
-box-shadow: none;
-border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: none;
+    border: 1px solid var(--border-layout-color);
 
     &:last-child {
         margin-bottom: 0;

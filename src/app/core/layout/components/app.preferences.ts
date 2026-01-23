@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { DrawerModule } from 'primeng/drawer';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { LayoutService } from '../service/layout.service';
-import { Language, MenuMode } from '../../commons/core.model';
+import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.model';
 
 @Component({
   selector: 'app-preferences',
@@ -430,7 +430,7 @@ import { Language, MenuMode } from '../../commons/core.model';
 
           <!-- Menu Profile Section -->
           <div class="flex flex-col gap-3">
-            <span class="font-semibold text-sm">{{ 'layout.menuProfile' | translate }}</span>
+            <span class="font-semibold text-sm">{{ 'layout.profilePosition' | translate }}</span>
             <div class="grid grid-cols-2 gap-4">
               <!-- Start -->
               <div class="flex cursor-pointer flex-col" (click)="menuProfilePosition = 'start'">
@@ -552,7 +552,7 @@ export class AppPreferences {
     return this.layoutService.layoutConfig().menuProfilePosition;
   }
 
-  set menuProfilePosition(val: string) {
+  set menuProfilePosition(val: MenuProfilePosition) {
     this.layoutService.layoutConfig.update((config) => ({
       ...config,
       menuProfilePosition: val,

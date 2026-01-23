@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, inject, ViewChild } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -85,6 +85,18 @@ import { TranslateModule } from '@ngx-translate/core';
       <div class="layout-topbar-actions-start"></div>
       <div class="layout-topbar-actions-end">
         <ul class="layout-topbar-items">
+          <li>
+            <a
+              (click)="toggleFullScreen()"
+              [pTooltip]="
+                (isFullScreen ? 'layout.exit_full_screen' : 'layout.full_screen') | translate
+              "
+              tooltipPosition="bottom"
+              showDelay="300"
+            >
+              <i [class]="isFullScreen ? 'pi pi-window-minimize' : 'pi pi-window-maximize'"></i>
+            </a>
+          </li>
           <li class="layout-topbar-search">
             <a
               pStyleClass="@next"
@@ -182,13 +194,22 @@ import { TranslateModule } from '@ngx-translate/core';
   `,
 })
 export class AppTopbar {
-  layoutService = inject(LayoutService);
+  public readonly layoutService = inject(LayoutService);
+  private cdr = inject(ChangeDetectorRef);
+  public isFullScreen = false;
 
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
   @ViewChild('menuButton') menuButton!: ElementRef<HTMLButtonElement>;
 
   @ViewChild('mobileMenuButton') mobileMenuButton!: ElementRef<HTMLButtonElement>;
+
+  ngOnInit() {
+    document.addEventListener('fullscreenchange', () => {
+      this.isFullScreen = !!document.fullscreenElement;
+      this.cdr.detectChanges();
+    });
+  }
 
   onMenuButtonClick() {
     this.layoutService.onMenuToggle();
@@ -223,5 +244,13 @@ export class AppTopbar {
       ...val,
       topbarMenuActive: !val.topbarMenuActive,
     }));
+  }
+
+  toggleFullScreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
   }
 }

@@ -6,22 +6,24 @@ import {
   signal,
   Signal,
   WritableSignal,
+  DestroyRef,
 } from '@angular/core';
 import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { MenuItem } from 'primeng/api';
 import { LocalStorageService } from '../../services/localstorage.service';
-import { AppSettings, Language, MenuMode, MenuProfileMode } from '../../commons/core.model';
+import { AppSettings, Language, MenuMode, MenuProfilePosition } from '../../commons/core.model';
 import { LOCAL_STORAGE_KEYS } from '../../commons/core.constants';
 import { TranslateService } from '@ngx-translate/core';
 
-export interface layoutConfig {
+export interface LayoutConfig {
   primary: string;
-  surface: string | undefined | null;
+  surface: string | null;
   darkTheme: boolean;
   menuMode: MenuMode;
-  menuTheme: string;
-  topbarTheme: string;
-  menuProfilePosition: string;
+  menuTheme: 'light' | 'dark';
+  topbarTheme: 'light' | 'dark';
+  menuProfilePosition: MenuProfilePosition;
   language: Language;
 }
 
@@ -34,7 +36,7 @@ export interface LayoutState {
   rightMenuActive: boolean;
   topbarMenuActive: boolean;
   sidebarActive: boolean;
-  activeMenuItem: any;
+  activeMenuItem: MenuItem | null;
   overlaySubmenuActive: boolean;
   anchored: boolean;
   menuProfileActive: boolean;
@@ -54,10 +56,12 @@ export interface TabCloseEvent {
   providedIn: 'root',
 })
 export class LayoutService {
-  private localStorageService = inject(LocalStorageService);
-  private translate = inject(TranslateService);
+  private readonly localStorageService = inject(LocalStorageService);
+  private readonly translate = inject(TranslateService);
+  private readonly destroyRef = inject(DestroyRef);
 
-  _config: layoutConfig = {
+  // Default configuration
+  private readonly DEFAULT_CONFIG: LayoutConfig = {
     primary: 'primary',
     surface: null,
     darkTheme: false,
@@ -68,7 +72,7 @@ export class LayoutService {
     language: 'es',
   };
 
-  _state: LayoutState = {
+  private readonly DEFAULT_STATE: LayoutState = {
     staticMenuDesktopInactive: false,
     overlayMenuActive: false,
     configSidebarVisible: false,
@@ -83,107 +87,127 @@ export class LayoutService {
     menuProfileActive: false,
   };
 
-  layoutConfig = signal<layoutConfig>(this._config);
+  // Signals
+  layoutConfig = signal<LayoutConfig>(this.DEFAULT_CONFIG);
+  layoutState = signal<LayoutState>(this.DEFAULT_STATE);
+  transitionComplete = signal<boolean>(false);
 
-  layoutState = signal<LayoutState>(this._state);
+  // Subjects
+  private readonly configUpdate = new Subject<LayoutConfig>();
+  private readonly overlayOpen = new Subject<void>();
+  private readonly menuSource = new Subject<MenuChangeEvent>();
+  private readonly resetSource = new Subject<void>();
+  private readonly languageChange = new Subject<Language>();
 
-  private configUpdate = new Subject<layoutConfig>();
+  // Observables
+  readonly menuSource$ = this.menuSource.asObservable();
+  readonly resetSource$ = this.resetSource.asObservable();
+  readonly configUpdate$ = this.configUpdate.asObservable();
+  readonly overlayOpen$ = this.overlayOpen.asObservable();
+  readonly languageChange$ = this.languageChange.asObservable();
 
-  private overlayOpen = new Subject<any>();
-
-  private menuSource = new Subject<MenuChangeEvent>();
-
-  private resetSource = new Subject();
-
-  private languageChange = new Subject<Language>();
-
-  menuSource$ = this.menuSource.asObservable();
-
-  resetSource$ = this.resetSource.asObservable();
-
-  configUpdate$ = this.configUpdate.asObservable();
-
-  overlayOpen$ = this.overlayOpen.asObservable();
-
-  languageChange$ = this.languageChange.asObservable();
-
-  isSidebarActive: Signal<boolean> = computed(
+  // Computed signals
+  readonly isSidebarActive: Signal<boolean> = computed(
     () => this.layoutState().overlayMenuActive || this.layoutState().staticMenuMobileActive,
   );
 
-  isDarkTheme: Signal<boolean> = computed(() => this.layoutConfig().darkTheme);
+  readonly isDarkTheme: Signal<boolean> = computed(() => this.layoutConfig().darkTheme);
 
-  isOverlay: Signal<boolean> = computed(() => this.layoutConfig().menuMode === 'overlay');
+  readonly isOverlay: Signal<boolean> = computed(() => this.layoutConfig().menuMode === 'overlay');
 
-  isSlim: Signal<boolean> = computed(() => this.layoutConfig().menuMode === 'slim');
+  readonly isSlim: Signal<boolean> = computed(() => this.layoutConfig().menuMode === 'slim');
 
-  isSlimPlus: Signal<boolean> = computed(() => this.layoutConfig().menuMode === 'slim-plus');
+  readonly isSlimPlus: Signal<boolean> = computed(
+    () => this.layoutConfig().menuMode === 'slim-plus',
+  );
 
-  isHorizontal: Signal<boolean> = computed(() => this.layoutConfig().menuMode === 'horizontal');
+  readonly isHorizontal: Signal<boolean> = computed(
+    () => this.layoutConfig().menuMode === 'horizontal',
+  );
 
-  currentLanguage: Signal<Language> = computed(() => this.layoutConfig().language);
+  readonly isStatic: Signal<boolean> = computed(() => this.layoutConfig().menuMode === 'static');
 
-  transitionComplete: WritableSignal<boolean> = signal<boolean>(false);
+  readonly currentLanguage: Signal<Language> = computed(() => this.layoutConfig().language);
 
-  isSidebarStateChanged = computed(() => {
-    const layoutConfig = this.layoutConfig();
-    return (
-      layoutConfig.menuMode === 'horizontal' ||
-      layoutConfig.menuMode === 'slim' ||
-      layoutConfig.menuMode === 'slim-plus'
-    );
+  readonly isCompactMenuMode = computed(() => {
+    const mode = this.layoutConfig().menuMode;
+    return mode === 'horizontal' || mode === 'slim' || mode === 'slim-plus';
   });
 
   private initialized = false;
+  private lastSavedConfig: string | null = null;
 
   constructor() {
-    // Cargar configuración desde localStorage
     this.loadConfigFromStorage();
+    this.setupEffects();
+    this.setupCleanup();
+    this.setupDebouncedSave();
+  }
 
-    effect(() => {
-      const config = this.layoutConfig();
-      if (config) {
-        this.onConfigUpdate();
-        // Guardar en localStorage cada vez que cambia la configuración
-        this.saveConfigToStorage();
-      }
-    });
-
+  private setupEffects(): void {
+    // Effect para cambios de configuración
     effect(() => {
       const config = this.layoutConfig();
 
-      if (!this.initialized || !config) {
-        this.initialized = true;
-        return;
+      if (!config) return;
+
+      // Notificar cambios
+      this.configUpdate.next(config);
+
+      // Manejar transición de tema oscuro si ya fue inicializado
+      if (this.initialized) {
+        this.handleDarkModeTransition(config);
       }
 
-      this.handleDarkModeTransition(config);
+      this.initialized = true;
     });
 
+    // Effect para reset cuando cambia el modo de menú
     effect(() => {
-      this.isSidebarStateChanged() && this.reset();
+      if (this.isCompactMenuMode()) {
+        this.reset();
+      }
     });
+  }
+
+  private setupCleanup(): void {
+    this.destroyRef.onDestroy(() => {
+      this.configUpdate.complete();
+      this.overlayOpen.complete();
+      this.menuSource.complete();
+      this.resetSource.complete();
+      this.languageChange.complete();
+    });
+  }
+
+  private setupDebouncedSave(): void {
+    // Guardar configuración con debounce para evitar escrituras excesivas
+    this.configUpdate$.pipe(debounceTime(300)).subscribe(() => this.saveConfigToStorage());
   }
 
   private loadConfigFromStorage(): void {
     const savedSettings = this.localStorageService.get<AppSettings>(LOCAL_STORAGE_KEYS.appSettings);
 
-    if (savedSettings) {
-      const language = savedSettings.language || 'es';
-
-      this.layoutConfig.update((config) => ({
-        ...config,
-        darkTheme: savedSettings.colorScheme === 'dark',
-        menuMode: savedSettings.menuMode,
-        menuTheme: savedSettings.colorScheme === 'dark' ? 'dark' : 'light',
-        topbarTheme: savedSettings.colorScheme === 'dark' ? 'dark' : 'light',
-        menuProfilePosition: savedSettings.menuProfileMode,
-        language: language,
-      }));
-
-      this.translate.use(language);
+    if (!savedSettings) {
       this.toggleDarkMode();
+      return;
     }
+
+    const isDark = savedSettings.colorScheme === 'dark';
+    const language = savedSettings.language || 'es';
+
+    this.layoutConfig.set({
+      ...this.DEFAULT_CONFIG,
+      darkTheme: isDark,
+      menuMode: savedSettings.menuMode,
+      menuTheme: isDark ? 'dark' : 'light',
+      topbarTheme: isDark ? 'dark' : 'light',
+      menuProfilePosition: savedSettings.menuProfileMode,
+      language,
+    });
+
+    this.translate.use(language);
+    this.toggleDarkMode();
   }
 
   private saveConfigToStorage(): void {
@@ -191,14 +215,20 @@ export class LayoutService {
     const themeSettings: AppSettings = {
       colorScheme: config.darkTheme ? 'dark' : 'light',
       menuMode: config.menuMode,
-      menuProfileMode: config.menuProfilePosition as MenuProfileMode,
+      menuProfileMode: config.menuProfilePosition,
       language: config.language,
     };
 
-    this.localStorageService.set(LOCAL_STORAGE_KEYS.appSettings, themeSettings);
+    const currentConfigStr = JSON.stringify(themeSettings);
+
+    // Solo guardar si la configuración cambió
+    if (this.lastSavedConfig !== currentConfigStr) {
+      this.localStorageService.set(LOCAL_STORAGE_KEYS.appSettings, themeSettings);
+      this.lastSavedConfig = currentConfigStr;
+    }
   }
 
-  private handleDarkModeTransition(config: layoutConfig): void {
+  private handleDarkModeTransition(config: LayoutConfig): void {
     if ((document as any).startViewTransition) {
       this.startViewTransition(config);
     } else {
@@ -207,20 +237,21 @@ export class LayoutService {
     }
   }
 
-  private startViewTransition(config: layoutConfig): void {
+  private startViewTransition(config: LayoutConfig): void {
     const transition = (document as any).startViewTransition(() => {
       this.toggleDarkMode(config);
     });
 
     transition.ready
-      .then(() => {
-        this.onTransitionEnd();
-      })
-      .catch(() => {});
+      .then(() => this.onTransitionEnd())
+      .catch(() => {
+        // Silenciar errores de transición
+      });
   }
 
-  toggleDarkMode(config?: layoutConfig): void {
-    const _config = config || this.layoutConfig();
+  private toggleDarkMode(config?: LayoutConfig): void {
+    const _config = config ?? this.layoutConfig();
+
     if (_config.darkTheme) {
       document.documentElement.classList.add('app-dark');
     } else {
@@ -228,85 +259,119 @@ export class LayoutService {
     }
   }
 
+  private onTransitionEnd(): void {
+    this.transitionComplete.set(true);
+    setTimeout(() => {
+      this.transitionComplete.set(false);
+    }, 0);
+  }
+
+  // Public API
   changeLanguage(language: Language): void {
     this.layoutConfig.update((config) => ({
       ...config,
       language,
     }));
+
     this.languageChange.next(language);
     this.translate.use(language);
   }
 
-  private onTransitionEnd() {
-    this.transitionComplete.set(true);
-    setTimeout(() => {
-      this.transitionComplete.set(false);
-    });
-  }
-
-  onMenuToggle() {
+  onMenuToggle(): void {
     if (this.isOverlay()) {
       this.layoutState.update((prev) => ({
         ...prev,
-        overlayMenuActive: !this.layoutState().overlayMenuActive,
+        overlayMenuActive: !prev.overlayMenuActive,
       }));
 
       if (this.layoutState().overlayMenuActive) {
-        this.overlayOpen.next(null);
+        this.overlayOpen.next();
       }
     }
 
     if (this.isDesktop()) {
       this.layoutState.update((prev) => ({
         ...prev,
-        staticMenuDesktopInactive: !this.layoutState().staticMenuDesktopInactive,
+        staticMenuDesktopInactive: !prev.staticMenuDesktopInactive,
       }));
     } else {
       this.layoutState.update((prev) => ({
         ...prev,
-        staticMenuMobileActive: !this.layoutState().staticMenuMobileActive,
+        staticMenuMobileActive: !prev.staticMenuMobileActive,
       }));
 
       if (this.layoutState().staticMenuMobileActive) {
-        this.overlayOpen.next(null);
+        this.overlayOpen.next();
       }
     }
   }
 
-  onMenuProfileToggle() {
-    this.layoutState.update((prev) => ({ ...prev, menuProfileActive: !prev.menuProfileActive }));
+  onMenuProfileToggle(): void {
+    this.layoutState.update((prev) => ({
+      ...prev,
+      menuProfileActive: !prev.menuProfileActive,
+    }));
   }
 
-  openRightMenu() {
-    this.layoutState.update((prev) => ({ ...prev, rightMenuActive: true }));
+  openRightMenu(): void {
+    this.layoutState.update((prev) => ({
+      ...prev,
+      rightMenuActive: true,
+    }));
   }
 
-  isDesktop() {
+  closeRightMenu(): void {
+    this.layoutState.update((prev) => ({
+      ...prev,
+      rightMenuActive: false,
+    }));
+  }
+
+  isDesktop(): boolean {
     return window.innerWidth > 991;
   }
 
-  isMobile() {
+  isMobile(): boolean {
     return !this.isDesktop();
   }
 
-  onConfigUpdate() {
-    this._config = { ...this.layoutConfig() };
-    this.configUpdate.next(this.layoutConfig());
-  }
-
-  onMenuStateChange(event: MenuChangeEvent) {
+  onMenuStateChange(event: MenuChangeEvent): void {
     this.menuSource.next(event);
   }
 
-  reset() {
-    this.resetSource.next(true);
+  reset(): void {
+    this.resetSource.next();
   }
 
-  onOverlaySubmenuOpen() {
-    this.overlayOpen.next(null);
+  onOverlaySubmenuOpen(): void {
+    this.overlayOpen.next();
   }
 
-  hideConfigSidebar() {
-    this.layoutState.update((prev) => ({ ...prev, configSidebarVisible: false }));
+  showConfigSidebar(): void {
+    this.layoutState.update((prev) => ({
+      ...prev,
+      configSidebarVisible: true,
+    }));
+  }
+
+  hideConfigSidebar(): void {
+    this.layoutState.update((prev) => ({
+      ...prev,
+      configSidebarVisible: false,
+    }));
+  }
+
+  toggleConfigSidebar(): void {
+    this.layoutState.update((prev) => ({
+      ...prev,
+      configSidebarVisible: !prev.configSidebarVisible,
+    }));
+  }
+
+  updateConfig(config: Partial<LayoutConfig>): void {
+    this.layoutConfig.update((current) => ({
+      ...current,
+      ...config,
+    }));
   }
 }

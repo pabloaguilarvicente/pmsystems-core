@@ -3,10 +3,10 @@ import { AppLayout } from './core/layout/components/app.layout';
 
 export const appRoutes: Routes = [
   {
-    path: 'dashboard',
+    path: 'analytics',
     component: AppLayout,
-    loadChildren: () => import('./modules/dashboard/dashboard.routes'),
+    loadChildren: () => import('./modules/analytics/analytics.routes'),
   },
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: '**', redirectTo: 'dashboard' },
+  { path: '', redirectTo: 'analytics', pathMatch: 'full' },
+  { path: '**', redirectTo: 'analytics' },
 ];

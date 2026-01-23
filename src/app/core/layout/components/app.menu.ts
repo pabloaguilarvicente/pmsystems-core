@@ -22,42 +22,125 @@ export class AppMenu {
 
   model: MenuItem[] = [
     {
-      label: 'layout.home',
-      icon: 'pi pi-home',
+      label: 'layout.analytics',
+      icon: 'pi pi-chart-line',
       items: [
         {
-          label: 'layout.general',
-          icon: 'pi pi-fw pi-chart-pie',
-          routerLink: ['/dashboard'],
+          label: 'layout.overview',
+          icon: 'pi pi-chart-pie',
+          routerLink: ['/analytics/overview'],
+        },
+        {
+          label: 'layout.reports',
+          icon: 'pi pi-file',
+          routerLink: ['/analytics/reports'],
+        },
+        {
+          label: 'layout.realtime',
+          icon: 'pi pi-clock',
+          routerLink: ['/analytics/realtime'],
         },
       ],
     },
-    // {
-    //   label: 'Apps',
-    //   icon: 'pi pi-th-large',
-    //   items: [
-    //     {
-    //       label: 'Blog',
-    //       icon: 'pi pi-fw pi-comment',
-    //       items: [
-    //         {
-    //           label: 'List',
-    //           icon: 'pi pi-fw pi-image',
-    //           routerLink: ['/apps/blog/list'],
-    //         },
-    //         {
-    //           label: 'Detail',
-    //           icon: 'pi pi-fw pi-list',
-    //           routerLink: ['/apps/blog/detail'],
-    //         },
-    //         {
-    //           label: 'Edit',
-    //           icon: 'pi pi-fw pi-pencil',
-    //           routerLink: ['/apps/blog/edit'],
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
+
+    {
+      label: 'layout.management',
+      icon: 'pi pi-briefcase',
+      items: [
+        {
+          label: 'layout.users',
+          icon: 'pi pi-users',
+          items: [
+            {
+              label: 'layout.user_list',
+              icon: 'pi pi-list',
+            },
+            {
+              label: 'layout.roles',
+              icon: 'pi pi-id-card',
+            },
+            {
+              label: 'layout.permissions',
+              icon: 'pi pi-lock',
+            },
+          ],
+        },
+        {
+          label: 'layout.teams',
+          icon: 'pi pi-sitemap',
+        },
+      ],
+    },
+
+    {
+      label: 'layout.apps',
+      icon: 'pi pi-th-large',
+      items: [
+        {
+          label: 'layout.blog',
+          icon: 'pi pi-comment',
+          items: [
+            {
+              label: 'layout.blog_list',
+              icon: 'pi pi-image',
+            },
+            {
+              label: 'layout.blog_detail',
+              icon: 'pi pi-file',
+            },
+            {
+              label: 'layout.blog_edit',
+              icon: 'pi pi-pencil',
+            },
+          ],
+        },
+        {
+          label: 'layout.notifications',
+          icon: 'pi pi-bell',
+        },
+        {
+          label: 'layout.messages',
+          icon: 'pi pi-envelope',
+        },
+      ],
+    },
+
+    {
+      label: 'layout.settings',
+      icon: 'pi pi-cog',
+      items: [
+        {
+          label: 'layout.profile',
+          icon: 'pi pi-user',
+        },
+        {
+          label: 'layout.preferences',
+          icon: 'pi pi-sliders-h',
+        },
+        {
+          label: 'layout.security',
+          icon: 'pi pi-shield',
+        },
+      ],
+    },
+
+    {
+      separator: true,
+    },
+
+    {
+      label: 'layout.support',
+      icon: 'pi pi-question-circle',
+      items: [
+        {
+          label: 'layout.documentation',
+          icon: 'pi pi-book',
+        },
+        {
+          label: 'layout.contact_support',
+          icon: 'pi pi-headphones',
+        },
+      ],
+    },
   ];
 }

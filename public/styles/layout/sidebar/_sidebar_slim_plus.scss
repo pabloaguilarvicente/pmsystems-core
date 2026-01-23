@@ -1,4 +1,4 @@
-@use '../_sass_variables' as *;
+@use "../_sass_variables" as *;
 
 @media screen and (min-width: $breakpoint) {
     .layout-container {
@@ -53,8 +53,8 @@
                 }
 
                 .layout-root-menuitem {
-                    margin: .75rem 0;
-                    
+                    margin: 0.75rem 0;
+
                     &:first-child {
                         margin-top: 0;
                     }
@@ -73,7 +73,7 @@
                         align-items: center;
                         justify-content: center;
                         text-align: center;
-                        border-radius:var(--border-radius);
+                        border-radius: var(--border-radius);
                         cursor: pointer;
                         outline: none;
                         transition: background-color var(--transition-duration);
@@ -109,46 +109,50 @@
                         top: 0;
                         min-width: 15rem;
                         background-color: var(--menu-bg);
-                        border-radius: var(--border-radius);
-                        padding: .5rem 0;
+                        border-top-right-radius: var(--border-radius);
+                        border-bottom-right-radius: var(--border-radius);
+                        padding: 0.5rem 0;
                         max-height: 20rem;
                         overflow: auto;
                         z-index: 999;
-                        box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
-    
+                        box-shadow: none;
+                        border-top: 1px solid var(--border-layout-color);
+                        border-bottom: 1px solid var(--border-layout-color);
+                        border-right: 1px solid var(--border-layout-color);
+
                         &::-webkit-scrollbar {
                             display: none;
                         }
-                        
+
                         a {
-                            padding-right: .5rem;
+                            padding-right: 0.5rem;
                         }
 
                         li {
                             a {
                                 padding-left: 0.5rem;
                             }
-            
+
                             li {
                                 a {
                                     padding-left: 1rem;
                                 }
-            
+
                                 li {
                                     a {
                                         padding-left: 1.5rem;
                                     }
-            
+
                                     li {
                                         a {
                                             padding-left: 2rem;
                                         }
-            
+
                                         li {
                                             a {
                                                 padding-left: 2.5rem;
                                             }
-            
+
                                             li {
                                                 a {
                                                     padding-left: 3rem;
@@ -174,16 +178,17 @@
                     padding: 0;
                     border-radius: 50%;
                     justify-content: center;
-                    margin: .75rem 0;
+                    margin: 0.75rem 0;
 
-                    span, i {
+                    span,
+                    i {
                         display: none;
                     }
                 }
 
                 > ul {
                     > li {
-                        margin: .75rem 0;
+                        margin: 0.75rem 0;
 
                         &:first-child {
                             margin-top: 0;
