@@ -1,18 +1,27 @@
 import { CommonModule } from '@angular/common';
 import { booleanAttribute, Component, inject, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { PrimeNG } from 'primeng/config';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { Router } from '@angular/router';
 import { DrawerModule } from 'primeng/drawer';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { LayoutService, MenuMode } from '../service/layout.service';
+import { LayoutService } from '../service/layout.service';
+import { Language, MenuMode } from '../../commons/core.model';
 
 @Component({
-  selector: 'app-configurator',
+  selector: 'app-preferences',
   standalone: true,
-  imports: [CommonModule, FormsModule, SelectButtonModule, DrawerModule, RadioButtonModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    SelectButtonModule,
+    DrawerModule,
+    RadioButtonModule,
+    TranslateModule,
+  ],
   template: `
     <button
       *ngIf="simple"
@@ -29,19 +38,67 @@ import { LayoutService, MenuMode } from '../service/layout.service';
       position="right"
       [transitionOptions]="'.3s cubic-bezier(0, 0, 0.2, 1)'"
       styleClass="layout-config-sidebar w-80"
-      header="Preferencias"
+      [header]="'layout.title' | translate"
     >
       <div class="flex flex-col gap-6">
+        <!-- Language Section -->
+        <div class="flex flex-col gap-3">
+          <span class="font-semibold text-sm">{{ 'layout.language' | translate }}</span>
+          <div class="grid grid-cols-2 gap-4">
+            <!-- Spanish -->
+            <div class="flex cursor-pointer flex-col" (click)="changeLanguage('es')">
+              <div
+                class="flex h-20 items-center justify-center overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
+                [ngClass]="
+                  currentLanguage === 'es'
+                    ? 'border-primary border-3'
+                    : 'border-surface-200 dark:border-surface-700'
+                "
+              >
+                <img src="images/flags/PE.png" alt="" width="30" />
+              </div>
+              <div
+                class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
+                [class.text-primary]="currentLanguage === 'es'"
+              >
+                {{ 'layout.spanish' | translate }}
+              </div>
+            </div>
+
+            <!-- English -->
+            <div class="flex cursor-pointer flex-col" (click)="changeLanguage('en')">
+              <div
+                class="flex h-20 items-center justify-center overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
+                [ngClass]="
+                  currentLanguage === 'en'
+                    ? 'border-primary border-3'
+                    : 'border-surface-200 dark:border-surface-700'
+                "
+              >
+                <img src="images/flags/US.png" alt="" width="30" />
+              </div>
+              <div
+                class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
+                [class.text-primary]="currentLanguage === 'en'"
+              >
+                {{ 'layout.english' | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Color Scheme Section -->
         <div class="flex flex-col gap-3">
-          <span class="text-lg font-semibold">Esquema de Color</span>
+          <span class="font-semibold text-sm">{{ 'layout.colorScheme' | translate }}</span>
           <div class="grid grid-cols-2 gap-4">
             <!-- Light Theme -->
             <div class="flex cursor-pointer flex-col" (click)="darkTheme = false">
               <div
                 class="flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
                 [ngClass]="
-                  !darkTheme ? 'border-primary border-3' : 'border-surface-200 dark:border-surface-700'
+                  !darkTheme
+                    ? 'border-primary border-3'
+                    : 'border-surface-200 dark:border-surface-700'
                 "
               >
                 <div class="flex flex-auto flex-col bg-white">
@@ -61,10 +118,10 @@ import { LayoutService, MenuMode } from '../service/layout.service';
                 </div>
               </div>
               <div
-                class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-medium"
+                class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                 [class.text-primary]="!darkTheme"
               >
-                Claro
+                {{ 'layout.light' | translate }}
               </div>
             </div>
 
@@ -73,7 +130,9 @@ import { LayoutService, MenuMode } from '../service/layout.service';
               <div
                 class="flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
                 [ngClass]="
-                  darkTheme ? 'border-primary border-3' : 'border-surface-200 dark:border-surface-700'
+                  darkTheme
+                    ? 'border-primary border-3'
+                    : 'border-surface-200 dark:border-surface-700'
                 "
               >
                 <div class="flex flex-auto flex-col bg-gray-900">
@@ -93,10 +152,10 @@ import { LayoutService, MenuMode } from '../service/layout.service';
                 </div>
               </div>
               <div
-                class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-medium"
+                class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                 [class.text-primary]="darkTheme"
               >
-                Oscuro
+                {{ 'layout.dark' | translate }}
               </div>
             </div>
           </div>
@@ -105,7 +164,7 @@ import { LayoutService, MenuMode } from '../service/layout.service';
         <ng-container *ngIf="!simple">
           <!-- Menu Type Section -->
           <div class="flex flex-col gap-3">
-            <span class="text-lg font-semibold">Tipo de Menú</span>
+            <span class="font-semibold text-sm">{{ 'layout.menuType' | translate }}</span>
             <div class="grid grid-cols-2 gap-4">
               <!-- Static -->
               <div class="flex cursor-pointer flex-col" (click)="menuMode = 'static'">
@@ -144,10 +203,10 @@ import { LayoutService, MenuMode } from '../service/layout.service';
                   </div>
                 </div>
                 <div
-                  class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-medium"
+                  class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                   [class.text-primary]="menuMode === 'static'"
                 >
-                  Estático
+                  {{ 'layout.static' | translate }}
                 </div>
               </div>
 
@@ -190,10 +249,10 @@ import { LayoutService, MenuMode } from '../service/layout.service';
                   </div>
                 </div>
                 <div
-                  class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-medium"
+                  class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                   [class.text-primary]="menuMode === 'overlay'"
                 >
-                  Superpuesto
+                  {{ 'layout.overlay' | translate }}
                 </div>
               </div>
 
@@ -234,10 +293,10 @@ import { LayoutService, MenuMode } from '../service/layout.service';
                   </div>
                 </div>
                 <div
-                  class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-medium"
+                  class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                   [class.text-primary]="menuMode === 'slim'"
                 >
-                  Delgado
+                  {{ 'layout.slim' | translate }}
                 </div>
               </div>
 
@@ -259,7 +318,7 @@ import { LayoutService, MenuMode } from '../service/layout.service';
                     </div>
                   </div>
                   <div
-                    class="w-6 border-l border-surface-200 bg-surface-50 dark:border-surface-700 dark:bg-surface-850"
+                    class="w-6 border-l border-surface-200 bg-surface-50 dark:border-surface-700 dark:bg-surface-800"
                   >
                     <div class="mx-1 mt-3 space-y-1">
                       <div class="h-0.5 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
@@ -285,52 +344,12 @@ import { LayoutService, MenuMode } from '../service/layout.service';
                   </div>
                 </div>
                 <div
-                  class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-medium"
+                  class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                   [class.text-primary]="menuMode === 'slim-plus'"
                 >
-                  Delgado+
+                  {{ 'layout.slimPlus' | translate }}
                 </div>
               </div>
-
-              <!-- Reveal -->
-              <!-- <div class="flex cursor-pointer flex-col" (click)="menuMode = 'reveal'">
-                <div
-                  class="flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
-                  [ngClass]="
-                    menuMode === 'reveal'
-                      ? 'border-primary border-3'
-                      : 'border-surface-200 dark:border-surface-700'
-                  "
-                >
-                  <div class="relative flex flex-auto flex-col">
-                    <div class="h-3 bg-surface-100 dark:bg-surface-800">
-                      <div class="ml-1.5 flex h-full items-center">
-                        <div class="h-1 w-2 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                      </div>
-                    </div>
-                    <div
-                      class="relative flex flex-auto border-t border-surface-200 bg-surface-0 dark:border-surface-700 dark:bg-surface-900"
-                    >
-                      <div
-                        class="absolute left-0 top-0 h-full w-8 bg-surface-100 dark:bg-surface-800"
-                      >
-                        <div class="mx-1.5 mt-2 space-y-1">
-                          <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                          <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                          <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                        </div>
-                      </div>
-                      <div class="ml-4 flex-auto bg-surface-0 dark:bg-surface-900"></div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-medium"
-                  [class.text-primary]="menuMode === 'reveal'"
-                >
-                  Revelar
-                </div>
-              </div> -->
 
               <!-- Drawer -->
               <div class="flex cursor-pointer flex-col" (click)="menuMode = 'drawer'">
@@ -371,10 +390,10 @@ import { LayoutService, MenuMode } from '../service/layout.service';
                   </div>
                 </div>
                 <div
-                  class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-medium"
+                  class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                   [class.text-primary]="menuMode === 'drawer'"
                 >
-                  Cajón
+                  {{ 'layout.drawer' | translate }}
                 </div>
               </div>
 
@@ -400,10 +419,10 @@ import { LayoutService, MenuMode } from '../service/layout.service';
                   <div class="flex flex-auto bg-surface-0 dark:bg-surface-900"></div>
                 </div>
                 <div
-                  class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-medium"
+                  class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                   [class.text-primary]="menuMode === 'horizontal'"
                 >
-                  Horizontal
+                  {{ 'layout.horizontal' | translate }}
                 </div>
               </div>
             </div>
@@ -411,7 +430,7 @@ import { LayoutService, MenuMode } from '../service/layout.service';
 
           <!-- Menu Profile Section -->
           <div class="flex flex-col gap-3">
-            <span class="text-lg font-semibold">Perfil del Menú</span>
+            <span class="font-semibold text-sm">{{ 'layout.menuProfile' | translate }}</span>
             <div class="grid grid-cols-2 gap-4">
               <!-- Start -->
               <div class="flex cursor-pointer flex-col" (click)="menuProfilePosition = 'start'">
@@ -447,10 +466,10 @@ import { LayoutService, MenuMode } from '../service/layout.service';
                   </div>
                 </div>
                 <div
-                  class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-medium"
+                  class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                   [class.text-primary]="menuProfilePosition === 'start'"
                 >
-                  Inicio
+                  {{ 'layout.start' | translate }}
                 </div>
               </div>
 
@@ -488,10 +507,10 @@ import { LayoutService, MenuMode } from '../service/layout.service';
                   </div>
                 </div>
                 <div
-                  class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-medium"
+                  class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                   [class.text-primary]="menuProfilePosition === 'end'"
                 >
-                  Final
+                  {{ 'layout.end' | translate }}
                 </div>
               </div>
             </div>
@@ -501,7 +520,7 @@ import { LayoutService, MenuMode } from '../service/layout.service';
     </p-drawer>
   `,
 })
-export class AppConfigurator {
+export class AppPreferences {
   @Input({ transform: booleanAttribute }) simple: boolean = false;
 
   router = inject(Router);
@@ -513,6 +532,10 @@ export class AppConfigurator {
     { name: 'Claro', value: false },
     { name: 'Oscuro', value: true },
   ];
+
+  get currentLanguage(): Language {
+    return this.layoutService.currentLanguage();
+  }
 
   get menuMode() {
     return this.layoutService.layoutConfig().menuMode;
@@ -565,5 +588,9 @@ export class AppConfigurator {
       ...val,
       configSidebarVisible: !val.configSidebarVisible,
     }));
+  }
+
+  changeLanguage(language: Language) {
+    this.layoutService.changeLanguage(language);
   }
 }

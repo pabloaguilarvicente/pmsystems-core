@@ -10,19 +10,9 @@ import {
 import { Subject } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 import { LocalStorageService } from '../../services/localstorage.service';
-import { ThemeSettings } from '../../commons/core.model';
+import { AppSettings, Language, MenuMode, MenuProfileMode } from '../../commons/core.model';
 import { LOCAL_STORAGE_KEYS } from '../../commons/core.constants';
-
-export type ColorScheme = 'light' | 'dark';
-export type MenuMode =
-  | 'static'
-  | 'overlay'
-  | 'slim-plus'
-  | 'slim'
-  | 'horizontal'
-  | 'reveal'
-  | 'drawer';
-export type MenuProfileMode = 'start' | 'end';
+import { TranslateService } from '@ngx-translate/core';
 
 export interface layoutConfig {
   primary: string;
@@ -32,6 +22,7 @@ export interface layoutConfig {
   menuTheme: string;
   topbarTheme: string;
   menuProfilePosition: string;
+  language: Language;
 }
 
 export interface LayoutState {
@@ -64,6 +55,7 @@ export interface TabCloseEvent {
 })
 export class LayoutService {
   private localStorageService = inject(LocalStorageService);
+  private translate = inject(TranslateService);
 
   _config: layoutConfig = {
     primary: 'primary',
@@ -73,6 +65,7 @@ export class LayoutService {
     menuTheme: 'light',
     topbarTheme: 'light',
     menuProfilePosition: 'end',
+    language: 'es',
   };
 
   _state: LayoutState = {
@@ -102,6 +95,8 @@ export class LayoutService {
 
   private resetSource = new Subject();
 
+  private languageChange = new Subject<Language>();
+
   menuSource$ = this.menuSource.asObservable();
 
   resetSource$ = this.resetSource.asObservable();
@@ -109,6 +104,8 @@ export class LayoutService {
   configUpdate$ = this.configUpdate.asObservable();
 
   overlayOpen$ = this.overlayOpen.asObservable();
+
+  languageChange$ = this.languageChange.asObservable();
 
   isSidebarActive: Signal<boolean> = computed(
     () => this.layoutState().overlayMenuActive || this.layoutState().staticMenuMobileActive,
@@ -123,6 +120,8 @@ export class LayoutService {
   isSlimPlus: Signal<boolean> = computed(() => this.layoutConfig().menuMode === 'slim-plus');
 
   isHorizontal: Signal<boolean> = computed(() => this.layoutConfig().menuMode === 'horizontal');
+
+  currentLanguage: Signal<Language> = computed(() => this.layoutConfig().language);
 
   transitionComplete: WritableSignal<boolean> = signal<boolean>(false);
 
@@ -167,11 +166,11 @@ export class LayoutService {
   }
 
   private loadConfigFromStorage(): void {
-    const savedSettings = this.localStorageService.get<ThemeSettings>(
-      LOCAL_STORAGE_KEYS.themeSettings,
-    );
+    const savedSettings = this.localStorageService.get<AppSettings>(LOCAL_STORAGE_KEYS.appSettings);
 
     if (savedSettings) {
+      const language = savedSettings.language || 'es';
+
       this.layoutConfig.update((config) => ({
         ...config,
         darkTheme: savedSettings.colorScheme === 'dark',
@@ -179,21 +178,24 @@ export class LayoutService {
         menuTheme: savedSettings.colorScheme === 'dark' ? 'dark' : 'light',
         topbarTheme: savedSettings.colorScheme === 'dark' ? 'dark' : 'light',
         menuProfilePosition: savedSettings.menuProfileMode,
+        language: language,
       }));
 
+      this.translate.use(language);
       this.toggleDarkMode();
     }
   }
 
   private saveConfigToStorage(): void {
     const config = this.layoutConfig();
-    const themeSettings: ThemeSettings = {
+    const themeSettings: AppSettings = {
       colorScheme: config.darkTheme ? 'dark' : 'light',
       menuMode: config.menuMode,
       menuProfileMode: config.menuProfilePosition as MenuProfileMode,
+      language: config.language,
     };
 
-    this.localStorageService.set(LOCAL_STORAGE_KEYS.themeSettings, themeSettings);
+    this.localStorageService.set(LOCAL_STORAGE_KEYS.appSettings, themeSettings);
   }
 
   private handleDarkModeTransition(config: layoutConfig): void {
@@ -224,6 +226,15 @@ export class LayoutService {
     } else {
       document.documentElement.classList.remove('app-dark');
     }
+  }
+
+  changeLanguage(language: Language): void {
+    this.layoutConfig.update((config) => ({
+      ...config,
+      language,
+    }));
+    this.languageChange.next(language);
+    this.translate.use(language);
   }
 
   private onTransitionEnd() {

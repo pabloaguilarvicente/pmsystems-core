@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'dashboard-main',
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './dashboard-main.html',
 })
-export class DashboardMain {
-
-}
+export class DashboardMain {}

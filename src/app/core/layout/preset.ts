@@ -44,6 +44,11 @@ const MainPreset = definePreset(Aura, {
         padding: '0.2rem 0.7rem',
       },
     },
+    drawer: {
+      header: {
+        padding: '0.5rem',
+      },
+    },
   },
 });
 

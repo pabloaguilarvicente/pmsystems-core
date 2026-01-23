@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'notifications',
+  imports: [TranslateModule],
   template: `
     <ul class="list-none p-0 m-0">
       <li class="px-4 py-1">
-        <span>You have <b>4</b> new notifications</span>
+        <span [innerHTML]="'layout.notifications_label' | translate: { value: count }"> </span>
       </li>
       <li class="p-4">
         <div class="flex items-center">
@@ -13,9 +15,9 @@ import { Component } from '@angular/core';
           <div class="flex flex-col ml-4 flex-1">
             <div class="flex items-center justify-between mb-1">
               <span class="font-bold">Jerome Bell</span>
-              <small>42 mins ago</small>
+              <small>42 mins {{ 'layout.ago' | translate }}</small>
             </div>
-            <span class="text-sm leading-normal">How to write content about your photographs?</span>
+            <span class="text-sm leading-normal">Lorem ipsum dolor sit amet.</span>
           </div>
         </div>
       </li>
@@ -25,9 +27,9 @@ import { Component } from '@angular/core';
           <div class="flex flex-col ml-4 flex-1">
             <div class="flex items-center justify-between mb-1">
               <span class="fs-small font-bold">Cameron Williamson</span>
-              <small>48 mins ago</small>
+              <small>48 mins {{ 'layout.ago' | translate }}</small>
             </div>
-            <span class="text-sm leading-normal">Start a blog to reach your creative peak.</span>
+            <span class="text-sm leading-normal">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</span>
           </div>
         </div>
       </li>
@@ -37,9 +39,9 @@ import { Component } from '@angular/core';
           <div class="flex flex-col ml-4 flex-1">
             <div class="flex items-center justify-between mb-1">
               <span class="fs-small font-bold">Anna Miles</span>
-              <small>1 day ago</small>
+              <small>50 mins {{ 'layout.ago' | translate }}</small>
             </div>
-            <span class="text-sm leading-normal">Caring is the new marketing</span>
+            <span class="text-sm leading-normal">Lorem ipsum dolor sit amet.</span>
           </div>
         </div>
       </li>
@@ -49,13 +51,15 @@ import { Component } from '@angular/core';
           <div class="flex flex-col ml-4 flex-1">
             <div class="flex items-center justify-between mb-1">
               <span class="fs-small font-bold">Arlene Mccoy</span>
-              <small>4 day ago</small>
+              <small>60 mins {{ 'layout.ago' | translate }}</small>
             </div>
-            <span class="text-sm leading-normal">Starting your traveling blog with Vasco.</span>
+            <span class="text-sm leading-normal">Lorem ipsum dolor sit amet, consectetur adipisicing.</span>
           </div>
         </div>
       </li>
     </ul>
   `,
 })
-export class Notifications {}
+export class Notifications {
+  public readonly count: number = 4;
+}

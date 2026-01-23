@@ -7,8 +7,11 @@ import { LayoutService } from '../service/layout.service';
   selector: '[app-footer]',
   imports: [ButtonModule],
   template: ` <span class="font-medium text-lg text-muted-color">
-      <!-- <img src="/layout/images/logo/footer-ultima{{layoutService.isDarkTheme() ? '-dark.svg' : '.svg'}}"/> -->
-      <img src="images/logos/BLUE01.svg" alt="logo" width="50" />
+      <img
+        src="images/logos/{{ layoutService.isDarkTheme() ? 'WHITE01.svg' : 'BLUE01.svg' }}"
+        alt="logo"
+        width="50"
+      />
     </span>
     <div class="flex gap-2">
       <button pButton icon="pi pi-github" rounded text severity="secondary"></button>

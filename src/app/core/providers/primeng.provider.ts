@@ -1,0 +1,11 @@
+import { providePrimeNG } from 'primeng/config';
+import MainPreset from '../layout/preset';
+
+export const PRIMENG_PROVIDERS = providePrimeNG({
+  theme: {
+    preset: MainPreset,
+    options: {
+      darkModeSelector: '.app-dark',
+    },
+  },
+});

@@ -22,11 +22,11 @@ export class AppMenu {
 
   model: MenuItem[] = [
     {
-      label: 'Inicio',
+      label: 'layout.home',
       icon: 'pi pi-home',
       items: [
         {
-          label: 'Analytics Dashboard',
+          label: 'layout.general',
           icon: 'pi pi-fw pi-chart-pie',
           routerLink: ['/dashboard'],
         },

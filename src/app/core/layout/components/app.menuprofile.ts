@@ -14,11 +14,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LayoutService } from '../service/layout.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: '[app-menu-profile]',
   standalone: true,
-  imports: [CommonModule, TooltipModule, ButtonModule, RouterModule],
+  imports: [CommonModule, TooltipModule, ButtonModule, RouterModule, TranslateModule],
   template: `<button
       class="cursor-pointer flex items-center"
       (click)="toggleMenu()"
@@ -44,30 +45,22 @@ import { LayoutService } from '../service/layout.service';
     </button>
 
     <ul *ngIf="menuProfileActive()" [@menu]="isHorizontal() ? 'overlay' : 'inline'">
-      <li
-        pTooltip="Preferencias"
-        [tooltipDisabled]="isTooltipDisabled()"
-        [routerLink]="['/profile/create']"
-      >
+      <li [pTooltip]="'layout.preferences' | translate" [tooltipDisabled]="isTooltipDisabled()">
         <button class="cursor-pointer" (click)="toggleConfigSidebar()">
           <i class="pi pi-cog pi-fw"></i>
-          <span>Preferencias</span>
+          <span>{{ 'layout.preferences' | translate }}</span>
         </button>
       </li>
-      <li pTooltip="Perfil" [tooltipDisabled]="isTooltipDisabled()">
-        <button class="cursor-pointer" [routerLink]="['/documentation']">
+      <li [pTooltip]="'layout.profile' | translate" [tooltipDisabled]="isTooltipDisabled()">
+        <button class="cursor-pointer">
           <i class="pi pi-user pi-fw"></i>
-          <span>Perfil</span>
+          <span>{{ 'layout.profile' | translate }}</span>
         </button>
       </li>
-      <li
-        pTooltip="Cerrar sesión"
-        [tooltipDisabled]="isTooltipDisabled()"
-        [routerLink]="['/auth/login2']"
-      >
-        <button class="cursor-pointer" class="p-link">
+      <li [pTooltip]="'layout.logout' | translate" [tooltipDisabled]="isTooltipDisabled()">
+        <button class="cursor-pointer">
           <i class="pi pi-power-off pi-fw"></i>
-          <span>Cerrar sesión</span>
+          <span>{{ 'layout.logout' | translate }}</span>
         </button>
       </li>
     </ul>`,
