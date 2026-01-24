@@ -115,9 +115,9 @@
                         min-width: 15rem;
                         background-color: var(--menu-bg);
                         box-shadow: none;
-                        border-left: 1px solid var(--border-layout-color);
-                        border-bottom: 1px solid var(--border-layout-color);
-                        border-right: 1px solid var(--border-layout-color);
+                        border-left: 1px solid var(--surface-border);
+                        border-bottom: 1px solid var(--surface-border);
+                        border-right: 1px solid var(--surface-border);
                         padding: 0.5rem 0;
                         border-bottom-left-radius: var(--border-radius);
                         border-bottom-right-radius: var(--border-radius);
@@ -214,9 +214,9 @@
                     min-width: 15rem;
                     background-color: var(--menu-bg);
                     box-shadow: none;
-                    border-top: 1px solid var(--border-layout-color);
-                    border-bottom: 1px solid var(--border-layout-color);
-                    border-right: 1px solid var(--border-layout-color);
+                    border-top: 1px solid var(--surface-border);
+                    border-bottom: 1px solid var(--surface-border);
+                    border-right: 1px solid var(--surface-border);
                     padding: 0.5rem 0;
                     border-radius: var(--border-radius);
                     max-height: 20rem;

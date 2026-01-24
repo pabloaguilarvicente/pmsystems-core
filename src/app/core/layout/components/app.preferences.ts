@@ -36,8 +36,7 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
       [(visible)]="visible"
       (onHide)="layoutService.hideConfigSidebar()"
       position="right"
-      [transitionOptions]="'.3s cubic-bezier(0, 0, 0.2, 1)'"
-      styleClass="layout-config-sidebar w-80"
+      styleClass="w-80"
       [header]="'layout.title' | translate"
     >
       <div class="flex flex-col gap-6">

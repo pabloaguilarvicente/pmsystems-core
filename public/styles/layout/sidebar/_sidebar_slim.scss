@@ -270,9 +270,9 @@
                         overflow: auto;
                         z-index: 999;
                         box-shadow: none;
-                        border-top: 1px solid var(--border-layout-color);
-                        border-bottom: 1px solid var(--border-layout-color);
-                        border-right: 1px solid var(--border-layout-color);
+                        border-top: 1px solid var(--surface-border);
+                        border-bottom: 1px solid var(--surface-border);
+                        border-right: 1px solid var(--surface-border);
 
                         &::-webkit-scrollbar {
                             display: none;

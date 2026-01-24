@@ -40,14 +40,15 @@ const MainPreset = definePreset(Aura, {
   },
   components: {
     tooltip: {
-      root: {
-        padding: '0.2rem 0.7rem',
-      },
+      root: { padding: '0.2rem 0.7rem' },
     },
     drawer: {
-      header: {
-        padding: '0.5rem',
-      },
+      header: { padding: '0.5rem' },
+      root: { borderColor: 'transparent' },
+    },
+    dialog: {
+      content: { padding: '2rem' },
+      root: { borderRadius: '0.5rem' },
     },
   },
 });

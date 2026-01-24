@@ -10,7 +10,7 @@
     color: var(--topbar-item-text-color);
     background-color: var(--topbar-bg);
     box-shadow: none;
-    border-bottom: 1px solid var(--border-layout-color);
+    border-bottom: 1px solid var(--surface-border);
 
     ul {
         margin: 0;
@@ -50,10 +50,8 @@
             border-radius: 0.2rem;
             color: var(--topbar-menu-button-text-color);
             background-color: var(--topbar-menu-button-bg);
-            box-shadow:
-                0px 3px 5px rgb(0 0 0 / 6%),
-                0px 7px 9px rgb(0 0 0 / 12%),
-                0px 20px 25px -8px rgb(0 0 0 / 18%);
+            box-shadow: none;
+            border: 1px solid var(--surface-border);
             transition: background-color var(--transition-duration);
             cursor: pointer;
 
@@ -145,9 +143,9 @@
                         border-bottom-left-radius: var(--border-radius);
                         border-bottom-right-radius: var(--border-radius);
                         box-shadow: none;
-                        border-left: 1px solid var(--border-layout-color);
-                        border-right: 1px solid var(--border-layout-color);
-                        border-bottom: 1px solid var(--border-layout-color);
+                        border-left: 1px solid var(--surface-border);
+                        border-right: 1px solid var(--surface-border);
+                        border-bottom: 1px solid var(--surface-border);
                         border-top: none;
                     }
 
