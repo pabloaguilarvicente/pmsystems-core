@@ -1,13 +1,4 @@
-import {
-  computed,
-  effect,
-  inject,
-  Injectable,
-  signal,
-  Signal,
-  WritableSignal,
-  DestroyRef,
-} from '@angular/core';
+import { computed, effect, inject, Injectable, signal, Signal, DestroyRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { MenuItem } from 'primeng/api';
@@ -15,6 +6,7 @@ import { LocalStorageService } from '../../services/localstorage.service';
 import { AppSettings, Language, MenuMode, MenuProfilePosition } from '../../commons/core.model';
 import { LOCAL_STORAGE_KEYS } from '../../commons/core.constants';
 import { TranslateService } from '@ngx-translate/core';
+import { PrimeNG } from 'primeng/config';
 
 export interface LayoutConfig {
   primary: string;
@@ -59,6 +51,7 @@ export class LayoutService {
   private readonly localStorageService = inject(LocalStorageService);
   private readonly translate = inject(TranslateService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly primeng = inject(PrimeNG);
 
   // Default configuration
   private readonly DEFAULT_CONFIG: LayoutConfig = {
@@ -206,8 +199,12 @@ export class LayoutService {
       language,
     });
 
-    this.translate.use(language);
-    this.toggleDarkMode();
+    this.translate.use(language).subscribe({
+      next: () => {
+        this.updatePrimeNGTranslations();
+        this.toggleDarkMode();
+      },
+    });
   }
 
   private saveConfigToStorage(): void {
@@ -266,7 +263,6 @@ export class LayoutService {
     }, 0);
   }
 
-  // Public API
   changeLanguage(language: Language): void {
     this.layoutConfig.update((config) => ({
       ...config,
@@ -274,7 +270,24 @@ export class LayoutService {
     }));
 
     this.languageChange.next(language);
-    this.translate.use(language);
+
+    // Esperar a que se carguen las traducciones antes de actualizar PrimeNG
+    this.translate.use(language).subscribe({
+      next: () => {
+        this.updatePrimeNGTranslations();
+      },
+      error: (err) => {
+        console.error(`Error al cargar traducciones para el idioma: ${language}`, err);
+      },
+    });
+  }
+
+  private updatePrimeNGTranslations(): void {
+    this.translate.get('primeng').subscribe({
+      next: (translations) => {
+        this.primeng.setTranslation(translations);
+      },
+    });
   }
 
   onMenuToggle(): void {
