@@ -3,11 +3,14 @@ import { AppMenu } from './app.menu';
 import { CommonModule } from '@angular/common';
 import { AppMenuProfile } from './app.menuprofile';
 import { LayoutService } from '../service/layout.service';
+import { Button } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: '[app-sidebar]',
   standalone: true,
-  imports: [AppMenuProfile, AppMenu, CommonModule],
+  imports: [AppMenuProfile, AppMenu, CommonModule, Button, TooltipModule, TranslateModule],
   template: `<div
     class="layout-sidebar"
     (mouseenter)="onMouseEnter()"
@@ -24,7 +27,17 @@ import { LayoutService } from '../service/layout.service';
           <img src="images/logos/BLUE01.svg" alt="logo" width="50" />
         </div>
       </a>
-      <button class="layout-sidebar-anchor" type="button" (click)="anchor()"></button>
+      <p-button
+        icon="pi pi-thumbtack"
+        (onClick)="anchor()"
+        [text]="true"
+        [rounded]="true"
+        [severity]="anchored() ? 'primary' : 'secondary'"
+        [pTooltip]="anchored() ? ('layout.unpin' | translate) : ('layout.pin' | translate)"
+        class="layout-sidebar-anchor"
+        size="small"
+        tooltipPosition="right"
+      />
     </div>
     <div app-menu-profile #menuProfileStart *ngIf="menuProfilePosition() === 'start'"></div>
     <div #menuContainer class="layout-menu-container">

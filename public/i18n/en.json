@@ -39,6 +39,7 @@
     "overlay": "Overlay",
     "overview": "Overview",
     "permissions": "Permissions",
+    "pin": "Pin",
     "preferences": "Preferences",
     "products": "Products",
     "profile": "Profile",
@@ -62,6 +63,7 @@
     "teams": "Teams",
     "title": "Preferences",
     "tools": "Tools",
+    "unpin": "Unpin",
     "user_list": "User list",
     "users": "Users"
   },

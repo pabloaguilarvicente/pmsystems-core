@@ -1,4 +1,4 @@
-@use '../_sass_variables' as *;
+@use "../_sass_variables" as *;
 
 @media screen and (min-width: $breakpoint) {
     .layout-reveal {
@@ -13,7 +13,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: flex-end;
-                padding: 0 .75rem;
+                padding: 0 0.75rem;
                 height: 4rem;
                 background-color: var(--topbar-start-bg);
                 color: var(--topbar-item-text-color);
@@ -28,13 +28,6 @@
 
                 .layout-sidebar-anchor {
                     display: none;
-                    width: 1.25rem;
-                    height: 1.25rem;
-                    border-radius: 50%;
-                    border: 2px solid var(--topbar-menu-button-bg);
-                    background-color: transparent;
-                    transition: background-color var(--transition-duration),
-                        transform 0.3s;
                 }
             }
 
@@ -163,12 +156,6 @@
         &.layout-sidebar-anchored {
             .layout-topbar {
                 padding-left: 17rem;
-            }
-
-            .layout-sidebar-top {
-                .layout-sidebar-anchor {
-                    background-color: var(--topbar-menu-button-bg);
-                }
             }
 
             .layout-content-wrapper {

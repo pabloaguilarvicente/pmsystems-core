@@ -40,6 +40,7 @@
     "overlay": "Superpuesto",
     "overview": "Resumen",
     "permissions": "Permisos",
+    "pin": "Anclar",
     "preferences": "Preferencias",
     "products": "Productos",
     "profile": "Perfil",
@@ -63,6 +64,7 @@
     "teams": "Equipos",
     "title": "Preferencias",
     "tools": "Herramientas",
+    "unpin": "Desanclar",
     "user_list": "Lista de usuarios",
     "users": "Usuarios"
   },
