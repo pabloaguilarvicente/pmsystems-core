@@ -92,3 +92,24 @@ p-treetable {
 .p-dialog-mask.p-component-overlay-leave {
     animation: dialog-mask-fade-out 0.3s cubic-bezier(0.55, 0, 0.55, 1);
 }
+
+.p-toast .p-toast-message {
+    background: #ffffff;
+    border: none;
+    border-left: 4px solid;
+    border-radius: 8px;
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.15),
+        0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0 0 1rem 0;
+    backdrop-filter: blur(10px);
+}
+
+.p-toast .p-toast-message-content {
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+

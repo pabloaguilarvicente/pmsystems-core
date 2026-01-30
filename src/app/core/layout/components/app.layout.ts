@@ -10,6 +10,7 @@ import { Toast } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { AppRightMenu } from './app.rightmenu';
 import { LayoutService } from '../service/layout.service';
+import { AppProgressBar } from '../../components/app-progress-bar';
 
 @Component({
   selector: 'app-layout',
@@ -23,6 +24,7 @@ import { LayoutService } from '../service/layout.service';
     AppBreadcrumb,
     AppRightMenu,
     Toast,
+    AppProgressBar,
   ],
   template: `
     <div class="layout-container" [ngClass]="containerClass()">
@@ -32,22 +34,31 @@ import { LayoutService } from '../service/layout.service';
       <div class="layout-content-wrapper">
         <div app-breadcrumb></div>
         <div class="layout-content">
-          <router-outlet></router-outlet>
+          <app-progress-bar />
+          <router-outlet />
         </div>
         <div app-footer></div>
       </div>
     </div>
     <app-preferences />
-    <p-toast />
+    <p-toast position="bottom-right" [breakpoints]="breakpoints" />
   `,
   providers: [MessageService],
 })
 export class AppLayout implements OnDestroy {
-  overlayMenuOpenSubscription: Subscription;
+  private readonly overlayMenuOpenSubscription: Subscription;
 
-  menuOutsideClickListener: any;
+  private menuOutsideClickListener: any;
 
-  menuScrollListener: any;
+  private menuScrollListener: any;
+
+  public readonly breakpoints = {
+    '920px': {
+      width: '90%',
+      right: 'auto',
+      left: '5%',
+    },
+  };
 
   @ViewChild(AppSidebar) appSidebar!: AppSidebar;
 

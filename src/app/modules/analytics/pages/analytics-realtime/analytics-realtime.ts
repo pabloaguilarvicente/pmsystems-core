@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Titlepage } from '../../../../core/components/titlepage/titlepage';
+import { AppTitlePage } from '../../../../core/components/app-title-page';
 
 @Component({
   selector: 'analytics-realtime',
-  imports: [Titlepage],
+  imports: [AppTitlePage],
   templateUrl: './analytics-realtime.html',
 })
 export class AnalyticsRealtime {}

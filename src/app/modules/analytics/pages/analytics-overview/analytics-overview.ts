@@ -1,9 +1,9 @@
-import { Component } from '@angular/core'
-import { Titlepage } from '../../../../core/components/titlepage/titlepage';
+import { Component } from '@angular/core';
+import { AppTitlePage } from '../../../../core/components/app-title-page';
 
 @Component({
   selector: 'analytics-overview',
-  imports: [Titlepage],
+  imports: [AppTitlePage],
   templateUrl: './analytics-overview.html',
 })
 export class AnalyticsOverview {}
