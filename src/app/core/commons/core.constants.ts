@@ -1,4 +1,4 @@
-export const I18N_PATH: string = '/i18n/';
+export const I18N_PATH: string = 'i18n/';
 
 export const LOCAL_STORAGE_KEYS = {
   appSettings: 'appSettings',
