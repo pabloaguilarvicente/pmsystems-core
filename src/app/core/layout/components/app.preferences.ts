@@ -6,8 +6,7 @@ import { PrimeNG } from 'primeng/config';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DrawerModule } from 'primeng/drawer';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { LayoutService } from '../service/layout.service';
-import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.model';
+import { Language, LayoutService, MenuMode, MenuProfilePosition } from '../service/layout.service';
 
 @Component({
   selector: 'app-preferences',
@@ -21,16 +20,6 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
     TranslateModule,
   ],
   template: `
-    @if (simple) {
-      <button
-        class="layout-config-button config-link"
-        type="button"
-        (click)="toggleConfigSidebar()"
-      >
-        <i class="ph ph-gear"></i>
-      </button>
-    }
-
     <p-drawer
       [(visible)]="visible"
       (onHide)="layoutService.hideConfigSidebar()"

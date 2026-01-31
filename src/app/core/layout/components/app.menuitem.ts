@@ -107,27 +107,41 @@ import { TranslateModule } from '@ngx-translate/core';
         'collapsed',
         style({
           height: '0',
+          overflow: 'hidden',
         }),
       ),
       state(
         'expanded',
         style({
           height: '*',
+          overflow: 'hidden',
         }),
       ),
       state(
         'hidden',
         style({
-          display: 'none',
+          height: '0',
+          opacity: '0',
+          overflow: 'hidden',
         }),
       ),
       state(
         'visible',
         style({
-          display: 'block',
+          height: '*',
+          opacity: '1',
+          overflow: 'visible',
         }),
       ),
       transition('collapsed <=> expanded', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)')),
+      transition('hidden => visible', [
+        style({ height: '0', opacity: '0', overflow: 'hidden' }),
+        animate('400ms cubic-bezier(0.86, 0, 0.07, 1)', style({ height: '*', opacity: '1' })),
+      ]),
+      transition('visible => hidden', [
+        style({ overflow: 'hidden' }),
+        animate('400ms cubic-bezier(0.86, 0, 0.07, 1)', style({ height: '0', opacity: '0' })),
+      ]),
     ]),
   ],
 })

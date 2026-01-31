@@ -3,10 +3,22 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { MenuItem } from 'primeng/api';
 import { LocalStorageService } from '../../services/localstorage.service';
-import { AppSettings, Language, MenuMode, MenuProfilePosition } from '../../commons/core.model';
+import { AppSettings } from '../../commons/core.model';
 import { LOCAL_STORAGE_KEYS } from '../../commons/core.constants';
 import { TranslateService } from '@ngx-translate/core';
 import { PrimeNG } from 'primeng/config';
+
+export type ColorScheme = 'light' | 'dark';
+export type MenuMode =
+  | 'static'
+  | 'overlay'
+  | 'slim-plus'
+  | 'slim'
+  | 'horizontal'
+  | 'reveal'
+  | 'drawer';
+export type MenuProfilePosition = 'start' | 'end';
+export type Language = 'es' | 'en';
 
 export interface LayoutConfig {
   primary: string;
@@ -58,7 +70,7 @@ export class LayoutService {
     primary: 'primary',
     surface: null,
     darkTheme: false,
-    menuMode: 'static',
+    menuMode: 'drawer',
     menuTheme: 'light',
     topbarTheme: 'light',
     menuProfilePosition: 'end',

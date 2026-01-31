@@ -113,6 +113,11 @@
                 > ul {
                     > li {
                         > button {
+                            > span {
+                                opacity: 0;
+                                white-space: nowrap;
+                                transition: all 0.1s;
+                            }
                             > i {
                                 margin-right: 0.5rem;
                                 font-size: 1.25rem;
@@ -250,6 +255,11 @@
                     > ul {
                         > li {
                             > button {
+                                > span {
+                                    opacity: 1;
+                                    white-space: nowrap;
+                                    transition: all 0.1s;
+                                }
                                 > i {
                                     margin-right: 0.5rem;
                                     font-size: 1.25rem;

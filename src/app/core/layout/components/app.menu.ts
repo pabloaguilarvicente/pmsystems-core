@@ -21,7 +21,7 @@ import { AppMenuitem } from './app.menuitem';
   `,
 })
 export class AppMenu {
-  el: ElementRef = inject(ElementRef);
+  public readonly el: ElementRef = inject(ElementRef);
 
   @ViewChild('menuContainer') menuContainer!: ElementRef;
 

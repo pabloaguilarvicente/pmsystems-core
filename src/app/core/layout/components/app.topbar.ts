@@ -38,20 +38,12 @@ import { TranslateModule } from '@ngx-translate/core';
     <div class="layout-topbar-start">
       <a class="layout-topbar-logo" routerLink="/">
         <div class="layout-topbar-logo-full flex items-center gap-2">
-          <img
-            src="images/logos/{{ layoutService.isDarkTheme() ? 'WHITE01.svg' : 'BLUE01.svg' }}"
-            alt="logo"
-            width="50"
-          />
-          <span class="font-black whitespace-nowrap">PM SYSTEMS</span>
+          <img src="images/logos/BLUE01.svg" alt="logo" width="50" />
+          <span class="font-black whitespace-nowrap text-primary">PM SYSTEMS</span>
         </div>
 
         <div class="layout-topbar-logo-slim">
-          <img
-            src="images/logos/{{ layoutService.isDarkTheme() ? 'WHITE01.svg' : 'BLUE01.svg' }}"
-            alt="logo"
-            width="50"
-          />
+          <img src="images/logos/BLUE01.svg" alt="logo" width="50" />
         </div>
       </a>
       <a
