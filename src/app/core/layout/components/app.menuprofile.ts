@@ -32,12 +32,12 @@ import { TranslateModule } from '@ngx-translate/core';
         <small>Software Developer</small>
       </span>
       <i
-        class="layout-menu-profile-toggler pi pi-fw"
+        class="layout-menu-profile-toggler ph-thin"
         [ngClass]="{
-          'pi-angle-down':
+          'ph-caret-down':
             (!menuProfileActive() && (menuProfilePosition() === 'start' || isHorizontal())) ||
             (menuProfileActive() && menuProfilePosition() === 'end' && !isHorizontal()),
-          'pi-angle-up':
+          'ph-caret-up':
             (menuProfileActive() && (menuProfilePosition() === 'start' || isHorizontal())) ||
             (!menuProfileActive() && menuProfilePosition() === 'end' && !isHorizontal()),
         }"
@@ -48,21 +48,21 @@ import { TranslateModule } from '@ngx-translate/core';
       <ul [@menu]="isHorizontal() ? 'overlay' : 'inline'">
         <li [pTooltip]="'preferences.label' | translate" [tooltipDisabled]="isTooltipDisabled()">
           <button class="cursor-pointer" (click)="toggleConfigSidebar()">
-            <i class="pi pi-cog pi-fw"></i>
+            <i class="ph-thin ph-faders"></i>
             <span>{{ 'preferences.label' | translate }}</span>
           </button>
         </li>
 
         <li [pTooltip]="'profile.label' | translate" [tooltipDisabled]="isTooltipDisabled()">
           <button class="cursor-pointer">
-            <i class="pi pi-user pi-fw"></i>
+            <i class="ph-thin ph-user-rectangle"></i>
             <span>{{ 'profile.label' | translate }}</span>
           </button>
         </li>
 
         <li [pTooltip]="'auth.logout' | translate" [tooltipDisabled]="isTooltipDisabled()">
           <button class="cursor-pointer">
-            <i class="pi pi-power-off pi-fw"></i>
+            <i class="ph-thin ph-power"></i>
             <span>{{ 'auth.logout' | translate }}</span>
           </button>
         </li>

@@ -67,17 +67,14 @@ import { TranslateModule } from '@ngx-translate/core';
         "
         tooltipPosition="bottom"
         showDelay="300"
-        [pTooltipPT]="{
-          arrow: { style: { display: 'none' } },
-        }"
       >
-        <i class="pi pi-bars"></i>
+        <i class="ph ph-list"></i>
       </a>
 
       <button class="app-config-mobile-button"></button>
 
       <a #mobileMenuButton class="layout-topbar-mobile-button" (click)="onTopbarMenuToggle()">
-        <i class="pi pi-ellipsis-v font-extrabold!"></i>
+        <i class="ph-fill ph-dots-three-outline-vertical"></i>
       </a>
     </div>
 
@@ -88,13 +85,11 @@ import { TranslateModule } from '@ngx-translate/core';
           <li>
             <a
               (click)="toggleFullScreen()"
-              [pTooltip]="
-                (isFullScreen ? 'screen.exit' : 'screen.full') | translate
-              "
+              [pTooltip]="(isFullScreen ? 'screen.exit' : 'screen.full') | translate"
               tooltipPosition="bottom"
               showDelay="300"
             >
-              <i [class]="isFullScreen ? 'pi pi-window-minimize' : 'pi pi-window-maximize'"></i>
+              <i class="ph ph-corners-out"></i>
             </a>
           </li>
           <li class="layout-topbar-search">
@@ -110,11 +105,11 @@ import { TranslateModule } from '@ngx-translate/core';
               tooltipPosition="bottom"
               showDelay="300"
             >
-              <i class="pi pi-search"></i>
+              <i class="ph ph-magnifying-glass"></i>
             </a>
 
             <div class="layout-search-panel !hidden p-input-filled">
-              <i class="pi pi-search"></i>
+              <i class="ph ph-magnifying-glass"></i>
               <input
                 #searchInput
                 type="text"
@@ -125,7 +120,7 @@ import { TranslateModule } from '@ngx-translate/core';
                 pButton
                 pRipple
                 type="button"
-                icon="pi pi-times"
+                icon="ph ph-x"
                 rounded
                 text
                 pStyleClass=".layout-search-panel"
@@ -146,7 +141,7 @@ import { TranslateModule } from '@ngx-translate/core';
               tooltipPosition="bottom"
               showDelay="300"
             >
-              <i class="pi pi-bell !align-middle"></i>
+              <i class="ph ph-bell !align-middle"></i>
             </a>
             <div class="hidden">
               <notifications />
@@ -164,7 +159,7 @@ import { TranslateModule } from '@ngx-translate/core';
               tooltipPosition="bottom"
               showDelay="300"
             >
-              <i class="pi pi-table"></i>
+              <i class="ph ph-grid-four"></i>
             </a>
             <div class="hidden">
               <tools />
@@ -177,7 +172,7 @@ import { TranslateModule } from '@ngx-translate/core';
               tooltipPosition="bottom"
               showDelay="300"
             >
-              <i class="pi pi-sliders-h"></i>
+              <i class="ph ph-faders"></i>
             </a>
           </li>
         </ul>

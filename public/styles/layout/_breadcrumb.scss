@@ -19,11 +19,6 @@
             font-weight: 200 !important;
             font-size: small;
 
-            .pi {
-                font-weight: 100 !important;
-                font-size: small;
-            }
-
             li {
                 display: flex;
                 align-items: center;
@@ -40,5 +35,9 @@
         button {
             flex-shrink: 0;
         }
+    }
+
+    [class*="ph-"] {
+        font-size: 1.25rem;
     }
 }

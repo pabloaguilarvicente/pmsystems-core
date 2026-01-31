@@ -19,10 +19,10 @@ interface Breadcrumb {
   template: `
     <nav class="layout-breadcrumb">
       <ol>
-        <li><i class="pi pi-home"></i></li>
+        <li><i class="ph ph-house"></i></li>
 
         @for (item of breadcrumbs$ | async; track $index) {
-          <li><i class="pi pi-angle-right"></i></li>
+          <li><i class="ph ph-caret-right"></i></li>
           <li>
             <span>{{ item.label | translate }}</span>
           </li>
@@ -34,14 +34,14 @@ interface Breadcrumb {
         pButton
         pRipple
         type="button"
-        icon="pi pi-calendar"
+        icon="ph ph-calendar-dots"
         class="p-button-rounded p-button-text p-button-plain"
       ></button>
       <button
         pButton
         pRipple
         type="button"
-        icon="pi pi pi-print"
+        icon="ph ph-printer"
         class="p-button-rounded p-button-text p-button-plain"
       ></button>
     </div>

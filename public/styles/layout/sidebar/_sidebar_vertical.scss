@@ -89,13 +89,13 @@
                     color var(--transition-duration);
 
                 .layout-menuitem-icon {
+                    font-size: 1.25rem;
                     margin-right: 0.5rem;
                     color: var(--menuitem-text-color);
                     transition: color var(--transition-duration);
                 }
 
                 .layout-submenu-toggler {
-                    font-size: 75%;
                     margin-left: auto;
                     transition: transform var(--transition-duration);
                 }

@@ -28,7 +28,7 @@ import { TranslateModule } from '@ngx-translate/core';
       @if (root) {
         <div class="layout-menuitem-root-text">
           <span>{{ item.label | translate }}</span>
-          <i class="layout-menuitem-root-icon pi pi-fw pi-minus"></i>
+          <i class="layout-menuitem-root-icon ph-thin ph-minus"></i>
         </div>
       }
 
@@ -48,7 +48,7 @@ import { TranslateModule } from '@ngx-translate/core';
           <span class="layout-menuitem-text">{{ item.label | translate }}</span>
 
           @if (item.items) {
-            <i class="pi pi-fw pi-angle-down layout-submenu-toggler"></i>
+            <i class="ph-thin ph-caret-down layout-submenu-toggler"></i>
           }
         </a>
       }

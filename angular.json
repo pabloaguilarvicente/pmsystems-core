@@ -55,7 +55,12 @@
               }
             ],
             "styles": [
-              "node_modules/primeicons/primeicons.css",
+              "node_modules/@phosphor-icons/web/src/regular/style.css",
+              "node_modules/@phosphor-icons/web/src/bold/style.css",
+              "node_modules/@phosphor-icons/web/src/light/style.css",
+              "node_modules/@phosphor-icons/web/src/thin/style.css",
+              "node_modules/@phosphor-icons/web/src/fill/style.css",
+              "node_modules/@phosphor-icons/web/src/duotone/style.css",
               "public/styles/layout/layout.scss",
               "src/styles.scss"
             ]

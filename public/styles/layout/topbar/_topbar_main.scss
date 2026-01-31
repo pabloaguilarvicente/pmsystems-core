@@ -39,10 +39,8 @@
         .layout-menu-button {
             position: absolute;
             top: 50%;
-            margin-top: -1.25rem;
+            margin-top: -0.9rem;
             right: -1.25rem;
-            width: 1.6rem;
-            height: 1.6rem;
             display: inline-flex;
             flex-shrink: 0;
             align-items: center;
@@ -51,7 +49,6 @@
             color: var(--topbar-menu-button-text-color);
             background-color: var(--topbar-menu-button-bg);
             box-shadow: none;
-            border: 1px solid var(--surface-border);
             transition: background-color var(--transition-duration);
             cursor: pointer;
 
@@ -60,7 +57,7 @@
             }
 
             i {
-                font-size: x-small;
+                font-size: 1.6rem;
                 transition: transform var(--transition-duration);
             }
         }
@@ -71,6 +68,9 @@
             width: 2.5rem;
             height: 2.5rem;
             cursor: pointer;
+            i {
+                font-size: large;
+            }
         }
     }
 
@@ -183,6 +183,9 @@
                             }
                         }
                     }
+                }
+                [class*="ph-"] {
+                    font-size: 1.6rem;
                 }
             }
         }

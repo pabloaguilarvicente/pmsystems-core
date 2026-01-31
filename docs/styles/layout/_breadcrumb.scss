@@ -24,6 +24,11 @@
                 font-size: small;
             }
 
+            [class*="ph-"] {
+                font-weight: 100 !important;
+                font-size: small;
+            }
+
             li {
                 display: flex;
                 align-items: center;

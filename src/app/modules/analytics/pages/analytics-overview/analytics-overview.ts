@@ -13,7 +13,7 @@ export class AnalyticsOverview {
 
   confirmDelete(): void {
     this.confirmDialog.confirm({
-      type: 'primary',
+      type: 'info',
     });
   }
 }

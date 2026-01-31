@@ -35,7 +35,7 @@ export interface ConfirmationTypeConfig {
 
 export const CONFIRMATION_TYPE_CONFIGS: Record<ConfirmationType, ConfirmationTypeConfig> = {
   delete: {
-    icon: 'pi-trash',
+    icon: 'ph-trash-simple',
     iconColor: 'bg-red-500',
     header: 'confirmations.delete.header',
     message: 'confirmations.delete.message',
@@ -48,7 +48,7 @@ export const CONFIRMATION_TYPE_CONFIGS: Record<ConfirmationType, ConfirmationTyp
     showSuccessToast: true,
   },
   save: {
-    icon: 'pi-save',
+    icon: 'ph-floppy-disk',
     iconColor: 'bg-green-500',
     header: 'confirmations.save.header',
     message: 'confirmations.save.message',
@@ -61,7 +61,7 @@ export const CONFIRMATION_TYPE_CONFIGS: Record<ConfirmationType, ConfirmationTyp
     showSuccessToast: true,
   },
   warn: {
-    icon: 'pi-exclamation-triangle',
+    icon: 'ph-warning',
     iconColor: 'bg-orange-500',
     header: 'confirmations.warn.header',
     message: 'confirmations.warn.message',
@@ -74,7 +74,7 @@ export const CONFIRMATION_TYPE_CONFIGS: Record<ConfirmationType, ConfirmationTyp
     showSuccessToast: true,
   },
   info: {
-    icon: 'pi-info-circle',
+    icon: 'ph-exclamation-mark',
     iconColor: 'bg-blue-400',
     header: 'confirmations.info.header',
     message: 'confirmations.info.message',
@@ -87,7 +87,7 @@ export const CONFIRMATION_TYPE_CONFIGS: Record<ConfirmationType, ConfirmationTyp
     showSuccessToast: true,
   },
   success: {
-    icon: 'pi-check-circle',
+    icon: 'ph-check-fat',
     iconColor: 'bg-green-500',
     header: 'confirmations.success.header',
     message: 'confirmations.success.message',
@@ -100,7 +100,7 @@ export const CONFIRMATION_TYPE_CONFIGS: Record<ConfirmationType, ConfirmationTyp
     showSuccessToast: true,
   },
   primary: {
-    icon: 'pi-question',
+    icon: 'ph-question-mark',
     iconColor: 'bg-primary',
     header: 'confirmations.primary.header',
     message: 'confirmations.primary.message',

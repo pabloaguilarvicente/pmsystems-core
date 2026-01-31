@@ -27,7 +27,7 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
         type="button"
         (click)="toggleConfigSidebar()"
       >
-        <i class="pi pi-cog"></i>
+        <i class="ph ph-gear"></i>
       </button>
     }
 

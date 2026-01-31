@@ -37,7 +37,6 @@ import { AppProgressBar } from '../../components/app-progress-bar';
           <app-progress-bar />
           <router-outlet />
         </div>
-        <div app-footer></div>
       </div>
     </div>
     <app-preferences />

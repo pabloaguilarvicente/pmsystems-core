@@ -28,21 +28,21 @@ export class AppMenu {
   model: MenuItem[] = [
     {
       label: 'analytics.label',
-      icon: 'pi pi-chart-line',
+      icon: 'ph-thin ph-chart-bar',
       items: [
         {
           label: 'analytics.overview',
-          icon: 'pi pi-chart-pie',
+          icon: 'ph-thin ph-chart-pie-slice',
           routerLink: ['/analytics/overview'],
         },
         {
           label: 'analytics.reports',
-          icon: 'pi pi-file',
+          icon: 'ph-thin ph-chart-bar',
           routerLink: ['/analytics/reports'],
         },
         {
           label: 'analytics.realtime',
-          icon: 'pi pi-clock',
+          icon: 'ph-thin ph-presentation-chart',
           routerLink: ['/analytics/realtime'],
         },
       ],
@@ -50,81 +50,81 @@ export class AppMenu {
 
     {
       label: 'management.label',
-      icon: 'pi pi-briefcase',
+      icon: 'ph-thin ph-briefcase',
       items: [
         {
           label: 'users.label',
-          icon: 'pi pi-users',
+          icon: 'ph-thin ph-users',
           items: [
             {
               label: 'users.list',
-              icon: 'pi pi-list',
+              icon: 'ph-thin ph-list',
             },
             {
               label: 'roles.label',
-              icon: 'pi pi-id-card',
+              icon: 'ph-thin ph-identification-card',
             },
             {
               label: 'permissions.label',
-              icon: 'pi pi-lock',
+              icon: 'ph-thin ph-lock',
             },
           ],
         },
         {
           label: 'teams.label',
-          icon: 'pi pi-sitemap',
+          icon: 'ph-thin ph-tree-structure',
         },
       ],
     },
 
     {
       label: 'apps.label',
-      icon: 'pi pi-th-large',
+      icon: 'ph-thin ph-grid-four',
       items: [
         {
           label: 'blog.label',
-          icon: 'pi pi-comment',
+          icon: 'ph-thin ph-chat-circle-text',
           items: [
             {
               label: 'blog.list',
-              icon: 'pi pi-image',
+              icon: 'ph-thin ph-image',
             },
             {
               label: 'blog.detail',
-              icon: 'pi pi-file',
+              icon: 'ph-thin ph-file-text',
             },
             {
               label: 'blog.edit',
-              icon: 'pi pi-pencil',
+              icon: 'ph-thin ph-pencil',
             },
           ],
         },
         {
           label: 'notifications.label',
-          icon: 'pi pi-bell',
+          icon: 'ph-thin ph-bell',
         },
         {
           label: 'messages.label',
-          icon: 'pi pi-envelope',
+          icon: 'ph-thin ph-envelope',
         },
       ],
     },
 
     {
       label: 'settings.label',
-      icon: 'pi pi-cog',
+      icon: 'ph-thin ph-gear',
       items: [
         {
           label: 'profile.label',
-          icon: 'pi pi-user',
+          icon: 'ph-thin ph-user',
         },
         {
           label: 'preferences.label',
-          icon: 'pi pi-sliders-h',
+          icon: 'ph-thin ph-sliders',
         },
         {
           label: 'security.label',
-          icon: 'pi pi-shield',
+          icon: 'ph-thin ph-shield',
         },
       ],
     },
@@ -135,15 +135,15 @@ export class AppMenu {
 
     {
       label: 'support.label',
-      icon: 'pi pi-question-circle',
+      icon: 'ph-thin ph-question',
       items: [
         {
           label: 'support.documentation',
-          icon: 'pi pi-book',
+          icon: 'ph-thin ph-book',
         },
         {
           label: 'support.contact',
-          icon: 'pi pi-headphones',
+          icon: 'ph-thin ph-headset',
         },
       ],
     },

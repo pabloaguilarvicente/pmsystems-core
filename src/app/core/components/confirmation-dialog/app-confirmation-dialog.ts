@@ -26,7 +26,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
                 (currentConfig?.iconColor || 'bg-primary')
               "
             >
-              <i [class]="'pi text-3xl! ' + (currentConfig?.icon || 'pi-question')"></i>
+              <i [class]="'ph text-3xl! ' + (currentConfig?.icon || 'ph-question')"></i>
             </div>
             <span class="font-bold text-2xl">{{ currentConfig?.header | translate }}</span>
             <span class="text-center">{{ currentConfig?.message | translate }}</span>

@@ -28,11 +28,10 @@ import { TranslateModule } from '@ngx-translate/core';
         </div>
       </a>
       <p-button
-        icon="pi pi-thumbtack"
+        [icon]="anchored() ? 'ph-fill ph-push-pin-simple' : 'ph ph-push-pin-simple'"
         (onClick)="anchor()"
         [text]="true"
         [rounded]="true"
-        [severity]="anchored() ? 'primary' : 'secondary'"
         [pTooltip]="anchored() ? ('actions.unpin' | translate) : ('actions.pin' | translate)"
         class="layout-sidebar-anchor"
         size="small"

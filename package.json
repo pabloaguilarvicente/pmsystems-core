@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-"deploy": "ng build --configuration production --base-href /pmsystems-core/ && xcopy docs\\browser\\* docs\\ /E /Y && rmdir /S /Q docs\\browser && copy docs\\index.html docs\\404.html && type nul > docs\\.nojekyll && git add . && git commit -m Deploy && git push"
+    "deploy": "ng build --configuration production --base-href /pmsystems-core/ && xcopy docs\\browser\\* docs\\ /E /Y && rmdir /S /Q docs\\browser && copy docs\\index.html docs\\404.html && type nul > docs\\.nojekyll && git add . && git commit -m Deploy && git push"
   },
   "prettier": {
     "printWidth": 100,
@@ -34,11 +34,11 @@
     "@fontsource-variable/manrope": "^5.2.8",
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
+    "@phosphor-icons/web": "^2.1.2",
     "@primeuix/themes": "^2.0.2",
     "@tailwindcss/postcss": "^4.1.18",
     "chart.js": "^4.5.1",
     "postcss": "^8.5.6",
-    "primeicons": "^7.0.0",
     "primeng": "^21.0.3",
     "rxjs": "~7.8.0",
     "tailwindcss": "^4.1.18",
