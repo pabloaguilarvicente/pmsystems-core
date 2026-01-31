@@ -48,7 +48,7 @@ const MainPreset = definePreset(Aura, {
     },
     dialog: {
       content: { padding: '2rem' },
-      root: { borderRadius: '0.5rem' },
+      root: { borderRadius: '0.5rem', borderColor: 'transparent' },
     },
   },
 });

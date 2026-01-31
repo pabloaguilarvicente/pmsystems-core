@@ -22,7 +22,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [CommonModule, TooltipModule, ButtonModule, RouterModule, TranslateModule],
   template: `<button
       class="cursor-pointer flex items-center"
-      (click)="toggleMenu()"
+      (click)="toggleMenu($event)"
       pTooltip="Profile"
       [tooltipDisabled]="isTooltipDisabled()"
     >
@@ -154,7 +154,8 @@ export class AppMenuProfile implements OnDestroy {
     this.unbindOutsideClickListener();
   }
 
-  toggleMenu() {
+  toggleMenu(event: Event) {
+    event.stopPropagation();
     this.layoutService.onMenuProfileToggle();
   }
 

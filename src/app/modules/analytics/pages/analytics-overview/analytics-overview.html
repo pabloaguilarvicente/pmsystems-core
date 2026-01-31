@@ -2,6 +2,12 @@
   <div class="col-span-12">
     <div class="card">
       <app-title-page title="layout.overview" />
+
+      <div class="flex justify-center">
+        <p-button icon="pi pi-bell" (onClick)="confirmDelete()" size="large"> </p-button>
+      </div>
     </div>
   </div>
 </div>
+
+<app-confirmation-dialog />

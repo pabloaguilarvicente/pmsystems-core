@@ -1,9 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AppTitlePage } from '../../../../core/components/app-title-page';
-
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ButtonModule } from 'primeng/button';
+import { AppConfirmationDialogComponent } from '../../../../core/components/app-confirmation-dialog';
 @Component({
   selector: 'analytics-overview',
-  imports: [AppTitlePage],
+  imports: [AppTitlePage, ConfirmDialogModule, ButtonModule, AppConfirmationDialogComponent],
   templateUrl: './analytics-overview.html',
 })
-export class AnalyticsOverview {}
+export class AnalyticsOverview {
+  @ViewChild(AppConfirmationDialogComponent) confirmDialog!: AppConfirmationDialogComponent;
+
+  confirmDelete(): void {
+    this.confirmDialog.confirm({
+      type: 'custom',
+      icon:'pi pi-bell'
+    });
+  }
+}
