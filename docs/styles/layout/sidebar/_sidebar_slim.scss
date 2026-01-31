@@ -124,7 +124,7 @@
 
                                     .layout-menuitem-icon {
                                         font-size: 1.5rem;
-                                        color: var(--menuitem-icon-color);
+                                        color: var(--menuitem-text-color);
                                     }
 
                                     .layout-menuitem-text {
@@ -132,7 +132,7 @@
                                     }
 
                                     &:hover {
-                                        background-color: var(--menuitem-hover-bg-color);
+                                        background-color: var(--menuitem-hover-bg);
                                     }
                                 }
 
@@ -153,15 +153,15 @@
 
                                     a {
                                         padding-right: 0.5rem;
-                                        color: var(--popup-submenu-item-text-color);
-                                        border-radius: var(--border-radius);
+                                        color: var(--menuitem-text-color);
+                                        border-radius: 0.3rem;
 
                                         .layout-menuitem-icon {
-                                            color: var(--popup-submenu-item-icon-color);
+                                            color: var(--menuitem-text-color);
                                         }
 
                                         &:hover {
-                                            background-color: var(--popup-submenu-item-hover-bg-color);
+                                            background-color: var(--menuitem-hover-bg);
                                         }
                                     }
 
@@ -265,7 +265,7 @@
                         background-color: var(--menu-bg);
                         border-top-right-radius: var(--border-radius);
                         border-bottom-right-radius: var(--border-radius);
-                        padding: 0.5rem 0;
+                        padding: 0.5rem;
                         max-height: 20rem;
                         overflow: auto;
                         z-index: 999;
@@ -280,6 +280,7 @@
 
                         a {
                             padding-right: 0.5rem;
+                            border-radius: 0.3rem;
                         }
 
                         li {

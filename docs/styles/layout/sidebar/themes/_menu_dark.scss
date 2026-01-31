@@ -4,6 +4,6 @@
     --menuitem-text-color: rgba(255, 255, 255, 0.87);
     --menuitem-hover-bg: hsla(0, 0%, 100%, 0.04);
     --active-menuitem-text-color: rgba(255, 255, 255, 0.87);
-    --active-menuitem-bg: hsla(0, 0%, 100%, 0.04);
+    --active-menuitem-bg: var(--p-primary-500);
     --inline-menu-border-color: hsla(0, 0%, 100%, 0.12);
 }
