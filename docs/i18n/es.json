@@ -1,0 +1,345 @@
+{
+    "actions": {
+        "accept": "Aceptar",
+        "apply": "Aplicar",
+        "cancel": "Cancelar",
+        "choose": "Elegir",
+        "clear": "Limpiar",
+        "close": "Cerrar",
+        "confirm": "Confirmar",
+        "continue": "Continuar",
+        "delete": "Eliminar",
+        "edit": "Editar",
+        "hide": "Ocultar",
+        "pin": "Anclar",
+        "save": "Guardar",
+        "search": "Buscar",
+        "show": "Mostrar",
+        "unpin": "Desanclar",
+        "upload": "Subir"
+    },
+    "analytics": {
+        "label": "Analítica",
+        "overview": "Resumen",
+        "realtime": "Tiempo real",
+        "reports": "Reportes"
+    },
+    "apps": {
+        "label": "Aplicaciones"
+    },
+    "auth": {
+        "logout": "Cerrar sesión"
+    },
+    "balance": {
+        "label": "Balance"
+    },
+    "blog": {
+        "detail": "Detalle",
+        "edit": "Editar",
+        "label": "Blog",
+        "list": "Listado"
+    },
+    "confirmations": {
+        "delete": {
+            "error": "Error al eliminar el elemento",
+            "header": "Confirmar eliminación",
+            "message": "¿Está seguro que desea eliminar este elemento? Esta acción no se puede deshacer.",
+            "success": "Elemento eliminado correctamente"
+        },
+        "info": {
+            "error": "Error al procesar",
+            "header": "Información",
+            "message": "¿Desea proceder con esta acción?",
+            "success": "Acción completada"
+        },
+        "primary": {
+            "error": "Error al procesar",
+            "header": "Confirmación",
+            "message": "¿Desea continuar?",
+            "success": "Operación completada"
+        },
+        "save": {
+            "error": "Error al guardar los cambios",
+            "header": "Guardar cambios",
+            "message": "¿Está seguro que desea guardar los cambios realizados?",
+            "success": "Cambios guardados correctamente"
+        },
+        "success": {
+            "error": "Error en la operación",
+            "header": "Confirmación",
+            "message": "¿Desea confirmar esta acción?",
+            "success": "Operación exitosa"
+        },
+        "warn": {
+            "error": "Error al completar la acción",
+            "header": "Advertencia",
+            "message": "Esta acción requiere confirmación. ¿Desea continuar?",
+            "success": "Acción completada correctamente"
+        }
+    },
+    "language": {
+        "english": "Inglés",
+        "label": "Idioma",
+        "spanish": "Español"
+    },
+    "management": {
+        "label": "Administración"
+    },
+    "menu": {
+        "drawer": "Cajón",
+        "horizontal": "Horizontal",
+        "label": "Menú",
+        "overlay": "Superpuesto",
+        "slim": "Delgado",
+        "slim_plus": "Delgado+",
+        "static": "Estático",
+        "type": "Tipo de Menú"
+    },
+    "messages": {
+        "label": "Mensajes"
+    },
+    "notifications": {
+        "count": "Tienes <strong>{{value}}</strong> notificaciones nuevas",
+        "label": "Notificaciones"
+    },
+    "permissions": {
+        "label": "Permisos"
+    },
+    "preferences": {
+        "label": "Preferencias"
+    },
+    "primeng": {
+        "accept": "Sí",
+        "addRule": "Agregar regla",
+        "am": "am",
+        "apply": "Aplicar",
+        "aria": {
+            "cancelEdit": "Cancelar edición",
+            "close": "Cerrar",
+            "collapseRow": "Fila contraída",
+            "editRow": "Editar fila",
+            "expandRow": "Fila expandida",
+            "falseLabel": "Falso",
+            "filterConstraint": "Restricción de filtro",
+            "filterOperator": "Operador de filtro",
+            "firstPageLabel": "Primera página",
+            "gridView": "Vista de cuadrícula",
+            "hideFilterMenu": "Ocultar menú de filtros",
+            "jumpToPageDropdownLabel": "Ir a la página (menú)",
+            "jumpToPageInputLabel": "Ir a la página (entrada)",
+            "lastPageLabel": "Última página",
+            "listView": "Vista de lista",
+            "moveAllToSource": "Mover todo al origen",
+            "moveAllToTarget": "Mover todo al objetivo",
+            "moveBottom": "Mover abajo",
+            "moveDown": "Mover hacia abajo",
+            "moveToSource": "Mover al origen",
+            "moveToTarget": "Mover al objetivo",
+            "moveTop": "Mover arriba",
+            "moveUp": "Mover hacia arriba",
+            "navigation": "Navegación",
+            "next": "Siguiente",
+            "nextPageLabel": "Página siguiente",
+            "nullLabel": "No seleccionado",
+            "pageLabel": "Página {page}",
+            "prevPageLabel": "Página anterior",
+            "previous": "Anterior",
+            "rotateLeft": "Rotar a la izquierda",
+            "rotateRight": "Rotar a la derecha",
+            "rowsPerPageLabel": "Filas por página",
+            "saveEdit": "Guardar edición",
+            "scrollTop": "Desplazar arriba",
+            "selectAll": "Todos los elementos seleccionados",
+            "selectRow": "Fila seleccionada",
+            "showFilterMenu": "Mostrar menú de filtros",
+            "slide": "Diapositiva",
+            "slideNumber": "Diapositiva {slideNumber}",
+            "star": "1 estrella",
+            "stars": "{star} estrellas",
+            "trueLabel": "Verdadero",
+            "unselectAll": "Todos los elementos deseleccionados",
+            "unselectRow": "Fila deseleccionada",
+            "zoomImage": "Ampliar imagen",
+            "zoomIn": "Acercar",
+            "zoomOut": "Alejar"
+        },
+        "cancel": "Cancelar",
+        "choose": "Elegir",
+        "chooseDate": "Elegir fecha",
+        "chooseMonth": "Elegir mes",
+        "chooseYear": "Elegir año",
+        "clear": "Limpiar",
+        "completed": "Completado",
+        "contains": "Contiene",
+        "dateAfter": "Fecha es posterior",
+        "dateBefore": "Fecha es anterior",
+        "dateFormat": "dd/mm/yy",
+        "dateIs": "Fecha es",
+        "dateIsNot": "Fecha no es",
+        "dayNames": [
+            "Domingo",
+            "Lunes",
+            "Martes",
+            "Miércoles",
+            "Jueves",
+            "Viernes",
+            "Sábado"
+        ],
+        "dayNamesMin": [
+            "Do",
+            "Lu",
+            "Ma",
+            "Mi",
+            "Ju",
+            "Vi",
+            "Sa"
+        ],
+        "dayNamesShort": [
+            "Dom",
+            "Lun",
+            "Mar",
+            "Mié",
+            "Jue",
+            "Vie",
+            "Sáb"
+        ],
+        "emptyFilterMessage": "No se encontraron resultados",
+        "emptyMessage": "No hay opciones disponibles",
+        "emptySearchMessage": "No se encontraron resultados",
+        "emptySelectionMessage": "Ningún elemento seleccionado",
+        "endsWith": "Termina con",
+        "equals": "Igual a",
+        "fileSizeTypes": [
+            "B",
+            "KB",
+            "MB",
+            "GB",
+            "TB",
+            "PB",
+            "EB",
+            "ZB",
+            "YB"
+        ],
+        "firstDayOfWeek": 0,
+        "gt": "Mayor que",
+        "gte": "Mayor o igual a",
+        "lt": "Menor que",
+        "lte": "Menor o igual a",
+        "matchAll": "Coincidir todo",
+        "matchAny": "Coincidir cualquiera",
+        "medium": "Medio",
+        "monthNames": [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre"
+        ],
+        "monthNamesShort": [
+            "Ene",
+            "Feb",
+            "Mar",
+            "Abr",
+            "May",
+            "Jun",
+            "Jul",
+            "Ago",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dic"
+        ],
+        "nextDecade": "Década siguiente",
+        "nextHour": "Hora siguiente",
+        "nextMinute": "Minuto siguiente",
+        "nextMonth": "Mes siguiente",
+        "nextSecond": "Segundo siguiente",
+        "nextYear": "Año siguiente",
+        "noFilter": "Sin filtro",
+        "notContains": "No contiene",
+        "notEquals": "Diferente de",
+        "passwordPrompt": "Ingrese una contraseña",
+        "pending": "Pendiente",
+        "pm": "pm",
+        "prevDecade": "Década anterior",
+        "prevHour": "Hora anterior",
+        "prevMinute": "Minuto anterior",
+        "prevMonth": "Mes anterior",
+        "prevSecond": "Segundo anterior",
+        "prevYear": "Año anterior",
+        "reject": "No",
+        "removeRule": "Eliminar regla",
+        "searchMessage": "{0} resultados disponibles",
+        "selectionMessage": "{0} elementos seleccionados",
+        "startsWith": "Comienza con",
+        "strong": "Fuerte",
+        "today": "Hoy",
+        "upload": "Subir",
+        "weak": "Débil",
+        "weekHeader": "Sem"
+    },
+    "products": {
+        "label": "Products"
+    },
+    "profile": {
+        "label": "Perfil",
+        "position": "Posición del Perfil"
+    },
+    "roles": {
+        "label": "Roles"
+    },
+    "screen": {
+        "exit": "Salir de pantalla completa",
+        "full": "Pantalla completa",
+        "label": "Pantalla"
+    },
+    "security": {
+        "credentials": "Credenciales",
+        "label": "Seguridad"
+    },
+    "settings": {
+        "label": "Configuración",
+        "preferences": "Preferencias"
+    },
+    "status": {
+        "completed": "Completado",
+        "error": "Error",
+        "loading": "Cargando",
+        "pending": "Pendiente",
+        "success": "Éxito"
+    },
+    "support": {
+        "contact": "Contactar soporte",
+        "documentation": "Documentación",
+        "label": "Soporte"
+    },
+    "teams": {
+        "label": "Equipos"
+    },
+    "theme": {
+        "dark": "Oscuro",
+        "label": "Esquema de Color",
+        "light": "Claro"
+    },
+    "time": {
+        "ago": "atrás",
+        "end": "Final",
+        "realtime": "Tiempo real",
+        "start": "Inicio",
+        "today": "Hoy"
+    },
+    "tools": {
+        "label": "Herramientas"
+    },
+    "users": {
+        "label": "Usuarios",
+        "list": "Lista de usuarios"
+    }
+}

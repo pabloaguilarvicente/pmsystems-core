@@ -1,0 +1,345 @@
+{
+    "actions": {
+        "accept": "Accept",
+        "apply": "Apply",
+        "cancel": "Cancel",
+        "choose": "Choose",
+        "clear": "Clear",
+        "close": "Close",
+        "confirm": "Confirm",
+        "continue": "Continue",
+        "delete": "Delete",
+        "edit": "Edit",
+        "hide": "Hide",
+        "pin": "Pin",
+        "save": "Save",
+        "search": "Search",
+        "show": "Show",
+        "unpin": "Unpin",
+        "upload": "Upload"
+    },
+    "analytics": {
+        "label": "Analytics",
+        "overview": "Overview",
+        "realtime": "Real time",
+        "reports": "Reports"
+    },
+    "apps": {
+        "label": "Apps"
+    },
+    "auth": {
+        "logout": "Logout"
+    },
+    "balance": {
+        "label": "Balance"
+    },
+    "blog": {
+        "detail": "Detail",
+        "edit": "Edit",
+        "label": "Blog",
+        "list": "List"
+    },
+    "confirmations": {
+        "delete": {
+            "header": "Confirm deletion",
+            "message": "Are you sure you want to delete this item? This action cannot be undone.",
+            "success": "Item deleted successfully",
+            "error": "Error deleting item"
+        },
+        "save": {
+            "header": "Save changes",
+            "message": "Are you sure you want to save the changes made?",
+            "success": "Changes saved successfully",
+            "error": "Error saving changes"
+        },
+        "warn": {
+            "header": "Warning",
+            "message": "This action requires confirmation. Do you want to continue?",
+            "success": "Action completed successfully",
+            "error": "Error completing action"
+        },
+        "info": {
+            "header": "Information",
+            "message": "Do you want to proceed with this action?",
+            "success": "Action completed",
+            "error": "Error processing"
+        },
+        "success": {
+            "header": "Confirmation",
+            "message": "Do you want to confirm this action?",
+            "success": "Successful operation",
+            "error": "Operation error"
+        },
+        "primary": {
+            "header": "Confirmation",
+            "message": "Do you want to continue?",
+            "success": "Operation completed",
+            "error": "Error processing"
+        }
+    },
+    "language": {
+        "english": "English",
+        "label": "Language",
+        "spanish": "Spanish"
+    },
+    "management": {
+        "label": "Management"
+    },
+    "menu": {
+        "drawer": "Drawer",
+        "horizontal": "Horizontal",
+        "label": "Menu",
+        "overlay": "Overlay",
+        "slim": "Slim",
+        "slim_plus": "Slim+",
+        "static": "Static",
+        "type": "Menu type"
+    },
+    "messages": {
+        "label": "Messages"
+    },
+    "notifications": {
+        "count": "You have <strong>{{value}}</strong> new notifications",
+        "label": "Notifications"
+    },
+    "permissions": {
+        "label": "Permissions"
+    },
+    "preferences": {
+        "label": "Preferences"
+    },
+    "primeng": {
+        "accept": "Yes",
+        "addRule": "Add rule",
+        "am": "AM",
+        "apply": "Apply",
+        "aria": {
+            "cancelEdit": "Cancel edit",
+            "close": "Close",
+            "collapseRow": "Row collapsed",
+            "editRow": "Edit row",
+            "expandRow": "Row expanded",
+            "falseLabel": "False",
+            "filterConstraint": "Filter constraint",
+            "filterOperator": "Filter operator",
+            "firstPageLabel": "First page",
+            "gridView": "Grid view",
+            "hideFilterMenu": "Hide filter menu",
+            "jumpToPageDropdownLabel": "Jump to page dropdown",
+            "jumpToPageInputLabel": "Jump to page input",
+            "lastPageLabel": "Last page",
+            "listView": "List view",
+            "moveAllToSource": "Move all to source",
+            "moveAllToTarget": "Move all to target",
+            "moveBottom": "Move bottom",
+            "moveDown": "Move down",
+            "moveToSource": "Move to source",
+            "moveToTarget": "Move to target",
+            "moveTop": "Move top",
+            "moveUp": "Move up",
+            "navigation": "Navigation",
+            "next": "Next",
+            "nextPageLabel": "Next page",
+            "nullLabel": "Not selected",
+            "pageLabel": "Page {page}",
+            "prevPageLabel": "Previous page",
+            "previous": "Previous",
+            "rotateLeft": "Rotate left",
+            "rotateRight": "Rotate right",
+            "rowsPerPageLabel": "Rows per page",
+            "saveEdit": "Save edit",
+            "scrollTop": "Scroll top",
+            "selectAll": "All items selected",
+            "selectRow": "Row selected",
+            "showFilterMenu": "Show filter menu",
+            "slide": "Slide",
+            "slideNumber": "{slideNumber} slide",
+            "star": "1 star",
+            "stars": "{star} stars",
+            "trueLabel": "True",
+            "unselectAll": "All items unselected",
+            "unselectRow": "Row unselected",
+            "zoomImage": "Zoom image",
+            "zoomIn": "Zoom in",
+            "zoomOut": "Zoom out"
+        },
+        "cancel": "Cancel",
+        "choose": "Choose",
+        "chooseDate": "Choose date",
+        "chooseMonth": "Choose month",
+        "chooseYear": "Choose year",
+        "clear": "Clear",
+        "completed": "Completed",
+        "contains": "Contains",
+        "dateAfter": "Date is after",
+        "dateBefore": "Date is before",
+        "dateFormat": "mm/dd/yy",
+        "dateIs": "Date is",
+        "dateIsNot": "Date is not",
+        "dayNames": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+        ],
+        "dayNamesMin": [
+            "Su",
+            "Mo",
+            "Tu",
+            "We",
+            "Th",
+            "Fr",
+            "Sa"
+        ],
+        "dayNamesShort": [
+            "Sun",
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri",
+            "Sat"
+        ],
+        "emptyFilterMessage": "No results found",
+        "emptyMessage": "No available options",
+        "emptySearchMessage": "No results found",
+        "emptySelectionMessage": "No selected item",
+        "endsWith": "Ends with",
+        "equals": "Equals",
+        "fileSizeTypes": [
+            "B",
+            "KB",
+            "MB",
+            "GB",
+            "TB",
+            "PB",
+            "EB",
+            "ZB",
+            "YB"
+        ],
+        "firstDayOfWeek": 0,
+        "gt": "Greater than",
+        "gte": "Greater than or equal to",
+        "lt": "Less than",
+        "lte": "Less than or equal to",
+        "matchAll": "Match all",
+        "matchAny": "Match any",
+        "medium": "Medium",
+        "monthNames": [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ],
+        "monthNamesShort": [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec"
+        ],
+        "nextDecade": "Next decade",
+        "nextHour": "Next hour",
+        "nextMinute": "Next minute",
+        "nextMonth": "Next month",
+        "nextSecond": "Next second",
+        "nextYear": "Next year",
+        "noFilter": "No filter",
+        "notContains": "Not contains",
+        "notEquals": "Not equals",
+        "passwordPrompt": "Enter a password",
+        "pending": "Pending",
+        "pm": "PM",
+        "prevDecade": "Previous decade",
+        "prevHour": "Previous hour",
+        "prevMinute": "Previous minute",
+        "prevMonth": "Previous month",
+        "prevSecond": "Previous second",
+        "prevYear": "Previous year",
+        "reject": "No",
+        "removeRule": "Remove rule",
+        "searchMessage": "{0} results are available",
+        "selectionMessage": "{0} items selected",
+        "startsWith": "Starts with",
+        "strong": "Strong",
+        "today": "Today",
+        "upload": "Upload",
+        "weak": "Weak",
+        "weekHeader": "Wk"
+    },
+    "products": {
+        "label": "Productos"
+    },
+    "profile": {
+        "label": "Profile",
+        "position": "Profile position"
+    },
+    "roles": {
+        "label": "Roles"
+    },
+    "screen": {
+        "exit": "Exit full screen",
+        "full": "Full screen",
+        "label": "Screen"
+    },
+    "security": {
+        "credentials": "Credentials",
+        "label": "Security"
+    },
+    "settings": {
+        "label": "Settings",
+        "preferences": "Preferences"
+    },
+    "status": {
+        "completed": "Completed",
+        "error": "Error",
+        "loading": "Loading",
+        "pending": "Pending",
+        "success": "Success"
+    },
+    "support": {
+        "contact": "Contact support",
+        "documentation": "Documentation",
+        "label": "Support"
+    },
+    "teams": {
+        "label": "Teams"
+    },
+    "theme": {
+        "dark": "Dark",
+        "label": "Color scheme",
+        "light": "Light"
+    },
+    "time": {
+        "ago": "ago",
+        "end": "End",
+        "realtime": "Real time",
+        "start": "Start",
+        "today": "Today"
+    },
+    "tools": {
+        "label": "Tools"
+    },
+    "users": {
+        "label": "Users",
+        "list": "User list"
+    }
+}
