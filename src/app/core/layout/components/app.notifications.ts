@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
   template: `
     <ul class="list-none p-0 m-0">
       <li class="px-4 py-1">
-        <span [innerHTML]="'layout.notifications_label' | translate: { value: count }"> </span>
+        <span [innerHTML]="'notifications.count' | translate: { value: count }"> </span>
       </li>
       <li class="p-4">
         <div class="flex items-center">
@@ -15,7 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
           <div class="flex flex-col ml-4 flex-1">
             <div class="flex items-center justify-between mb-1">
               <span class="font-bold">Jerome Bell</span>
-              <small>42 mins {{ 'layout.ago' | translate }}</small>
+              <small>42 min {{ 'time.ago' | translate }}</small>
             </div>
             <span class="text-sm leading-normal">Lorem ipsum dolor sit amet.</span>
           </div>
@@ -27,7 +27,7 @@ import { TranslateModule } from '@ngx-translate/core';
           <div class="flex flex-col ml-4 flex-1">
             <div class="flex items-center justify-between mb-1">
               <span class="fs-small font-bold">Cameron Williamson</span>
-              <small>48 mins {{ 'layout.ago' | translate }}</small>
+              <small>48 min {{ 'time.ago' | translate }}</small>
             </div>
             <span class="text-sm leading-normal">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</span>
           </div>
@@ -39,7 +39,7 @@ import { TranslateModule } from '@ngx-translate/core';
           <div class="flex flex-col ml-4 flex-1">
             <div class="flex items-center justify-between mb-1">
               <span class="fs-small font-bold">Anna Miles</span>
-              <small>50 mins {{ 'layout.ago' | translate }}</small>
+              <small>50 min {{ 'time.ago' | translate }}</small>
             </div>
             <span class="text-sm leading-normal">Lorem ipsum dolor sit amet.</span>
           </div>
@@ -51,7 +51,7 @@ import { TranslateModule } from '@ngx-translate/core';
           <div class="flex flex-col ml-4 flex-1">
             <div class="flex items-center justify-between mb-1">
               <span class="fs-small font-bold">Arlene Mccoy</span>
-              <small>60 mins {{ 'layout.ago' | translate }}</small>
+              <small>60 min {{ 'time.ago' | translate }}</small>
             </div>
             <span class="text-sm leading-normal">Lorem ipsum dolor sit amet, consectetur adipisicing.</span>
           </div>

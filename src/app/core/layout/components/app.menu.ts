@@ -8,12 +8,17 @@ import { AppMenuitem } from './app.menuitem';
   selector: 'app-menu, [app-menu]',
   standalone: true,
   imports: [CommonModule, AppMenuitem, RouterModule],
-  template: ` <ul class="layout-menu" #menuContainer>
-    <ng-container *ngFor="let item of model; let i = index">
-      <li app-menuitem *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"></li>
-      <li *ngIf="item.separator" class="menu-separator"></li>
-    </ng-container>
-  </ul>`,
+  template: `
+    <ul class="layout-menu" #menuContainer>
+      @for (item of model; track $index) {
+        @if (!item.separator) {
+          <li app-menuitem [item]="item" [index]="$index" [root]="true"></li>
+        } @else {
+          <li class="menu-separator"></li>
+        }
+      }
+    </ul>
+  `,
 })
 export class AppMenu {
   el: ElementRef = inject(ElementRef);
@@ -22,21 +27,21 @@ export class AppMenu {
 
   model: MenuItem[] = [
     {
-      label: 'layout.analytics',
+      label: 'analytics.label',
       icon: 'pi pi-chart-line',
       items: [
         {
-          label: 'layout.overview',
+          label: 'analytics.overview',
           icon: 'pi pi-chart-pie',
           routerLink: ['/analytics/overview'],
         },
         {
-          label: 'layout.reports',
+          label: 'analytics.reports',
           icon: 'pi pi-file',
           routerLink: ['/analytics/reports'],
         },
         {
-          label: 'layout.realtime',
+          label: 'analytics.realtime',
           icon: 'pi pi-clock',
           routerLink: ['/analytics/realtime'],
         },
@@ -44,81 +49,81 @@ export class AppMenu {
     },
 
     {
-      label: 'layout.management',
+      label: 'management.label',
       icon: 'pi pi-briefcase',
       items: [
         {
-          label: 'layout.users',
+          label: 'users.label',
           icon: 'pi pi-users',
           items: [
             {
-              label: 'layout.user_list',
+              label: 'users.list',
               icon: 'pi pi-list',
             },
             {
-              label: 'layout.roles',
+              label: 'roles.label',
               icon: 'pi pi-id-card',
             },
             {
-              label: 'layout.permissions',
+              label: 'permissions.label',
               icon: 'pi pi-lock',
             },
           ],
         },
         {
-          label: 'layout.teams',
+          label: 'teams.label',
           icon: 'pi pi-sitemap',
         },
       ],
     },
 
     {
-      label: 'layout.apps',
+      label: 'apps.label',
       icon: 'pi pi-th-large',
       items: [
         {
-          label: 'layout.blog',
+          label: 'blog.label',
           icon: 'pi pi-comment',
           items: [
             {
-              label: 'layout.blog_list',
+              label: 'blog.list',
               icon: 'pi pi-image',
             },
             {
-              label: 'layout.blog_detail',
+              label: 'blog.detail',
               icon: 'pi pi-file',
             },
             {
-              label: 'layout.blog_edit',
+              label: 'blog.edit',
               icon: 'pi pi-pencil',
             },
           ],
         },
         {
-          label: 'layout.notifications',
+          label: 'notifications.label',
           icon: 'pi pi-bell',
         },
         {
-          label: 'layout.messages',
+          label: 'messages.label',
           icon: 'pi pi-envelope',
         },
       ],
     },
 
     {
-      label: 'layout.settings',
+      label: 'settings.label',
       icon: 'pi pi-cog',
       items: [
         {
-          label: 'layout.profile',
+          label: 'profile.label',
           icon: 'pi pi-user',
         },
         {
-          label: 'layout.preferences',
+          label: 'preferences.label',
           icon: 'pi pi-sliders-h',
         },
         {
-          label: 'layout.security',
+          label: 'security.label',
           icon: 'pi pi-shield',
         },
       ],
@@ -129,15 +134,15 @@ export class AppMenu {
     },
 
     {
-      label: 'layout.support',
+      label: 'support.label',
       icon: 'pi pi-question-circle',
       items: [
         {
-          label: 'layout.documentation',
+          label: 'support.documentation',
           icon: 'pi pi-book',
         },
         {
-          label: 'layout.contact_support',
+          label: 'support.contact',
           icon: 'pi pi-headphones',
         },
       ],

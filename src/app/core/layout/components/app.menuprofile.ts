@@ -44,26 +44,30 @@ import { TranslateModule } from '@ngx-translate/core';
       ></i>
     </button>
 
-    <ul *ngIf="menuProfileActive()" [@menu]="isHorizontal() ? 'overlay' : 'inline'">
-      <li [pTooltip]="'layout.preferences' | translate" [tooltipDisabled]="isTooltipDisabled()">
-        <button class="cursor-pointer" (click)="toggleConfigSidebar()">
-          <i class="pi pi-cog pi-fw"></i>
-          <span>{{ 'layout.preferences' | translate }}</span>
-        </button>
-      </li>
-      <li [pTooltip]="'layout.profile' | translate" [tooltipDisabled]="isTooltipDisabled()">
-        <button class="cursor-pointer">
-          <i class="pi pi-user pi-fw"></i>
-          <span>{{ 'layout.profile' | translate }}</span>
-        </button>
-      </li>
-      <li [pTooltip]="'layout.logout' | translate" [tooltipDisabled]="isTooltipDisabled()">
-        <button class="cursor-pointer">
-          <i class="pi pi-power-off pi-fw"></i>
-          <span>{{ 'layout.logout' | translate }}</span>
-        </button>
-      </li>
-    </ul>`,
+    @if (menuProfileActive()) {
+      <ul [@menu]="isHorizontal() ? 'overlay' : 'inline'">
+        <li [pTooltip]="'preferences.label' | translate" [tooltipDisabled]="isTooltipDisabled()">
+          <button class="cursor-pointer" (click)="toggleConfigSidebar()">
+            <i class="pi pi-cog pi-fw"></i>
+            <span>{{ 'preferences.label' | translate }}</span>
+          </button>
+        </li>
+
+        <li [pTooltip]="'profile.label' | translate" [tooltipDisabled]="isTooltipDisabled()">
+          <button class="cursor-pointer">
+            <i class="pi pi-user pi-fw"></i>
+            <span>{{ 'profile.label' | translate }}</span>
+          </button>
+        </li>
+
+        <li [pTooltip]="'auth.logout' | translate" [tooltipDisabled]="isTooltipDisabled()">
+          <button class="cursor-pointer">
+            <i class="pi pi-power-off pi-fw"></i>
+            <span>{{ 'auth.logout' | translate }}</span>
+          </button>
+        </li>
+      </ul>
+    } `,
   animations: [
     trigger('menu', [
       transition('void => inline', [

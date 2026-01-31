@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { AppTitlePage } from '../../../../core/components/app-title-page';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ButtonModule } from 'primeng/button';
-import { AppConfirmationDialogComponent } from '../../../../core/components/app-confirmation-dialog';
+import { AppConfirmationDialogComponent } from '../../../../core/components/confirmation-dialog/app-confirmation-dialog';
 @Component({
   selector: 'analytics-overview',
   imports: [AppTitlePage, ConfirmDialogModule, ButtonModule, AppConfirmationDialogComponent],
@@ -13,8 +13,7 @@ export class AnalyticsOverview {
 
   confirmDelete(): void {
     this.confirmDialog.confirm({
-      type: 'custom',
-      icon:'pi pi-bell'
+      type: 'primary',
     });
   }
 }

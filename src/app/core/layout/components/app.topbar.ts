@@ -43,7 +43,7 @@ import { TranslateModule } from '@ngx-translate/core';
             alt="logo"
             width="50"
           />
-          <span class="font-bold whitespace-nowrap">PM SYSTEMS</span>
+          <span class="font-black whitespace-nowrap">PM SYSTEMS</span>
         </div>
 
         <div class="layout-topbar-logo-slim">
@@ -59,11 +59,11 @@ import { TranslateModule } from '@ngx-translate/core';
         class="layout-menu-button"
         (click)="onMenuButtonClick()"
         [pTooltip]="
-          ('layout.hide' | translate) +
+          ('actions.hide' | translate) +
           '/' +
-          ('layout.show' | translate) +
+          ('actions.show' | translate) +
           ' ' +
-          ('layout.menu' | translate)
+          ('menu.label' | translate)
         "
         tooltipPosition="bottom"
         showDelay="300"
@@ -89,7 +89,7 @@ import { TranslateModule } from '@ngx-translate/core';
             <a
               (click)="toggleFullScreen()"
               [pTooltip]="
-                (isFullScreen ? 'layout.exit_full_screen' : 'layout.full_screen') | translate
+                (isFullScreen ? 'screen.exit' : 'screen.full') | translate
               "
               tooltipPosition="bottom"
               showDelay="300"
@@ -106,7 +106,7 @@ import { TranslateModule } from '@ngx-translate/core';
               leaveActiveClass="animate-fadeout"
               [hideOnOutsideClick]="true"
               (click)="focusSearchInput()"
-              [pTooltip]="'layout.search' | translate"
+              [pTooltip]="'actions.search' | translate"
               tooltipPosition="bottom"
               showDelay="300"
             >
@@ -119,7 +119,7 @@ import { TranslateModule } from '@ngx-translate/core';
                 #searchInput
                 type="text"
                 pInputText
-                [placeholder]="'layout.search' | translate"
+                [placeholder]="'actions.search' | translate"
               />
               <button
                 pButton
@@ -142,7 +142,7 @@ import { TranslateModule } from '@ngx-translate/core';
               leaveToClass="hidden"
               leaveActiveClass="animate-fadeout"
               [hideOnOutsideClick]="true"
-              [pTooltip]="'layout.notifications' | translate"
+              [pTooltip]="'notifications.label' | translate"
               tooltipPosition="bottom"
               showDelay="300"
             >
@@ -160,7 +160,7 @@ import { TranslateModule } from '@ngx-translate/core';
               leaveToClass="hidden"
               leaveActiveClass="animate-fadeout"
               [hideOnOutsideClick]="true"
-              [pTooltip]="'layout.tools' | translate"
+              [pTooltip]="'tools.label' | translate"
               tooltipPosition="bottom"
               showDelay="300"
             >
@@ -173,7 +173,7 @@ import { TranslateModule } from '@ngx-translate/core';
           <li>
             <a
               (click)="toggleConfigSidebar()"
-              [pTooltip]="'layout.preferences' | translate"
+              [pTooltip]="'settings.preferences' | translate"
               tooltipPosition="bottom"
               showDelay="300"
             >

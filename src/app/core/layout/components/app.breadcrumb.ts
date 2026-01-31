@@ -20,12 +20,13 @@ interface Breadcrumb {
     <nav class="layout-breadcrumb">
       <ol>
         <li><i class="pi pi-home"></i></li>
-        <ng-template ngFor let-item let-last="last" [ngForOf]="breadcrumbs$ | async">
+
+        @for (item of breadcrumbs$ | async; track $index) {
           <li><i class="pi pi-angle-right"></i></li>
           <li>
             <span>{{ item.label | translate }}</span>
           </li>
-        </ng-template>
+        }
       </ol>
     </nav>
     <div class="layout-breadcrumb-buttons">

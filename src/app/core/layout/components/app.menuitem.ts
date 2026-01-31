@@ -24,77 +24,82 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: '[app-menuitem]',
   imports: [CommonModule, RouterModule, RippleModule, TooltipModule, TranslateModule],
   template: `
-    <ng-container>
-      <div *ngIf="root && item.visible !== false" class="layout-menuitem-root-text">
-        <span>{{ item.label | translate }}</span>
-        <i class="layout-menuitem-root-icon pi pi-fw pi-minus"></i>
-      </div>
-      <a
-        *ngIf="(!item.routerLink || item.items) && item.visible !== false"
-        [attr.href]="item.url"
-        (click)="itemClick($event)"
-        (mouseenter)="onMouseEnter()"
-        [ngClass]="item.class"
-        [attr.target]="item.target"
-        tabindex="0"
-        pRipple
-        [pTooltip]="item.label | translate"
-        [tooltipDisabled]="!(isSlim() && root && !active)"
-      >
-        <i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
-        <span class="layout-menuitem-text">{{ item.label | translate }}</span>
-        <i class="pi pi-fw pi-angle-down layout-submenu-toggler" *ngIf="item.items"></i>
-      </a>
-      <a
-        *ngIf="item.routerLink && !item.items && item.visible !== false"
-        (click)="itemClick($event)"
-        (mouseenter)="onMouseEnter()"
-        [ngClass]="item.class"
-        [routerLink]="item.routerLink"
-        routerLinkActive="active-route"
-        [routerLinkActiveOptions]="
-          item.routerLinkActiveOptions || {
-            paths: 'exact',
-            queryParams: 'ignored',
-            matrixParams: 'ignored',
-            fragment: 'ignored',
-          }
-        "
-        [fragment]="item.fragment"
-        [queryParamsHandling]="item.queryParamsHandling"
-        [preserveFragment]="item.preserveFragment"
-        [skipLocationChange]="item.skipLocationChange"
-        [replaceUrl]="item.replaceUrl"
-        [state]="item.state"
-        [queryParams]="item.queryParams"
-        [attr.target]="item.target"
-        tabindex="0"
-        pRipple
-        [pTooltip]="item.label | translate"
-        [tooltipDisabled]="!(isSlim() && root)"
-      >
-        <i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
-        <span class="layout-menuitem-text">{{ item.label | translate }}</span>
-        <i class="pi pi-fw pi-angle-down layout-submenu-toggler" *ngIf="item.items"></i>
-      </a>
+    @if (item.visible !== false) {
+      @if (root) {
+        <div class="layout-menuitem-root-text">
+          <span>{{ item.label | translate }}</span>
+          <i class="layout-menuitem-root-icon pi pi-fw pi-minus"></i>
+        </div>
+      }
 
-      <ul
-        #submenu
-        *ngIf="item.items && item.visible !== false"
-        [@children]="submenuAnimation"
-        (@children.done)="onSubmenuAnimated($event)"
-      >
-        <ng-template ngFor let-child let-i="index" [ngForOf]="item.items">
-          <li
-            app-menuitem
-            [item]="child"
-            [index]="i"
-            [parentKey]="key"
-            [class]="child['badgeClass']"
-          ></li>
-        </ng-template>
-      </ul>
-    </ng-container>
+      @if (!item.routerLink || item.items) {
+        <a
+          [attr.href]="item.url"
+          (click)="itemClick($event)"
+          (mouseenter)="onMouseEnter()"
+          [ngClass]="item.class"
+          [attr.target]="item.target"
+          tabindex="0"
+          pRipple
+          [pTooltip]="item.label | translate"
+          [tooltipDisabled]="!(isSlim() && root && !active)"
+        >
+          <i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
+          <span class="layout-menuitem-text">{{ item.label | translate }}</span>
+
+          @if (item.items) {
+            <i class="pi pi-fw pi-angle-down layout-submenu-toggler"></i>
+          }
+        </a>
+      }
+
+      @if (item.routerLink && !item.items) {
+        <a
+          (click)="itemClick($event)"
+          (mouseenter)="onMouseEnter()"
+          [ngClass]="item.class"
+          [routerLink]="item.routerLink"
+          routerLinkActive="active-route"
+          [routerLinkActiveOptions]="
+            item.routerLinkActiveOptions || {
+              paths: 'exact',
+              queryParams: 'ignored',
+              matrixParams: 'ignored',
+              fragment: 'ignored',
+            }
+          "
+          [fragment]="item.fragment"
+          [queryParamsHandling]="item.queryParamsHandling"
+          [preserveFragment]="item.preserveFragment"
+          [skipLocationChange]="item.skipLocationChange"
+          [replaceUrl]="item.replaceUrl"
+          [state]="item.state"
+          [queryParams]="item.queryParams"
+          [attr.target]="item.target"
+          tabindex="0"
+          pRipple
+          [pTooltip]="item.label | translate"
+          [tooltipDisabled]="!(isSlim() && root)"
+        >
+          <i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
+          <span class="layout-menuitem-text">{{ item.label | translate }}</span>
+        </a>
+      }
+
+      @if (item.items) {
+        <ul #submenu [@children]="submenuAnimation" (@children.done)="onSubmenuAnimated($event)">
+          @for (child of item.items; track $index) {
+            <li
+              app-menuitem
+              [item]="child"
+              [index]="$index"
+              [parentKey]="key"
+              [class]="child['badgeClass']"
+            ></li>
+          }
+        </ul>
+      }
+    }
   `,
   animations: [
     trigger('children', [

@@ -2,10 +2,8 @@ import { CommonModule } from '@angular/common';
 import { booleanAttribute, Component, inject, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-
 import { PrimeNG } from 'primeng/config';
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { Router } from '@angular/router';
 import { DrawerModule } from 'primeng/drawer';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { LayoutService } from '../service/layout.service';
@@ -23,26 +21,27 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
     TranslateModule,
   ],
   template: `
-    <button
-      *ngIf="simple"
-      class="layout-config-button config-link"
-      type="button"
-      (click)="toggleConfigSidebar()"
-    >
-      <i class="pi pi-cog"></i>
-    </button>
+    @if (simple) {
+      <button
+        class="layout-config-button config-link"
+        type="button"
+        (click)="toggleConfigSidebar()"
+      >
+        <i class="pi pi-cog"></i>
+      </button>
+    }
 
     <p-drawer
       [(visible)]="visible"
       (onHide)="layoutService.hideConfigSidebar()"
       position="right"
       styleClass="w-80"
-      [header]="'layout.title' | translate"
+      [header]="'settings.preferences' | translate"
     >
       <div class="flex flex-col gap-6">
         <!-- Language Section -->
         <div class="flex flex-col gap-3">
-          <span class="font-semibold text-sm">{{ 'layout.language' | translate }}</span>
+          <span class="font-semibold text-sm">{{ 'language.label' | translate }}</span>
           <div class="grid grid-cols-2 gap-4">
             <!-- Spanish -->
             <div class="flex cursor-pointer flex-col" (click)="changeLanguage('es')">
@@ -60,7 +59,7 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
                 class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                 [class.text-primary]="currentLanguage === 'es'"
               >
-                {{ 'layout.spanish' | translate }}
+                {{ 'language.spanish' | translate }}
               </div>
             </div>
 
@@ -80,7 +79,7 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
                 class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                 [class.text-primary]="currentLanguage === 'en'"
               >
-                {{ 'layout.english' | translate }}
+                {{ 'language.english' | translate }}
               </div>
             </div>
           </div>
@@ -88,7 +87,7 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
 
         <!-- Color Scheme Section -->
         <div class="flex flex-col gap-3">
-          <span class="font-semibold text-sm">{{ 'layout.colorScheme' | translate }}</span>
+          <span class="font-semibold text-sm">{{ 'theme.label' | translate }}</span>
           <div class="grid grid-cols-2 gap-4">
             <!-- Light Theme -->
             <div class="flex cursor-pointer flex-col" (click)="darkTheme = false">
@@ -120,7 +119,7 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
                 class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                 [class.text-primary]="!darkTheme"
               >
-                {{ 'layout.light' | translate }}
+                {{ 'theme.light' | translate }}
               </div>
             </div>
 
@@ -154,16 +153,16 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
                 class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                 [class.text-primary]="darkTheme"
               >
-                {{ 'layout.dark' | translate }}
+                {{ 'theme.dark' | translate }}
               </div>
             </div>
           </div>
         </div>
 
-        <ng-container *ngIf="!simple">
+        @if (!simple) {
           <!-- Menu Type Section -->
           <div class="flex flex-col gap-3">
-            <span class="font-semibold text-sm">{{ 'layout.menuType' | translate }}</span>
+            <span class="font-semibold text-sm">{{ 'menu.type' | translate }}</span>
             <div class="grid grid-cols-2 gap-4">
               <!-- Static -->
               <div class="flex cursor-pointer flex-col" (click)="menuMode = 'static'">
@@ -189,10 +188,10 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
                     <div class="h-3 bg-surface-100 dark:bg-surface-800">
                       <div class="mr-1.5 flex h-full items-center justify-end">
                         <div
-                          class="ml-1 h-1 w-1 rounded-full bg-surface-300 dark:bg-surface-600"
+                          class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
                         ></div>
                         <div
-                          class="ml-1 h-1 w-1 rounded-full bg-surface-300 dark:bg-surface-600"
+                          class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
                         ></div>
                       </div>
                     </div>
@@ -205,7 +204,7 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
                   class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                   [class.text-primary]="menuMode === 'static'"
                 >
-                  {{ 'layout.static' | translate }}
+                  {{ 'menu.static' | translate }}
                 </div>
               </div>
 
@@ -219,39 +218,32 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
                       : 'border-surface-200 dark:border-surface-700'
                   "
                 >
-                  <div class="relative flex flex-auto flex-col">
+                  <div
+                    class="flex flex-auto flex-col border-l border-surface-200 dark:border-surface-700"
+                  >
                     <div class="h-3 bg-surface-100 dark:bg-surface-800">
-                      <div class="ml-1.5 flex h-full items-center">
-                        <div class="h-1 w-2 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                      </div>
-                      <div class="mr-1.5 flex h-full items-center justify-end">
-                        <div
-                          class="ml-1 h-1 w-1 rounded-full bg-surface-300 dark:bg-surface-600"
-                        ></div>
-                        <div
-                          class="ml-1 h-1 w-1 rounded-full bg-surface-300 dark:bg-surface-600"
-                        ></div>
+                      <div class="flex h-full items-center justify-between px-1.5">
+                        <div class="h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"></div>
+                        <div class="flex gap-0.5">
+                          <div
+                            class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
+                          ></div>
+                          <div
+                            class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
+                          ></div>
+                        </div>
                       </div>
                     </div>
                     <div
                       class="flex flex-auto border-t border-surface-200 bg-surface-0 dark:border-surface-700 dark:bg-surface-900"
                     ></div>
-                    <div
-                      class="absolute left-0 top-3 h-[calc(100%-0.75rem)] w-8 bg-surface-100 opacity-80 dark:bg-surface-800"
-                    >
-                      <div class="mx-1.5 mt-2 space-y-1">
-                        <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                        <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                        <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                      </div>
-                    </div>
                   </div>
                 </div>
                 <div
                   class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                   [class.text-primary]="menuMode === 'overlay'"
                 >
-                  {{ 'layout.overlay' | translate }}
+                  {{ 'menu.overlay' | translate }}
                 </div>
               </div>
 
@@ -266,11 +258,11 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
                   "
                 >
                   <div class="w-5 bg-surface-100 dark:bg-surface-800">
-                    <div class="mx-1 mt-3 space-y-1.5">
-                      <div class="h-1 w-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                      <div class="h-1 w-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                      <div class="h-1 w-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                      <div class="h-1 w-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                    <div class="mx-1 mt-3 space-y-1">
+                      <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                      <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                      <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                      <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
                     </div>
                   </div>
                   <div
@@ -279,10 +271,10 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
                     <div class="h-3 bg-surface-100 dark:bg-surface-800">
                       <div class="mr-1.5 flex h-full items-center justify-end">
                         <div
-                          class="ml-1 h-1 w-1 rounded-full bg-surface-300 dark:bg-surface-600"
+                          class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
                         ></div>
                         <div
-                          class="ml-1 h-1 w-1 rounded-full bg-surface-300 dark:bg-surface-600"
+                          class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
                         ></div>
                       </div>
                     </div>
@@ -295,11 +287,11 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
                   class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                   [class.text-primary]="menuMode === 'slim'"
                 >
-                  {{ 'layout.slim' | translate }}
+                  {{ 'menu.slim' | translate }}
                 </div>
               </div>
 
-              <!-- Slim Plus -->
+              <!-- Slim+ -->
               <div class="flex cursor-pointer flex-col" (click)="menuMode = 'slim-plus'">
                 <div
                   class="flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
@@ -310,18 +302,19 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
                   "
                 >
                   <div class="w-5 bg-surface-100 dark:bg-surface-800">
-                    <div class="mx-1 mt-3 space-y-1.5">
-                      <div class="h-1 w-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                      <div class="h-1 w-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                      <div class="h-1 w-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                    <div class="mx-1 mt-2 space-y-1">
+                      <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                      <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                      <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                      <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
                     </div>
                   </div>
-                  <div
-                    class="w-6 border-l border-surface-200 bg-surface-50 dark:border-surface-700 dark:bg-surface-800"
-                  >
-                    <div class="mx-1 mt-3 space-y-1">
-                      <div class="h-0.5 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                      <div class="h-0.5 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                  <div class="w-8 bg-surface-50 dark:bg-surface-900">
+                    <div class="mx-1 mt-2 space-y-0.5">
+                      <div class="h-0.5 rounded-sm bg-surface-200 dark:bg-surface-700"></div>
+                      <div class="h-0.5 rounded-sm bg-surface-200 dark:bg-surface-700"></div>
+                      <div class="h-0.5 rounded-sm bg-surface-200 dark:bg-surface-700"></div>
+                      <div class="h-0.5 rounded-sm bg-surface-200 dark:bg-surface-700"></div>
                     </div>
                   </div>
                   <div
@@ -330,10 +323,10 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
                     <div class="h-3 bg-surface-100 dark:bg-surface-800">
                       <div class="mr-1.5 flex h-full items-center justify-end">
                         <div
-                          class="ml-1 h-1 w-1 rounded-full bg-surface-300 dark:bg-surface-600"
+                          class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
                         ></div>
                         <div
-                          class="ml-1 h-1 w-1 rounded-full bg-surface-300 dark:bg-surface-600"
+                          class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
                         ></div>
                       </div>
                     </div>
@@ -346,7 +339,7 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
                   class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                   [class.text-primary]="menuMode === 'slim-plus'"
                 >
-                  {{ 'layout.slimPlus' | translate }}
+                  {{ 'menu.slim_plus' | translate }}
                 </div>
               </div>
 
@@ -360,46 +353,39 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
                       : 'border-surface-200 dark:border-surface-700'
                   "
                 >
-                  <div class="relative flex flex-auto flex-col">
+                  <div
+                    class="flex flex-auto flex-col border-l border-surface-200 dark:border-surface-700"
+                  >
                     <div class="h-3 bg-surface-100 dark:bg-surface-800">
-                      <div class="ml-1.5 flex h-full items-center">
-                        <div class="h-1 w-2 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                      </div>
-                      <div class="mr-1.5 flex h-full items-center justify-end">
-                        <div
-                          class="ml-1 h-1 w-1 rounded-full bg-surface-300 dark:bg-surface-600"
-                        ></div>
+                      <div class="flex h-full items-center justify-between px-1.5">
+                        <div class="h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"></div>
+                        <div class="flex gap-0.5">
+                          <div
+                            class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
+                          ></div>
+                          <div
+                            class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
+                          ></div>
+                        </div>
                       </div>
                     </div>
                     <div
                       class="flex flex-auto border-t border-surface-200 bg-surface-0 dark:border-surface-700 dark:bg-surface-900"
                     ></div>
-                    <div
-                      class="absolute left-0 top-3 h-[calc(100%-0.75rem)] w-7 bg-surface-100 shadow-lg dark:bg-surface-800"
-                    >
-                      <div class="mx-1.5 mt-2 space-y-1">
-                        <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                        <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                        <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                      </div>
-                      <div
-                        class="absolute right-0.5 top-0.5 h-1 w-1 rounded-full bg-primary opacity-70"
-                      ></div>
-                    </div>
                   </div>
                 </div>
                 <div
                   class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                   [class.text-primary]="menuMode === 'drawer'"
                 >
-                  {{ 'layout.drawer' | translate }}
+                  {{ 'menu.drawer' | translate }}
                 </div>
               </div>
 
               <!-- Horizontal -->
               <div class="flex cursor-pointer flex-col" (click)="menuMode = 'horizontal'">
                 <div
-                  class="flex h-20 flex-col overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
+                  class="flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
                   [ngClass]="
                     menuMode === 'horizontal'
                       ? 'border-primary border-3'
@@ -421,7 +407,7 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
                   class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                   [class.text-primary]="menuMode === 'horizontal'"
                 >
-                  {{ 'layout.horizontal' | translate }}
+                  {{ 'menu.horizontal' | translate }}
                 </div>
               </div>
             </div>
@@ -429,7 +415,7 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
 
           <!-- Menu Profile Section -->
           <div class="flex flex-col gap-3">
-            <span class="font-semibold text-sm">{{ 'layout.profilePosition' | translate }}</span>
+            <span class="font-semibold text-sm">{{ 'profile.position' | translate }}</span>
             <div class="grid grid-cols-2 gap-4">
               <!-- Start -->
               <div class="flex cursor-pointer flex-col" (click)="menuProfilePosition = 'start'">
@@ -468,7 +454,7 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
                   class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                   [class.text-primary]="menuProfilePosition === 'start'"
                 >
-                  {{ 'layout.start' | translate }}
+                  {{ 'time.start' | translate }}
                 </div>
               </div>
 
@@ -509,12 +495,12 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
                   class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                   [class.text-primary]="menuProfilePosition === 'end'"
                 >
-                  {{ 'layout.end' | translate }}
+                  {{ 'time.end' | translate }}
                 </div>
               </div>
             </div>
           </div>
-        </ng-container>
+        }
       </div>
     </p-drawer>
   `,
@@ -522,15 +508,9 @@ import { Language, MenuMode, MenuProfilePosition } from '../../commons/core.mode
 export class AppPreferences {
   @Input({ transform: booleanAttribute }) simple: boolean = false;
 
-  router = inject(Router);
-  config: PrimeNG = inject(PrimeNG);
-  layoutService: LayoutService = inject(LayoutService);
-  primeng = inject(PrimeNG);
-
-  themeOptions = [
-    { name: 'Claro', value: false },
-    { name: 'Oscuro', value: true },
-  ];
+  private readonly config: PrimeNG = inject(PrimeNG);
+  public readonly layoutService: LayoutService = inject(LayoutService);
+  private readonly primeng = inject(PrimeNG);
 
   get currentLanguage(): Language {
     return this.layoutService.currentLanguage();

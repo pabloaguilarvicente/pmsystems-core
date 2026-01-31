@@ -20,7 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
       <a href="/">
         <div class="layout-sidebar-logo">
           <img src="images/logos/BLUE01.svg" alt="logo" width="50" />
-          <span class="font-bold whitespace-nowrap">PM Systems</span>
+          <span class="font-black whitespace-nowrap">PM SYSTEMS</span>
         </div>
 
         <div class="layout-sidebar-logo-slim">
@@ -33,17 +33,21 @@ import { TranslateModule } from '@ngx-translate/core';
         [text]="true"
         [rounded]="true"
         [severity]="anchored() ? 'primary' : 'secondary'"
-        [pTooltip]="anchored() ? ('layout.unpin' | translate) : ('layout.pin' | translate)"
+        [pTooltip]="anchored() ? ('actions.unpin' | translate) : ('actions.pin' | translate)"
         class="layout-sidebar-anchor"
         size="small"
         tooltipPosition="right"
       />
     </div>
-    <div app-menu-profile #menuProfileStart *ngIf="menuProfilePosition() === 'start'"></div>
+    @if (menuProfilePosition() === 'start') {
+      <div app-menu-profile #menuProfileStart></div>
+    }
     <div #menuContainer class="layout-menu-container">
       <div app-menu></div>
     </div>
-    <div app-menu-profile #menuProfileEnd *ngIf="menuProfilePosition() === 'end'"></div>
+    @if (menuProfilePosition() === 'end') {
+      <div app-menu-profile #menuProfileEnd></div>
+    }
   </div>`,
 })
 export class AppSidebar implements OnDestroy {
