@@ -55,24 +55,12 @@ export class AppMenu {
         {
           label: 'users.label',
           icon: 'ph-thin ph-users',
-          items: [
-            {
-              label: 'users.list',
-              icon: 'ph-thin ph-list',
-            },
-            {
-              label: 'roles.label',
-              icon: 'ph-thin ph-identification-card',
-            },
-            {
-              label: 'permissions.label',
-              icon: 'ph-thin ph-lock',
-            },
-          ],
+          routerLink: '/users',
         },
         {
           label: 'teams.label',
           icon: 'ph-thin ph-tree-structure',
+          routerLink: '',
         },
       ],
     },
@@ -88,24 +76,29 @@ export class AppMenu {
             {
               label: 'blog.list',
               icon: 'ph-thin ph-image',
+              routerLink: '',
             },
             {
               label: 'blog.detail',
               icon: 'ph-thin ph-file-text',
+              routerLink: '',
             },
             {
               label: 'blog.edit',
               icon: 'ph-thin ph-pencil',
+              routerLink: '',
             },
           ],
         },
         {
           label: 'notifications.label',
           icon: 'ph-thin ph-bell',
+          routerLink: '',
         },
         {
           label: 'messages.label',
           icon: 'ph-thin ph-envelope',
+          routerLink: '',
         },
       ],
     },
@@ -117,14 +110,17 @@ export class AppMenu {
         {
           label: 'profile.label',
           icon: 'ph-thin ph-user',
+          routerLink: '',
         },
         {
           label: 'preferences.label',
           icon: 'ph-thin ph-sliders',
+          routerLink: '',
         },
         {
           label: 'security.label',
           icon: 'ph-thin ph-shield',
+          routerLink: '',
         },
       ],
     },
@@ -140,10 +136,12 @@ export class AppMenu {
         {
           label: 'support.documentation',
           icon: 'ph-thin ph-book',
+          routerLink: '',
         },
         {
           label: 'support.contact',
           icon: 'ph-thin ph-headset',
+          routerLink: '',
         },
       ],
     },

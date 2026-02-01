@@ -148,7 +148,7 @@
         &.layout-sidebar-active {
             .layout-sidebar {
                 width: 17rem;
-
+                z-index: 1001;
                 .layout-sidebar-top {
                     padding: 0 1.5rem;
                     .layout-sidebar-logo {

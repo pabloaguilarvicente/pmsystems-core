@@ -4,12 +4,13 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { PRIMENG_PROVIDERS } from './core/providers/primeng.provider';
 import { TRANSLATE_PROVIDERS } from './core/providers/translate.provider';
 import { ROUTER_PROVIDERS } from './core/providers/router.provider';
+import { PROVIDE_INTERCEPTORS } from './core/providers/interceptors.provider';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     ROUTER_PROVIDERS,
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), PROVIDE_INTERCEPTORS),
     provideAnimationsAsync(),
     PRIMENG_PROVIDERS,
     TRANSLATE_PROVIDERS,

@@ -1,0 +1,32 @@
+export type UserRole = 'ADMIN' | 'MODERATOR' | 'USER';
+
+export interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  username: string;
+  role: UserRole;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt?: string;
+}
+
+export interface CreateUserRequest {
+  firstName: string;
+  lastName: string;
+  email: string;
+  username: string;
+  password: string;
+  role: UserRole;
+}
+
+export interface UpdateUserRequest {
+  firstName: string;
+  lastName: string;
+  email: string;
+  username: string;
+  password: string;
+  role: UserRole;
+  isActive: boolean;
+}

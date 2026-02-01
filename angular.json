@@ -21,13 +21,16 @@
           "skipTests": true
         },
         "@schematics/angular:guard": {
-          "skipTests": true
+          "skipTests": true,
+          "typeSeparator": "."
         },
         "@schematics/angular:interceptor": {
-          "skipTests": true
+          "skipTests": true,
+          "typeSeparator": "."
         },
         "@schematics/angular:pipe": {
-          "skipTests": true
+          "skipTests": true,
+          "typeSeparator": "."
         },
         "@schematics/angular:resolver": {
           "skipTests": true
@@ -84,7 +87,13 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
