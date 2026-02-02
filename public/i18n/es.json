@@ -11,11 +11,13 @@
         "delete": "Eliminar",
         "edit": "Editar",
         "hide": "Ocultar",
+        "label": "Acciones",
         "pin": "Anclar",
         "save": "Guardar",
         "search": "Buscar",
         "show": "Mostrar",
         "unpin": "Desanclar",
+        "update": "Actualizar",
         "upload": "Subir"
     },
     "analytics": {
@@ -77,10 +79,25 @@
             "success": "Acción completada correctamente"
         }
     },
+    "email": {
+        "input": "Ingrese correo electrónico",
+        "label": "Correo electrónico",
+        "placeholder": "Ingrese correo electrónico"
+    },
+    "firstName": {
+        "input": "Ingrese nombres",
+        "label": "Nombres",
+        "placeholder": "Ingrese nombres"
+    },
     "language": {
         "english": "Inglés",
         "label": "Idioma",
         "spanish": "Español"
+    },
+    "lastName": {
+        "input": "Ingrese apellidos",
+        "label": "Apellidos",
+        "placeholder": "Ingrese apellidos"
     },
     "management": {
         "label": "Administración"
@@ -96,11 +113,15 @@
         "type": "Tipo de Menú"
     },
     "messages": {
-        "label": "Mensajes"
+        "label": "Mensajes",
+        "noRecords": "No se encontraron registros"
     },
     "notifications": {
         "count": "Tienes <strong>{{value}}</strong> notificaciones nuevas",
         "label": "Notificaciones"
+    },
+    "options": {
+        "label": "Opciones"
     },
     "permissions": {
         "label": "Permisos"
@@ -292,6 +313,17 @@
         "label": "Perfil",
         "position": "Posición del Perfil"
     },
+    "registered": {
+        "label": "Registrado"
+    },
+    "role": {
+        "plural": {
+            "label": "Roles"
+        },
+        "singular": {
+            "label": "Rol"
+        }
+    },
     "roles": {
         "label": "Roles"
     },
@@ -311,6 +343,7 @@
     "status": {
         "completed": "Completado",
         "error": "Error",
+        "label": "Estado",
         "loading": "Cargando",
         "pending": "Pendiente",
         "success": "Éxito"
@@ -338,8 +371,12 @@
     "tools": {
         "label": "Herramientas"
     },
-    "users": {
-        "label": "Usuarios",
-        "list": "Lista de usuarios"
+    "user": {
+        "plural": {
+            "label": "Usuarios"
+        },
+        "singular": {
+            "label": "Usuario"
+        }
     }
 }

@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
 import { Observable } from 'rxjs';
 import { ApiListResponse, ApiResponse, buildHttpParams } from '../../../core/commons/api.utils';
-import { User } from '../models/users.model';
+import { User, UserFiltersParams } from '../models/users.model';
 
 @Injectable()
 export class UsersService {
@@ -11,7 +11,7 @@ export class UsersService {
   private readonly API_URL = environment.api.baseUrl;
   private readonly PATH = 'users';
 
-  getAll(queryParams: any): Observable<ApiListResponse<User>> {
+  getAll(queryParams: UserFiltersParams): Observable<ApiListResponse<User>> {
     const params = buildHttpParams(queryParams);
     return this.http.get<ApiListResponse<User>>(`${this.API_URL}/${this.PATH}`, {
       params,
@@ -34,7 +34,7 @@ export class UsersService {
     return this.http.patch<ApiResponse<User>>(`${this.API_URL}/${this.PATH}/${id}`, changes);
   }
 
-  delete(id: number): Observable<ApiResponse<null>> {
-    return this.http.delete<ApiResponse<null>>(`${this.API_URL}/${this.PATH}/${id}`);
+  delete(id: number): Observable<ApiResponse<User>> {
+    return this.http.delete<ApiResponse<User>>(`${this.API_URL}/${this.PATH}/${id}`);
   }
 }

@@ -1,1 +1,94 @@
-<p>users-main works!</p>
+<div class="grid grid-cols-12 gap-4">
+  <div class="col-span-12">
+    <div class="card">
+      <app-title-page title="user.plural.label" />
+      <p-table
+        [value]="users()"
+        [loading]="isLoading()"
+        [paginator]="false"
+        [lazy]="true"
+        (onLazyLoad)="onSort($event)"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="firstName" style="width: 15%">
+              {{ 'firstName.label' | translate }}
+              <p-sortIcon field="firstName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="lastName" style="width: 15%">
+              {{ 'lastName.label' | translate }}
+              <p-sortIcon field="lastName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="email" style="width: 20%">
+              {{ 'email.label' | translate }}
+              <p-sortIcon field="email"></p-sortIcon>
+            </th>
+            <th pSortableColumn="username" style="width: 15%">
+              {{ 'user.singular.label' | translate }}
+              <p-sortIcon field="username"></p-sortIcon>
+            </th>
+            <th pSortableColumn="role.name" style="width: 10%">
+              {{ 'role.singular.label' | translate }}
+              <p-sortIcon field="role.name"></p-sortIcon>
+            </th>
+            <th style="width: 10%">{{ 'status.label' | translate }}</th>
+            <th pSortableColumn="createdAt" style="width: 10%">
+              {{ 'registered.label' | translate }}
+              <p-sortIcon field="createdAt"></p-sortIcon>
+            </th>
+            <th style="width: 5%" class="text-center">{{ 'options.label' | translate }}</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-user>
+          <tr>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.username }}</td>
+            <td>
+              <span [class]="'badge badge-' + user.role.code">
+                {{ user.role.name }}
+              </span>
+            </td>
+            <td>
+              <span [class]="'badge badge-' + user.status.code">
+                {{ user.status.name }}
+              </span>
+            </td>
+            <td>{{ user.createdAt | date: 'short' }}</td>
+            <td class="flex justify-center">
+              <p-menu #actions [model]="items" [popup]="true" appendTo="body">
+                <ng-template pTemplate="item" let-item>
+                  <a pRipple class="flex items-center px-3 py-2 cursor-pointer gap-3">
+                    <span [class]="item.icon"></span>
+                    <span>{{ item.label | translate }}</span>
+                  </a>
+                </ng-template>
+              </p-menu>
+              <p-button
+                variant="text"
+                (click)="actions.toggle($event)"
+                icon="ph-bold ph-dots-three-outline-vertical"
+              />
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="8" class="text-center">{{ 'messages.noRecords' | translate }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+      @if (pagination()) {
+        <app-paginator
+          [pagination]="pagination()!"
+          [loading]="isLoading()"
+          (pageChange)="onPaginatorChange($event)"
+        />
+      }
+    </div>
+  </div>
+</div>

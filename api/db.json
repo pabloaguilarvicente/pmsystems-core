@@ -1,0 +1,116 @@
+{
+  "roles": [
+    {
+      "code": "ADMIN",
+      "id": 1,
+      "name": "Administrador"
+    },
+    {
+      "code": "MODERATOR",
+      "id": 2,
+      "name": "Moderador"
+    },
+    {
+      "code": "USER",
+      "id": 3,
+      "name": "Usuario"
+    }
+  ],
+  "statuses": [
+    {
+      "code": "ACTIVE",
+      "id": 1,
+      "name": "Activo"
+    },
+    {
+      "code": "INACTIVE",
+      "id": 2,
+      "name": "Inactivo"
+    }
+  ],
+  "users": [
+    {
+      "createdAt": "2024-01-15T10:30:00.000Z",
+      "email": "juan.perez@example.com",
+      "firstName": "Juan",
+      "id": 1,
+      "lastName": "Pérez",
+      "roleId": 1,
+      "statusId": 1,
+      "updatedAt": "2024-02-01T14:20:00.000Z",
+      "username": "jperez"
+    },
+    {
+      "createdAt": "2024-01-20T09:15:00.000Z",
+      "email": "maria.garcia@example.com",
+      "firstName": "María",
+      "id": 2,
+      "lastName": "García",
+      "roleId": 2,
+      "statusId": 1,
+      "username": "mgarcia"
+    },
+    {
+      "createdAt": "2024-01-25T11:45:00.000Z",
+      "email": "carlos.lopez@example.com",
+      "firstName": "Carlos",
+      "id": 3,
+      "lastName": "López",
+      "roleId": 3,
+      "statusId": 1,
+      "username": "clopez"
+    },
+    {
+      "createdAt": "2024-01-28T13:00:00.000Z",
+      "email": "ana.martinez@example.com",
+      "firstName": "Ana",
+      "id": 4,
+      "lastName": "Martínez",
+      "roleId": 3,
+      "statusId": 2,
+      "updatedAt": "2024-01-30T16:30:00.000Z",
+      "username": "amartinez"
+    },
+    {
+      "createdAt": "2024-02-01T08:00:00.000Z",
+      "email": "luis.rodriguez@example.com",
+      "firstName": "Luis",
+      "id": 5,
+      "lastName": "Rodríguez",
+      "roleId": 2,
+      "statusId": 1,
+      "username": "lrodriguez"
+    },
+    {
+      "createdAt": "2024-02-02T09:30:00.000Z",
+      "email": "carmen.fernandez@example.com",
+      "firstName": "Carmen",
+      "id": 6,
+      "lastName": "Fernández",
+      "roleId": 3,
+      "statusId": 1,
+      "username": "cfernandez"
+    },
+    {
+      "createdAt": "2024-02-03T11:00:00.000Z",
+      "email": "pedro.sanchez@example.com",
+      "firstName": "Pedro",
+      "id": 7,
+      "lastName": "Sánchez",
+      "roleId": 3,
+      "statusId": 2,
+      "updatedAt": "2024-02-03T15:45:00.000Z",
+      "username": "psanchez"
+    },
+    {
+      "createdAt": "2024-02-04T08:15:00.000Z",
+      "email": "laura.diaz@example.com",
+      "firstName": "Laura",
+      "id": 8,
+      "lastName": "Díaz",
+      "roleId": 2,
+      "statusId": 1,
+      "username": "ldiaz"
+    }
+  ]
+}

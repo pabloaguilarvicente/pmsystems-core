@@ -46,3 +46,8 @@ package-lock.json
 # System files
 .DS_Store
 Thumbs.db
+
+#api
+api/node_modules/
+api/package-lock.json
+/docs

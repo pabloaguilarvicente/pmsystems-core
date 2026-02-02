@@ -53,7 +53,7 @@ export class AppMenu {
       icon: 'ph-thin ph-briefcase',
       items: [
         {
-          label: 'users.label',
+          label: 'user.plural.label',
           icon: 'ph-thin ph-users',
           routerLink: '/users',
         },

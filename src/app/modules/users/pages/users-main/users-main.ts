@@ -1,64 +1,100 @@
-import { Component, effect, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { UsersService } from '../../services/users.service';
-import { User } from '../../models/users.model';
+import { User, UserFiltersParams } from '../../models/users.model';
 import { Pagination } from '../../../../core/commons/api.utils';
-
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
+import { DatePipe } from '@angular/common';
+import { AppPaginator, PaginatorChangeEvent } from '../../../../core/components/app-paginator';
+import { TranslateModule } from '@ngx-translate/core';
+import { MenuModule } from 'primeng/menu';
+import { MenuItem } from 'primeng/api';
+import { getContrastColor, isTailwindColor } from '../../../../core/commons/color.utils';
+import { AppTitlePage } from "../../../../core/components/app-title-page";
 @Component({
   selector: 'users-main',
-  imports: [],
+  imports: [
+    TableModule,
+    ButtonModule,
+    TooltipModule,
+    DatePipe,
+    AppPaginator,
+    TranslateModule,
+    MenuModule,
+    AppTitlePage
+],
   templateUrl: './users-main.html',
   providers: [UsersService],
 })
 export class UsersMain {
+  public readonly userService = inject(UsersService);
+
+  public items: MenuItem[] = [
+    { label: 'actions.update', icon: 'ph-bold ph-pencil-simple' },
+    { label: 'actions.delete', icon: 'ph-bold ph-trash-simple' },
+  ];
+
   public users = signal<User[]>([]);
   public pagination = signal<Pagination | undefined>(undefined);
   public isLoading = signal<boolean>(false);
-  public error = signal<string | null>(null);
 
-  public currentPage = signal<number>(1);
-  public pageSize = signal<number>(10);
+  public filterParams = signal<UserFiltersParams>({
+    currentPage: 1,
+    pageSize: 5,
+  });
 
-  constructor(private userService: UsersService) {
-    effect(() => {
-      const page = this.currentPage();
-      const size = this.pageSize();
-      this.getAll();
+  getAll(): void {
+    this.isLoading.set(true);
+    this.userService.getAll(this.filterParams()).subscribe({
+      next: (response) => {
+        this.users.set(response.data);
+        this.pagination.set(response.pagination);
+        this.isLoading.set(false);
+      },
+      error: () => {
+        this.isLoading.set(false);
+      },
     });
   }
 
-  public ngOnInit(): void {
+  private updateFiltersAndLoad(updates: Partial<UserFiltersParams>): void {
+    this.filterParams.update((params) => ({
+      ...params,
+      ...updates,
+    }));
     this.getAll();
   }
 
-  getAll(): void {
-    // this.isLoading.set(true);
-    // this.error.set(null);
-    // this.userService.getAll({}).subscribe({
-    //   next: (response) => {
-    //     this.users.set(response.data);
-    //     this.pagination.set(response.pagination);
-    //     this.isLoading.set(false);
-    //   },
-    //   error: (err) => {
-    //     this.error.set(err.error.message);
-    //   },
-    // });
+  public onSort(event: any): void {
+    this.updateFiltersAndLoad({
+      sort: event.sortField,
+      order: event.sortOrder === 1 ? 'asc' : event.sortOrder === -1 ? 'desc' : undefined,
+    });
   }
 
-  public nextPage(): void {
-    if (this.pagination()?.hasNextPage) {
-      this.currentPage.update((page) => page + 1);
+  public onPaginatorChange(event: PaginatorChangeEvent): void {
+    this.updateFiltersAndLoad({
+      currentPage: event.currentPage,
+      pageSize: event.pageSize,
+    });
+  }
+
+  getBgColor(color: string): { class?: string; style?: { [key: string]: string } } {
+    if (isTailwindColor(color)) {
+      return { class: `badge bg-${color}-200` };
     }
+
+    return {
+      class: 'badge',
+      style: {
+        'background-color': color,
+        color: getContrastColor(color),
+      },
+    };
   }
 
-  public previousPage(): void {
-    if (this.pagination()?.hasPreviousPage) {
-      this.currentPage.update((page) => page - 1);
-    }
-  }
-
-  public changePageSize(size: number): void {
-    this.pageSize.set(size);
-    this.currentPage.set(1);
+  public getTextColor(bgColor: string): string {
+    return getContrastColor(bgColor);
   }
 }

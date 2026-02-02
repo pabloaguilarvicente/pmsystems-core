@@ -1,4 +1,4 @@
-export type UserRole = 'ADMIN' | 'MODERATOR' | 'USER';
+export type Role = 'ADMIN' | 'MODERATOR' | 'USER';
 
 export interface User {
   id: string;
@@ -7,9 +7,23 @@ export interface User {
   email: string;
   username: string;
   role: UserRole;
-  isActive: boolean;
+  status: UserStatus;
   createdAt: string;
   updatedAt?: string;
+}
+
+export interface UserStatus {
+  id: number;
+  code: Role;
+  name: string;
+  color: string;
+}
+
+export interface UserRole {
+  id: number;
+  code: Role;
+  name: string;
+  color: string;
 }
 
 export interface CreateUserRequest {
@@ -28,5 +42,15 @@ export interface UpdateUserRequest {
   username: string;
   password: string;
   role: UserRole;
-  isActive: boolean;
+  status: boolean;
+}
+
+export interface UserFiltersParams {
+  role?: UserRole;
+  status?: boolean;
+  search?: string;
+  currentPage: number;
+  pageSize: number;
+  sort?: string;
+  order?: 'asc' | 'desc';
 }
