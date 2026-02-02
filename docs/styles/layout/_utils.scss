@@ -29,3 +29,71 @@ a {
 .p-overlay-mask {
     backdrop-filter: blur(2px);
 }
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.125rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    border-radius: 0.3rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: all 0.2s ease-in-out;
+    font-weight: 100;
+
+    // Roles
+    &-ADMIN {
+        background-color: #fecaca;
+    }
+
+    &-MODERATOR {
+        background-color: #bfdbfe;
+    }
+
+    &-USER {
+        background-color: #c7d2fe;
+    }
+
+    &-ACTIVE {
+        background-color: #a7f3d0;
+    }
+
+    &-INACTIVE {
+        background-color: #e5e7eb;
+    }
+
+    &-PENDING {
+        background-color: #fde68a;
+    }
+
+    &-SUSPENDED {
+        background-color: #fca5a5;
+    }
+}
+
+.badge-sm {
+    padding: 0.125rem 0.5rem;
+    font-size: 0.625rem;
+    line-height: 1rem;
+}
+
+.badge-md {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+}
+
+.badge-lg {
+    padding: 0.375rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+}
+
+.badge-xl {
+    padding: 0.5rem 1.25rem;
+    font-size: 1rem;
+    line-height: 1.75rem;
+}

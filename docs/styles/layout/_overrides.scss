@@ -113,3 +113,11 @@ p-treetable {
 }
 
 
+.p-datatable-thead > tr > th
+{
+    color: var(--text-color) !important;
+    font-size: x-small;
+    font-weight: bold !important;
+    text-transform: uppercase;
+}
+
