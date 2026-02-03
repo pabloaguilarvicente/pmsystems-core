@@ -13,6 +13,7 @@
         "hide": "Hide",
         "label": "Actions",
         "pin": "Pin",
+        "return": "Return",
         "save": "Save",
         "search": "Search",
         "show": "Show",
@@ -43,10 +44,10 @@
     },
     "confirmations": {
         "delete": {
-            "error": "Error deleting item",
+            "error": "Error deleting the record",
             "header": "Confirm deletion",
-            "message": "Are you sure you want to delete this item? This action cannot be undone.",
-            "success": "Item deleted successfully"
+            "message": "Are you sure you want to delete this record? This action cannot be undone.",
+            "success": "Record deleted successfully"
         },
         "info": {
             "error": "Error processing",
@@ -79,10 +80,64 @@
             "success": "Action completed successfully"
         }
     },
+    "crud": {
+        "detail": "Detail",
+        "list": "List",
+        "main": "Main",
+        "register": "Register",
+        "update": "Update"
+    },
     "email": {
         "input": "Enter email",
         "label": "Email",
         "placeholder": "Enter email"
+    },
+    "errors": {
+        "buttons": {
+            "goBack": "Go Back",
+            "goHome": "Go Home",
+            "hideDetails": "Hide technical details",
+            "retry": "Retry",
+            "showDetails": "Show technical details"
+        },
+        "descriptions": {
+            "400": "The request contains invalid or malformed data.",
+            "401": "You need to log in to access this resource.",
+            "403": "You don't have permission to access this resource.",
+            "404": "The requested resource does not exist or is not available.",
+            "408": "The request took too long to process.",
+            "409": "There is a conflict with the current state of the resource.",
+            "422": "The data sent could not be processed.",
+            "429": "You have exceeded the request limit. Please try again later.",
+            "500": "An error occurred on the server. We are working to fix it.",
+            "502": "The server could not process your request correctly.",
+            "503": "The service is temporarily unavailable. Please try again later.",
+            "504": "The server took too long to respond.",
+            "default": "An unexpected error occurred while processing your request."
+        },
+        "labels": {
+            "code": "Code",
+            "errorDetails": "Error Details",
+            "status": "Status",
+            "technicalMessage": "Technical Message",
+            "timestamp": "Timestamp",
+            "url": "URL"
+        },
+        "titles": {
+            "400": "Bad Request",
+            "401": "Unauthorized",
+            "403": "Forbidden",
+            "404": "Not Found",
+            "408": "Request Timeout",
+            "409": "Conflict",
+            "422": "Unprocessable Entity",
+            "429": "Too Many Requests",
+            "500": "Internal Server Error",
+            "502": "Bad Gateway",
+            "503": "Service Unavailable",
+            "504": "Gateway Timeout",
+            "default": "Request Error"
+        }
     },
     "firstName": {
         "input": "Enter first names",

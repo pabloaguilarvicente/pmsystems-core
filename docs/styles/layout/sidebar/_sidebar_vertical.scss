@@ -100,7 +100,7 @@
                 }
 
                 &.active-route {
-                    font-weight: 700;
+                    font-weight: bold;
                     color: var(--active-menuitem-text-color);
                     background-color: var(--active-menuitem-bg);
                     .layout-menuitem-icon {

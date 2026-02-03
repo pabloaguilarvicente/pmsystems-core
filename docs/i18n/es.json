@@ -13,6 +13,7 @@
         "hide": "Ocultar",
         "label": "Acciones",
         "pin": "Anclar",
+        "return": "Regresar",
         "save": "Guardar",
         "search": "Buscar",
         "show": "Mostrar",
@@ -43,10 +44,10 @@
     },
     "confirmations": {
         "delete": {
-            "error": "Error al eliminar el elemento",
+            "error": "Error al eliminar el registro",
             "header": "Confirmar eliminación",
-            "message": "¿Está seguro que desea eliminar este elemento? Esta acción no se puede deshacer.",
-            "success": "Elemento eliminado correctamente"
+            "message": "¿Está seguro que desea eliminar este registro? Esta acción no se puede deshacer.",
+            "success": "registro eliminado correctamente"
         },
         "info": {
             "error": "Error al procesar",
@@ -79,10 +80,64 @@
             "success": "Acción completada correctamente"
         }
     },
+    "crud": {
+        "detail": "Detalle",
+        "list": "Listado",
+        "main": "Principal",
+        "register": "Registrar",
+        "update": "Actualizar"
+    },
     "email": {
         "input": "Ingrese correo electrónico",
         "label": "Correo electrónico",
         "placeholder": "Ingrese correo electrónico"
+    },
+    "errors": {
+        "buttons": {
+            "goBack": "Volver Atrás",
+            "goHome": "Ir al Inicio",
+            "hideDetails": "Ocultar detalles técnicos",
+            "retry": "Reintentar",
+            "showDetails": "Mostrar detalles técnicos"
+        },
+        "descriptions": {
+            "400": "La solicitud contiene datos inválidos o mal formados.",
+            "401": "Necesitas iniciar sesión para acceder a este recurso.",
+            "403": "No tienes permisos para acceder a este recurso.",
+            "404": "El recurso solicitado no existe o no está disponible.",
+            "408": "La solicitud tardó demasiado tiempo en procesarse.",
+            "409": "Existe un conflicto con el estado actual del recurso.",
+            "422": "Los datos enviados no pudieron ser procesados.",
+            "429": "Has excedido el límite de solicitudes. Intenta más tarde.",
+            "500": "Ocurrió un error en el servidor. Estamos trabajando para solucionarlo.",
+            "502": "El servidor no pudo procesar tu solicitud correctamente.",
+            "503": "El servicio no está disponible temporalmente. Intenta más tarde.",
+            "504": "El servidor tardó demasiado en responder.",
+            "default": "Ocurrió un error inesperado al procesar tu solicitud."
+        },
+        "labels": {
+            "code": "Código",
+            "errorDetails": "Detalles del Error",
+            "status": "Estado",
+            "technicalMessage": "Mensaje Técnico",
+            "timestamp": "Timestamp",
+            "url": "URL"
+        },
+        "titles": {
+            "400": "Solicitud Incorrecta",
+            "401": "No Autorizado",
+            "403": "Acceso Prohibido",
+            "404": "Recurso No Encontrado",
+            "408": "Tiempo de Espera Agotado",
+            "409": "Conflicto",
+            "422": "Datos No Procesables",
+            "429": "Demasiadas Solicitudes",
+            "500": "Error Interno del Servidor",
+            "502": "Puerta de Enlace Incorrecta",
+            "503": "Servicio No Disponible",
+            "504": "Tiempo de Espera de Puerta de Enlace",
+            "default": "Error en la Solicitud"
+        }
     },
     "firstName": {
         "input": "Ingrese nombres",

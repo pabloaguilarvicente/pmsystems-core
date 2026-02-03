@@ -1,7 +1,6 @@
 .card {
     background-color: var(--surface-card);
-    padding: 1rem;
-    margin-bottom: 2rem;
+    padding: 2rem 1rem;
     border-radius: 0.5rem;
 
     box-shadow:
@@ -71,6 +70,36 @@ a {
 
     &-SUSPENDED {
         background-color: #fca5a5;
+    }
+
+    //errors-http
+
+    &-400 {
+        background-color: #fde68a;
+    }
+
+    &-401 {
+        background-color: #fee2e2;
+    }
+
+    &-403 {
+        background-color: #fef3c7;
+    }
+
+    &-404 {
+        background-color: #e0e7ff;
+    }
+
+    &-409 {
+        background-color: #fae8ff;
+    }
+
+    &-422 {
+        background-color: #cffafe;
+    }
+
+    &-500 {
+        background-color: #fecaca;
     }
 }
 
