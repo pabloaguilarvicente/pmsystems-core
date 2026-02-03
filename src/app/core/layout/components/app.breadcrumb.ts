@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { TranslateModule } from '@ngx-translate/core';
+import { TooltipModule } from 'primeng/tooltip';
 
 interface Breadcrumb {
   label: string;
@@ -15,35 +16,27 @@ interface Breadcrumb {
 @Component({
   selector: '[app-breadcrumb]',
   standalone: true,
-  imports: [CommonModule, RouterModule, ButtonModule, RippleModule, TranslateModule],
+  imports: [CommonModule, RouterModule, ButtonModule, RippleModule, TranslateModule, TooltipModule],
   template: `
     <nav class="layout-breadcrumb">
       <ol>
-        <li><i class="ph ph-house"></i></li>
+        <li><i class="ph-thin ph-house"></i></li>
 
         @for (item of breadcrumbs$ | async; track $index) {
-          <li><i class="ph ph-caret-right"></i></li>
+          <li><i class="ph ph-caret-right text-sm!"></i></li>
           <li>
-            <span>{{ item.label | translate }}</span>
+            <span class="text-sm">{{ item.label | translate }}</span>
           </li>
         }
       </ol>
     </nav>
     <div class="layout-breadcrumb-buttons">
-      <button
-        pButton
-        pRipple
-        type="button"
-        icon="ph ph-calendar-dots"
-        class="p-button-rounded p-button-text p-button-plain"
-      ></button>
-      <button
-        pButton
-        pRipple
-        type="button"
-        icon="ph ph-printer"
-        class="p-button-rounded p-button-text p-button-plain"
-      ></button>
+      <p-button
+        variant="text"
+        icon="ph-bold ph-arrow-fat-left"
+        styleClass="p-0!"
+        [pTooltip]="'actions.return' | translate"
+      ></p-button>
     </div>
   `,
   host: {

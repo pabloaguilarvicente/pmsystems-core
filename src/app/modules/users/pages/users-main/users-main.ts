@@ -1,39 +1,41 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal, ViewChild } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { User, UserFiltersParams } from '../../models/users.model';
 import { Pagination } from '../../../../core/commons/api.utils';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
-import { DatePipe } from '@angular/common';
 import { AppPaginator, PaginatorChangeEvent } from '../../../../core/components/app-paginator';
 import { TranslateModule } from '@ngx-translate/core';
 import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
-import { getContrastColor, isTailwindColor } from '../../../../core/commons/color.utils';
-import { AppTitlePage } from "../../../../core/components/app-title-page";
+import { AppTitlePage } from '../../../../core/components/app-title-page';
+import { AppConfirmationDialog } from '../../../../core/components/confirmation-dialog/app-confirmation-dialog';
+import { Router } from '@angular/router';
+import { LocaleDatePipe } from '../../../../core/pipes/locale-date-pipe.pipe';
+import { AppMessages } from '../../../../core/components/app-messages';
+import { NO_DATA_IMAGE } from '../../../../core/commons/core.constants';
 @Component({
   selector: 'users-main',
   imports: [
     TableModule,
     ButtonModule,
     TooltipModule,
-    DatePipe,
+    LocaleDatePipe,
     AppPaginator,
     TranslateModule,
     MenuModule,
-    AppTitlePage
-],
+    AppTitlePage,
+    AppConfirmationDialog,
+    AppMessages,
+  ],
   templateUrl: './users-main.html',
   providers: [UsersService],
 })
 export class UsersMain {
+  @ViewChild(AppConfirmationDialog) confirmDialog!: AppConfirmationDialog;
   public readonly userService = inject(UsersService);
-
-  public items: MenuItem[] = [
-    { label: 'actions.update', icon: 'ph-bold ph-pencil-simple' },
-    { label: 'actions.delete', icon: 'ph-bold ph-trash-simple' },
-  ];
+  public readonly router = inject(Router);
 
   public users = signal<User[]>([]);
   public pagination = signal<Pagination | undefined>(undefined);
@@ -44,7 +46,24 @@ export class UsersMain {
     pageSize: 5,
   });
 
-  getAll(): void {
+  public NO_DATA_IMAGE = NO_DATA_IMAGE;
+
+  getMenuItems(item: User): MenuItem[] {
+    return [
+      {
+        label: 'actions.update',
+        icon: 'ph-bold ph-pencil-simple',
+        command: () => this.redirectUpdate(item),
+      },
+      {
+        label: 'actions.delete',
+        icon: 'ph-bold ph-trash-simple',
+        command: () => this.confirmDelete(item),
+      },
+    ];
+  }
+
+  getAll() {
     this.isLoading.set(true);
     this.userService.getAll(this.filterParams()).subscribe({
       next: (response) => {
@@ -58,7 +77,7 @@ export class UsersMain {
     });
   }
 
-  private updateFiltersAndLoad(updates: Partial<UserFiltersParams>): void {
+  private updateFiltersAndLoad(updates: Partial<UserFiltersParams>) {
     this.filterParams.update((params) => ({
       ...params,
       ...updates,
@@ -66,35 +85,28 @@ export class UsersMain {
     this.getAll();
   }
 
-  public onSort(event: any): void {
+  public onSort(event: any) {
     this.updateFiltersAndLoad({
       sort: event.sortField,
       order: event.sortOrder === 1 ? 'asc' : event.sortOrder === -1 ? 'desc' : undefined,
     });
   }
 
-  public onPaginatorChange(event: PaginatorChangeEvent): void {
+  public onPaginatorChange(event: PaginatorChangeEvent) {
     this.updateFiltersAndLoad({
       currentPage: event.currentPage,
       pageSize: event.pageSize,
     });
   }
 
-  getBgColor(color: string): { class?: string; style?: { [key: string]: string } } {
-    if (isTailwindColor(color)) {
-      return { class: `badge bg-${color}-200` };
-    }
-
-    return {
-      class: 'badge',
-      style: {
-        'background-color': color,
-        color: getContrastColor(color),
-      },
-    };
+  private redirectUpdate(item: User) {
+    this.router.navigate(['users/update', item.id]);
   }
 
-  public getTextColor(bgColor: string): string {
-    return getContrastColor(bgColor);
+  private confirmDelete(item: User) {
+    this.confirmDialog.confirm({
+      type: 'delete',
+      header: item.firstName + ' ' + item.lastName,
+    });
   }
 }

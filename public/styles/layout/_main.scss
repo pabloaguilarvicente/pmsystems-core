@@ -1,4 +1,4 @@
-@use "@fontsource-variable/manrope";
+@use "@fontsource-variable/onest";
 
 html {
     height: 100%;
@@ -12,7 +12,7 @@ body {
     min-height: 100%;
     background: var(--surface-ground);
     color: var(--text-color);
-    font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
+    font-family: "Onest Variable", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 

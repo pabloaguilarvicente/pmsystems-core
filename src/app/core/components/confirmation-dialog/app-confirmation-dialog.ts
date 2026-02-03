@@ -28,13 +28,13 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
             >
               <i [class]="'ph text-3xl! ' + (currentConfig?.icon || 'ph-question')"></i>
             </div>
-            <span class="font-bold text-2xl">{{ currentConfig?.header | translate }}</span>
-            <span class="text-center">{{ currentConfig?.message | translate }}</span>
+            <span class="font-semibold text-2xl">{{ currentConfig?.header | translate }}</span>
+            <span class="text-center font-semibold">{{ currentConfig?.message | translate }}</span>
             <div class="grid w-full grid-cols-2 gap-2">
               <p-button
                 [label]="currentConfig?.rejectLabel | translate"
                 (onClick)="handleReject(onReject)"
-                [outlined]="true"
+                variant="text"
                 [severity]="currentConfig?.rejectButtonSeverity"
                 fluid
                 [size]="'large'"
@@ -56,7 +56,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   `,
   providers: [ConfirmationService],
 })
-export class AppConfirmationDialogComponent {
+export class AppConfirmationDialog {
   public currentConfig?: ConfirmationTypeConfig;
   private userOnAccept?: () => void | Promise<void>;
   private userOnReject?: () => void;

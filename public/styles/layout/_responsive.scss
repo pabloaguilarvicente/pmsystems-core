@@ -1,4 +1,4 @@
-@use './sass_variables' as *;
+@use "./sass_variables" as *;
 
 @media screen and (min-width: $breakpoint) {
     .layout-container {
@@ -82,6 +82,10 @@
     }
 
     .layout-container {
+        .layout-content {
+            padding: 1rem;
+        }
+
         .layout-content-wrapper {
             margin-left: 0;
         }

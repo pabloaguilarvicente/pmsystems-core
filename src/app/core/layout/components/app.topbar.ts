@@ -87,9 +87,9 @@ import { TranslateModule } from '@ngx-translate/core';
           <li class="layout-topbar-search">
             <a
               pStyleClass="@next"
-              enterFromClass="!hidden"
+              enterFromClass="hidden!"
               enterActiveClass="animate-scalein"
-              leaveToClass="!hidden"
+              leaveToClass="hidden!"
               leaveActiveClass="animate-fadeout"
               [hideOnOutsideClick]="true"
               (click)="focusSearchInput()"
@@ -100,7 +100,7 @@ import { TranslateModule } from '@ngx-translate/core';
               <i class="ph ph-magnifying-glass"></i>
             </a>
 
-            <div class="layout-search-panel !hidden p-input-filled">
+            <div class="layout-search-panel hidden! p-input-filled">
               <i class="ph ph-magnifying-glass"></i>
               <input
                 #searchInput
@@ -116,7 +116,7 @@ import { TranslateModule } from '@ngx-translate/core';
                 rounded
                 text
                 pStyleClass=".layout-search-panel"
-                leaveToClass="!hidden"
+                leaveToClass="hidden!"
                 leaveActiveClass="animate-fadeout"
               ></button>
             </div>
@@ -133,7 +133,7 @@ import { TranslateModule } from '@ngx-translate/core';
               tooltipPosition="bottom"
               showDelay="300"
             >
-              <i class="ph ph-bell !align-middle"></i>
+              <i class="ph ph-bell align-middle!"></i>
             </a>
             <div class="hidden">
               <notifications />
