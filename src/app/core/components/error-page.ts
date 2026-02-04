@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ERROR_IMAGE } from '../commons/core.constants';
 
-interface ErrorData {
+export interface ErrorData {
   title: string;
   description: string;
   code: string;
@@ -20,7 +20,9 @@ interface ErrorData {
   imports: [AppMessages],
   template: `
     <div class="card">
-      <app-messages [message]="errorMessage()" />
+      <div class="full-screen">
+        <app-messages [message]="errorMessage()" />
+      </div>
     </div>
   `,
 })
@@ -44,6 +46,10 @@ export class ErrorPage {
         description: errorData.description,
         code: errorData.code,
         status: errorData.status,
+        statusText: errorData.statusText,
+        message: errorData.message,
+        url: errorData.url,
+        timestamp: errorData.timestamp,
         image: ERROR_IMAGE,
         size: 'xl',
       });

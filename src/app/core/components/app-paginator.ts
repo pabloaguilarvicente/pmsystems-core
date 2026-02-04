@@ -15,33 +15,18 @@ export interface PaginatorChangeEvent {
   selector: 'app-paginator',
   imports: [ButtonModule, SelectModule, FormsModule, TooltipModule, TranslateModule],
   template: `
-    <div class="flex flex-col lg:flex-row items-center lg:justify-end gap-3 p-3">
-      <div class="flex items-center gap-2 w-full lg:w-auto justify-center lg:justify-start">
-        <span class="text-sm text-gray-600">
-          {{ 'primeng.aria.rowsPerPageLabel' | translate }}
-        </span>
-
-        <p-select
-          [options]="pageSizeDropdownOptions()"
-          [ngModel]="selectedPageSize()"
-          (onChange)="onPageSizeChange($event)"
-          [readonly]="loading()"
-          class="w-20 border-none! shadow-xs!"
-          appendTo="body"
-          size="small"
-        >
-          <ng-template #selectedItem let-item>
-            @if (item) {
-              <span class="text-gray-600 text-center">{{ item.label }}</span>
-            }
-          </ng-template>
-        </p-select>
-        <span class="text-sm text-gray-600">
-          {{ firstRecord() }} - {{ lastRecord() }} / {{ pagination().totalItems }}
-        </span>
+    <div class="flex flex-col justify-end gap-3 px-4 py-3 md:flex-row md:items-center md:gap-4">
+      <!-- Fila 1: Info de resultados -->
+      <div class="flex items-center justify-center gap-2 text-sm text-gray-500 md:justify-start">
+        <span class=""> {{ firstRecord() }}-{{ lastRecord() }} </span>
+        <span class="text-gray-500">{{ 'paginator.of' | translate }}</span>
+        <span class="">{{ pagination().totalItems }}</span>
+        <span class="text-gray-500">{{ 'paginator.results' | translate }}</span>
       </div>
 
-      <div class="flex items-center w-full lg:w-auto justify-center">
+      <!-- Fila 2: Controles de navegación -->
+      <div class="flex items-center justify-center gap-1">
+        <!-- Primera página -->
         <p-button
           icon="ph-bold ph-caret-double-left"
           variant="text"
@@ -50,9 +35,11 @@ export interface PaginatorChangeEvent {
           [pTooltip]="'primeng.aria.firstPageLabel' | translate"
           tooltipPosition="top"
           severity="secondary"
-          styleClass="p-0!"
-        ></p-button>
+          size="small"
+          styleClass="shadow-sm!"
+        />
 
+        <!-- Página anterior -->
         <p-button
           icon="ph-bold ph-caret-left"
           variant="text"
@@ -61,11 +48,19 @@ export interface PaginatorChangeEvent {
           [pTooltip]="'primeng.aria.prevPageLabel' | translate"
           tooltipPosition="top"
           severity="secondary"
-          styleClass="p-0!"
-        ></p-button>
+          size="small"
+          styleClass="shadow-sm!"
+        />
 
-        <span class="text-sm text-gray-600 mx-2">{{ pagination().currentPage }}</span>
+        <!-- Indicador de página actual -->
+        <div class="flex items-center gap-2 mx-2 px-3">
+          <span class="text-sm  text-gray-500">{{ 'paginator.page' | translate }}</span>
+          <span class="text-sm font-extrabold">{{ pagination().currentPage }}</span>
+          <span class="text-sm text-gray-500">{{ 'paginator.of' | translate }}</span>
+          <span class="text-sm  text-gray-500">{{ pagination().totalPages }}</span>
+        </div>
 
+        <!-- Página siguiente -->
         <p-button
           icon="ph-bold ph-caret-right"
           variant="text"
@@ -74,9 +69,11 @@ export interface PaginatorChangeEvent {
           [pTooltip]="'primeng.aria.nextPageLabel' | translate"
           tooltipPosition="top"
           severity="secondary"
-          styleClass="p-0!"
-        ></p-button>
+          size="small"
+          styleClass="shadow-sm!"
+        />
 
+        <!-- Última página -->
         <p-button
           icon="ph-bold ph-caret-double-right"
           variant="text"
@@ -85,8 +82,34 @@ export interface PaginatorChangeEvent {
           [pTooltip]="'primeng.aria.lastPageLabel' | translate"
           tooltipPosition="top"
           severity="secondary"
-          styleClass="p-0!"
-        ></p-button>
+          size="small"
+          styleClass="shadow-sm!"
+        />
+      </div>
+
+      <!-- Fila 3: Selector de items por página -->
+      <div class="flex items-center justify-center gap-2 md:justify-start">
+        <label class="text-sm text-gray-600 whitespace-nowrap">
+          {{ 'actions.show' | translate }}
+        </label>
+        <p-select
+          [options]="pageSizeDropdownOptions()"
+          [ngModel]="selectedPageSize()"
+          (onChange)="onPageSizeChange($event)"
+          [readonly]="loading()"
+          class="w-21 border-none! shadow-sm!"
+          appendTo="body"
+          size="small"
+        >
+          <ng-template #selectedItem let-item>
+            @if (item) {
+              <span class="text-sm  text-gray-500">{{ item.label }}</span>
+            }
+          </ng-template>
+        </p-select>
+        <span class="text-sm text-gray-600 whitespace-nowrap">{{
+          'paginator.perPage' | translate
+        }}</span>
       </div>
     </div>
   `,

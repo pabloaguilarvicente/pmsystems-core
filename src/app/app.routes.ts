@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { AppLayout } from './core/layout/components/app.layout';
 import { ErrorPage } from './core/components/error-page';
+import { errorGuard } from './core/guards/error.guard';
 
 export const appRoutes: Routes = [
   {
@@ -19,6 +20,7 @@ export const appRoutes: Routes = [
       {
         path: 'error',
         component: ErrorPage,
+        canActivate: [errorGuard],
       },
       { path: '', redirectTo: 'analytics', pathMatch: 'full' },
     ],

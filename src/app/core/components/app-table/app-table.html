@@ -1,0 +1,109 @@
+<p-table
+  [columns]="config().columns"
+  [value]="config().loading ? getSkeletonRows() : config().data"
+  [paginator]="config().paginator ?? false"
+  [lazy]="config().lazy ?? true"
+  (onLazyLoad)="onLazyLoad($event)"
+>
+  <!-- Header dinámico -->
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      @for (col of columns; track col.field) {
+        <th
+          [pSortableColumn]="col.sortable ? col.sortKey || col.field : null"
+          [style.width]="col.width"
+          [class.text-center]="col.headerAlign === 'center'"
+          [class.text-right]="col.headerAlign === 'right'"
+        >
+          {{ col.header | translate }}
+          @if (col.sortable && !config().loading) {
+            <p-sortIcon [field]="col.sortKey || col.field"></p-sortIcon>
+          }
+        </th>
+      }
+    </tr>
+  </ng-template>
+
+  <!-- Body dinámico -->
+  <ng-template pTemplate="body" let-item let-columns="columns">
+    <tr>
+      @for (col of columns; track col.field) {
+        <td
+          [class.text-center]="col.cellAlign === 'center'"
+          [class.text-right]="col.cellAlign === 'right'"
+        >
+          @if (config().loading) {
+            <!-- Skeleton durante la carga -->
+            <p-skeleton height="1.7rem" class="my-2" />
+          } @else {
+            <!-- Tipo: texto simple -->
+            @if (col.type === 'text' || !col.type) {
+              {{ getNestedValue(item, col.field) }}
+            }
+
+            <!-- Tipo: badge -->
+            @if (col.type === 'badge') {
+              <span [class]="'badge badge-' + getNestedValue(item, col.badgeClassField!)">
+                {{ getNestedValue(item, col.field) }}
+              </span>
+            }
+
+            <!-- Tipo: fecha -->
+            @if (col.type === 'date') {
+              {{ getNestedValue(item, col.field) | localeDate: col.pipeArgs }}
+            }
+
+            <!-- Tipo: acciones -->
+            @if (col.type === 'actions') {
+              <div class="flex justify-center">
+                <p-menu #actions [model]="col.menuItems!(item)" [popup]="true" appendTo="body">
+                  <ng-template pTemplate="item" let-menuItem>
+                    <a pRipple class="flex items-center px-3 py-2 cursor-pointer gap-3">
+                      <span [class]="menuItem.icon"></span>
+                      <span>{{ menuItem.label | translate }}</span>
+                    </a>
+                  </ng-template>
+                </p-menu>
+                <p-button
+                  variant="text"
+                  (click)="actions.toggle($event)"
+                  icon="ph-bold ph-dots-three-outline-vertical"
+                />
+              </div>
+            }
+          }
+        </td>
+      }
+    </tr>
+  </ng-template>
+
+  <!-- Empty message - solo cuando NO está cargando y NO hay datos -->
+  @if (!config().loading) {
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td [attr.colspan]="config().columns.length">
+          <app-messages
+            [message]="{
+              description: 'messages.noRecords',
+              image: NO_DATA_IMAGE,
+            }"
+          />
+        </td>
+      </tr>
+    </ng-template>
+  }
+</p-table>
+
+@if (config().pagination && !config().loading && config().pagination!.totalItems > 0) {
+  <app-paginator
+    [pagination]="config().pagination!"
+    [loading]="config().loading ?? false"
+    (pageChange)="onPaginatorChange($event)"
+  />
+}
+
+@if (config().loading) {
+  <skeleton-paginator />
+}
+
+<app-confirmation-dialog />

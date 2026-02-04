@@ -2,13 +2,14 @@ import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
+import { ErrorData } from '../components/error-page';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
-      const errorData = {
+      const errorData: ErrorData = {
         title: getErrorTitle(error.status),
         description: getErrorDescription(error),
         code: `ERROR_${error.status}`,

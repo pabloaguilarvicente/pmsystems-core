@@ -61,7 +61,7 @@ server.use((req, res, next) => {
     next();
 });
 
-// ✅ PRIMERO: Usar el router de JSON Server (para que procese la paginación)
+// Usar el router de JSON Server 
 server.use(router);
 
 // Función para expandir relaciones en usuarios
@@ -121,7 +121,7 @@ const sortByNestedProperty = (items, field, order = 'asc') => {
     });
 };
 
-// ✅ DESPUÉS: Middleware para transformar respuestas (se ejecuta DESPUÉS del router)
+// Middleware para transformar respuestas 
 router.render = (req, res) => {
     // Si es una respuesta exitosa
     if (res.statusCode >= 200 && res.statusCode < 300) {
@@ -143,7 +143,7 @@ router.render = (req, res) => {
                 }
             }
 
-            // ✅ Usar los valores guardados en req.paginationParams
+            //Usar los valores guardados en req.paginationParams
             const currentPage = req.paginationParams.currentPage;
             const pageSize = req.paginationParams.pageSize;
             const totalPages = totalCount ? Math.ceil(parseInt(totalCount) / pageSize) : 1;

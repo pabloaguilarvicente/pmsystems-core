@@ -1,52 +1,108 @@
-import { Component, effect, inject, signal, ViewChild } from '@angular/core';
+import { Component, computed, inject, signal, ViewChild } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { User, UserFiltersParams } from '../../models/users.model';
-import { Pagination } from '../../../../core/commons/api.utils';
-import { TableModule } from 'primeng/table';
-import { ButtonModule } from 'primeng/button';
-import { TooltipModule } from 'primeng/tooltip';
-import { AppPaginator, PaginatorChangeEvent } from '../../../../core/components/app-paginator';
+import { ApiListResponse } from '../../../../core/commons/api.utils';
 import { TranslateModule } from '@ngx-translate/core';
-import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
 import { AppTitlePage } from '../../../../core/components/app-title-page';
-import { AppConfirmationDialog } from '../../../../core/components/confirmation-dialog/app-confirmation-dialog';
 import { Router } from '@angular/router';
-import { LocaleDatePipe } from '../../../../core/pipes/locale-date-pipe.pipe';
-import { AppMessages } from '../../../../core/components/app-messages';
-import { NO_DATA_IMAGE } from '../../../../core/commons/core.constants';
+import { PaginatorChangeEvent } from '../../../../core/components/app-paginator';
+import { AppTable } from '../../../../core/components/app-table/app-table';
+import { Column, TableInput } from '../../../../core/components/app-table/app-table.model';
+
 @Component({
   selector: 'users-main',
-  imports: [
-    TableModule,
-    ButtonModule,
-    TooltipModule,
-    LocaleDatePipe,
-    AppPaginator,
-    TranslateModule,
-    MenuModule,
-    AppTitlePage,
-    AppConfirmationDialog,
-    AppMessages,
-  ],
+  imports: [TranslateModule, AppTitlePage, AppTable],
   templateUrl: './users-main.html',
   providers: [UsersService],
 })
 export class UsersMain {
-  @ViewChild(AppConfirmationDialog) confirmDialog!: AppConfirmationDialog;
+  @ViewChild(AppTable) table!: AppTable;
+
   public readonly userService = inject(UsersService);
   public readonly router = inject(Router);
 
-  public users = signal<User[]>([]);
-  public pagination = signal<Pagination | undefined>(undefined);
+  public response = signal<ApiListResponse<User> | null>(null);
   public isLoading = signal<boolean>(false);
-
   public filterParams = signal<UserFiltersParams>({
     currentPage: 1,
     pageSize: 5,
   });
 
-  public NO_DATA_IMAGE = NO_DATA_IMAGE;
+  public readonly cols: Column[] = [
+    {
+      field: 'firstName',
+      header: 'firstName.label',
+      sortable: true,
+      width: '15%',
+      type: 'text',
+    },
+    {
+      field: 'lastName',
+      header: 'lastName.label',
+      sortable: true,
+      width: '15%',
+      type: 'text',
+    },
+    {
+      field: 'email',
+      header: 'email.label',
+      sortable: true,
+      width: '20%',
+      type: 'text',
+    },
+    {
+      field: 'username',
+      header: 'user.singular.label',
+      sortable: true,
+      width: '15%',
+      type: 'text',
+    },
+    {
+      field: 'role.name',
+      header: 'role.singular.label',
+      sortable: true,
+      sortKey: 'role.name',
+      width: '10%',
+      type: 'badge',
+      badgeClassField: 'role.code',
+    },
+    {
+      field: 'status.name',
+      header: 'status.label',
+      sortable: false,
+      width: '10%',
+      type: 'badge',
+      badgeClassField: 'status.code',
+    },
+    {
+      field: 'createdAt',
+      header: 'registered.label',
+      sortable: true,
+      width: '10%',
+      type: 'date',
+      pipe: 'localeDate',
+      pipeArgs: 'dd MMM, y',
+    },
+    {
+      field: 'actions',
+      header: 'options.label',
+      sortable: false,
+      width: '5%',
+      type: 'actions',
+      cellAlign: 'center',
+      menuItems: (item: User) => this.getMenuItems(item),
+    },
+  ];
+
+  public tableConfig = computed<TableInput<User>>(() => ({
+    columns: this.cols,
+    data: this.response()?.data ?? [],
+    loading: this.isLoading(),
+    pagination: this.response()?.pagination ?? null,
+    lazy: true,
+    paginator: false,
+  }));
 
   getMenuItems(item: User): MenuItem[] {
     return [
@@ -67,8 +123,7 @@ export class UsersMain {
     this.isLoading.set(true);
     this.userService.getAll(this.filterParams()).subscribe({
       next: (response) => {
-        this.users.set(response.data);
-        this.pagination.set(response.pagination);
+        this.response.set(response);
         this.isLoading.set(false);
       },
       error: () => {
@@ -104,7 +159,7 @@ export class UsersMain {
   }
 
   private confirmDelete(item: User) {
-    this.confirmDialog.confirm({
+    this.table.confirm({
       type: 'delete',
       header: item.firstName + ' ' + item.lastName,
     });

@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import { ActivatedRouteSnapshot, NavigationEnd, Router, RouterModule } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { TranslateModule } from '@ngx-translate/core';
@@ -22,7 +21,7 @@ interface Breadcrumb {
       <ol>
         <li><i class="ph-thin ph-house"></i></li>
 
-        @for (item of breadcrumbs$ | async; track $index) {
+        @for (item of breadcrumbs(); track $index) {
           <li><i class="ph ph-caret-right text-sm!"></i></li>
           <li>
             <span class="text-sm">{{ item.label | translate }}</span>
@@ -31,12 +30,15 @@ interface Breadcrumb {
       </ol>
     </nav>
     <div class="layout-breadcrumb-buttons">
-      <p-button
-        variant="text"
-        icon="ph-bold ph-arrow-fat-left"
-        styleClass="p-0!"
-        [pTooltip]="'actions.return' | translate"
-      ></p-button>
+      @if (showBackButton()) {
+        <p-button
+          variant="text"
+          icon="ph-bold ph-arrow-fat-left"
+          styleClass="p-0!"
+          [pTooltip]="'actions.return' | translate"
+          (onClick)="goBack()"
+        ></p-button>
+      }
     </div>
   `,
   host: {
@@ -44,20 +46,22 @@ interface Breadcrumb {
   },
 })
 export class AppBreadcrumb {
-  private readonly _breadcrumbs$ = new BehaviorSubject<Breadcrumb[]>([]);
+  public breadcrumbs = signal<Breadcrumb[]>([]);
+  public showBackButton = signal<boolean>(false);
 
-  readonly breadcrumbs$ = this._breadcrumbs$.asObservable();
+  constructor(
+    private router: Router,
+    private location: Location,
+  ) {
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+      const root = this.router.routerState.snapshot.root;
+      const breadcrumbs: Breadcrumb[] = [];
+      this.addBreadcrumb(root, [], breadcrumbs);
 
-  constructor(private router: Router) {
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event) => {
-        const root = this.router.routerState.snapshot.root;
-        const breadcrumbs: Breadcrumb[] = [];
-        this.addBreadcrumb(root, [], breadcrumbs);
+      this.breadcrumbs.set(breadcrumbs);
 
-        this._breadcrumbs$.next(breadcrumbs);
-      });
+      this.updateBackButtonVisibility(root);
+    });
   }
 
   private addBreadcrumb(
@@ -80,5 +84,24 @@ export class AppBreadcrumb {
     if (route.firstChild) {
       this.addBreadcrumb(route.firstChild, routeUrl, breadcrumbs);
     }
+  }
+
+  private updateBackButtonVisibility(route: ActivatedRouteSnapshot) {
+    let currentRoute = route;
+    while (currentRoute.firstChild) {
+      currentRoute = currentRoute.firstChild;
+    }
+
+    const showBackButton = currentRoute.data['showBackButton'];
+
+    if (showBackButton !== undefined) {
+      this.showBackButton.set(showBackButton);
+    } else {
+      this.showBackButton.set(this.breadcrumbs().length > 1);
+    }
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

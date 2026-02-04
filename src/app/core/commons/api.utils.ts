@@ -2,13 +2,13 @@ import { HttpParams } from '@angular/common/http';
 
 export interface ApiListResponse<T> {
   data: T[];
-  pagination?: Pagination;
-  meta?: MetaData;
+  pagination: Pagination;
+  meta: MetaData;
 }
 export interface ApiResponse<T> {
   data: T;
-  message?: string;
-  meta?: MetaData;
+  message: string;
+  meta: MetaData;
 }
 export interface Pagination {
   currentPage: number;
@@ -19,9 +19,9 @@ export interface Pagination {
   hasPreviousPage: boolean;
 }
 export interface MetaData {
-  timestamp?: string;
-  requestId?: string;
-  version?: string;
+  timestamp: string;
+  requestId: string;
+  version: string;
 }
 
 export function buildHttpParams(params: Record<string, any>): HttpParams {

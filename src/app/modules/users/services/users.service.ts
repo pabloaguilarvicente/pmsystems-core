@@ -12,7 +12,7 @@ export class UsersService {
   private readonly PATH = 'users';
 
   getAll(queryParams: UserFiltersParams): Observable<ApiListResponse<User>> {
-    const params = buildHttpParams(queryParams);
+    let params = buildHttpParams(queryParams);
     return this.http.get<ApiListResponse<User>>(`${this.API_URL}/${this.PATH}`, {
       params,
     });
