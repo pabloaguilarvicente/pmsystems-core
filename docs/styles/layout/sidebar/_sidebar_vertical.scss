@@ -53,7 +53,6 @@
         li.active-menuitem {
             > a {
                 color: var(--active-menuitem-text-color);
-                // background-color: var(--active-menuitem-bg);
 
                 .layout-menuitem-icon {
                     color: var(--active-menuitem-text-color);
@@ -64,7 +63,16 @@
                 }
             }
         }
+        a:has(.layout-submenu-toggler) {
+            color: var(--menuitem-text-color) !important;
 
+            .layout-menuitem-icon {
+                color: var(--menuitem-text-color) !important;
+            }
+            .layout-submenu-toggler {
+                color: var(--menuitem-text-color) !important;
+            }
+        }
         ul {
             margin: 0;
             padding: 0;
