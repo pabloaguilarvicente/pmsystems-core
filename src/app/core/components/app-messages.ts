@@ -55,43 +55,59 @@ export interface AppMessage {
 
         @if (isErrorMessage()) {
           <div class="w-full max-w-2xl mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-            <div class="flex flex-col gap-2 text-sm text-left">
+            <div class="flex flex-col gap-3 text-sm text-left">
               @if (message().statusText) {
-                <div class="flex items-start gap-2">
-                  <span class="font-black min-w-24">{{ 'errors.labels.status' | translate }}:</span>
-                  <span class="text-gray-600 font-mono">{{ message().statusText }}</span>
+                <div class="flex flex-col md:flex-row md:items-start gap-1 md:gap-2">
+                  <span class="font-black md:min-w-24">
+                    {{ 'errors.labels.status' | translate }}:
+                  </span>
+                  <span class="text-gray-600 font-mono break-all">
+                    {{ message().statusText }}
+                  </span>
                 </div>
               }
 
               @if (message().status) {
-                <div class="flex items-start gap-2">
-                  <span class="font-black min-w-24">{{ 'errors.labels.code' | translate }}:</span>
-                  <span class="text-gray-600 font-mono">{{ message().status }}</span>
+                <div class="flex flex-col md:flex-row md:items-start gap-1 md:gap-2">
+                  <span class="font-black md:min-w-24">
+                    {{ 'errors.labels.code' | translate }}:
+                  </span>
+                  <span class="text-gray-600 font-mono">
+                    {{ message().status }}
+                  </span>
                 </div>
               }
 
               @if (message().message) {
-                <div class="flex items-start gap-2">
-                  <span class="font-black min-w-24"
-                    >{{ 'errors.labels.message' | translate }}:</span
-                  >
-                  <span class="text-gray-600 font-mono">{{ message().message }}</span>
+                <div class="flex flex-col md:flex-row md:items-start gap-1 md:gap-2">
+                  <span class="font-black md:min-w-24">
+                    {{ 'errors.labels.message' | translate }}:
+                  </span>
+                  <span class="text-gray-600 font-mono break-all">
+                    {{ message().message }}
+                  </span>
                 </div>
               }
 
               @if (message().url) {
-                <div class="flex items-start gap-2">
-                  <span class="font-black min-w-24">{{ 'errors.labels.url' | translate }}:</span>
-                  <span class="text-gray-600 font-mono">{{ message().url }}</span>
+                <div class="flex flex-col md:flex-row md:items-start gap-1 md:gap-2">
+                  <span class="font-black md:min-w-24">
+                    {{ 'errors.labels.url' | translate }}:
+                  </span>
+                  <span class="text-gray-600 font-mono break-all">
+                    {{ message().url }}
+                  </span>
                 </div>
               }
 
               @if (message().timestamp) {
-                <div class="flex items-start gap-2">
-                  <span class="font-black  min-w-24"
-                    >{{ 'errors.labels.timestamp' | translate }}:</span
-                  >
-                  <span class="text-gray-600 font-mono">{{ message().timestamp }}</span>
+                <div class="flex flex-col md:flex-row md:items-start gap-1 md:gap-2">
+                  <span class="font-black md:min-w-24">
+                    {{ 'errors.labels.timestamp' | translate }}:
+                  </span>
+                  <span class="text-gray-600 font-mono">
+                    {{ message().timestamp }}
+                  </span>
                 </div>
               }
             </div>

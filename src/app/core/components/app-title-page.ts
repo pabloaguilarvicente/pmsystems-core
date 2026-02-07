@@ -20,6 +20,8 @@ import { ButtonModule } from 'primeng/button';
           iconPos="right"
           [raised]="true"
           fluid
+          size="large"
+          styleClass="py-3! px-8!"
         />
       }
     </div>

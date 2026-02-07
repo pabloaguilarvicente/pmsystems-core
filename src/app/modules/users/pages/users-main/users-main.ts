@@ -9,18 +9,23 @@ import { Router } from '@angular/router';
 import { PaginatorChangeEvent } from '../../../../core/components/app-paginator';
 import { AppTable } from '../../../../core/components/app-table/app-table';
 import { Column, TableInput } from '../../../../core/components/app-table/app-table.model';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { UserDetailDialog } from '../../components/user-detail-dialog/user-detail-dialog';
+import { BREAKPOINTS } from '../../../../core/commons/core.constants';
 
 @Component({
   selector: 'users-main',
   imports: [TranslateModule, AppTitlePage, AppTable],
   templateUrl: './users-main.html',
-  providers: [UsersService],
+  providers: [UsersService, DialogService],
 })
 export class UsersMain {
+  public ref: DynamicDialogRef | undefined;
   @ViewChild(AppTable) table!: AppTable;
 
   public readonly userService = inject(UsersService);
   public readonly router = inject(Router);
+  public readonly dialogService = inject(DialogService);
 
   public response = signal<ApiListResponse<User> | null>(null);
   public isLoading = signal<boolean>(false);
@@ -116,6 +121,11 @@ export class UsersMain {
         icon: 'ph-bold ph-trash-simple',
         command: () => this.confirmDelete(item),
       },
+      {
+        label: 'crud.detail',
+        icon: 'ph-bold ph ph-eye',
+        command: () => this.showDetail(item),
+      },
     ];
   }
 
@@ -163,5 +173,16 @@ export class UsersMain {
       type: 'delete',
       header: item.firstName + ' ' + item.lastName,
     });
+  }
+
+  private showDetail(data: User) {
+    this.ref = this.dialogService.open(UserDetailDialog, {
+      width: '60vw',
+      modal: true,
+      breakpoints: BREAKPOINTS,
+      data: data,
+      dismissableMask: true,
+      closable:true
+    })!;
   }
 }

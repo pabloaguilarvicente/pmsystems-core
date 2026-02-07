@@ -42,6 +42,9 @@
         "label": "Blog",
         "list": "List"
     },
+    "code": {
+        "label": "Code"
+    },
     "confirmations": {
         "delete": {
             "error": "Error deleting the record",
@@ -167,6 +170,9 @@
     "messages": {
         "label": "Messages",
         "noRecords": "No records found"
+    },
+    "name": {
+        "label": "Name"
     },
     "notifications": {
         "count": "You have <strong>{{value}}</strong> new notifications",
@@ -375,6 +381,7 @@
         "label": "Registered"
     },
     "role": {
+        "info": "Role information",
         "plural": {
             "label": "Roles"
         },
@@ -401,6 +408,7 @@
     "status": {
         "completed": "Completed",
         "error": "Error",
+        "info": "Status information",
         "label": "Status",
         "loading": "Loading",
         "pending": "Pending",

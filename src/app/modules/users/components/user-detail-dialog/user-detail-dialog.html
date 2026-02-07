@@ -1,0 +1,206 @@
+<div class="relative flex flex-col h-full">
+  <!-- Contenido con scroll -->
+  <div class="flex-1 overflow-y-auto p-6">
+    <!-- Header con avatar y nombre -->
+    <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8">
+      <!-- Avatar -->
+      <p-avatar image="images/user.jpg" size="xlarge" />
+
+      <!-- Información principal -->
+      <div class="flex-1 text-center sm:text-left flex flex-col gap-2">
+        <span class="text-2xl sm:text-3xl font-bold"
+          >{{ user().firstName }} {{ user().lastName }}</span
+        >
+        <span>&#64;{{ user().username }}</span>
+
+        <!-- Badges de rol y estado -->
+        <div class="flex flex-wrap gap-2 justify-center sm:justify-start">
+          <span [class]="'badge badge-' + user().role.code">
+            {{ user().role.name }}
+          </span>
+          <span [class]="'badge badge-' + user().status.code">
+            {{ user().status.name }}
+          </span>
+        </div>
+
+        <!-- Última actualización -->
+        @if (user().updatedAt) {
+          <div class="flex items-center gap-2 text-sm text-gray-400">
+            <i class="ph ph-clock text-gray-400"></i>
+            <span>Última actualización: {{ user().updatedAt | localeDate: 'dd MMM, y' }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Información detallada en cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <!-- Card Email -->
+      <div class="rounded-lg border border-gray-200 dark:border-zinc-700 p-3">
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0">
+            <i class="ph ph-envelope text-xl"></i>
+          </div>
+          <div class="flex-1 min-w-0 flex flex-col gap-1">
+            <p class="text-sm">{{ 'email.label' | translate }}</p>
+            <p class="font-medium truncate">{{ user().email }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Username -->
+      <div class="rounded-lg border border-gray-200 dark:border-zinc-700 p-3">
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0">
+            <i class="ph ph-user text-xl"></i>
+          </div>
+          <div class="flex-1 min-w-0 flex flex-col gap-1">
+            <p class="text-sm">{{ 'user.singular.label' | translate }}</p>
+            <p class="font-medium truncate">{{ user().username }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Rol -->
+      <div class="rounded-lg border border-gray-200 dark:border-zinc-700 p-3">
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0">
+            <i class="ph ph-shield text-xl"></i>
+          </div>
+          <div class="flex-1 min-w-0 flex flex-col gap-1">
+            <p class="text-sm">{{ 'role.singular.label' | translate }}</p>
+            <div class="flex items-center gap-2">
+              <span [class]="'badge badge-' + user().role.code">
+                {{ user().role.name }}
+              </span>
+              <span class="text-xs">({{ user().role.code }})</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Estado -->
+      <div class="rounded-lg border border-gray-200 dark:border-zinc-700 p-3">
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0">
+            <i class="ph ph-check-circle text-xl"></i>
+          </div>
+          <div class="flex-1 min-w-0 flex flex-col gap-1">
+            <p class="text-sm">{{ 'status.label' | translate }}</p>
+            <div class="flex items-center gap-2">
+              <span [class]="'badge badge-' + user().status.code">
+                {{ user().status.name }}
+              </span>
+              <span class="text-xs">({{ user().status.code }})</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card ID -->
+      <div class="rounded-lg border border-gray-200 dark:border-zinc-700 p-3">
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0">
+            <i class="ph ph-identification-card text-xl"></i>
+          </div>
+          <div class="flex-1 min-w-0 flex flex-col gap-1">
+            <p class="text-sm">ID</p>
+            <p class="font-mono text-sm truncate">{{ user().id }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Fecha de creación -->
+      <div class="rounded-lg border border-gray-200 dark:border-zinc-700 p-3">
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0">
+            <i class="ph ph-calendar text-xl"></i>
+          </div>
+          <div class="flex-1 min-w-0 flex flex-col gap-1">
+            <p class="text-sm">{{ 'registered.label' | translate }}</p>
+            <p class="font-medium">
+              {{ user().createdAt | localeDate: 'dd MMM, y' }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Información adicional del rol y estado -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <!-- Detalles del Rol -->
+      <div class="rounded-lg p-3 border border-gray-200 dark:border-zinc-700">
+        <h3 class="font-semibold mb-3 flex items-center gap-2">
+          <i class="ph ph-info"></i>
+          {{ 'role.info' | translate }}
+        </h3>
+        <div class="flex flex-col gap-2 text-sm">
+          <div class="flex justify-between">
+            <span>ID:</span>
+            <span class="font-medium">{{ user().role.id }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span>{{ 'code.label' | translate }}:</span>
+            <span class="font-medium">{{ user().role.code }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span>{{ 'name.label' | translate }}:</span>
+            <span class="font-medium">{{ user().role.name }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detalles del Estado -->
+      <div class="rounded-lg p-3 border border-gray-200 dark:border-zinc-700">
+        <h3 class="font-semibold mb-3 flex items-center gap-2">
+          <i class="ph ph-info"></i>
+          {{ 'status.info' | translate }}
+        </h3>
+        <div class="flex flex-col gap-2 text-sm">
+          <div class="flex justify-between">
+            <span>ID:</span>
+            <span class="font-medium">{{ user().status.id }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span>{{ 'code.label' | translate }}:</span>
+            <span class="font-medium">{{ user().status.code }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Color:</span>
+            <div class="flex items-center gap-2">
+              <span [class]="'badge badge-' + user().status.color + ' px-2 py-1 rounded text-xs'">
+                {{ user().status.color }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer con botones - Fijo en la parte inferior -->
+  <div
+    class="sticky bottom-0 left-0 right-0 border-t border-gray-200 p-3 shadow-lg dark:border-zinc-700"
+  >
+    <div class="flex flex-col sm:flex-row gap-3">
+      <p-button
+        (onClick)="close()"
+        [label]="'actions.close' | translate"
+        severity="secondary"
+        [fluid]="true"
+        [size]="'large'"
+        class="sm:flex-1"
+      ></p-button>
+
+      <p-button
+        (onClick)="redirectUpdate()"
+        [label]="'actions.update' | translate"
+        [raised]="true"
+        severity="primary"
+        [fluid]="true"
+        [size]="'large'"
+        class="sm:flex-1"
+      ></p-button>
+    </div>
+  </div>
+</div>
