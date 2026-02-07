@@ -36,11 +36,8 @@
     "balance": {
         "label": "Balance"
     },
-    "blog": {
-        "detail": "Detalle",
-        "edit": "Editar",
-        "label": "Blog",
-        "list": "Listado"
+    "code": {
+        "label": "Código"
     },
     "confirmations": {
         "delete": {
@@ -167,6 +164,9 @@
     "messages": {
         "label": "Mensajes",
         "noRecords": "No se encontraron registros"
+    },
+    "name": {
+        "label": "Nombre"
     },
     "notifications": {
         "count": "Tienes <strong>{{value}}</strong> notificaciones nuevas",
@@ -375,6 +375,7 @@
         "label": "Registrado"
     },
     "role": {
+        "info": "Información del Rol",
         "plural": {
             "label": "Roles"
         },
@@ -401,6 +402,7 @@
     "status": {
         "completed": "Completado",
         "error": "Error",
+        "info": "Información del estado",
         "label": "Estado",
         "loading": "Cargando",
         "pending": "Pendiente",

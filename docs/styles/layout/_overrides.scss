@@ -93,6 +93,10 @@ p-treetable {
     animation: dialog-mask-fade-out 0.3s cubic-bezier(0.55, 0, 0.55, 1);
 }
 
+.p-dialog-header {
+    display: none !important;
+}
+
 .p-toast .p-toast-message {
     background: #ffffff;
     border: none;
@@ -112,12 +116,9 @@ p-treetable {
     gap: 0.75rem;
 }
 
-
-.p-datatable-thead > tr > th
-{
+.p-datatable-thead > tr > th {
     color: var(--text-color) !important;
     font-size: x-small;
     font-weight: 800 !important;
     text-transform: uppercase;
 }
-
