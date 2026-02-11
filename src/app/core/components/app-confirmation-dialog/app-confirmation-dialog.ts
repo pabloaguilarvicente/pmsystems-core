@@ -36,7 +36,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
                 (onClick)="handleReject(onReject)"
                 variant="text"
                 [severity]="currentConfig?.rejectButtonSeverity"
-                fluid
+                fluid="true"
                 [size]="'large'"
               ></p-button>
 
@@ -45,7 +45,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
                 (onClick)="handleAccept(onAccept)"
                 [raised]="true"
                 [severity]="currentConfig?.acceptButtonSeverity"
-                fluid
+                fluid="true"
                 [size]="'large'"
               ></p-button>
             </div>

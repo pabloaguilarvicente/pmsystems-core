@@ -1,0 +1,83 @@
+<p-datepicker
+  [showButtonBar]="shouldShowQuickFilters()"
+  [selectionMode]="config().selectionMode"
+  [readonlyInput]="true"
+  [iconDisplay]="'input'"
+  [showIcon]="true"
+  [ngModel]="selectedDate()"
+  (ngModelChange)="selectedDate.set($event)"
+  [hideOnDateTimeSelect]="false"
+  fluid="true"
+  [placeholder]="'date.label' | translate"
+>
+  <ng-template #buttonbar let-todayCallback="todayCallback" let-clearCallback="clearCallback">
+    <div class="flex flex-col gap-1 w-full">
+      @if (hasValidSelection()) {
+        <div class="flex justify-center">
+          <p-button
+            size="small"
+            icon="ph ph-trash-simple"
+            [outlined]="true"
+            [label]="'actions.clear' | translate"
+            severity="danger"
+            (click)="clearDate(clearCallback, $event)"
+          />
+        </div>
+      }
+      <div class="grid grid-cols-2 gap-1">
+        <p-button
+          size="small"
+          [label]="'date_filter.today' | translate"
+          [outlined]="isButtonOutlined('today')"
+          [severity]="getButtonSeverity('today')"
+          (click)="setToday(todayCallback, $event)"
+          styleClass="w-full!"
+        />
+        <p-button
+          size="small"
+          [label]="'date_filter.last_week' | translate"
+          [outlined]="isButtonOutlined('lastWeek')"
+          [severity]="getButtonSeverity('lastWeek')"
+          (click)="setLastWeek($event)"
+          styleClass="w-full!"
+        />
+      </div>
+      <div class="grid grid-cols-2 gap-1">
+        <p-button
+          size="small"
+          [label]="'date_filter.last_month' | translate"
+          [outlined]="isButtonOutlined('lastMonth')"
+          [severity]="getButtonSeverity('lastMonth')"
+          (click)="setLastMonth($event)"
+          styleClass="w-full!"
+        />
+        <p-button
+          size="small"
+          [label]="'date_filter.last_year' | translate"
+          [outlined]="isButtonOutlined('lastYear')"
+          [severity]="getButtonSeverity('lastYear')"
+          (click)="setLastYear($event)"
+          styleClass="w-full!"
+        />
+      </div>
+
+      <div class="grid grid-cols-2 gap-2 mt-6">
+        <p-button
+          [label]="'actions.cancel' | translate"
+          [outlined]="true"
+          severity="secondary"
+          (onClick)="cancelDateSelection()"
+          styleClass="w-full!"
+        ></p-button>
+
+        <p-button
+          [label]="'actions.accept' | translate"
+          (onClick)="emitDateChange()"
+          [raised]="true"
+          severity="primary"
+          styleClass="w-full!"
+        ></p-button>
+      </div>
+    </div>
+  </ng-template>
+</p-datepicker>

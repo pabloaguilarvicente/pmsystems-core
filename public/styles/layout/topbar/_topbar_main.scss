@@ -45,7 +45,7 @@
             flex-shrink: 0;
             align-items: center;
             justify-content: center;
-            border-radius: 0.2rem;
+            border-radius: var(--border-radius);
             color: var(--topbar-menu-button-text-color);
             background-color: var(--topbar-menu-button-bg);
             box-shadow: none;

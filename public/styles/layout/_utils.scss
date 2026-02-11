@@ -1,11 +1,15 @@
 .card {
     background-color: var(--surface-card);
     padding: 2rem 1rem;
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius);
 
     box-shadow:
         0 1px 3px 0 rgba(0, 0, 0, 0.1),
         0 1px 2px -1px rgba(0, 0, 0, 0.1);
+
+    // box-shadow:
+    //     0 1px 15px rgba(0, 0, 0, 0.04),
+    //     0 1px 6px rgba(0, 0, 0, 0.04);
 }
 
 a {
@@ -44,7 +48,7 @@ a {
     font-size: 0.75rem;
     font-weight: 500;
     line-height: 1.25rem;
-    border-radius: 0.3rem;
+    border-radius: var(--border-radius);
     text-transform: uppercase;
     white-space: nowrap;
     transition: all 0.2s ease-in-out;
@@ -133,3 +137,12 @@ a {
     font-size: 1rem;
     line-height: 1.75rem;
 }
+
+.hidden-badge .p-overlaybadge .p-badge {
+    display: none !important;
+}
+
+.hidden-badge .p-overlaybadge-badge {
+    display: none !important;
+}
+

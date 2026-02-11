@@ -1,0 +1,16 @@
+<p-selectbutton
+  [options]="viewAs"
+  [ngModel]="selected()"
+  (onChange)="onViewAsChange($event.value)"
+  optionValue="id"
+  fluid="true"
+  [unselectable]="true"
+>
+  <ng-template #item let-item>
+    <i
+      [class]="(selected() === item.id ? 'text-primary ph-fill ' : 'ph-bold ') + item.icon"
+      [pTooltip]="item.label | translate"
+      tooltipPosition="bottom"
+    ></i>
+  </ng-template>
+</p-selectbutton>

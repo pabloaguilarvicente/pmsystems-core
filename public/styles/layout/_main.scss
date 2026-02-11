@@ -18,6 +18,7 @@ body {
 
     ::-webkit-scrollbar {
         width: 6px;
+        height: 6px;
     }
 
     ::-webkit-scrollbar-track {
@@ -31,4 +32,27 @@ body {
     ::-webkit-scrollbar-thumb:hover {
         background-color: #d1d5db;
     }
+}
+
+[title*="."] {
+    pointer-events: auto;
+}
+
+/* Prevenir que el navegador muestre el tooltip nativo */
+[title*="."]::before,
+[title*="."]::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* Forzar que no se muestre el tooltip del navegador */
+*[title*="."] {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+*[title*="."]:hover::after {
+    content: "" !important;
+    display: none !important;
 }

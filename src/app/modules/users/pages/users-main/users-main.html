@@ -10,6 +10,10 @@
     </div>
 
     <div class="col-span-12">
+      <app-filters [config]="filtersConfig" (filtersChange)="onFiltersChange($event)"></app-filters>
+    </div>
+
+    <div class="col-span-12">
       <app-table
         [config]="tableConfig()"
         (lazyLoad)="onSort($event)"

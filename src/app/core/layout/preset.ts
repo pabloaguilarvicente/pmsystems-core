@@ -49,12 +49,14 @@ const MainPreset = definePreset(Aura, {
     dialog: {
       content: { padding: '2rem' },
       root: {
-        borderRadius: '0.5rem',
+        borderRadius: 'var(--border-radius)',
         borderColor: 'none',
         shadow: '0 0 20px 5px rgba(0,0,0,0.1)',
       },
       header: { padding: '0' },
     },
+    button: { root: { borderRadius: 'var(--border-radius)' } },
+    inputtext: { root: { borderRadius: 'var(--border-radius)' } },
   },
 });
 

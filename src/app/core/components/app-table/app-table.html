@@ -1,7 +1,6 @@
 <p-table
   [columns]="config().columns"
   [value]="config().loading ? getSkeletonRows() : config().data"
-  [paginator]="config().paginator ?? false"
   [lazy]="config().lazy ?? true"
   (onLazyLoad)="onLazyLoad($event)"
 >

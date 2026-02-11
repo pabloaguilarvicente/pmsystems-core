@@ -1,0 +1,36 @@
+<div class="flex flex-wrap items-center justify-between gap-4 p-4">
+  <!-- Search Filter -->
+  @if (showSearch) {
+    <div class="w-100">
+      <filter-search [config]="searchConfig" (searchChange)="searchChange($event)"></filter-search>
+    </div>
+  }
+
+  <div class="w-full lg:w-auto flex flex-col lg:flex-row items-stretch lg:items-center gap-4">
+    <!-- Menu Filter -->
+    @if (showMenu) {
+      <filter-menu [config]="menuConfig" (filtersApplied)="filtersApplied($event)"></filter-menu>
+    }
+
+    <!-- Date Filter -->
+    @if (showDate) {
+      <filter-date [config]="dateConfig" (dateChange)="dateChange($event)"></filter-date>
+    }
+
+    <!-- Columns Filter -->
+    @if (showColumns) {
+      <filter-column
+        [config]="columnsConfig"
+        (columnsChange)="columnsChange($event)"
+      ></filter-column>
+    }
+
+    <!-- View As Filter -->
+    @if (showViewAs) {
+      <filter-view-as
+        [config]="viewAsConfig"
+        (viewAsChange)="viewAsChange($event)"
+      ></filter-view-as>
+    }
+  </div>
+</div>

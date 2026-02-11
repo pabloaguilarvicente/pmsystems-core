@@ -101,7 +101,7 @@ p-treetable {
     background: #ffffff;
     border: none;
     border-left: 4px solid;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     box-shadow:
         0 4px 12px rgba(0, 0, 0, 0.15),
         0 2px 4px rgba(0, 0, 0, 0.1);
@@ -121,4 +121,64 @@ p-treetable {
     font-size: x-small;
     font-weight: 800 !important;
     text-transform: uppercase;
+}
+
+.p-menu-list {
+    padding: 0 !important;
+}
+
+.p-togglebutton {
+    background: var(--surface-card) !important;
+    border: 1px solid var(--surface-border) !important;
+    min-width: 3.2rem;
+    flex: 0 0 3.2rem;
+}
+.p-togglebutton.p-togglebutton-checked {
+    background: var(--surface-card) !important;
+    padding: 0;
+}
+
+.p-togglebutton-checked .p-togglebutton-content {
+    background: var(--p-primary-50) !important;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+}
+
+.p-popover::before,
+.p-popover::after {
+    display: none !important;
+}
+
+.p-button:not(.p-button-outlined):not(.p-button-text):not(.p-button-link) {
+    border: none !important;
+}
+
+p-listbox.single-selection .p-listbox-option-check-icon,
+p-listbox.single-selection .p-listbox-option-blank-icon {
+    display: none !important;
+}
+
+p-listbox.single-selection .p-listbox-option::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    border: 1px solid var(--p-surface-300);
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    background-color: var(--p-content-background);
+    transition: all 0.2s;
+}
+
+p-listbox.single-selection .p-listbox-option[data-p-selected="true"]::before {
+    border-color: var(--p-primary-color);
+    background-color: var(--p-primary-color);
+    box-shadow: inset 0 0 0 3px var(--p-content-background);
+}
+
+p-listbox.single-selection .p-listbox-option {
+    display: flex;
+    align-items: center;
 }

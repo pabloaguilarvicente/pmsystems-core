@@ -17,6 +17,7 @@ export interface Pagination {
   totalItems: number;
   hasNextPage: boolean;
   hasPreviousPage: boolean;
+  restoreParams: boolean;
 }
 export interface MetaData {
   timestamp: string;

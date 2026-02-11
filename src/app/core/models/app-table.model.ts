@@ -1,4 +1,4 @@
-import { Pagination } from '../../commons/api.utils';
+import { Pagination } from '../commons/api.utils';
 
 export type ColumnAlign = 'left' | 'center' | 'right';
 export type ColumnType = 'text' | 'template' | 'number' | 'date' | 'badge' | 'custom' | 'actions';
@@ -65,16 +65,4 @@ export interface TableInput<T = any> {
 
   /** Indica si es lazy loading */
   lazy?: boolean;
-
-  /** Indica si muestra el paginador */
-  paginator?: boolean;
-}
-
-export interface TableInput<T = any> {
-  columns: Column[];
-  data: T[];
-  loading?: boolean;
-  pagination?: Pagination | null;
-  lazy?: boolean;
-  paginator?: boolean;
 }

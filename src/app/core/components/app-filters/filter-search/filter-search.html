@@ -1,0 +1,14 @@
+<p-iconfield>
+  <p-inputicon class="ph-bold ph-magnifying-glass" />
+  <input
+    type="text"
+    pInputText
+    [placeholder]="'actions.search' | translate"
+    fluid="true"
+    [ngModel]="searchValue()"
+    (ngModelChange)="onSearchInput($event)"
+  />
+  @if (searchValue()) {
+    <p-inputicon class="ph-bold ph-x cursor-pointer" (click)="onClear()" />
+  }
+</p-iconfield>

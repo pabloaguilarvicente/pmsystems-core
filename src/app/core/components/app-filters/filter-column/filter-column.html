@@ -1,0 +1,53 @@
+<p-overlaybadge
+  [value]="hiddenColumnsCount > 0 ? hiddenColumnsCount.toString() : null"
+  [class.hidden-badge]="hiddenColumnsCount === 0"
+>
+  <p-button
+    [label]="'actions.hide' | translate"
+    outlined="true"
+    severity="secondary"
+    icon="ph-bold ph-eye-slash"
+    iconPos="right"
+    (click)="popover.toggle($event)"
+    fluid="true"
+  />
+</p-overlaybadge>
+
+<p-popover #popover appendTo="body">
+  <div class="w-auto p-4">
+    <div class="flex flex-col gap-1">
+      <label>{{ 'columns.hint' | translate }}</label>
+      <p-listbox
+        [options]="allColumns()"
+        [(ngModel)]="selectedHiddenFields"
+        optionLabel="header"
+        optionValue="field"
+        [multiple]="true"
+        [checkbox]="true"
+        [filter]="true"
+        [highlightOnSelect]="false"
+        class="min-w-70"
+        fluid="true"
+      >
+        <ng-template let-item pTemplate="item">
+          {{ item.header | translate }}
+        </ng-template>
+      </p-listbox>
+    </div>
+    <div class="grid grid-cols-2 gap-2 mt-6">
+      <p-button
+        [label]="'actions.cancel' | translate"
+        [outlined]="true"
+        severity="secondary"
+        (click)="onCancel(); popover.hide()"
+        styleClass="w-full!"
+      />
+      <p-button
+        [label]="'actions.accept' | translate"
+        severity="primary"
+        (click)="onAccept(); popover.hide()"
+        styleClass="w-full!"
+      />
+    </div>
+  </div>
+</p-popover>

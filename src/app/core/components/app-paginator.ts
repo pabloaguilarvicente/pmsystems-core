@@ -1,10 +1,11 @@
-import { Component, computed, input, output } from '@angular/core';
+import { Component, computed, effect, inject, input, output, untracked } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
 import { TooltipModule } from 'primeng/tooltip';
 import { Pagination } from '../commons/api.utils';
+import { AppFiltersService } from '../services/app-filters.service';
 
 export interface PaginatorChangeEvent {
   currentPage: number;
@@ -115,11 +116,12 @@ export interface PaginatorChangeEvent {
   `,
 })
 export class AppPaginator {
+  private readonly appFiltersService = inject(AppFiltersService);
+
   public pagination = input.required<Pagination>();
   public loading = input<boolean>(false);
   public pageSizeOptions = input<number[]>([5, 10, 25, 50, 100]);
   public pageChange = output<PaginatorChangeEvent>();
-  public Math = Math;
 
   public pageSizeDropdownOptions = computed(() =>
     this.pageSizeOptions().map((size) => ({
@@ -141,10 +143,47 @@ export class AppPaginator {
     ),
   );
 
+  constructor() {
+    // Restaurar paginación guardada al inicializar
+    effect(() => {
+      const pag = this.pagination();
+
+      if (!pag.restoreParams) return;
+
+      const saved = this.appFiltersService.getFilters()?.pagination;
+
+      if (saved) {
+        // Solo emitir si los valores guardados difieren de los actuales
+        const pageChanged = saved.currentPage !== pag.currentPage;
+        const sizeChanged = saved.pageSize !== pag.pageSize;
+
+        if (pageChanged || sizeChanged) {
+          // untracked para no crear dependencia reactiva al emitir
+          untracked(() => {
+            this.pageChange.emit({
+              currentPage: saved.currentPage,
+              pageSize: saved.pageSize,
+            });
+          });
+        }
+      }
+    });
+  }
+
   private emitPageChange(page: number, pageSize?: number): void {
+    const resolvedSize = pageSize ?? this.pagination().pageSize;
+
+    // Persistir en el servicio si restoreParams está activo
+    if (this.pagination().restoreParams) {
+      this.appFiltersService.updatePagination({
+        currentPage: page,
+        pageSize: resolvedSize,
+      });
+    }
+
     this.pageChange.emit({
       currentPage: page,
-      pageSize: pageSize ?? this.pagination().pageSize,
+      pageSize: resolvedSize,
     });
   }
 

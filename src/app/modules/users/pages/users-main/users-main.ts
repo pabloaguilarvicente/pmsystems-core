@@ -8,14 +8,16 @@ import { AppTitlePage } from '../../../../core/components/app-title-page';
 import { Router } from '@angular/router';
 import { PaginatorChangeEvent } from '../../../../core/components/app-paginator';
 import { AppTable } from '../../../../core/components/app-table/app-table';
-import { Column, TableInput } from '../../../../core/components/app-table/app-table.model';
+import { Column, TableInput } from '../../../../core/models/app-table.model';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { UserDetailDialog } from '../../components/user-detail-dialog/user-detail-dialog';
-import { BREAKPOINTS } from '../../../../core/commons/core.constants';
+import { BREAKPOINTS, ROLES, STATUS } from '../../../../core/commons/core.constants';
+import { AppFilters } from '../../../../core/components/app-filters/app-filters';
+import { AppFiltersConfig, AppFiltersOutput } from '../../../../core/models/app-filters.model';
 
 @Component({
   selector: 'users-main',
-  imports: [TranslateModule, AppTitlePage, AppTable],
+  imports: [TranslateModule, AppTitlePage, AppTable, AppFilters],
   templateUrl: './users-main.html',
   providers: [UsersService, DialogService],
 })
@@ -104,10 +106,48 @@ export class UsersMain {
     columns: this.cols,
     data: this.response()?.data ?? [],
     loading: this.isLoading(),
-    pagination: this.response()?.pagination ?? null,
+    pagination: this.response()?.pagination
+      ? {
+          ...this.response()!.pagination,
+          restoreParams: true,
+        }
+      : null,
     lazy: true,
-    paginator: false,
   }));
+
+  public filtersConfig: AppFiltersConfig = {
+    search: { show: true, config: { restoreParams: true } },
+    columns: { show: true, config: { restoreParams: true, columns: this.cols } },
+    viewAs: { show: true, config: { restoreParams: true, defaultView: 'LIST' } },
+    date: {
+      show: true,
+      config: { restoreParams: true, selectionMode: 'range', showQuickFilters: true },
+    },
+    menu: {
+      show: true,
+      config: [
+        {
+          filter: 'role',
+          label: 'role.singular.label',
+          cleanable: true,
+          multiple: true,
+          searchable: true,
+          dataSource: ROLES,
+          fieldConfig: { id: 'id', label: 'name' },
+          restoreParams: true,
+        },
+        {
+          filter: 'status',
+          label: 'status.label',
+          cleanable: true,
+          multiple: false,
+          dataSource: STATUS,
+          fieldConfig: { id: 'id', label: 'name' },
+          restoreParams: true,
+        },
+      ],
+    },
+  };
 
   getMenuItems(item: User): MenuItem[] {
     return [
@@ -182,7 +222,29 @@ export class UsersMain {
       breakpoints: BREAKPOINTS,
       data: data,
       dismissableMask: true,
-      closable:true
+      closable: true,
     })!;
+  }
+
+  public onFiltersChange(filters: AppFiltersOutput): void {
+    if (filters.search) {
+      console.log('Búsqueda:', filters.search);
+    }
+
+    if (filters.dates) {
+      console.log('Rango de fechas:', filters.dates);
+    }
+
+    if (filters.extraFilters) {
+      console.log('Filtros extra (role, status, etc):', filters.extraFilters);
+    }
+
+    if (filters.columns) {
+      console.log('Columnas visibles:', filters.columns);
+    }
+
+    if (filters.viewAs) {
+      console.log('Vista:', filters.viewAs);
+    }
   }
 }

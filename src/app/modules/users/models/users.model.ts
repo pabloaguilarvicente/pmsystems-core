@@ -1,4 +1,6 @@
 export type Role = 'ADMIN' | 'MODERATOR' | 'USER';
+export type Status = 'ACTIVE' | 'INACTIVE';
+export type Order = 'asc' | 'desc';
 
 export interface User {
   id: string;
@@ -14,16 +16,14 @@ export interface User {
 
 export interface UserStatus {
   id: number;
-  code: Role;
+  code: Status;
   name: string;
-  color: string;
 }
 
 export interface UserRole {
   id: number;
   code: Role;
   name: string;
-  color: string;
 }
 
 export interface CreateUserRequest {
@@ -52,5 +52,5 @@ export interface UserFiltersParams {
   currentPage: number;
   pageSize: number;
   sort?: string;
-  order?: 'asc' | 'desc';
+  order?: Order;
 }

@@ -3,10 +3,10 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { MenuItem } from 'primeng/api';
 import { LocalStorageService } from '../../services/localstorage.service';
-import { AppSettings } from '../../commons/core.model';
 import { LOCAL_STORAGE_KEYS } from '../../commons/core.constants';
 import { TranslateService } from '@ngx-translate/core';
 import { PrimeNG } from 'primeng/config';
+import { UiSettings } from '../../models/core.model';
 
 export type ColorScheme = 'light' | 'dark';
 export type MenuMode =
@@ -191,7 +191,7 @@ export class LayoutService {
   }
 
   private loadConfigFromStorage(): void {
-    const savedSettings = this.localStorageService.get<AppSettings>(LOCAL_STORAGE_KEYS.appSettings);
+    const savedSettings = this.localStorageService.get<UiSettings>(LOCAL_STORAGE_KEYS.uiSettings);
 
     if (!savedSettings) {
       this.toggleDarkMode();
@@ -221,7 +221,7 @@ export class LayoutService {
 
   private saveConfigToStorage(): void {
     const config = this.layoutConfig();
-    const themeSettings: AppSettings = {
+    const themeSettings: UiSettings = {
       colorScheme: config.darkTheme ? 'dark' : 'light',
       menuMode: config.menuMode,
       menuProfileMode: config.menuProfilePosition,
@@ -232,7 +232,7 @@ export class LayoutService {
 
     // Solo guardar si la configuración cambió
     if (this.lastSavedConfig !== currentConfigStr) {
-      this.localStorageService.set(LOCAL_STORAGE_KEYS.appSettings, themeSettings);
+      this.localStorageService.set(LOCAL_STORAGE_KEYS.uiSettings, themeSettings);
       this.lastSavedConfig = currentConfigStr;
     }
   }

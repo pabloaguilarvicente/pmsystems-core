@@ -26,7 +26,7 @@ export interface ErrorData {
     </div>
   `,
 })
-export class ErrorPage {
+export class AppErrorPage {
   public errorMessage = signal<AppMessage>({});
 
   constructor(

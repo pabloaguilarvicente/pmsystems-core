@@ -7,10 +7,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LocaleDatePipe } from '../../pipes/locale-date-pipe.pipe';
 import { AppMessages } from '../app-messages';
 import { AppPaginator, PaginatorChangeEvent } from '../app-paginator';
-import { AppConfirmationDialog } from '../confirmation-dialog/app-confirmation-dialog';
+import { AppConfirmationDialog } from '../app-confirmation-dialog/app-confirmation-dialog';
 import { NO_DATA_IMAGE } from '../../commons/core.constants';
-import { TableInput } from './app-table.model';
-import { SkeletonPaginator } from '../skeletons/skeleton-paginator';
+import { TableInput } from '../../models/app-table.model';
+import { SkeletonPaginator } from '../app-skeletons/skeleton-paginator';
 
 @Component({
   selector: 'app-table',

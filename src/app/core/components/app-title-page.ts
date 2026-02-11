@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
@@ -19,7 +19,7 @@ import { ButtonModule } from 'primeng/button';
           [icon]="buttonIcon()"
           iconPos="right"
           [raised]="true"
-          fluid
+          fluid="true"
           size="large"
           styleClass="py-3! px-8!"
         />
