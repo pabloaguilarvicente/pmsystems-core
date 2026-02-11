@@ -45,6 +45,10 @@
     "code": {
         "label": "Code"
     },
+    "columns": {
+        "hint": "Columns that are not displayed in the table",
+        "label": "Columns"
+    },
     "confirmations": {
         "delete": {
             "error": "Error deleting the record",
@@ -89,6 +93,15 @@
         "main": "Main",
         "register": "Register",
         "update": "Update"
+    },
+    "date": {
+        "label": "Date"
+    },
+    "date_filter": {
+        "last_month": "Last month",
+        "last_week": "Last week",
+        "last_year": "Last year",
+        "today": "Today"
     },
     "email": {
         "input": "Enter email",
@@ -138,6 +151,10 @@
             "504": "Gateway Timeout",
             "default": "Request Error"
         }
+    },
+    "filter": {
+        "by": "Filter {{value}} by",
+        "label": "Filter"
     },
     "firstName": {
         "input": "Enter first names",
@@ -389,9 +406,6 @@
             "label": "Role"
         }
     },
-    "roles": {
-        "label": "Roles"
-    },
     "screen": {
         "exit": "Exit full screen",
         "full": "Full screen",
@@ -444,5 +458,10 @@
         "singular": {
             "label": "User"
         }
+    },
+    "view_as": {
+        "grid": "Grid",
+        "label": "View as",
+        "list": "List"
     }
 }

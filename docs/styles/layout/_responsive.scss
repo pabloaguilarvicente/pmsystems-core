@@ -212,3 +212,15 @@
         margin-right: auto !important;
     }
 }
+
+@media screen and (max-width: ($breakpoint - 1)) {
+    .p-popover {
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+
+    .p-popover-content {
+        width: 80vw;
+        max-width: 80vw;
+    }
+}

@@ -39,6 +39,10 @@
     "code": {
         "label": "Código"
     },
+    "columns": {
+        "hint": "Columnas que no se muestran en la tabla",
+        "label": "Columnas"
+    },
     "confirmations": {
         "delete": {
             "error": "Error al eliminar el registro",
@@ -83,6 +87,15 @@
         "main": "Principal",
         "register": "Registrar",
         "update": "Actualizar"
+    },
+    "date": {
+        "label": "Fecha"
+    },
+    "date_filter": {
+        "last_month": "Último mes",
+        "last_week": "Última semana",
+        "last_year": "Último año",
+        "today": "Hoy"
     },
     "email": {
         "input": "Ingrese correo electrónico",
@@ -132,6 +145,10 @@
             "504": "Tiempo de Espera de Puerta de Enlace",
             "default": "Error en la Solicitud"
         }
+    },
+    "filter": {
+        "by": "Filtrar {{value}} por",
+        "label": "Filtrar"
     },
     "firstName": {
         "input": "Ingrese nombres",
@@ -383,9 +400,6 @@
             "label": "Rol"
         }
     },
-    "roles": {
-        "label": "Roles"
-    },
     "screen": {
         "exit": "Salir de pantalla completa",
         "full": "Pantalla completa",
@@ -438,5 +452,10 @@
         "singular": {
             "label": "Usuario"
         }
+    },
+    "view_as": {
+        "grid": "Cuadrícula",
+        "label": "Ver como",
+        "list": "Lista"
     }
 }
