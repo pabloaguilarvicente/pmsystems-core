@@ -1,7 +1,7 @@
 import { ApplicationRef, provideAppInitializer, inject } from '@angular/core';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-import { I18N_PATH } from '../commons/core.constants';
+import { I18N_PATH } from '../helpers/constant.helper';
 
 function removeTranslationTitles(): void {
   document.querySelectorAll('[title]').forEach((element) => {

@@ -4,7 +4,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { TranslateModule } from '@ngx-translate/core';
-import { AppFiltersService } from '../../../services/app-filters.service';
+import { FiltersService } from '../filters.service';
 
 export interface FilterSearchConfig {
   restoreParams: boolean;
@@ -21,7 +21,7 @@ export class FilterSearch {
 
   public searchChange = output<string>();
 
-  private readonly appFiltersService = inject(AppFiltersService);
+  private readonly filtersService = inject(FiltersService);
   private debounceTimer: number | undefined;
 
   public searchValue = linkedSignal<string>(() => {
@@ -29,7 +29,7 @@ export class FilterSearch {
     const defaultSearch = cfg.defaultSearch ?? '';
 
     if (!cfg.restoreParams) return defaultSearch;
-    return this.appFiltersService.getFilters()?.search ?? defaultSearch;
+    return this.filtersService.getFilters()?.search ?? defaultSearch;
   });
 
   constructor() {
@@ -48,9 +48,9 @@ export class FilterSearch {
 
         if (restoreParams) {
           if (value && value.trim()) {
-            this.appFiltersService.updateFilters({ search: value });
+            this.filtersService.updateFilters({ search: value });
           } else {
-            this.appFiltersService.updateFilters({ search: undefined });
+            this.filtersService.updateFilters({ search: undefined });
           }
         }
       }, debounceTime) as unknown as number;

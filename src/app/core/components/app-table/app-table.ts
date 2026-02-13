@@ -8,9 +8,9 @@ import { LocaleDatePipe } from '../../pipes/locale-date-pipe.pipe';
 import { AppMessages } from '../app-messages';
 import { AppPaginator, PaginatorChangeEvent } from '../app-paginator';
 import { AppConfirmationDialog } from '../app-confirmation-dialog/app-confirmation-dialog';
-import { NO_DATA_IMAGE } from '../../commons/core.constants';
-import { TableInput } from '../../models/app-table.model';
+import { NO_DATA_IMAGE } from '../../helpers/constant.helper';
 import { SkeletonPaginator } from '../app-skeletons/skeleton-paginator';
+import { TableInput } from './app-table.model';
 
 @Component({
   selector: 'app-table',

@@ -8,7 +8,7 @@ import { PopoverModule } from 'primeng/popover';
 import { SelectModel } from '../../../models/core.model';
 import { CommonModule } from '@angular/common';
 import { TooltipModule } from 'primeng/tooltip';
-import { AppFiltersService } from '../../../services/app-filters.service';
+import { FiltersService } from '../filters.service';
 
 export interface FilterMenuConfig {
   filter: string;
@@ -56,7 +56,7 @@ export interface FilterValues {
 })
 export class FilterMenu implements OnInit {
   private fb = inject(FormBuilder);
-  private readonly appFiltersService = inject(AppFiltersService);
+  private readonly filtersService = inject(FiltersService);
 
   // Inputs
   public config = input.required<FilterMenuConfig[]>();
@@ -79,7 +79,7 @@ export class FilterMenu implements OnInit {
 
       configs.forEach((filterConfig) => {
         if (filterConfig.restoreParams) {
-          const savedFilters = this.appFiltersService.getFilters();
+          const savedFilters = this.filtersService.getFilters();
           const extraFilters = savedFilters?.extraFilters;
 
           if (extraFilters && extraFilters[filterConfig.filter] !== undefined) {
@@ -105,7 +105,7 @@ export class FilterMenu implements OnInit {
       // Solo actualizar si hay valores emitidos
       if (Object.keys(this.lastEmittedValues).length > 0) {
         // Obtener extraFilters actuales y hacer merge
-        const currentFilters = this.appFiltersService.getFilters();
+        const currentFilters = this.filtersService.getFilters();
         const currentExtraFilters = currentFilters?.extraFilters ?? {};
 
         // Crear objeto con solo los filtros que tienen restoreParams y valores no vacíos
@@ -128,7 +128,7 @@ export class FilterMenu implements OnInit {
 
         // Si extraFilters quedó completamente vacío, actualizar con objeto vacío
         // Si tiene valores, actualizar con los filtros limpios
-        this.appFiltersService.updateExtraFilters(filtersToSave);
+        this.filtersService.updateExtraFilters(filtersToSave);
       }
     });
   }
@@ -283,7 +283,7 @@ export class FilterMenu implements OnInit {
 
       if (hasRestoreParams) {
         // Obtener extraFilters actuales
-        const currentFilters = this.appFiltersService.getFilters();
+        const currentFilters = this.filtersService.getFilters();
         const currentExtraFilters = currentFilters?.extraFilters ?? {};
 
         // Crear objeto con solo los filtros que tienen restoreParams y valores no vacíos
@@ -305,7 +305,7 @@ export class FilterMenu implements OnInit {
         });
 
         // Actualizar extraFilters (puede quedar vacío {})
-        this.appFiltersService.updateExtraFilters(filtersToSave);
+        this.filtersService.updateExtraFilters(filtersToSave);
       }
 
       this.filtersApplied.emit(cleanedValues);
@@ -326,7 +326,7 @@ export class FilterMenu implements OnInit {
       configs.forEach((filterConfig) => {
         if (filterConfig.restoreParams) {
           // Restaurar desde extraFilters
-          const savedFilters = this.appFiltersService.getFilters();
+          const savedFilters = this.filtersService.getFilters();
           const extraFilters = savedFilters?.extraFilters;
 
           if (extraFilters && extraFilters[filterConfig.filter] !== undefined) {

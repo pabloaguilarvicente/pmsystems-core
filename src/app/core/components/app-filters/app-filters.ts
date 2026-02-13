@@ -4,12 +4,8 @@ import { FilterViewAs, ViewAs } from './filter-view-as/filter-view-as';
 import { FilterColumn } from './filter-column/filter-column';
 import { FilterMenu, FilterValues } from './filter-menu/filter-menu';
 import { DateFilterOutput, FilterDate } from './filter-date/filter-date';
-import {
-  AppFiltersConfig,
-  AppFiltersOutput,
-  ColumnSelection,
-} from '../../models/app-filters.model';
 import { CommonModule } from '@angular/common';
+import { AppFiltersConfig, AppFiltersOutput, ColumnSelection } from './app-filters.model';
 
 @Component({
   selector: 'app-filters',

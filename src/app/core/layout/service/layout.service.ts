@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { MenuItem } from 'primeng/api';
 import { LocalStorageService } from '../../services/localstorage.service';
-import { LOCAL_STORAGE_KEYS } from '../../commons/core.constants';
+import { LOCAL_STORAGE_KEYS } from '../../helpers/constant.helper';
 import { TranslateService } from '@ngx-translate/core';
 import { PrimeNG } from 'primeng/config';
 import { UiSettings } from '../../models/core.model';

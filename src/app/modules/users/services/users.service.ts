@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
 import { Observable } from 'rxjs';
-import { ApiListResponse, ApiResponse, buildHttpParams } from '../../../core/commons/api.utils';
+import { ApiListResponse, ApiResponse, buildHttpParams } from '../../../core/helpers/api.helper';
 import { User, UserFiltersParams } from '../models/users.model';
 
 @Injectable()

@@ -1,16 +1,10 @@
-import { Pagination } from '../commons/api.utils';
-import { Column } from './app-table.model';
-import {
-  DateFilterOutput,
-  FilterDateConfig,
-} from '../components/app-filters/filter-date/filter-date';
-import {
-  FilterViewAsConfig,
-  ViewAs,
-} from '../components/app-filters/filter-view-as/filter-view-as';
-import { FilterSearchConfig } from '../components/app-filters/filter-search/filter-search';
-import { FilterMenuConfig } from '../components/app-filters/filter-menu/filter-menu';
-import { FilterColumnConfig } from '../components/app-filters/filter-column/filter-column';
+import { Pagination } from '../../helpers/api.helper';
+import { Column } from '../app-table/app-table.model';
+import { FilterColumnConfig } from './filter-column/filter-column';
+import { DateFilterOutput, FilterDateConfig } from './filter-date/filter-date';
+import { FilterMenuConfig } from './filter-menu/filter-menu';
+import { FilterSearchConfig } from './filter-search/filter-search';
+import { FilterViewAsConfig, ViewAs } from './filter-view-as/filter-view-as';
 
 export type RouteFiltersState = Record<string, RouteFilters>;
 

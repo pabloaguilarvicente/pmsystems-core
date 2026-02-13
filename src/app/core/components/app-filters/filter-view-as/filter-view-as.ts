@@ -2,10 +2,10 @@ import { Component, effect, inject, input, linkedSignal, output } from '@angular
 import { TranslateModule } from '@ngx-translate/core';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { TooltipModule } from 'primeng/tooltip';
-import { VIEW_AS } from '../../../commons/core.constants';
+import { VIEW_AS } from '../../../helpers/constant.helper';
 import { FormsModule } from '@angular/forms';
 import { SelectModel } from '../../../models/core.model';
-import { AppFiltersService } from '../../../services/app-filters.service';
+import { FiltersService } from '../filters.service';
 
 export type ViewAs = 'LIST' | 'GRID';
 
@@ -24,7 +24,7 @@ export class FilterViewAs {
 
   public viewAsChange = output<ViewAs>();
 
-  private readonly appFiltersService = inject(AppFiltersService);
+  private readonly filtersService = inject(FiltersService);
 
   public readonly viewAs: SelectModel[] = VIEW_AS;
 
@@ -33,13 +33,13 @@ export class FilterViewAs {
     const defaultView = cfg.defaultView ?? 'LIST';
 
     if (!cfg.restoreParams) return defaultView;
-    return this.appFiltersService.getFilters()?.viewAs ?? defaultView;
+    return this.filtersService.getFilters()?.viewAs ?? defaultView;
   });
 
   constructor() {
     effect(() => {
       if (this.config().restoreParams) {
-        this.appFiltersService.updateFilters({ viewAs: this.selected() });
+        this.filtersService.updateFilters({ viewAs: this.selected() });
       }
     });
   }

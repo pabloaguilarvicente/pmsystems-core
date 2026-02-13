@@ -1,18 +1,17 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocalStorageService } from './localstorage.service';
-import { ColumnSelection, RouteFilters, RouteFiltersState } from '../models/app-filters.model';
-import { AppSettings } from '../models/core.model';
-import { LOCAL_STORAGE_KEYS } from '../commons/core.constants';
-import { Pagination } from '../commons/api.utils';
-import { DateFilterOutput } from '../components/app-filters/filter-date/filter-date';
-import { ViewAs } from '../components/app-filters/filter-view-as/filter-view-as';
-import { Column } from '../models/app-table.model';
+import { LocalStorageService } from '../../services/localstorage.service';
+import { AppSettings } from '../../models/core.model';
+import { LOCAL_STORAGE_KEYS } from '../../helpers/constant.helper';
+import { Pagination } from '../../helpers/api.helper';
+import { DateFilterOutput } from './filter-date/filter-date';
+import { ViewAs } from './filter-view-as/filter-view-as';
+import { ColumnSelection, RouteFilters, RouteFiltersState } from './app-filters.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AppFiltersService {
+export class FiltersService {
   private readonly router = inject(Router);
   private readonly localStorageService = inject(LocalStorageService);
 
@@ -99,7 +98,10 @@ export class AppFiltersService {
   // ─────────────────────────────────────────────
 
   /** Actualiza únicamente la paginación para la ruta indicada */
-  public updatePagination(pagination: Pick<Pagination, 'currentPage' | 'pageSize'>, path?: string): RouteFilters {
+  public updatePagination(
+    pagination: Pick<Pagination, 'currentPage' | 'pageSize'>,
+    path?: string,
+  ): RouteFilters {
     return this.updateFilters({ pagination }, path);
   }
 
@@ -190,5 +192,4 @@ export class AppFiltersService {
   public hasFilters(path?: string): boolean {
     return this.getFilters(path) !== null;
   }
-  
 }

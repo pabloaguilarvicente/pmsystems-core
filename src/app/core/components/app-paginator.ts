@@ -4,8 +4,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
 import { TooltipModule } from 'primeng/tooltip';
-import { Pagination } from '../commons/api.utils';
-import { AppFiltersService } from '../services/app-filters.service';
+import { Pagination } from '../helpers/api.helper';
+import { FiltersService } from './app-filters/filters.service';
 
 export interface PaginatorChangeEvent {
   currentPage: number;
@@ -116,7 +116,7 @@ export interface PaginatorChangeEvent {
   `,
 })
 export class AppPaginator {
-  private readonly appFiltersService = inject(AppFiltersService);
+  private readonly filtersService = inject(FiltersService);
 
   public pagination = input.required<Pagination>();
   public loading = input<boolean>(false);
@@ -150,7 +150,7 @@ export class AppPaginator {
 
       if (!pag.restoreParams) return;
 
-      const saved = this.appFiltersService.getFilters()?.pagination;
+      const saved = this.filtersService.getFilters()?.pagination;
 
       if (saved) {
         // Solo emitir si los valores guardados difieren de los actuales
@@ -175,7 +175,7 @@ export class AppPaginator {
 
     // Persistir en el servicio si restoreParams está activo
     if (this.pagination().restoreParams) {
-      this.appFiltersService.updatePagination({
+      this.filtersService.updatePagination({
         currentPage: page,
         pageSize: resolvedSize,
       });

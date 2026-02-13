@@ -1,4 +1,4 @@
-import { Pagination } from '../commons/api.utils';
+import { Pagination } from '../../helpers/api.helper';
 
 export type ColumnAlign = 'left' | 'center' | 'right';
 export type ColumnType = 'text' | 'template' | 'number' | 'date' | 'badge' | 'custom' | 'actions';

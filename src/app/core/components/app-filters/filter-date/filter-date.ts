@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { DatePicker, DatePickerModule } from 'primeng/datepicker';
-import { AppFiltersService } from '../../../services/app-filters.service';
+import { FiltersService } from '../filters.service';
 
 export interface FilterDateConfig {
   selectionMode: 'single' | 'range';
@@ -39,7 +39,7 @@ export type DateRange = Date | Date[] | null;
 export class FilterDate {
   @ViewChild(DatePicker) datePicker!: DatePicker;
 
-  private readonly appFiltersService = inject(AppFiltersService);
+  private readonly filtersService = inject(FiltersService);
 
   public config = input.required<FilterDateConfig>();
   public selectedDate = model<DateRange>(null);
@@ -62,7 +62,7 @@ export class FilterDate {
       const cfg = this.config();
 
       if (cfg.restoreParams) {
-        const savedFilters = this.appFiltersService.getFilters();
+        const savedFilters = this.filtersService.getFilters();
         const savedDates = savedFilters?.dates;
 
         if (savedDates) {
@@ -76,18 +76,8 @@ export class FilterDate {
       }
     });
 
-    effect(() => {
-      const cfg = untracked(() => this.config());
-
-      if (!cfg.restoreParams) return;
-
-      const emittedDate = this.lastEmittedDate;
-
-      if (emittedDate) {
-        const output = this.convertDateToOutput(emittedDate);
-        this.appFiltersService.updateDates(output);
-      }
-    });
+    // ✅ NO hay effect automático que actualice el servicio
+    // Solo se actualiza al dar "Aceptar" mediante emitDateChange()
   }
 
   public setToday(callback: (event: Event) => void, event: Event): void {
@@ -159,17 +149,8 @@ export class FilterDate {
   public clearDate(callback: (event: Event) => void, event: Event): void {
     this.selectedDate.set(null);
     this.activeQuickFilter = null;
-    this.lastEmittedDate = null;
-
-    // ✅ Solo limpiar del servicio, NO emitir — el emit lo hace únicamente onAccept
-    if (this.config().restoreParams) {
-      const emptyDates: DateFilterOutput = {
-        startDate: null,
-        endDate: null,
-        singleDate: null,
-      };
-      this.appFiltersService.updateDates(emptyDates);
-    }
+    // ✅ Solo limpia en memoria, NO emite ni actualiza el servicio
+    // El servicio solo se actualiza al dar "Aceptar"
   }
 
   public getButtonSeverity(filter: string): 'secondary' | 'primary' {
@@ -187,12 +168,27 @@ export class FilterDate {
   public emitDateChange(): void {
     const date = this.selectedDate();
 
-    // ✅ Si no hay fecha, cerrar sin emitir
+    // ✅ Si no hay fecha, significa que se limpió - emitir null
     if (!date) {
+      const emptyOutput: DateFilterOutput = {
+        startDate: null,
+        endDate: null,
+        singleDate: null,
+      };
+
+      this.lastEmittedDate = null;
+
+      // Actualizar servicio y emitir
+      if (this.config().restoreParams) {
+        this.filtersService.updateDates(emptyOutput);
+      }
+
+      this.dateChange.emit(emptyOutput);
       this.closeDatePicker();
       return;
     }
 
+    // Validar selección de rango completa
     if (this.config().selectionMode === 'range' && Array.isArray(date)) {
       if (!date[0] || !date[1]) {
         this.closeDatePicker();
@@ -200,17 +196,19 @@ export class FilterDate {
       }
     }
 
+    // Si es la misma fecha que ya se emitió, solo cerrar
     if (this.isSameDate(date, this.lastEmittedDate)) {
       this.closeDatePicker();
       return;
     }
 
+    // ✅ ÚNICO PUNTO donde se emite y actualiza el servicio
     const output = this.convertDateToOutput(date);
 
     this.lastEmittedDate = this.cloneDate(date);
 
     if (this.config().restoreParams) {
-      this.appFiltersService.updateDates(output);
+      this.filtersService.updateDates(output);
     }
 
     this.dateChange.emit(output);
@@ -219,7 +217,7 @@ export class FilterDate {
 
   public cancelDateSelection(): void {
     if (this.config().restoreParams) {
-      const savedFilters = this.appFiltersService.getFilters();
+      const savedFilters = this.filtersService.getFilters();
       const savedDates = savedFilters?.dates;
 
       if (savedDates) {

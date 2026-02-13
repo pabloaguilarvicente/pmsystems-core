@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { AppMessage, AppMessages } from './app-messages';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { ERROR_IMAGE } from '../commons/core.constants';
+import { ERROR_IMAGE } from '../helpers/constant.helper';
 
 export interface ErrorData {
   title: string;

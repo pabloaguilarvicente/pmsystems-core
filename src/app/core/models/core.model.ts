@@ -1,4 +1,5 @@
-import { RouteFiltersState } from '../models/app-filters.model';
+
+import { RouteFiltersState } from '../components/app-filters/app-filters.model';
 import {
   ColorScheme,
   Language,

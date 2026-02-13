@@ -1,19 +1,22 @@
 import { Component, computed, inject, signal, ViewChild } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { User, UserFiltersParams } from '../../models/users.model';
-import { ApiListResponse } from '../../../../core/commons/api.utils';
+import { ApiListResponse } from '../../../../core/helpers/api.helper';
 import { TranslateModule } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { AppTitlePage } from '../../../../core/components/app-title-page';
 import { Router } from '@angular/router';
 import { PaginatorChangeEvent } from '../../../../core/components/app-paginator';
 import { AppTable } from '../../../../core/components/app-table/app-table';
-import { Column, TableInput } from '../../../../core/models/app-table.model';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { UserDetailDialog } from '../../components/user-detail-dialog/user-detail-dialog';
-import { BREAKPOINTS, ROLES, STATUS } from '../../../../core/commons/core.constants';
+import { BREAKPOINTS, ROLES, STATUS } from '../../../../core/helpers/constant.helper';
 import { AppFilters } from '../../../../core/components/app-filters/app-filters';
-import { AppFiltersConfig, AppFiltersOutput } from '../../../../core/models/app-filters.model';
+import {
+  AppFiltersConfig,
+  AppFiltersOutput,
+} from '../../../../core/components/app-filters/app-filters.model';
+import { Column, TableInput } from '../../../../core/components/app-table/app-table.model';
 
 @Component({
   selector: 'users-main',

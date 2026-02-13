@@ -4,9 +4,9 @@ import { ButtonModule } from 'primeng/button';
 import { ListboxModule } from 'primeng/listbox';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { PopoverModule } from 'primeng/popover';
-import { AppFiltersService } from '../../../services/app-filters.service';
+import { FiltersService } from '../filters.service';
 import { FormsModule } from '@angular/forms';
-import { ColumnSelection } from '../../../models/app-filters.model';
+import { ColumnSelection } from '../app-filters.model';
 
 export interface FilterColumnConfig {
   restoreParams: boolean;
@@ -29,7 +29,7 @@ export class FilterColumn {
   public config = input.required<FilterColumnConfig>();
   public columnsChange = output<ColumnSelection[]>();
 
-  private readonly appFiltersService = inject(AppFiltersService);
+  private readonly filtersService = inject(FiltersService);
 
   public allColumns = signal<ColumnSelection[]>([]);
 
@@ -51,7 +51,7 @@ export class FilterColumn {
         this.selectedHiddenFields = cols.filter((c) => c.visible === false).map((c) => c.field);
       } else {
         // Con restoreParams: intentar restaurar desde el servicio
-        const savedColumns = this.appFiltersService.getFilters()?.columns;
+        const savedColumns = this.filtersService.getFilters()?.columns;
         if (savedColumns && savedColumns.length > 0) {
           this.selectedHiddenFields = savedColumns
             .filter((c) => c.visible === false)
@@ -78,7 +78,7 @@ export class FilterColumn {
 
     // Guardar en el servicio si restoreParams es true
     if (cfg.restoreParams) {
-      this.appFiltersService.updateColumns(updatedColumns);
+      this.filtersService.updateColumns(updatedColumns);
     }
 
     this.columnsChange.emit(updatedColumns);
@@ -88,7 +88,7 @@ export class FilterColumn {
     const cfg = untracked(() => this.config());
 
     if (cfg.restoreParams) {
-      const savedColumns = this.appFiltersService.getFilters()?.columns;
+      const savedColumns = this.filtersService.getFilters()?.columns;
       if (savedColumns) {
         this.selectedHiddenFields = savedColumns
           .filter((c) => c.visible === false)
