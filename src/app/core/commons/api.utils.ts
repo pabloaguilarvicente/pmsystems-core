@@ -25,14 +25,12 @@ export interface MetaData {
   version: string;
 }
 
-export function buildHttpParams(params: Record<string, any>): HttpParams {
+export function buildHttpParams<T extends object>(params: T): HttpParams {
   let httpParams = new HttpParams();
 
-  Object.keys(params).forEach((key) => {
-    const value = params[key];
-
-    if (value !== undefined && value !== null) {
-      httpParams = httpParams.set(key, value.toString());
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== null && value !== undefined) {
+      httpParams = httpParams.set(key, String(value));
     }
   });
 

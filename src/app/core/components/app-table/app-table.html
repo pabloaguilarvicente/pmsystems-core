@@ -11,6 +11,7 @@
         <th
           [pSortableColumn]="col.sortable ? col.sortKey || col.field : null"
           [style.width]="col.width"
+          [style.text-align]="col.headerAlign || 'left'"
           [class.text-center]="col.headerAlign === 'center'"
           [class.text-right]="col.headerAlign === 'right'"
         >
@@ -28,6 +29,7 @@
     <tr>
       @for (col of columns; track col.field) {
         <td
+          [style.text-align]="col.cellAlign || 'left'"
           [class.text-center]="col.cellAlign === 'center'"
           [class.text-right]="col.cellAlign === 'right'"
         >

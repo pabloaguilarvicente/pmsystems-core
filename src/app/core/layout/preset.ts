@@ -57,6 +57,7 @@ const MainPreset = definePreset(Aura, {
     },
     button: { root: { borderRadius: 'var(--border-radius)' } },
     inputtext: { root: { borderRadius: 'var(--border-radius)' } },
+    selectbutton: { root: { borderRadius: 'var(--border-radius)' } },
   },
 });
 

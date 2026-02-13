@@ -55,7 +55,9 @@ export interface AppFiltersOutput {
     endDate: Date | null;
     singleDate: Date | null;
   };
-  extraFilters?: Record<string, any>;
+  extraFilters?: ExtraFilters;
   columns?: ColumnSelection[];
   viewAs?: 'LIST' | 'GRID';
 }
+
+export type ExtraFilters = Record<string, unknown>;

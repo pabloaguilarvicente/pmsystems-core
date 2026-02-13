@@ -46,11 +46,15 @@ export interface UpdateUserRequest {
 }
 
 export interface UserFiltersParams {
-  role?: UserRole;
-  status?: boolean;
+  role?: number[];
+  status?: number;
   search?: string;
   currentPage: number;
   pageSize: number;
   sort?: string;
   order?: Order;
+  startDate?: string;
+  endDate?: string;
+  date?: string;
+  [key: string]: any;
 }
