@@ -38,12 +38,12 @@ import { TranslateModule } from '@ngx-translate/core';
     <div class="layout-topbar-start">
       <a class="layout-topbar-logo" routerLink="/">
         <div class="layout-topbar-logo-full flex items-center gap-2">
-          <img src="images/logos/BLUE01.svg" alt="logo" width="50" />
+          <i class="ph-duotone ph-chalkboard-simple logo-icon"></i>
           <span class="font-black whitespace-nowrap text-primary">PM SYSTEMS</span>
         </div>
 
         <div class="layout-topbar-logo-slim">
-          <img src="images/logos/BLUE01.svg" alt="logo" width="50" />
+          <i class="ph-duotone ph-chalkboard-simple logo-icon"></i>
         </div>
       </a>
       <a
@@ -161,7 +161,7 @@ import { TranslateModule } from '@ngx-translate/core';
             <a
               (click)="toggleConfigSidebar()"
               [pTooltip]="'settings.preferences' | translate"
-              tooltipPosition="bottom"
+              tooltipPosition="left"
               showDelay="300"
             >
               <i class="ph ph-faders"></i>

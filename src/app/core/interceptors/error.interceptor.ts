@@ -20,9 +20,9 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         timestamp: new Date().toISOString(),
       };
 
-      // router.navigate(['/error'], {
-      //   state: { error: errorData },
-      // });
+      router.navigate(['/error'], {
+        state: { error: errorData },
+      });
 
       return throwError(() => error);
     }),

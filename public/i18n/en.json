@@ -437,9 +437,11 @@
         "label": "Teams"
     },
     "theme": {
+        "customColor": "Custom Color",
         "dark": "Dark",
         "label": "Color scheme",
-        "light": "Light"
+        "light": "Light",
+        "primaryColor": "Primary color"
     },
     "time": {
         "ago": "ago",

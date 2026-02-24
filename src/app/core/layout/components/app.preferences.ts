@@ -1,12 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { booleanAttribute, Component, inject, Input } from '@angular/core';
+import { booleanAttribute, Component, inject, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { PrimeNG } from 'primeng/config';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DrawerModule } from 'primeng/drawer';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { ColorPickerModule } from 'primeng/colorpicker';
 import { Language, LayoutService, MenuMode, MenuProfilePosition } from '../service/layout.service';
+import { ColorOption } from '../../models/core.model';
+import { PRESET_COLORS, PRIMARY_COLOR } from '../../helpers/constant.helper';
+import { applyPrimaryPalette } from '../preset';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-preferences',
@@ -17,7 +22,9 @@ import { Language, LayoutService, MenuMode, MenuProfilePosition } from '../servi
     SelectButtonModule,
     DrawerModule,
     RadioButtonModule,
+    ColorPickerModule,
     TranslateModule,
+    TooltipModule,
   ],
   template: `
     <p-drawer
@@ -26,6 +33,7 @@ import { Language, LayoutService, MenuMode, MenuProfilePosition } from '../servi
       position="right"
       styleClass="w-80"
       [header]="'settings.preferences' | translate"
+      [blockScroll]="true"
     >
       <div class="flex flex-col gap-6">
         <!-- Language Section -->
@@ -148,6 +156,46 @@ import { Language, LayoutService, MenuMode, MenuProfilePosition } from '../servi
           </div>
         </div>
 
+        <!-- Primary Color Section -->
+        <div class="flex flex-col gap-3">
+          <span class="font-semibold text-sm">{{ 'theme.primaryColor' | translate }}</span>
+
+          <!-- Preset Colors -->
+          <div class="flex items-center gap-2 flex-wrap">
+            @for (color of presetColors; track color.value) {
+              <button
+                type="button"
+                class="cursor-pointer h-8 w-8 rounded-full border-2 transition-all hover:scale-110 focus:outline-none"
+                [style.backgroundColor]="color.value"
+                [ngClass]="
+                  primaryColor === color.value
+                    ? ' border-surface-500 dark:border-surface-0 scale-110 shadow-md'
+                    : 'border-transparent'
+                "
+                [pTooltip]="color.label"
+                tooltipPosition="top"
+                (click)="selectPresetColor(color.value)"
+              ></button>
+            }
+          </div>
+
+          <!-- Custom Color Picker -->
+          <div class="flex items-center gap-3 mt-1">
+            <p-colorpicker
+              [(ngModel)]="customColor"
+              (ngModelChange)="onCustomColorChange($event)"
+              [inline]="false"
+              appendTo="body"
+            />
+            <span class="text-surface-500 dark:text-surface-400 text-sm">
+              {{ 'theme.customColor' | translate }}
+            </span>
+            <span class="text-surface-500 dark:text-surface-400 text-xs font-mono ml-auto">
+              {{ primaryColor }}
+            </span>
+          </div>
+        </div>
+
         @if (!simple) {
           <!-- Menu Type Section -->
           <div class="flex flex-col gap-3">
@@ -207,25 +255,28 @@ import { Language, LayoutService, MenuMode, MenuProfilePosition } from '../servi
                       : 'border-surface-200 dark:border-surface-700'
                   "
                 >
-                  <div
-                    class="flex flex-auto flex-col border-l border-surface-200 dark:border-surface-700"
-                  >
+                  <div class="flex flex-auto flex-col">
                     <div class="h-3 bg-surface-100 dark:bg-surface-800">
-                      <div class="flex h-full items-center justify-between px-1.5">
-                        <div class="h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"></div>
-                        <div class="flex gap-0.5">
-                          <div
-                            class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
-                          ></div>
-                          <div
-                            class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
-                          ></div>
-                        </div>
+                      <div class="mr-1.5 flex h-full items-center justify-end">
+                        <div
+                          class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
+                        ></div>
+                        <div
+                          class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
+                        ></div>
                       </div>
                     </div>
                     <div
                       class="flex flex-auto border-t border-surface-200 bg-surface-0 dark:border-surface-700 dark:bg-surface-900"
-                    ></div>
+                    >
+                      <div class="w-8 bg-surface-100 dark:bg-surface-800 opacity-70">
+                        <div class="mx-1.5 mt-3 space-y-1">
+                          <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                          <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                          <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div
@@ -280,58 +331,6 @@ import { Language, LayoutService, MenuMode, MenuProfilePosition } from '../servi
                 </div>
               </div>
 
-              <!-- Slim+ -->
-              <div class="flex cursor-pointer flex-col" (click)="menuMode = 'slim-plus'">
-                <div
-                  class="flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
-                  [ngClass]="
-                    menuMode === 'slim-plus'
-                      ? 'border-primary border-3'
-                      : 'border-surface-200 dark:border-surface-700'
-                  "
-                >
-                  <div class="w-5 bg-surface-100 dark:bg-surface-800">
-                    <div class="mx-1 mt-2 space-y-1">
-                      <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                      <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                      <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                      <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
-                    </div>
-                  </div>
-                  <div class="w-8 bg-surface-50 dark:bg-surface-900">
-                    <div class="mx-1 mt-2 space-y-0.5">
-                      <div class="h-0.5 rounded-sm bg-surface-200 dark:bg-surface-700"></div>
-                      <div class="h-0.5 rounded-sm bg-surface-200 dark:bg-surface-700"></div>
-                      <div class="h-0.5 rounded-sm bg-surface-200 dark:bg-surface-700"></div>
-                      <div class="h-0.5 rounded-sm bg-surface-200 dark:bg-surface-700"></div>
-                    </div>
-                  </div>
-                  <div
-                    class="flex flex-auto flex-col border-l border-surface-200 dark:border-surface-700"
-                  >
-                    <div class="h-3 bg-surface-100 dark:bg-surface-800">
-                      <div class="mr-1.5 flex h-full items-center justify-end">
-                        <div
-                          class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
-                        ></div>
-                        <div
-                          class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
-                        ></div>
-                      </div>
-                    </div>
-                    <div
-                      class="flex flex-auto border-t border-surface-200 bg-surface-0 dark:border-surface-700 dark:bg-surface-900"
-                    ></div>
-                  </div>
-                </div>
-                <div
-                  class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
-                  [class.text-primary]="menuMode === 'slim-plus'"
-                >
-                  {{ 'menu.slim_plus' | translate }}
-                </div>
-              </div>
-
               <!-- Drawer -->
               <div class="flex cursor-pointer flex-col" (click)="menuMode = 'drawer'">
                 <div
@@ -342,25 +341,23 @@ import { Language, LayoutService, MenuMode, MenuProfilePosition } from '../servi
                       : 'border-surface-200 dark:border-surface-700'
                   "
                 >
-                  <div
-                    class="flex flex-auto flex-col border-l border-surface-200 dark:border-surface-700"
-                  >
+                  <div class="flex flex-auto flex-col">
                     <div class="h-3 bg-surface-100 dark:bg-surface-800">
-                      <div class="flex h-full items-center justify-between px-1.5">
-                        <div class="h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"></div>
-                        <div class="flex gap-0.5">
-                          <div
-                            class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
-                          ></div>
-                          <div
-                            class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
-                          ></div>
-                        </div>
+                      <div class="ml-1.5 flex h-full items-center">
+                        <div class="h-1 w-3 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
                       </div>
                     </div>
                     <div
                       class="flex flex-auto border-t border-surface-200 bg-surface-0 dark:border-surface-700 dark:bg-surface-900"
-                    ></div>
+                    >
+                      <div class="w-10 bg-surface-100 dark:bg-surface-800 shadow-md">
+                        <div class="mx-1.5 mt-3 space-y-1">
+                          <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                          <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                          <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div
@@ -382,7 +379,7 @@ import { Language, LayoutService, MenuMode, MenuProfilePosition } from '../servi
                   "
                 >
                   <div
-                    class="h-5 border-b border-surface-200 bg-surface-100 dark:border-surface-700 dark:bg-surface-800"
+                    class="h-5 border-b border-surface-200 bg-surface-100 dark:border-surface-700 dark:bg-surface-800 w-full"
                   >
                     <div class="ml-1.5 flex h-full items-center gap-1">
                       <div class="h-1 w-3 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
@@ -497,9 +494,11 @@ import { Language, LayoutService, MenuMode, MenuProfilePosition } from '../servi
 export class AppPreferences {
   @Input({ transform: booleanAttribute }) simple: boolean = false;
 
-  private readonly config: PrimeNG = inject(PrimeNG);
   public readonly layoutService: LayoutService = inject(LayoutService);
-  private readonly primeng = inject(PrimeNG);
+
+  readonly presetColors: ColorOption[] = PRESET_COLORS;
+
+  customColor: string = PRIMARY_COLOR.replace('#', '');
 
   get currentLanguage(): Language {
     return this.layoutService.currentLanguage();
@@ -540,6 +539,10 @@ export class AppPreferences {
     }));
   }
 
+  get primaryColor(): string {
+    return this.layoutService.layoutConfig().primaryColor ?? PRIMARY_COLOR;
+  }
+
   get visible() {
     return this.layoutService.layoutState().configSidebarVisible;
   }
@@ -560,5 +563,23 @@ export class AppPreferences {
 
   changeLanguage(language: Language) {
     this.layoutService.changeLanguage(language);
+  }
+
+  selectPresetColor(color: string): void {
+    this.customColor = color.replace('#', '');
+    this.applyColor(color);
+  }
+
+  onCustomColorChange(hexWithoutHash: string): void {
+    if (!hexWithoutHash) return;
+    this.applyColor(`#${hexWithoutHash}`);
+  }
+
+  private applyColor(color: string): void {
+    this.layoutService.layoutConfig.update((config) => ({
+      ...config,
+      primaryColor: color,
+    }));
+    applyPrimaryPalette(color);
   }
 }

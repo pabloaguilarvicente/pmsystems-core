@@ -2,7 +2,6 @@ import { Component, signal } from '@angular/core';
 import { AppMessage, AppMessages } from './app-messages';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { ERROR_IMAGE } from '../helpers/constant.helper';
 
 export interface ErrorData {
   title: string;
@@ -50,7 +49,7 @@ export class AppErrorPage {
         message: errorData.message,
         url: errorData.url,
         timestamp: errorData.timestamp,
-        image: ERROR_IMAGE,
+        icon: 'ph-duotone ph-warning-circle',
         size: 'xl',
       });
     }

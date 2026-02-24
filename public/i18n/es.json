@@ -431,9 +431,11 @@
         "label": "Equipos"
     },
     "theme": {
+        "customColor": "Color personalizado",
         "dark": "Oscuro",
         "label": "Esquema de Color",
-        "light": "Claro"
+        "light": "Claro",
+        "primaryColor": "Color primario"
     },
     "time": {
         "ago": "atrás",

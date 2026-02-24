@@ -19,12 +19,12 @@ import { TranslateModule } from '@ngx-translate/core';
     <div class="layout-sidebar-top">
       <a href="/">
         <div class="layout-sidebar-logo">
-          <img src="images/logos/BLUE01.svg" alt="logo" width="50" />
+          <i class="ph-duotone ph-chalkboard-simple logo-icon"></i>
           <span class="font-black whitespace-nowrap">PM SYSTEMS</span>
         </div>
 
         <div class="layout-sidebar-logo-slim">
-          <img src="images/logos/BLUE01.svg" alt="logo" width="50" />
+          <i class="ph-duotone ph-chalkboard-simple logo-icon"></i>
         </div>
       </a>
       <p-button

@@ -3,10 +3,11 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { MenuItem } from 'primeng/api';
 import { LocalStorageService } from '../../services/localstorage.service';
-import { LOCAL_STORAGE_KEYS } from '../../helpers/constant.helper';
+import { LOCAL_STORAGE_KEYS, PRIMARY_COLOR } from '../../helpers/constant.helper';
 import { TranslateService } from '@ngx-translate/core';
 import { PrimeNG } from 'primeng/config';
 import { UiSettings } from '../../models/core.model';
+import { applyPrimaryPalette } from '../preset';
 
 export type ColorScheme = 'light' | 'dark';
 export type MenuMode =
@@ -29,6 +30,7 @@ export interface LayoutConfig {
   topbarTheme: 'light' | 'dark';
   menuProfilePosition: MenuProfilePosition;
   language: Language;
+  primaryColor: string;
 }
 
 export interface LayoutState {
@@ -75,6 +77,7 @@ export class LayoutService {
     topbarTheme: 'light',
     menuProfilePosition: 'end',
     language: 'es',
+    primaryColor: PRIMARY_COLOR,
   };
 
   private readonly DEFAULT_STATE: LayoutState = {
@@ -133,6 +136,8 @@ export class LayoutService {
   readonly isStatic: Signal<boolean> = computed(() => this.layoutConfig().menuMode === 'static');
 
   readonly currentLanguage: Signal<Language> = computed(() => this.layoutConfig().language);
+
+  readonly currentPrimaryColor: Signal<string> = computed(() => this.layoutConfig().primaryColor);
 
   readonly isCompactMenuMode = computed(() => {
     const mode = this.layoutConfig().menuMode;
@@ -200,6 +205,7 @@ export class LayoutService {
 
     const isDark = savedSettings.colorScheme === 'dark';
     const language = savedSettings.language || 'es';
+    const primaryColor = savedSettings.primaryColor || PRIMARY_COLOR;
 
     this.layoutConfig.set({
       ...this.DEFAULT_CONFIG,
@@ -209,7 +215,10 @@ export class LayoutService {
       topbarTheme: isDark ? 'dark' : 'light',
       menuProfilePosition: savedSettings.menuProfileMode,
       language,
+      primaryColor,
     });
+
+    applyPrimaryPalette(primaryColor);
 
     this.translate.use(language).subscribe({
       next: () => {
@@ -226,6 +235,7 @@ export class LayoutService {
       menuMode: config.menuMode,
       menuProfileMode: config.menuProfilePosition,
       language: config.language,
+      primaryColor: config.primaryColor,
     };
 
     const currentConfigStr = JSON.stringify(themeSettings);

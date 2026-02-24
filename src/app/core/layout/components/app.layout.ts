@@ -6,8 +6,6 @@ import { AppTopbar } from './app.topbar';
 import { AppPreferences } from './app.preferences';
 import { AppBreadcrumb } from './app.breadcrumb';
 import { AppSidebar } from './app.sidebar';
-import { Toast } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
 import { AppRightMenu } from './app.rightmenu';
 import { LayoutService } from '../service/layout.service';
 import { AppProgressBar } from '../../components/app-progress-bar';
@@ -23,7 +21,6 @@ import { AppProgressBar } from '../../components/app-progress-bar';
     AppPreferences,
     AppBreadcrumb,
     AppRightMenu,
-    Toast,
     AppProgressBar,
   ],
   template: `
@@ -40,9 +37,7 @@ import { AppProgressBar } from '../../components/app-progress-bar';
       </div>
     </div>
     <app-preferences />
-    <p-toast position="bottom-right" [breakpoints]="breakpoints" />
   `,
-  providers: [MessageService],
 })
 export class AppLayout implements OnDestroy {
   private readonly overlayMenuOpenSubscription: Subscription;
@@ -50,14 +45,6 @@ export class AppLayout implements OnDestroy {
   private menuOutsideClickListener: any;
 
   private menuScrollListener: any;
-
-  public readonly breakpoints = {
-    '920px': {
-      width: '90%',
-      right: 'auto',
-      left: '5%',
-    },
-  };
 
   @ViewChild(AppSidebar) appSidebar!: AppSidebar;
 

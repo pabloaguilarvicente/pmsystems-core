@@ -9,17 +9,14 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" type="text/css" href="styles/layout/preloading.css" />
+    <link rel="stylesheet" type="text/css" href="styles/preloading.css" />
   </head>
   <body>
     <app-root>
       <div class="preloader-container">
-        <div class="preloader-wrapper">
-          <img src="images/logos/BLUE01.svg" alt="Logo" class="preloader-image" />
-
-          <svg class="preloader-spinner" viewBox="0 0 100 100">
-            <circle class="preloader-circle" cx="50" cy="50" r="45" fill="none" stroke-width="6" />
-          </svg>
+        <i class="ph-duotone ph-chalkboard-simple preloader-icon"></i>
+        <div class="preloader-bar-track">
+          <div class="preloader-bar-fill"></div>
         </div>
       </div>
     </app-root>

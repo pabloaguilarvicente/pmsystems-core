@@ -1,8 +1,9 @@
-import { definePreset } from '@primeuix/themes';
+import { definePreset, updatePreset } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
 import { palette } from '@primeuix/themes';
+import { LOCAL_STORAGE_KEYS, PRIMARY_COLOR } from '../helpers/constant.helper';
 
-const primary = palette('#000f85');
+const primary = palette(PRIMARY_COLOR);
 
 const MainPreset = definePreset(Aura, {
   semantic: {
@@ -62,3 +63,20 @@ const MainPreset = definePreset(Aura, {
 });
 
 export default MainPreset;
+
+export function applyPrimaryPalette(hex: string): void {
+  updatePreset({
+    semantic: {
+      primary: palette(hex),
+    },
+  });
+}
+
+export function applyPreloaderColor(): void {
+  const savedSettings = localStorage.getItem(LOCAL_STORAGE_KEYS.uiSettings);
+  const color = savedSettings
+    ? (JSON.parse(savedSettings)?.primaryColor ?? PRIMARY_COLOR)
+    : PRIMARY_COLOR;
+
+  document.documentElement.style.setProperty('--preloader-color', color);
+}

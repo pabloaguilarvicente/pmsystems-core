@@ -1,4 +1,3 @@
-
 import { RouteFiltersState } from '../components/app-filters/app-filters.model';
 import {
   ColorScheme,
@@ -12,7 +11,9 @@ export interface UiSettings {
   menuMode: MenuMode;
   menuProfileMode: MenuProfilePosition;
   language: Language;
+  primaryColor?: string;
 }
+
 export interface AppSettings {
   filters: RouteFiltersState;
   global: GlobalState;
@@ -27,4 +28,9 @@ export interface SelectModel {
   id: number | string;
   label: string;
   icon?: string;
+}
+
+export interface ColorOption {
+  label: string;
+  value: string;
 }
