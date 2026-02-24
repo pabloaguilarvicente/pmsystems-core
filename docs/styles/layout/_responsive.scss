@@ -1,6 +1,4 @@
-@use "./sass_variables" as *;
-
-@media screen and (min-width: $breakpoint) {
+@media screen and (min-width: 992px) {
     .layout-container {
         &.layout-static {
             .layout-sidebar {
@@ -67,7 +65,7 @@
     }
 }
 
-@media screen and (max-width: ($breakpoint - 1)) {
+@media screen and (max-width: (992px - 1)) {
     .app-config-button {
         display: none;
     }
@@ -205,7 +203,7 @@
     }
 }
 
-@media screen and (max-width: ($breakpoint - 1)) {
+@media screen and (max-width: (992px - 1)) {
     .p-popover {
         left: 50% !important;
         transform: translateX(-50%) !important;

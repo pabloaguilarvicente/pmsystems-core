@@ -1,6 +1,4 @@
-@use "../_sass_variables" as *;
-
-@media screen and (min-width: $breakpoint) {
+@media screen and (min-width: 992px) {
     .layout-drawer {
         .layout-sidebar {
             height: 100%;
