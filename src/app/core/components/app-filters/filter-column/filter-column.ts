@@ -33,7 +33,7 @@ export class FilterColumn {
 
   public allColumns = signal<ColumnSelection[]>([]);
 
-  // ✅ Propiedad normal en lugar de signal para que [(ngModel)] funcione correctamente
+  //  Propiedad normal en lugar de signal para que [(ngModel)] funcione correctamente
   public selectedHiddenFields: string[] = [];
 
   public get hiddenColumnsCount(): number {
@@ -69,7 +69,7 @@ export class FilterColumn {
     const cols = cfg.columns;
     const hiddenFields = this.selectedHiddenFields;
 
-    // ✅ Emite todas las columnas con visible calculado según la selección
+    //  Emite todas las columnas con visible calculado según la selección
     const updatedColumns: ColumnSelection[] = cols.map((col) => ({
       field: col.field,
       header: col.header,

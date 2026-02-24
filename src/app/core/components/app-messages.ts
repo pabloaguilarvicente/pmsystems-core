@@ -20,7 +20,10 @@ export interface AppMessage {
   selector: 'app-messages',
   imports: [NgClass, TranslateModule],
   template: `
-    <div class="flex flex-col items-center justify-center text-center p-6">
+    <div
+      class="flex flex-col items-center justify-center text-center p-6 
+            text-gray-900 dark:text-gray-100"
+    >
       @if (message().image) {
         <img [src]="message().image" [alt]="message().title || ''" [ngClass]="imageClasses()" />
       } @else {
@@ -31,7 +34,7 @@ export interface AppMessage {
         @if (message().title || message().code || message().description) {
           <div class="flex flex-col items-center max-w-2xl mt-2">
             @if (message().title) {
-              <span class="font-black text-2xl text-gray-800">
+              <span class="font-black text-2xl">
                 {{ message().title | translate }}
               </span>
             }
@@ -46,7 +49,7 @@ export interface AppMessage {
             }
 
             @if (message().description) {
-              <p class="text-base text-gray-600 mt-2">
+              <p class="text-base text-gray-600 dark:text-gray-300 mt-2">
                 {{ message().description | translate }}
               </p>
             }
@@ -54,14 +57,26 @@ export interface AppMessage {
         }
 
         @if (isErrorMessage()) {
-          <div class="w-full max-w-2xl mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-            <div class="flex flex-col gap-3 text-sm text-left">
+          <div
+            class="w-full max-w-2xl mt-4 p-4
+               bg-gray-50 dark:bg-gray-800
+               rounded-lg
+               border border-gray-300 dark:border-gray-700
+               shadow-sm dark:shadow-none"
+          >
+            <div
+              class="flex flex-col gap-3 text-sm text-left
+                    text-gray-700 dark:text-gray-200"
+            >
               @if (message().statusText) {
                 <div class="flex flex-col md:flex-row md:items-start gap-1 md:gap-2">
                   <span class="font-black md:min-w-24">
                     {{ 'errors.labels.status' | translate }}:
                   </span>
-                  <span class="text-gray-600 font-mono break-all">
+                  <span
+                    class="font-mono break-all
+                           text-gray-600 dark:text-gray-400"
+                  >
                     {{ message().statusText }}
                   </span>
                 </div>
@@ -72,7 +87,10 @@ export interface AppMessage {
                   <span class="font-black md:min-w-24">
                     {{ 'errors.labels.code' | translate }}:
                   </span>
-                  <span class="text-gray-600 font-mono">
+                  <span
+                    class="font-mono
+                           text-gray-600 dark:text-gray-400"
+                  >
                     {{ message().status }}
                   </span>
                 </div>
@@ -83,7 +101,10 @@ export interface AppMessage {
                   <span class="font-black md:min-w-24">
                     {{ 'errors.labels.message' | translate }}:
                   </span>
-                  <span class="text-gray-600 font-mono break-all">
+                  <span
+                    class="font-mono break-all
+                           text-gray-600 dark:text-gray-400"
+                  >
                     {{ message().message }}
                   </span>
                 </div>
@@ -94,7 +115,10 @@ export interface AppMessage {
                   <span class="font-black md:min-w-24">
                     {{ 'errors.labels.url' | translate }}:
                   </span>
-                  <span class="text-gray-600 font-mono break-all">
+                  <span
+                    class="font-mono break-all
+                           text-gray-600 dark:text-gray-400"
+                  >
                     {{ message().url }}
                   </span>
                 </div>
@@ -105,7 +129,10 @@ export interface AppMessage {
                   <span class="font-black md:min-w-24">
                     {{ 'errors.labels.timestamp' | translate }}:
                   </span>
-                  <span class="text-gray-600 font-mono">
+                  <span
+                    class="font-mono
+                           text-gray-600 dark:text-gray-400"
+                  >
                     {{ message().timestamp }}
                   </span>
                 </div>

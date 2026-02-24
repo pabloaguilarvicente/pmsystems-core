@@ -3,6 +3,7 @@ import {
   computed,
   ElementRef,
   HostBinding,
+  HostListener,
   Input,
   OnDestroy,
   OnInit,
@@ -161,7 +162,35 @@ export class AppMenuitem implements OnInit, OnDestroy {
     return this.active;
   }
 
+  @HostBinding('class.has-active-route')
+  get hasActiveRouteClass() {
+    if (this.root && (this.isSlim() || this.isSlimPlus()) && this.layoutService.isDesktop()) {
+      return this.hasActiveRoute;
+    }
+    return false;
+  }
+
+  private leaveTimer: any = null;
+
+  @HostListener('mouseenter')
+  onHostMouseEnter() {
+    if (this.leaveTimer) {
+      clearTimeout(this.leaveTimer);
+      this.leaveTimer = null;
+    }
+  }
+
+  @HostListener('mouseleave')
+  onHostMouseLeave() {
+    this.leaveTimer = setTimeout(() => {
+      this.onMouseLeave();
+      this.leaveTimer = null;
+    }, 100);
+  }
+
   active = false;
+
+  hasActiveRoute = false;
 
   menuSourceSubscription: Subscription;
 
@@ -215,17 +244,16 @@ export class AppMenuitem implements OnInit, OnDestroy {
       this.active = false;
     });
 
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((params) => {
-        if (this.isSlimPlus() || this.isSlim() || this.isHorizontal()) {
-          this.active = false;
-        } else {
-          if (this.item.routerLink) {
-            this.updateActiveStateFromRoute();
-          }
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+      if (this.isSlimPlus() || this.isSlim() || this.isHorizontal()) {
+        this.active = false;
+        this.updateHasActiveRoute();
+      } else {
+        if (this.item.routerLink) {
+          this.updateActiveStateFromRoute();
         }
-      });
+      }
+    });
   }
 
   ngOnInit() {
@@ -234,6 +262,7 @@ export class AppMenuitem implements OnInit, OnDestroy {
     if (!(this.isSlimPlus() || this.isSlim() || this.isHorizontal()) && this.item.routerLink) {
       this.updateActiveStateFromRoute();
     }
+    this.updateHasActiveRoute();
   }
 
   ngAfterViewChecked() {
@@ -248,6 +277,33 @@ export class AppMenuitem implements OnInit, OnDestroy {
         this.submenu?.nativeElement.parentElement,
       );
     }
+  }
+
+  updateHasActiveRoute() {
+    if (!this.root || !this.item.items) return;
+    const hasActive = this.itemHasActiveRoute(this.item);
+    this.hasActiveRoute = hasActive;
+  }
+
+  itemHasActiveRoute(item: any): boolean {
+    if (item.routerLink) {
+      const link = Array.isArray(item.routerLink) ? item.routerLink[0] : item.routerLink;
+      if (
+        link &&
+        this.router.isActive(link, {
+          paths: 'exact',
+          queryParams: 'ignored',
+          matrixParams: 'ignored',
+          fragment: 'ignored',
+        })
+      ) {
+        return true;
+      }
+    }
+    if (item.items) {
+      return item.items.some((child: any) => this.itemHasActiveRoute(child));
+    }
+    return false;
   }
 
   updateActiveStateFromRoute() {
@@ -358,7 +414,28 @@ export class AppMenuitem implements OnInit, OnDestroy {
       if (this.layoutService.layoutState().menuHoverActive) {
         this.active = true;
         this.layoutService.onMenuStateChange({ key: this.key });
+      } else if (this.isSlim() || this.isSlimPlus()) {
+        // On first hover (before any click), activate directly
+        this.active = true;
+        this.layoutService.layoutState.update((val) => ({
+          ...val,
+          menuHoverActive: true,
+        }));
+        this.layoutService.onMenuStateChange({ key: this.key });
+        if (this.item.items) {
+          this.layoutService.onOverlaySubmenuOpen();
+        }
       }
+    }
+  }
+
+  onMouseLeave() {
+    // Only deactivate hover state, keep active so the border indicator stays visible
+    if (this.root && (this.isSlim() || this.isSlimPlus()) && this.layoutService.isDesktop()) {
+      this.layoutService.layoutState.update((val) => ({
+        ...val,
+        menuHoverActive: false,
+      }));
     }
   }
 
@@ -369,6 +446,10 @@ export class AppMenuitem implements OnInit, OnDestroy {
 
     if (this.menuResetSubscription) {
       this.menuResetSubscription.unsubscribe();
+    }
+
+    if (this.leaveTimer) {
+      clearTimeout(this.leaveTimer);
     }
   }
 }

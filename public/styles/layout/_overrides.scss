@@ -182,3 +182,22 @@ p-listbox.single-selection .p-listbox-option {
     display: flex;
     align-items: center;
 }
+
+.twitter-picker {
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+}
+
+.twitter-body {
+    padding: 0 !important;
+}
+
+.triangle {
+    display: none !important;
+}
+
+.triangleShadow {
+    display: none !important;
+}

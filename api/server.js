@@ -17,7 +17,7 @@ server.use(jsonServer.bodyParser);
 
 // Middleware para mapear parámetros de paginación
 server.use((req, res, next) => {
-    // ✅ CRÍTICO: Guardar los valores ANTES de mapearlos
+    //  CRÍTICO: Guardar los valores ANTES de mapearlos
     req.paginationParams = {
         currentPage: parseInt(req.query.currentPage) || parseInt(req.query._page) || 1,
         pageSize: parseInt(req.query.pageSize) || parseInt(req.query._limit) || 10

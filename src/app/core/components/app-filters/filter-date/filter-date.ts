@@ -7,7 +7,6 @@ import {
   output,
   ViewChild,
   inject,
-  untracked,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -76,11 +75,11 @@ export class FilterDate {
       }
     });
 
-    // ✅ NO hay effect automático que actualice el servicio
+    //  NO hay effect automático que actualice el servicio
     // Solo se actualiza al dar "Aceptar" mediante emitDateChange()
   }
 
-  public setToday(callback: (event: Event) => void, event: Event): void {
+  public setToday(): void {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
@@ -95,7 +94,7 @@ export class FilterDate {
     this.activeQuickFilter = 'today';
   }
 
-  public setLastWeek(event: Event): void {
+  public setLastWeek(): void {
     const today = new Date();
     today.setHours(23, 59, 59, 999);
 
@@ -112,7 +111,7 @@ export class FilterDate {
     this.activeQuickFilter = 'lastWeek';
   }
 
-  public setLastMonth(event: Event): void {
+  public setLastMonth(): void {
     const today = new Date();
     const startOfLastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
     startOfLastMonth.setHours(0, 0, 0, 0);
@@ -129,7 +128,7 @@ export class FilterDate {
     this.activeQuickFilter = 'lastMonth';
   }
 
-  public setLastYear(event: Event): void {
+  public setLastYear(): void {
     const today = new Date();
     const startOfLastYear = new Date(today.getFullYear() - 1, 0, 1);
     startOfLastYear.setHours(0, 0, 0, 0);
@@ -146,10 +145,10 @@ export class FilterDate {
     this.activeQuickFilter = 'lastYear';
   }
 
-  public clearDate(callback: (event: Event) => void, event: Event): void {
+  public clearDate(): void {
     this.selectedDate.set(null);
     this.activeQuickFilter = null;
-    // ✅ Solo limpia en memoria, NO emite ni actualiza el servicio
+    //  Solo limpia en memoria, NO emite ni actualiza el servicio
     // El servicio solo se actualiza al dar "Aceptar"
   }
 
@@ -168,7 +167,7 @@ export class FilterDate {
   public emitDateChange(): void {
     const date = this.selectedDate();
 
-    // ✅ Si no hay fecha, significa que se limpió - emitir null
+    //  Si no hay fecha, significa que se limpió - emitir null
     if (!date) {
       const emptyOutput: DateFilterOutput = {
         startDate: null,
@@ -202,7 +201,7 @@ export class FilterDate {
       return;
     }
 
-    // ✅ ÚNICO PUNTO donde se emite y actualiza el servicio
+    //  ÚNICO PUNTO donde se emite y actualiza el servicio
     const output = this.convertDateToOutput(date);
 
     this.lastEmittedDate = this.cloneDate(date);

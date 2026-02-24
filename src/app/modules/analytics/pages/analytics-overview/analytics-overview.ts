@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppTitlePage } from '../../../../core/components/app-title-page';
 
 @Component({

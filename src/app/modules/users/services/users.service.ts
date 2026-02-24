@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment.development';
 import { Observable } from 'rxjs';
 import { ApiListResponse, ApiResponse, buildHttpParams } from '../../../core/helpers/api.helper';
 import { User, UserFiltersParams } from '../models/users.model';
+import { PROGRESS_BAR } from '../../../core/interceptors/progress-bar.interceptor';
 
 @Injectable()
 export class UsersService {
@@ -15,6 +16,7 @@ export class UsersService {
     let params = buildHttpParams(queryParams);
     return this.http.get<ApiListResponse<User>>(`${this.API_URL}/${this.PATH}`, {
       params,
+      headers: { [PROGRESS_BAR]: 'true' },
     });
   }
 

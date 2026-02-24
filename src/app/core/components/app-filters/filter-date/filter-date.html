@@ -20,7 +20,7 @@
             [outlined]="true"
             [label]="'actions.clear' | translate"
             severity="danger"
-            (click)="clearDate(clearCallback, $event)"
+            (click)="clearDate()"
           />
         </div>
       }
@@ -30,7 +30,7 @@
           [label]="'date_filter.today' | translate"
           [outlined]="isButtonOutlined('today')"
           [severity]="getButtonSeverity('today')"
-          (click)="setToday(todayCallback, $event)"
+          (click)="setToday()"
           styleClass="w-full!"
         />
         <p-button
@@ -38,7 +38,7 @@
           [label]="'date_filter.last_week' | translate"
           [outlined]="isButtonOutlined('lastWeek')"
           [severity]="getButtonSeverity('lastWeek')"
-          (click)="setLastWeek($event)"
+          (click)="setLastWeek()"
           styleClass="w-full!"
         />
       </div>
@@ -48,7 +48,7 @@
           [label]="'date_filter.last_month' | translate"
           [outlined]="isButtonOutlined('lastMonth')"
           [severity]="getButtonSeverity('lastMonth')"
-          (click)="setLastMonth($event)"
+          (click)="setLastMonth()"
           styleClass="w-full!"
         />
         <p-button
@@ -56,7 +56,7 @@
           [label]="'date_filter.last_year' | translate"
           [outlined]="isButtonOutlined('lastYear')"
           [severity]="getButtonSeverity('lastYear')"
-          (click)="setLastYear($event)"
+          (click)="setLastYear()"
           styleClass="w-full!"
         />
       </div>

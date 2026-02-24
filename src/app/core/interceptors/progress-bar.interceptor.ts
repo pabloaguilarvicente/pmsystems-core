@@ -2,27 +2,23 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { ProgressBarService } from '../services/progress-bar.service';
 import { inject } from '@angular/core';
 import { finalize } from 'rxjs';
-export const HEADER_PROGRESS_BAR: string = 'X-Skip-Progress-Bar';
+
+export const PROGRESS_BAR: string = 'X-Progress-Bar';
 
 export const progressBarInterceptor: HttpInterceptorFn = (req, next) => {
   const progressBarService = inject(ProgressBarService);
 
-  const skipProgressBar = req.headers.has(HEADER_PROGRESS_BAR);
+  const showProgressBar = req.headers.get(PROGRESS_BAR) === 'true';
 
-  let cleanReq = req;
-  if (skipProgressBar) {
-    cleanReq = req.clone({
-      headers: req.headers.delete(HEADER_PROGRESS_BAR),
-    });
-  }
+  const cleanReq = showProgressBar ? req.clone({ headers: req.headers.delete(PROGRESS_BAR) }) : req;
 
-  if (!skipProgressBar) {
+  if (showProgressBar) {
     progressBarService.show();
   }
 
   return next(cleanReq).pipe(
     finalize(() => {
-      if (!skipProgressBar) {
+      if (showProgressBar) {
         progressBarService.hide();
       }
     }),

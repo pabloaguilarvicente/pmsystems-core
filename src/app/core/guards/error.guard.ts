@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 
-export const errorGuard: CanActivateFn = (route, state) => {
+export const errorGuard: CanActivateFn = () => {
   const router = inject(Router);
   const navigation = router.currentNavigation();
 

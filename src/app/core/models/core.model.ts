@@ -29,8 +29,3 @@ export interface SelectModel {
   label: string;
   icon?: string;
 }
-
-export interface ColorOption {
-  label: string;
-  value: string;
-}

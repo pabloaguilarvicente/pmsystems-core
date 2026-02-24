@@ -1,18 +1,21 @@
 import { UserRole, UserStatus } from '../../modules/users/models/users.model';
-import { ColorOption, SelectModel } from '../models/core.model';
+import { SelectModel } from '../models/core.model';
 
 export const PRIMARY_COLOR: string = '#000f85';
 export const I18N_PATH: string = 'i18n/';
 export const BREAKPOINTS = { '960px': '75vw', '640px': '90vw' };
 
-export const PRESET_COLORS: ColorOption[] = [
-  { label: 'Primary', value: PRIMARY_COLOR },
-  { label: 'Graphite', value: '#212121' },
-  { label: 'Cyan', value: '#00ACC1' },
-  { label: 'Amber', value: '#F9A825' },
-  { label: 'Crimson', value: '#C62828' },
-  { label: 'Mint', value: '#66BB6A' },
-  { label: 'Soft Violet', value: '#7E57C2' },
+export const PRESET_COLORS: string[] = [
+  PRIMARY_COLOR,
+  '#212121',
+  '#FCB900',
+  '#7BDCB5',
+  '#00D084',
+  '#8ED1FC',
+  '#0693E3',
+  '#EB144C',
+  '#F78DA7',
+  '#9900EF',
 ];
 
 export const VIEW_AS: SelectModel[] = [
