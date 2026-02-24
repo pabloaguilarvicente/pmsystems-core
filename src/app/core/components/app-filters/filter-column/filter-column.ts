@@ -56,6 +56,8 @@ export class FilterColumn {
           this.selectedHiddenFields = savedColumns
             .filter((c) => c.visible === false)
             .map((c) => c.field);
+          // Emitir para que la tabla refleje el estado restaurado
+          this.columnsChange.emit(savedColumns);
         } else {
           // Si no hay guardado, usar el estado inicial
           this.selectedHiddenFields = cols.filter((c) => c.visible === false).map((c) => c.field);

@@ -53,8 +53,8 @@ export interface UserFiltersParams {
   pageSize: number;
   sort?: string;
   order?: Order;
-  startDate?: string;
-  endDate?: string;
-  date?: string;
+  startDate?: string | null;
+  endDate?: string | null;
+  date?: string | null;
   [key: string]: any;
 }

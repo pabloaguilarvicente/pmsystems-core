@@ -39,7 +39,7 @@ export class UsersMain {
     pageSize: 5,
   });
 
-  public readonly cols: Column[] = [
+  public cols = signal<Column[]>([
     {
       field: 'firstName',
       header: 'firstName.label',
@@ -103,10 +103,10 @@ export class UsersMain {
       cellAlign: 'center',
       menuItems: (item: User) => this.getMenuItems(item),
     },
-  ];
+  ]);
 
   public tableConfig = computed<TableInput<User>>(() => ({
-    columns: this.cols,
+    columns: this.cols(),
     data: this.response()?.data ?? [],
     loading: this.isLoading(),
     pagination: this.response()?.pagination
@@ -119,37 +119,31 @@ export class UsersMain {
   }));
 
   public filtersConfig: AppFiltersConfig = {
-    search: { show: true, config: { restoreParams: true } },
-    columns: { show: true, config: { restoreParams: true, columns: this.cols } },
-    viewAs: { show: true, config: { restoreParams: true, defaultView: 'LIST' } },
-    date: {
-      show: true,
-      config: { restoreParams: true, selectionMode: 'range', showQuickFilters: true },
-    },
-    menu: {
-      show: true,
-      config: [
-        {
-          filter: 'role',
-          label: 'role.singular.label',
-          cleanable: true,
-          multiple: true,
-          searchable: true,
-          dataSource: ROLES,
-          fieldConfig: { id: 'id', label: 'name' },
-          restoreParams: true,
-        },
-        {
-          filter: 'status',
-          label: 'status.label',
-          cleanable: true,
-          multiple: false,
-          dataSource: STATUS,
-          fieldConfig: { id: 'id', label: 'name' },
-          restoreParams: true,
-        },
-      ],
-    },
+    search: { restoreParams: true },
+    columns: { restoreParams: true, columns: this.cols() },
+    viewAs: { restoreParams: true, defaultView: 'LIST' },
+    date: { restoreParams: true, selectionMode: 'range', showQuickFilters: true },
+    menu: [
+      {
+        filter: 'role',
+        label: 'role.singular.label',
+        cleanable: true,
+        multiple: true,
+        searchable: true,
+        dataSource: ROLES,
+        fieldConfig: { id: 'id', label: 'name' },
+        restoreParams: true,
+      },
+      {
+        filter: 'status',
+        label: 'status.label',
+        cleanable: true,
+        multiple: false,
+        dataSource: STATUS,
+        fieldConfig: { id: 'id', label: 'name' },
+        restoreParams: true,
+      },
+    ],
   };
 
   getMenuItems(item: User): MenuItem[] {
@@ -230,24 +224,36 @@ export class UsersMain {
   }
 
   public onFiltersChange(filters: AppFiltersOutput): void {
-    if (filters.search) {
-      console.log('Búsqueda:', filters.search);
+    if (filters.search !== undefined) {
+      this.updateFiltersAndLoad({ search: filters.search || undefined, currentPage: 1 });
     }
 
     if (filters.dates) {
-      console.log('Rango de fechas:', filters.dates);
+      this.updateFiltersAndLoad({
+        startDate: filters.dates.startDate,
+        endDate: filters.dates.endDate,
+        date: filters.dates.singleDate,
+        currentPage: 1,
+      });
     }
 
-    if (filters.extraFilters) {
-      console.log('Filtros extra (role, status, etc):', filters.extraFilters);
+    if (filters.extraFilters !== undefined) {
+      const extraFilterKeys = this.filtersConfig.menu?.map((c) => c.filter) ?? [];
+      const clearedKeys = Object.fromEntries(extraFilterKeys.map((key) => [key, undefined]));
+      this.updateFiltersAndLoad({ ...clearedKeys, ...filters.extraFilters, currentPage: 1 });
     }
 
     if (filters.columns) {
-      console.log('Columnas visibles:', filters.columns);
+      this.cols.update((current) =>
+        current.map((col) => {
+          const match = filters.columns!.find((c) => c.field === col.field);
+          return match ? { ...col, visible: match.visible } : col;
+        }),
+      );
     }
 
     if (filters.viewAs) {
-      console.log('Vista:', filters.viewAs);
+      console.log('VIEWAS');
     }
   }
 }

@@ -1,5 +1,5 @@
 <p-table
-  [columns]="config().columns"
+  [columns]="visibleColumns()"
   [value]="config().loading ? getSkeletonRows() : config().data"
   [lazy]="config().lazy ?? true"
   (onLazyLoad)="onLazyLoad($event)"
@@ -82,7 +82,7 @@
   @if (!config().loading) {
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td [attr.colspan]="config().columns.length">
+        <td [attr.colspan]="visibleColumns().length">
           <app-messages
             [message]="{
               description: 'messages.noRecords',

@@ -1,4 +1,4 @@
-import { Component, input, output, ViewChild } from '@angular/core';
+import { Component, computed, input, output, ViewChild } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
@@ -9,7 +9,7 @@ import { AppMessages } from '../app-messages';
 import { AppPaginator, PaginatorChangeEvent } from '../app-paginator';
 import { AppConfirmationDialog } from '../app-confirmation-dialog/app-confirmation-dialog';
 import { SkeletonPaginator } from '../app-skeletons/skeleton-paginator';
-import { TableInput } from './app-table.model';
+import { Column, TableInput } from './app-table.model';
 
 @Component({
   selector: 'app-table',
@@ -34,6 +34,10 @@ export class AppTable {
 
   public readonly lazyLoad = output<any>();
   public readonly pageChange = output<PaginatorChangeEvent>();
+
+  public readonly visibleColumns = computed<Column[]>(() =>
+    this.config().columns.filter((col) => col.visible !== false),
+  );
 
   getNestedValue(obj: any, path: string): any {
     return path.split('.').reduce((current, prop) => current?.[prop], obj);

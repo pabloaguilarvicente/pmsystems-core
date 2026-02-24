@@ -20,34 +20,19 @@ export interface RouteFilters {
 export type ColumnSelection = Pick<Column, 'field' | 'header' | 'visible'>;
 
 export interface AppFiltersConfig {
-  search: {
-    show: boolean;
-    config: FilterSearchConfig;
-  };
-  date: {
-    show: boolean;
-    config: FilterDateConfig;
-  };
-  menu: {
-    show: boolean;
-    config: FilterMenuConfig[];
-  };
-  columns: {
-    show: boolean;
-    config: FilterColumnConfig;
-  };
-  viewAs: {
-    show: boolean;
-    config: FilterViewAsConfig;
-  };
+  search?: FilterSearchConfig;
+  date?: FilterDateConfig;
+  menu?: FilterMenuConfig[];
+  columns?: FilterColumnConfig;
+  viewAs?: FilterViewAsConfig;
 }
 
 export interface AppFiltersOutput {
   search?: string;
   dates?: {
-    startDate: Date | null;
-    endDate: Date | null;
-    singleDate: Date | null;
+    startDate: string | null;
+    endDate: string | null;
+    singleDate: string | null;
   };
   extraFilters?: ExtraFilters;
   columns?: ColumnSelection[];

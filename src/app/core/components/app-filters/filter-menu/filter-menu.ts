@@ -71,30 +71,10 @@ export class FilterMenu implements OnInit {
   public filterDataSources: { [key: string]: any[] } = {};
   public activeFiltersCount = 0;
   private lastEmittedValues: FilterValues = {};
+  // Indica si alguna vez se emitieron filtros con valores reales
+  private hadActiveFilters = false;
 
   constructor() {
-    // Effect para restaurar valores guardados cuando restoreParams es true
-    effect(() => {
-      const configs = this.config();
-
-      configs.forEach((filterConfig) => {
-        if (filterConfig.restoreParams) {
-          const savedFilters = this.filtersService.getFilters();
-          const extraFilters = savedFilters?.extraFilters;
-
-          if (extraFilters && extraFilters[filterConfig.filter] !== undefined) {
-            // Restaurar desde extraFilters usando el nombre del filtro como clave
-            const savedValue = extraFilters[filterConfig.filter];
-            this.filterForm?.get(filterConfig.filter)?.setValue(savedValue, { emitEvent: false });
-            this.lastEmittedValues[filterConfig.filter] = savedValue;
-          }
-        }
-      });
-
-      // Actualizar contador después de restaurar
-      this.updateActiveFiltersCount();
-    });
-
     // Effect para guardar automáticamente en extraFilters cuando hay filtros con restoreParams
     effect(() => {
       const configs = untracked(() => this.config());
@@ -136,6 +116,45 @@ export class FilterMenu implements OnInit {
   ngOnInit(): void {
     this.initializeForm();
     this.loadDataSources();
+    this.restoreAndEmitSavedFilters();
+  }
+
+  /**
+   * Si hay filtros guardados (restoreParams), los restaura en el form,
+   * actualiza lastEmittedValues y emite para que el API cargue con ellos.
+   */
+  private restoreAndEmitSavedFilters(): void {
+    const configs = this.config();
+    const savedFilters = this.filtersService.getFilters();
+    const extraFilters = savedFilters?.extraFilters;
+
+    if (!extraFilters) return;
+
+    const restoredValues: FilterValues = {};
+
+    configs.forEach((filterConfig) => {
+      if (filterConfig.restoreParams && extraFilters[filterConfig.filter] !== undefined) {
+        restoredValues[filterConfig.filter] = extraFilters[filterConfig.filter];
+      }
+    });
+
+    if (Object.keys(restoredValues).length === 0) return;
+
+    // Aplicar al form y sincronizar lastEmittedValues
+    this.filterForm.patchValue(restoredValues, { emitEvent: false });
+    this.lastEmittedValues = this.filterForm.getRawValue();
+
+    // Emitir solo los valores no vacíos para que el API los reciba
+    const cleanedValues: FilterValues = {};
+    Object.keys(restoredValues).forEach((key) => {
+      if (!this.isValueEmpty(restoredValues[key])) {
+        cleanedValues[key] = restoredValues[key];
+      }
+    });
+
+    this.hadActiveFilters = true;
+    this.updateActiveFiltersCount();
+    this.filtersApplied.emit(cleanedValues);
   }
 
   /**
@@ -156,6 +175,10 @@ export class FilterMenu implements OnInit {
     });
 
     this.filterForm = this.fb.group(formControls);
+
+    // Inicializar lastEmittedValues con el estado inicial del form
+    // para que hasChanges() no detecte diferencias en la primera carga
+    this.lastEmittedValues = this.filterForm.getRawValue();
   }
 
   /**
@@ -282,33 +305,38 @@ export class FilterMenu implements OnInit {
       const hasRestoreParams = configs.some((c) => c.restoreParams);
 
       if (hasRestoreParams) {
-        // Obtener extraFilters actuales
         const currentFilters = this.filtersService.getFilters();
         const currentExtraFilters = currentFilters?.extraFilters ?? {};
 
-        // Crear objeto con solo los filtros que tienen restoreParams y valores no vacíos
         const filtersToSave: Record<string, unknown> = { ...currentExtraFilters };
 
         configs.forEach((config) => {
           if (config.restoreParams) {
             const value = filterValues[config.filter];
 
-            // Solo guardar si el valor no está vacío
             if (this.isValueEmpty(value)) {
-              // Si está vacío, eliminar del objeto
               delete filtersToSave[config.filter];
             } else {
-              // Si tiene valor, guardarlo
               filtersToSave[config.filter] = value;
             }
           }
         });
 
-        // Actualizar extraFilters (puede quedar vacío {})
         this.filtersService.updateExtraFilters(filtersToSave);
       }
 
-      this.filtersApplied.emit(cleanedValues);
+      const hasValues = Object.keys(cleanedValues).length > 0;
+
+      if (hasValues) {
+        // Hay filtros activos: activar flag y emitir
+        this.hadActiveFilters = true;
+        this.filtersApplied.emit(cleanedValues);
+      } else if (this.hadActiveFilters) {
+        // No hay filtros pero antes los había: emitir vacío para limpiar el API
+        this.hadActiveFilters = false;
+        this.filtersApplied.emit(cleanedValues);
+      }
+      // Si nunca hubo filtros activos y sigue vacío: no emitir
     }
 
     popover.hide();

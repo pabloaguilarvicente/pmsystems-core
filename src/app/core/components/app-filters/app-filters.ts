@@ -14,8 +14,8 @@ import { AppFiltersConfig, AppFiltersOutput, ColumnSelection } from './app-filte
 })
 export class AppFilters {
   /**
-   * Configuración general de todos los filtros
-   * Controla qué filtros se muestran y su configuración individual
+   * Configuración general de todos los filtros.
+   * Solo se muestran los filtros cuya propiedad esté declarada en el config.
    */
   public config = input.required<AppFiltersConfig>();
 
@@ -28,52 +28,6 @@ export class AppFilters {
    * Estado interno para acumular todos los cambios
    */
   private currentFiltersState: AppFiltersOutput = {};
-
-  /**
-   * Helpers para verificar si cada filtro debe mostrarse
-   */
-  public get showSearch(): boolean {
-    return this.config().search?.show ?? false;
-  }
-
-  public get showDate(): boolean {
-    return this.config().date?.show ?? false;
-  }
-
-  public get showMenu(): boolean {
-    return this.config().menu?.show ?? false;
-  }
-
-  public get showColumns(): boolean {
-    return this.config().columns?.show ?? false;
-  }
-
-  public get showViewAs(): boolean {
-    return this.config().viewAs?.show ?? false;
-  }
-
-  /**
-   * Getters para las configuraciones individuales
-   */
-  public get searchConfig() {
-    return this.config().search?.config;
-  }
-
-  public get dateConfig() {
-    return this.config().date?.config;
-  }
-
-  public get menuConfig() {
-    return this.config().menu?.config;
-  }
-
-  public get columnsConfig() {
-    return this.config().columns?.config;
-  }
-
-  public get viewAsConfig() {
-    return this.config().viewAs?.config;
-  }
 
   /**
    * Handlers para cada tipo de filtro
@@ -107,7 +61,6 @@ export class AppFilters {
    * Emite el estado completo de todos los filtros
    */
   private emitFiltersChange(): void {
-    // Crear una copia limpia del estado actual
     const output: AppFiltersOutput = {
       ...(this.currentFiltersState.search !== undefined && {
         search: this.currentFiltersState.search,
@@ -130,7 +83,7 @@ export class AppFilters {
   }
 
   /**
-   * Método público para resetear todos los filtros (opcional)
+   * Método público para resetear todos los filtros
    */
   public resetFilters(): void {
     this.currentFiltersState = {};
@@ -138,7 +91,7 @@ export class AppFilters {
   }
 
   /**
-   * Método público para obtener el estado actual de los filtros (opcional)
+   * Método público para obtener el estado actual de los filtros
    */
   public getCurrentFilters(): AppFiltersOutput {
     return { ...this.currentFiltersState };

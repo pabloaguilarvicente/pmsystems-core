@@ -32,6 +32,8 @@ export class FilterSearch {
     return this.filtersService.getFilters()?.search ?? defaultSearch;
   });
 
+  private isFirstEmit = true;
+
   constructor() {
     effect((onCleanup) => {
       const value = this.searchValue();
@@ -44,6 +46,11 @@ export class FilterSearch {
       }
 
       this.debounceTimer = setTimeout(() => {
+        if (this.isFirstEmit) {
+          this.isFirstEmit = false;
+          if (!value || !value.trim()) return;
+        }
+
         this.searchChange.emit(value);
 
         if (restoreParams) {

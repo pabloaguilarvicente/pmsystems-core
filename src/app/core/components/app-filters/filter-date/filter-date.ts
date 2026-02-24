@@ -8,7 +8,7 @@ import {
   ViewChild,
   inject,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
@@ -19,12 +19,13 @@ export interface FilterDateConfig {
   selectionMode: 'single' | 'range';
   showQuickFilters?: boolean;
   restoreParams: boolean;
+  format?: string;
 }
 
 export interface DateFilterOutput {
-  startDate: Date | null;
-  endDate: Date | null;
-  singleDate: Date | null;
+  startDate: string | null;
+  endDate: string | null;
+  singleDate: string | null;
 }
 
 export type DateRange = Date | Date[] | null;
@@ -33,12 +34,14 @@ export type DateRange = Date | Date[] | null;
   selector: 'filter-date',
   standalone: true,
   imports: [CommonModule, ButtonModule, DatePickerModule, TranslateModule, FormsModule],
+  providers: [DatePipe],
   templateUrl: './filter-date.html',
 })
 export class FilterDate {
   @ViewChild(DatePicker) datePicker!: DatePicker;
 
   private readonly filtersService = inject(FiltersService);
+  private readonly datePipe = inject(DatePipe);
 
   public config = input.required<FilterDateConfig>();
   public selectedDate = model<DateRange>(null);
@@ -46,6 +49,14 @@ export class FilterDate {
 
   public activeQuickFilter: string | null = null;
   public shouldShowQuickFilters = computed(() => this.config().showQuickFilters !== false);
+
+  public primeNgDateFormat = computed(() => {
+    const format = this.config().format ?? 'dd/MM/yyyy';
+    return format
+      .replace('MM', 'mm')
+      .replace('yyyy', 'yy')
+      .replace(/(?<!y)yy(?!y)/, 'y');
+  });
 
   private lastEmittedDate: DateRange = null;
 
@@ -70,13 +81,11 @@ export class FilterDate {
           if (restoredDate) {
             this.selectedDate.set(restoredDate);
             this.lastEmittedDate = this.cloneDate(restoredDate);
+            this.dateChange.emit(savedDates);
           }
         }
       }
     });
-
-    //  NO hay effect automático que actualice el servicio
-    // Solo se actualiza al dar "Aceptar" mediante emitDateChange()
   }
 
   public setToday(): void {
@@ -148,8 +157,6 @@ export class FilterDate {
   public clearDate(): void {
     this.selectedDate.set(null);
     this.activeQuickFilter = null;
-    //  Solo limpia en memoria, NO emite ni actualiza el servicio
-    // El servicio solo se actualiza al dar "Aceptar"
   }
 
   public getButtonSeverity(filter: string): 'secondary' | 'primary' {
@@ -167,7 +174,6 @@ export class FilterDate {
   public emitDateChange(): void {
     const date = this.selectedDate();
 
-    //  Si no hay fecha, significa que se limpió - emitir null
     if (!date) {
       const emptyOutput: DateFilterOutput = {
         startDate: null,
@@ -177,7 +183,6 @@ export class FilterDate {
 
       this.lastEmittedDate = null;
 
-      // Actualizar servicio y emitir
       if (this.config().restoreParams) {
         this.filtersService.updateDates(emptyOutput);
       }
@@ -187,7 +192,6 @@ export class FilterDate {
       return;
     }
 
-    // Validar selección de rango completa
     if (this.config().selectionMode === 'range' && Array.isArray(date)) {
       if (!date[0] || !date[1]) {
         this.closeDatePicker();
@@ -195,13 +199,11 @@ export class FilterDate {
       }
     }
 
-    // Si es la misma fecha que ya se emitió, solo cerrar
     if (this.isSameDate(date, this.lastEmittedDate)) {
       this.closeDatePicker();
       return;
     }
 
-    //  ÚNICO PUNTO donde se emite y actualiza el servicio
     const output = this.convertDateToOutput(date);
 
     this.lastEmittedDate = this.cloneDate(date);
@@ -241,21 +243,13 @@ export class FilterDate {
   }
 
   private isSameDate(date1: DateRange, date2: DateRange): boolean {
-    if (!date1 && !date2) {
-      return true;
-    }
-
-    if (!date1 || !date2) {
-      return false;
-    }
+    if (!date1 && !date2) return true;
+    if (!date1 || !date2) return false;
 
     if (Array.isArray(date1) && Array.isArray(date2)) {
-      const start1 = date1[0]?.getTime();
-      const end1 = date1[1]?.getTime();
-      const start2 = date2[0]?.getTime();
-      const end2 = date2[1]?.getTime();
-
-      return start1 === start2 && end1 === end2;
+      return (
+        date1[0]?.getTime() === date2[0]?.getTime() && date1[1]?.getTime() === date2[1]?.getTime()
+      );
     }
 
     if (date1 instanceof Date && date2 instanceof Date) {
@@ -266,9 +260,7 @@ export class FilterDate {
   }
 
   private cloneDate(date: DateRange): DateRange {
-    if (!date) {
-      return null;
-    }
+    if (!date) return null;
 
     if (Array.isArray(date)) {
       return [date[0] ? new Date(date[0]) : null, date[1] ? new Date(date[1]) : null] as Date[];
@@ -279,15 +271,8 @@ export class FilterDate {
 
   public hasValidSelection(): boolean {
     const date = this.selectedDate();
-
-    if (!date) {
-      return false;
-    }
-
-    if (Array.isArray(date)) {
-      return !!(date[0] || date[1]);
-    }
-
+    if (!date) return false;
+    if (Array.isArray(date)) return !!(date[0] || date[1]);
     return true;
   }
 
@@ -297,19 +282,65 @@ export class FilterDate {
     }
   }
 
+  private formatDate(date: Date | null): string | null {
+    if (!date) return null;
+    const format = this.config().format ?? 'dd/MM/yyyy';
+    return this.datePipe.transform(date, format);
+  }
+
+  /**
+   * Parsea un string con el formato configurado a un objeto Date.
+   * Necesario porque new Date('15/01/2025') con formato dd/MM/yyyy devuelve NaN.
+   * Soporta separadores / - . y los tokens: dd, MM, yyyy, yy
+   */
+  private parseDate(dateStr: string | null): Date | null {
+    if (!dateStr) return null;
+
+    const format = this.config().format ?? 'dd/MM/yyyy';
+
+    // Detectar separador (/ - .)
+    const separatorMatch = format.match(/[\/\-\.]/);
+    const separator = separatorMatch ? separatorMatch[0] : '/';
+
+    const formatParts = format.split(separator);
+    const dateParts = dateStr.split(separator);
+
+    if (formatParts.length !== dateParts.length) return null;
+
+    let day = 1,
+      month = 0,
+      year = new Date().getFullYear();
+
+    formatParts.forEach((token, i) => {
+      const value = parseInt(dateParts[i], 10);
+      if (isNaN(value)) return;
+
+      if (token === 'dd') day = value;
+      else if (token === 'MM')
+        month = value - 1; // Date usa 0-indexed
+      else if (token === 'yyyy') year = value;
+      else if (token === 'yy') year = value + (value >= 50 ? 1900 : 2000); // pivote estándar
+    });
+
+    const date = new Date(year, month, day);
+
+    // Validar que la fecha resultante sea coherente
+    if (date.getFullYear() !== year || date.getMonth() !== month || date.getDate() !== day) {
+      return null;
+    }
+
+    return date;
+  }
+
   private convertDateToOutput(date: DateRange): DateFilterOutput {
     if (!date) {
-      return {
-        startDate: null,
-        endDate: null,
-        singleDate: null,
-      };
+      return { startDate: null, endDate: null, singleDate: null };
     }
 
     if (Array.isArray(date)) {
       return {
-        startDate: date[0] || null,
-        endDate: date[1] || null,
+        startDate: this.formatDate(date[0] ?? null),
+        endDate: this.formatDate(date[1] ?? null),
         singleDate: null,
       };
     }
@@ -317,18 +348,16 @@ export class FilterDate {
     return {
       startDate: null,
       endDate: null,
-      singleDate: date,
+      singleDate: this.formatDate(date),
     };
   }
 
   private convertOutputToDateRange(output: DateFilterOutput): DateRange {
-    if (!output) {
-      return null;
-    }
+    if (!output) return null;
 
     if (output.startDate || output.endDate) {
-      const startDate = output.startDate ? new Date(output.startDate) : null;
-      const endDate = output.endDate ? new Date(output.endDate) : null;
+      const startDate = this.parseDate(output.startDate);
+      const endDate = this.parseDate(output.endDate);
 
       if (startDate || endDate) {
         return [startDate, endDate] as Date[];
@@ -336,7 +365,7 @@ export class FilterDate {
     }
 
     if (output.singleDate) {
-      return new Date(output.singleDate);
+      return this.parseDate(output.singleDate);
     }
 
     return null;
