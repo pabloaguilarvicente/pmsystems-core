@@ -83,10 +83,14 @@
     },
     "crud": {
         "detail": "Detalle",
+        "detail_entity": "Detalle de {{entity}}",
         "list": "Listado",
+        "list_entity": "Listado de {{entity}}",
         "main": "Principal",
         "register": "Registrar",
-        "update": "Actualizar"
+        "register_entity": "Registrar {{entity}}",
+        "update": "Actualizar",
+        "update_entity": "Actualizar {{entity}}"
     },
     "date": {
         "label": "Fecha"
@@ -393,6 +397,7 @@
     },
     "role": {
         "info": "Información del Rol",
+        "placeholder": "Seleccionar rol",
         "plural": {
             "label": "Roles"
         },
@@ -420,6 +425,7 @@
         "label": "Estado",
         "loading": "Cargando",
         "pending": "Pendiente",
+        "placeholder": "Seleccionar estado",
         "success": "Éxito"
     },
     "support": {

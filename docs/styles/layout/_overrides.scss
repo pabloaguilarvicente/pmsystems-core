@@ -207,3 +207,21 @@ p-listbox.single-selection .p-listbox-option {
 .twitter-input {
     width: 65px !important;
 }
+
+.p-inputtext::placeholder {
+    font-size: small;
+    font-weight: 300;
+}
+
+.p-select-label.p-placeholder {
+    font-size: small !important;
+    font-weight: 300;
+    padding-block: 0.77rem !important;
+}
+
+.p-select-overlay {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border: none !important;
+    margin-top: 0px !important    ;
+}
