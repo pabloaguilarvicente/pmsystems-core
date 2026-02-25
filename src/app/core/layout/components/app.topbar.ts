@@ -3,8 +3,6 @@ import { ChangeDetectorRef, Component, ElementRef, inject, ViewChild } from '@an
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { StyleClassModule } from 'primeng/styleclass';
-import { Ripple } from 'primeng/ripple';
-import { InputText } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { MegaMenuModule } from 'primeng/megamenu';
@@ -24,8 +22,6 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     StyleClassModule,
     FormsModule,
-    Ripple,
-    InputText,
     ButtonModule,
     MegaMenuModule,
     BadgeModule,
@@ -84,7 +80,7 @@ import { TranslateModule } from '@ngx-translate/core';
               <i class="ph ph-corners-out"></i>
             </a>
           </li>
-          <li class="layout-topbar-search">
+          <!-- <li class="layout-topbar-search">
             <a
               pStyleClass="@next"
               enterFromClass="hidden!"
@@ -120,7 +116,7 @@ import { TranslateModule } from '@ngx-translate/core';
                 leaveActiveClass="animate-fadeout"
               ></button>
             </div>
-          </li>
+          </li> -->
           <li>
             <a
               pStyleClass="@next"

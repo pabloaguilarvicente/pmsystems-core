@@ -33,7 +33,6 @@ export class FilterColumn {
 
   public allColumns = signal<ColumnSelection[]>([]);
 
-  //  Propiedad normal en lugar de signal para que [(ngModel)] funcione correctamente
   public selectedHiddenFields: string[] = [];
 
   public get hiddenColumnsCount(): number {

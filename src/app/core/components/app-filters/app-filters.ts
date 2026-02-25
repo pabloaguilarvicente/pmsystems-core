@@ -25,75 +25,33 @@ export class AppFilters {
   public filtersChange = output<AppFiltersOutput>();
 
   /**
-   * Estado interno para acumular todos los cambios
+   * Estado interno para acumular todos los cambios.
+   * Solo se usa para exponer getCurrentFilters() y resetFilters().
    */
   private currentFiltersState: AppFiltersOutput = {};
 
-  /**
-   * Handlers para cada tipo de filtro
-   */
   public searchChange(search: string): void {
     this.currentFiltersState.search = search;
-    this.emitFiltersChange();
+    this.filtersChange.emit({ search });
   }
 
   public dateChange(dateFilterOutput: DateFilterOutput): void {
     this.currentFiltersState.dates = dateFilterOutput;
-    this.emitFiltersChange();
+    this.filtersChange.emit({ dates: dateFilterOutput });
   }
 
   public filtersApplied(filterValues: FilterValues): void {
     this.currentFiltersState.extraFilters = filterValues;
-    this.emitFiltersChange();
+    this.filtersChange.emit({ extraFilters: filterValues });
   }
 
   public columnsChange(columnSelection: ColumnSelection[]): void {
     this.currentFiltersState.columns = columnSelection;
-    this.emitFiltersChange();
+    this.filtersChange.emit({ columns: columnSelection });
   }
 
   public viewAsChange(viewAs: ViewAs): void {
     this.currentFiltersState.viewAs = viewAs;
-    this.emitFiltersChange();
-  }
-
-  /**
-   * Emite el estado completo de todos los filtros
-   */
-  private emitFiltersChange(): void {
-    const output: AppFiltersOutput = {
-      ...(this.currentFiltersState.search !== undefined && {
-        search: this.currentFiltersState.search,
-      }),
-      ...(this.currentFiltersState.dates && {
-        dates: this.currentFiltersState.dates,
-      }),
-      ...(this.currentFiltersState.extraFilters && {
-        extraFilters: this.currentFiltersState.extraFilters,
-      }),
-      ...(this.currentFiltersState.columns && {
-        columns: this.currentFiltersState.columns,
-      }),
-      ...(this.currentFiltersState.viewAs && {
-        viewAs: this.currentFiltersState.viewAs,
-      }),
-    };
-
-    this.filtersChange.emit(output);
-  }
-
-  /**
-   * Método público para resetear todos los filtros
-   */
-  public resetFilters(): void {
-    this.currentFiltersState = {};
-    this.emitFiltersChange();
-  }
-
-  /**
-   * Método público para obtener el estado actual de los filtros
-   */
-  public getCurrentFilters(): AppFiltersOutput {
-    return { ...this.currentFiltersState };
+    this.filtersChange.emit({ viewAs });
   }
 }

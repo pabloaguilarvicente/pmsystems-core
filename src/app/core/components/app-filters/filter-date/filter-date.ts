@@ -290,8 +290,6 @@ export class FilterDate {
 
   /**
    * Parsea un string con el formato configurado a un objeto Date.
-   * Necesario porque new Date('15/01/2025') con formato dd/MM/yyyy devuelve NaN.
-   * Soporta separadores / - . y los tokens: dd, MM, yyyy, yy
    */
   private parseDate(dateStr: string | null): Date | null {
     if (!dateStr) return null;

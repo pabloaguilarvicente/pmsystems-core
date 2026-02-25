@@ -253,7 +253,7 @@ export class UsersMain {
     }
 
     if (filters.viewAs) {
-      console.log('VIEWAS');
+      console.log('EMITIENDO VIEWAS', filters.viewAs);
     }
   }
 }
