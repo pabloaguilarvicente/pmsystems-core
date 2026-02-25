@@ -16,6 +16,16 @@
     font-size: 38px;
 }
 
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    [class*="ph-"] {
+        font-size: x-small;
+        color: var(--color-red-500);
+    }
+}
+
 a {
     text-decoration: none;
 }

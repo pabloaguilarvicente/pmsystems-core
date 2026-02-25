@@ -1,1 +1,92 @@
-<p>users-register works!</p>
+<div class="card">
+  <form [formGroup]="mainForm">
+    <div class="grid grid-cols-12 gap-x-4 gap-y-6">
+      <div class="col-span-12">
+        <app-title-page title="crud.register" />
+      </div>
+
+      <div class="col-span-12 md:col-span-4">
+        <label for="firstName">{{ 'firstName.label' | translate }} <i class="ph-bold ph-asterisk"></i></label>
+        <input
+          id="firstName"
+          formControlName="firstName"
+          [placeholder]="'firstName.placeholder' | translate"
+          type="text"
+          fluid="true"
+          pSize="large"
+          pInputText
+          autocomplete="off"
+        />
+      </div>
+      <div class="col-span-12 md:col-span-4">
+        <label for="lastName">{{ 'lastName.label' | translate }} <i class="ph-bold ph-asterisk"></i></label>
+        <input
+          id="lastName"
+          formControlName="lastName"
+          [placeholder]="'lastName.placeholder' | translate"
+          type="text"
+          fluid="true"
+          pSize="large"
+          pInputText
+          autocomplete="off"
+        />
+      </div>
+      <div class="col-span-12 md:col-span-4">
+        <label for="email">{{ 'email.label' | translate }} <i class="ph-bold ph-asterisk"></i></label>
+        <input
+          id="email"
+          formControlName="email"
+          [placeholder]="'email.placeholder' | translate"
+          type="text"
+          fluid="true"
+          pSize="large"
+          pInputText
+          autocomplete="off"
+        />
+      </div>
+      <div class="col-span-12 md:col-span-4">
+        <label for="role">{{ 'role.singular.label' | translate }} <i class="ph-bold ph-asterisk"></i></label>
+        <p-select
+          id="role"
+          [options]="roles"
+          formControlName="role"
+          optionLabel="name"
+          optionValue="id"
+          [placeholder]="'role.placeholder' | translate"
+          fluid="true"
+          size="large"
+        />
+      </div>
+      <div class="col-span-12 md:col-span-4">
+        <label for="status">{{ 'status.label' | translate }} <i class="ph-bold ph-asterisk"></i></label>
+        <p-select
+          id="status"
+          [options]="status"
+          formControlName="status"
+          optionLabel="name"
+          optionValue="id"
+          [placeholder]="'status.placeholder' | translate"
+          fluid="true"
+          size="large"
+        />
+      </div>
+
+      <div class="col-span-12">
+        <div class="flex justify-end">
+          <p-button
+            (onClick)="register()"
+            [label]="'crud.register' | translate"
+            icon="ph-bold ph-floppy-disk"
+            iconPos="right"
+            [raised]="true"
+            size="large"
+            fluid="true"
+            styleClass="py-3! px-8!"
+            class="w-full sm:w-auto"
+            [disabled]="mainForm.invalid"
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

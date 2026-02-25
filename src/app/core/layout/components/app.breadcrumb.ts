@@ -1,11 +1,15 @@
 import { Component, signal } from '@angular/core';
-import { ActivatedRouteSnapshot, NavigationEnd, Router, RouterModule } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  NavigationEnd,
+  Router,
+  RouterModule,
+} from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { CommonModule, Location } from '@angular/common';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { TranslateModule } from '@ngx-translate/core';
-import { TooltipModule } from 'primeng/tooltip';
 
 interface Breadcrumb {
   label: string;
@@ -15,7 +19,13 @@ interface Breadcrumb {
 @Component({
   selector: '[app-breadcrumb]',
   standalone: true,
-  imports: [CommonModule, RouterModule, ButtonModule, RippleModule, TranslateModule, TooltipModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ButtonModule,
+    RippleModule,
+    TranslateModule,
+  ],
   template: `
     <nav class="layout-breadcrumb">
       <ol>
@@ -34,8 +44,8 @@ interface Breadcrumb {
         <p-button
           variant="text"
           icon="ph-bold ph-arrow-fat-left"
-          styleClass="p-0!"
-          [pTooltip]="'actions.return' | translate"
+          styleClass="py-0!"
+          [label]="'actions.return' | translate"
           (onClick)="goBack()"
         ></p-button>
       }
@@ -53,15 +63,17 @@ export class AppBreadcrumb {
     private router: Router,
     private location: Location,
   ) {
-    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
-      const root = this.router.routerState.snapshot.root;
-      const breadcrumbs: Breadcrumb[] = [];
-      this.addBreadcrumb(root, [], breadcrumbs);
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        const root = this.router.routerState.snapshot.root;
+        const breadcrumbs: Breadcrumb[] = [];
+        this.addBreadcrumb(root, [], breadcrumbs);
 
-      this.breadcrumbs.set(breadcrumbs);
+        this.breadcrumbs.set(breadcrumbs);
 
-      this.updateBackButtonVisibility(root);
-    });
+        this.updateBackButtonVisibility(root);
+      });
   }
 
   private addBreadcrumb(
@@ -72,7 +84,9 @@ export class AppBreadcrumb {
     const routeUrl = parentUrl.concat(route.url.map((url) => url.path));
     const breadcrumb = route.data['breadcrumb'];
     const parentBreadcrumb =
-      route.parent && route.parent.data ? route.parent.data['breadcrumb'] : null;
+      route.parent && route.parent.data
+        ? route.parent.data['breadcrumb']
+        : null;
 
     if (breadcrumb && breadcrumb !== parentBreadcrumb) {
       breadcrumbs.push({

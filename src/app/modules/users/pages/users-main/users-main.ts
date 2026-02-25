@@ -10,13 +10,20 @@ import { PaginatorChangeEvent } from '../../../../core/components/app-paginator'
 import { AppTable } from '../../../../core/components/app-table/app-table';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { UserDetailDialog } from '../../components/user-detail-dialog/user-detail-dialog';
-import { BREAKPOINTS, ROLES, STATUS } from '../../../../core/helpers/constant.helper';
+import {
+  BREAKPOINTS,
+  ROLES,
+  STATUS,
+} from '../../../../core/helpers/constant.helper';
 import { AppFilters } from '../../../../core/components/app-filters/app-filters';
 import {
   AppFiltersConfig,
   AppFiltersOutput,
 } from '../../../../core/components/app-filters/app-filters.model';
-import { Column, TableInput } from '../../../../core/components/app-table/app-table.model';
+import {
+  Column,
+  TableInput,
+} from '../../../../core/components/app-table/app-table.model';
 
 @Component({
   selector: 'users-main',
@@ -122,7 +129,11 @@ export class UsersMain {
     search: { restoreParams: true },
     columns: { restoreParams: true, columns: this.cols() },
     viewAs: { restoreParams: true, defaultView: 'LIST' },
-    date: { restoreParams: true, selectionMode: 'range', showQuickFilters: true },
+    date: {
+      restoreParams: true,
+      selectionMode: 'range',
+      showQuickFilters: true,
+    },
     menu: [
       {
         filter: 'role',
@@ -190,7 +201,12 @@ export class UsersMain {
   public onSort(event: any) {
     this.updateFiltersAndLoad({
       sort: event.sortField,
-      order: event.sortOrder === 1 ? 'asc' : event.sortOrder === -1 ? 'desc' : undefined,
+      order:
+        event.sortOrder === 1
+          ? 'asc'
+          : event.sortOrder === -1
+            ? 'desc'
+            : undefined,
     });
   }
 
@@ -225,7 +241,10 @@ export class UsersMain {
 
   public onFiltersChange(filters: AppFiltersOutput): void {
     if (filters.search !== undefined) {
-      this.updateFiltersAndLoad({ search: filters.search || undefined, currentPage: 1 });
+      this.updateFiltersAndLoad({
+        search: filters.search || undefined,
+        currentPage: 1,
+      });
     }
 
     if (filters.dates) {
@@ -238,9 +257,16 @@ export class UsersMain {
     }
 
     if (filters.extraFilters !== undefined) {
-      const extraFilterKeys = this.filtersConfig.menu?.map((c) => c.filter) ?? [];
-      const clearedKeys = Object.fromEntries(extraFilterKeys.map((key) => [key, undefined]));
-      this.updateFiltersAndLoad({ ...clearedKeys, ...filters.extraFilters, currentPage: 1 });
+      const extraFilterKeys =
+        this.filtersConfig.menu?.map((c) => c.filter) ?? [];
+      const clearedKeys = Object.fromEntries(
+        extraFilterKeys.map((key) => [key, undefined]),
+      );
+      this.updateFiltersAndLoad({
+        ...clearedKeys,
+        ...filters.extraFilters,
+        currentPage: 1,
+      });
     }
 
     if (filters.columns) {

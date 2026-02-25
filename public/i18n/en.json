@@ -89,10 +89,14 @@
     },
     "crud": {
         "detail": "Detail",
+        "detail_entity": "Detail of {{entity}}",
         "list": "List",
+        "list_entity": "List of {{entity}}",
         "main": "Main",
         "register": "Register",
-        "update": "Update"
+        "register_entity": "Register {{entity}}",
+        "update": "Update",
+        "update_entity": "Update {{entity}}"
     },
     "date": {
         "label": "Date"
@@ -399,6 +403,7 @@
     },
     "role": {
         "info": "Role information",
+        "placeholder": "Select role",
         "plural": {
             "label": "Roles"
         },
@@ -426,6 +431,7 @@
         "label": "Status",
         "loading": "Loading",
         "pending": "Pending",
+        "placeholder": "Select status",
         "success": "Success"
     },
     "support": {
