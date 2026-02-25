@@ -188,10 +188,12 @@ p-listbox.single-selection .p-listbox-option {
     border: none !important;
     border-radius: 0 !important;
     background: transparent !important;
+    width: 100% !important;
 }
 
 .twitter-body {
     padding: 0 !important;
+    margin: 0 !important;
 }
 
 .triangle {
@@ -200,4 +202,8 @@ p-listbox.single-selection .p-listbox-option {
 
 .triangleShadow {
     display: none !important;
+}
+
+.twitter-input {
+    width: 65px !important;
 }
