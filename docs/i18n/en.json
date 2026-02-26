@@ -21,6 +21,13 @@
         "update": "Update",
         "upload": "Upload"
     },
+    "address": {
+        "city": "City",
+        "country": "Country",
+        "state": "State",
+        "street": "Street",
+        "zipCode": "ZIP Code"
+    },
     "analytics": {
         "label": "Analytics",
         "overview": "Overview",
@@ -56,6 +63,12 @@
     "columns": {
         "hint": "Columns that are not displayed in the table",
         "label": "Columns"
+    },
+    "common": {
+        "disabled": "Disabled",
+        "enabled": "Enabled",
+        "notVerified": "Not verified",
+        "verified": "Verified"
     },
     "confirmations": {
         "delete": {
@@ -111,7 +124,9 @@
         "updateEntity": "Update {{value}}"
     },
     "date": {
-        "label": "Date"
+        "createdAt": "Created at",
+        "label": "Date",
+        "updatedAt": "Updated at"
     },
     "dateFilter": {
         "lastMonth": "Last month",
@@ -235,7 +250,10 @@
         "placeholder": "Enter your phone number"
     },
     "preferences": {
-        "label": "Preferences"
+        "emailNotifications": "Email notifications",
+        "label": "Preferences",
+        "notifications": "Notifications",
+        "timezone": "Time zone"
     },
     "primeng": {
         "accept": "Yes",
@@ -442,7 +460,13 @@
     },
     "security": {
         "credentials": "Credentials",
-        "label": "Security"
+        "emailVerified": "Email verified",
+        "failedAttempts": "Failed login attempts",
+        "label": "Security",
+        "lastLogin": "Last login",
+        "passwordChanged": "Password last changed",
+        "phoneVerified": "Phone verified",
+        "twoFactor": "Two-factor authentication"
     },
     "select": {
         "label": "Select",
