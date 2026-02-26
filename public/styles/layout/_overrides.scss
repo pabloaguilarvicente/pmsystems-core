@@ -98,7 +98,7 @@ p-treetable {
 }
 
 .p-toast .p-toast-message {
-    background: #ffffff;
+    background-color: var(--surface-card);
     border: none;
     border-left: 4px solid;
     border-radius: var(--border-radius);
@@ -210,18 +210,33 @@ p-listbox.single-selection .p-listbox-option {
 
 .p-inputtext::placeholder {
     font-size: small;
-    font-weight: 300;
+    font-weight: 200;
 }
 
 .p-select-label.p-placeholder {
     font-size: small !important;
-    font-weight: 300;
-    padding-block: 0.77rem !important;
+    font-weight: 200;
+}
+
+.p-textarea::placeholder {
+    font-size: small !important;
+    font-weight: 200;
 }
 
 .p-select-overlay {
-    border-top-left-radius: 0 !important;
-    border-top-right-radius: 0 !important;
-    border: none !important;
-    margin-top: 0px !important    ;
+    margin-top: -2px !important    ;
+}
+
+.mainForm {
+    .p-select-label.p-placeholder {
+        padding-block: 0.77rem !important;
+    }
+}
+
+.p-divider-horizontal .p-divider-content {
+    padding: 0 0.5rem 0 0 !important;
+}
+
+.p-divider-horizontal {
+    padding: 0 !important;
 }

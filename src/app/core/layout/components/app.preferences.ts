@@ -340,7 +340,7 @@ import { PRESET_COLORS, PRIMARY_COLOR } from '../../helpers/constant.helper';
                   class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
                   [class.text-primary]="menuMode === 'slim-plus'"
                 >
-                  {{ 'menu.slim_plus' | translate }}
+                  {{ 'menu.slimPlus' | translate }}
                 </div>
               </div>
 

@@ -36,6 +36,14 @@
     "balance": {
         "label": "Balance"
     },
+    "bio": {
+        "label": "Biography",
+        "placeholder": "Enter a brief description of the user"
+    },
+    "birthDate": {
+        "label": "Date of birth",
+        "placeholder": "Select your date of birth"
+    },
     "blog": {
         "detail": "Detail",
         "edit": "Edit",
@@ -89,22 +97,26 @@
     },
     "crud": {
         "detail": "Detail",
-        "detail_entity": "Detail of {{entity}}",
+        "detailEntity": "Detail of {{value}}",
+        "generalData": "General Information",
+        "generalDataDescription": "Section containing the basic information required for user management.",
         "list": "List",
-        "list_entity": "List of {{entity}}",
+        "listEntity": "List of {{value}}",
         "main": "Main",
+        "profilePhoto": "Profile Photo",
+        "profilePhotoDescription": "Upload a photo to personalize your account.",
         "register": "Register",
-        "register_entity": "Register {{entity}}",
+        "registerEntity": "Register {{value}}",
         "update": "Update",
-        "update_entity": "Update {{entity}}"
+        "updateEntity": "Update {{value}}"
     },
     "date": {
         "label": "Date"
     },
-    "date_filter": {
-        "last_month": "Last month",
-        "last_week": "Last week",
-        "last_year": "Last year",
+    "dateFilter": {
+        "lastMonth": "Last month",
+        "lastWeek": "Last week",
+        "lastYear": "Last year",
         "today": "Today"
     },
     "email": {
@@ -165,6 +177,13 @@
         "label": "First names",
         "placeholder": "Enter first names"
     },
+    "form": {
+        "invalid": "The form contains incomplete or invalid fields. Please review the entered information."
+    },
+    "gender": {
+        "label": "Gender",
+        "placeholder": "Select gender"
+    },
     "language": {
         "english": "English",
         "label": "Language",
@@ -184,7 +203,7 @@
         "label": "Menu",
         "overlay": "Overlay",
         "slim": "Slim",
-        "slim_plus": "Slim+",
+        "slimPlus": "Slim+",
         "static": "Static",
         "type": "Menu type"
     },
@@ -210,6 +229,10 @@
     },
     "permissions": {
         "label": "Permissions"
+    },
+    "phone": {
+        "label": "Phone",
+        "placeholder": "Enter your phone number"
     },
     "preferences": {
         "label": "Preferences"
@@ -395,6 +418,7 @@
         "label": "Productos"
     },
     "profile": {
+        "description": "Section containing the user's personal and additional information.",
         "label": "Profile",
         "position": "Profile position"
     },
@@ -419,6 +443,10 @@
     "security": {
         "credentials": "Credentials",
         "label": "Security"
+    },
+    "select": {
+        "label": "Select",
+        "placeholder": "Select"
     },
     "settings": {
         "label": "Settings",
@@ -467,7 +495,7 @@
             "label": "User"
         }
     },
-    "view_as": {
+    "viewAs": {
         "grid": "Grid",
         "label": "View as",
         "list": "List"

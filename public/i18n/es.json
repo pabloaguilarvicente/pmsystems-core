@@ -36,6 +36,14 @@
     "balance": {
         "label": "Balance"
     },
+    "bio": {
+        "label": "Biografía",
+        "placeholder": "Ingresar una breve descripción del usuario"
+    },
+    "birthDate": {
+        "label": "Fecha de nacimiento",
+        "placeholder": "Seleccione su fecha de nacimiento"
+    },
     "code": {
         "label": "Código"
     },
@@ -83,22 +91,26 @@
     },
     "crud": {
         "detail": "Detalle",
-        "detail_entity": "Detalle de {{entity}}",
+        "detailEntity": "Detalle de {{value}}",
+        "generalData": "Datos generales",
+        "generalDataDescription": "Sección de datos básicos necesarios para la gestión del usuario.",
         "list": "Listado",
-        "list_entity": "Listado de {{entity}}",
+        "listEntity": "Listado de {{value}}",
         "main": "Principal",
+        "profilePhoto": "Foto de perfil",
+        "profilePhotoDescription": "Cargue una foto para personalizar su cuenta.",
         "register": "Registrar",
-        "register_entity": "Registrar {{entity}}",
+        "registerEntity": "Registrar {{value}}",
         "update": "Actualizar",
-        "update_entity": "Actualizar {{entity}}"
+        "updateEntity": "Actualizar {{value}}"
     },
     "date": {
         "label": "Fecha"
     },
-    "date_filter": {
-        "last_month": "Último mes",
-        "last_week": "Última semana",
-        "last_year": "Último año",
+    "dateFilter": {
+        "lastMonth": "Último mes",
+        "lastWeek": "Última semana",
+        "lastYear": "Último año",
         "today": "Hoy"
     },
     "email": {
@@ -159,6 +171,13 @@
         "label": "Nombres",
         "placeholder": "Ingrese nombres"
     },
+    "form": {
+        "invalid": "El formulario contiene campos incompletos o con datos inválidos. Verifique la información ingresada."
+    },
+    "gender": {
+        "label": "Género",
+        "placeholder": "Seleccionar género"
+    },
     "language": {
         "english": "Inglés",
         "label": "Idioma",
@@ -178,7 +197,7 @@
         "label": "Menú",
         "overlay": "Superpuesto",
         "slim": "Delgado",
-        "slim_plus": "Delgado+",
+        "slimPlus": "Delgado+",
         "static": "Estático",
         "type": "Tipo de Menú"
     },
@@ -204,6 +223,10 @@
     },
     "permissions": {
         "label": "Permisos"
+    },
+    "phone": {
+        "label": "Teléfono",
+        "placeholder": "Ingrese su número de teléfono"
     },
     "preferences": {
         "label": "Preferencias"
@@ -389,6 +412,7 @@
         "label": "Products"
     },
     "profile": {
+        "description": "Sección que contiene la información personal y complementaria del usuario.",
         "label": "Perfil",
         "position": "Posición del Perfil"
     },
@@ -413,6 +437,10 @@
     "security": {
         "credentials": "Credenciales",
         "label": "Seguridad"
+    },
+    "select": {
+        "label": "Seleccionar",
+        "placeholder": "Seleccionar"
     },
     "settings": {
         "label": "Configuración",
@@ -461,7 +489,7 @@
             "label": "Usuario"
         }
     },
-    "view_as": {
+    "viewAs": {
         "grid": "Cuadrícula",
         "label": "Ver como",
         "list": "Lista"

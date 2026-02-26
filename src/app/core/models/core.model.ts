@@ -6,6 +6,12 @@ import {
   MenuProfilePosition,
 } from '../layout/service/layout.service';
 
+export const Order = {
+  Asc: 'asc',
+  Desc: 'desc',
+} as const;
+export type Order = (typeof Order)[keyof typeof Order];
+
 export interface UiSettings {
   colorScheme: ColorScheme;
   menuMode: MenuMode;

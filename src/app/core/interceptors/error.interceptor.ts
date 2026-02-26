@@ -1,11 +1,11 @@
 import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
-import { inject } from '@angular/core';
-import { Router } from '@angular/router';
+// import { inject } from '@angular/core';
+// import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { ErrorData } from '../components/app-error-page';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
-  const router = inject(Router);
+  // const router = inject(Router);
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
@@ -20,9 +20,11 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         timestamp: new Date().toISOString(),
       };
 
-      router.navigate(['/error'], {
-        state: { error: errorData },
-      });
+      console.log(errorData);
+
+      // router.navigate(['/error'], {
+      //   state: { error: errorData },
+      // });
 
       return throwError(() => error);
     }),

@@ -1,92 +1,162 @@
-<div class="card">
-  <form [formGroup]="mainForm">
-    <div class="grid grid-cols-12 gap-x-4 gap-y-6">
-      <div class="col-span-12">
-        <app-title-page title="crud.register" />
-      </div>
-
-      <div class="col-span-12 md:col-span-4">
-        <label for="firstName">{{ 'firstName.label' | translate }} <i class="ph-bold ph-asterisk"></i></label>
-        <input
-          id="firstName"
-          formControlName="firstName"
-          [placeholder]="'firstName.placeholder' | translate"
-          type="text"
-          fluid="true"
-          pSize="large"
-          pInputText
-          autocomplete="off"
-        />
-      </div>
-      <div class="col-span-12 md:col-span-4">
-        <label for="lastName">{{ 'lastName.label' | translate }} <i class="ph-bold ph-asterisk"></i></label>
-        <input
-          id="lastName"
-          formControlName="lastName"
-          [placeholder]="'lastName.placeholder' | translate"
-          type="text"
-          fluid="true"
-          pSize="large"
-          pInputText
-          autocomplete="off"
-        />
-      </div>
-      <div class="col-span-12 md:col-span-4">
-        <label for="email">{{ 'email.label' | translate }} <i class="ph-bold ph-asterisk"></i></label>
-        <input
-          id="email"
-          formControlName="email"
-          [placeholder]="'email.placeholder' | translate"
-          type="text"
-          fluid="true"
-          pSize="large"
-          pInputText
-          autocomplete="off"
-        />
-      </div>
-      <div class="col-span-12 md:col-span-4">
-        <label for="role">{{ 'role.singular.label' | translate }} <i class="ph-bold ph-asterisk"></i></label>
-        <p-select
-          id="role"
-          [options]="roles"
-          formControlName="role"
-          optionLabel="name"
-          optionValue="id"
-          [placeholder]="'role.placeholder' | translate"
-          fluid="true"
-          size="large"
-        />
-      </div>
-      <div class="col-span-12 md:col-span-4">
-        <label for="status">{{ 'status.label' | translate }} <i class="ph-bold ph-asterisk"></i></label>
-        <p-select
-          id="status"
-          [options]="status"
-          formControlName="status"
-          optionLabel="name"
-          optionValue="id"
-          [placeholder]="'status.placeholder' | translate"
-          fluid="true"
-          size="large"
-        />
-      </div>
-
-      <div class="col-span-12">
-        <div class="flex justify-end">
-          <p-button
-            (onClick)="register()"
-            [label]="'crud.register' | translate"
-            icon="ph-bold ph-floppy-disk"
-            iconPos="right"
-            [raised]="true"
-            size="large"
-            fluid="true"
-            styleClass="py-3! px-8!"
-            class="w-full sm:w-auto"
-            [disabled]="mainForm.invalid"
-          />
+<form [formGroup]="mainForm" class="mainForm">
+  <div class="grid grid-cols-12 gap-4">
+    <div class="col-span-12 md:col-span-4">
+      <div class="card">
+        <div class="grid grid-cols-12 gap-x-4 gap-y-6" formGroupName="profile">
+          <div class="col-span-12">
+            <form-label for="picture" label="crud.profilePhoto"></form-label>
+            <form-picture formControlName="picture" mode="upload"></form-picture>
+          </div>
+          <div class="col-span-12">
+            <form-label for="bio" label="bio.label"></form-label>
+            <textarea
+              formControlName="bio"
+              [placeholder]="'bio.placeholder' | translate"
+              rows="2"
+              cols="30"
+              autoResize="true"
+              fluid="true"
+              pTextarea
+            ></textarea>
+          </div>
         </div>
       </div>
     </div>
-  </form>
-</div>
+    <div class="col-span-12 md:col-span-8">
+      <div class="card">
+        <div class="grid grid-cols-12 gap-x-4 gap-y-6">
+          <div class="col-span-12">
+            <form-title title="crud.generalData" description="crud.generalDataDescription"></form-title>
+          </div>
+          <div class="col-span-12 md:col-span-6">
+            <form-label for="firstName" label="firstName.label" [required]="true"></form-label>
+            <input
+              id="firstName"
+              formControlName="firstName"
+              [placeholder]="'firstName.placeholder' | translate"
+              type="text"
+              fluid="true"
+              pSize="large"
+              pInputText
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-span-12 md:col-span-6">
+            <form-label for="lastName" label="lastName.label" [required]="true"></form-label>
+            <input
+              id="lastName"
+              formControlName="lastName"
+              [placeholder]="'lastName.placeholder' | translate"
+              type="text"
+              fluid="true"
+              pSize="large"
+              pInputText
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-span-12 md:col-span-6">
+            <form-label for="email" label="email.label" [required]="true"></form-label>
+            <input
+              id="email"
+              formControlName="email"
+              [placeholder]="'email.placeholder' | translate"
+              type="text"
+              fluid="true"
+              pSize="large"
+              pInputText
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-span-12 md:col-span-3">
+            <form-label for="role" label="role.singular.label" [required]="true"></form-label>
+            <p-select
+              id="role"
+              [options]="roles"
+              formControlName="role"
+              optionLabel="name"
+              optionValue="code"
+              [placeholder]="'select.placeholder' | translate"
+              fluid="true"
+              size="large"
+              appendTo="body"
+            />
+          </div>
+          <div class="col-span-12 md:col-span-3">
+            <form-label for="status" label="status.label" [required]="true"></form-label>
+            <p-select
+              id="status"
+              [options]="status"
+              formControlName="status"
+              optionLabel="name"
+              optionValue="code"
+              [placeholder]="'select.placeholder' | translate"
+              fluid="true"
+              size="large"
+              appendTo="body"
+            />
+          </div>
+
+          <div class="col-span-12" formGroupName="profile">
+            <div class="grid grid-cols-12 gap-x-4 gap-y-6">
+              <div class="col-span-12">
+                <form-title title="profile.label" description="profile.description" class="mt-6"></form-title>
+              </div>
+              <div class="col-span-12 md:col-span-4">
+                <form-label for="birthDate" label="birthDate.label"></form-label>
+                <p-datepicker
+                  formControlName="birthDate"
+                  id="birthDate"
+                  [placeholder]="'select.placeholder' | translate"
+                  [iconDisplay]="'input'"
+                  [showIcon]="true"
+                  size="large"
+                />
+              </div>
+              <div class="col-span-12 md:col-span-4">
+                <form-label for="gender" label="gender.label" [required]="true"></form-label>
+                <p-select
+                  id="gender"
+                  [options]="genders"
+                  formControlName="gender"
+                  optionLabel="name"
+                  optionValue="code"
+                  [placeholder]="'select.placeholder' | translate"
+                  fluid="true"
+                  size="large"
+                  appendTo="body"
+                />
+              </div>
+              <div class="col-span-12 md:col-span-4">
+                <form-label for="phone" label="phone.label"></form-label>
+                <p-inputmask
+                  formControlName="phone"
+                  mask="999 999 999"
+                  [placeholder]="'phone.placeholder' | translate"
+                  fluid="true"
+                  size="large"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- button -->
+          <div class="col-span-12">
+            <div class="flex justify-end">
+              <p-button
+                (onClick)="register()"
+                [label]="'crud.register' | translate"
+                icon="ph-bold ph-floppy-disk"
+                iconPos="right"
+                [raised]="true"
+                size="large"
+                fluid="true"
+                styleClass="py-3! px-8!"
+                class="w-full sm:w-auto"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

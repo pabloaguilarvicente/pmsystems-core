@@ -24,6 +24,7 @@ import {
   Column,
   TableInput,
 } from '../../../../core/components/app-table/app-table.model';
+import { Order } from '../../../../core/models/core.model';
 
 @Component({
   selector: 'users-main',
@@ -203,9 +204,9 @@ export class UsersMain {
       sort: event.sortField,
       order:
         event.sortOrder === 1
-          ? 'asc'
+          ? Order.Asc
           : event.sortOrder === -1
-            ? 'desc'
+            ? Order.Desc
             : undefined,
     });
   }
