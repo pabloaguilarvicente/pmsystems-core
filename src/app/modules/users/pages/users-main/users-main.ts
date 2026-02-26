@@ -10,20 +10,10 @@ import { PaginatorChangeEvent } from '../../../../core/components/app-paginator'
 import { AppTable } from '../../../../core/components/app-table/app-table';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { UserDetailDialog } from '../../components/user-detail-dialog/user-detail-dialog';
-import {
-  BREAKPOINTS,
-  ROLES,
-  STATUS,
-} from '../../../../core/helpers/constant.helper';
+import { BREAKPOINTS, ROLES, STATUS } from '../../../../core/helpers/constant.helper';
 import { AppFilters } from '../../../../core/components/app-filters/app-filters';
-import {
-  AppFiltersConfig,
-  AppFiltersOutput,
-} from '../../../../core/components/app-filters/app-filters.model';
-import {
-  Column,
-  TableInput,
-} from '../../../../core/components/app-table/app-table.model';
+import { AppFiltersConfig, AppFiltersOutput } from '../../../../core/components/app-filters/app-filters.model';
+import { Column, TableInput } from '../../../../core/components/app-table/app-table.model';
 import { Order } from '../../../../core/models/core.model';
 
 @Component({
@@ -202,12 +192,7 @@ export class UsersMain {
   public onSort(event: any) {
     this.updateFiltersAndLoad({
       sort: event.sortField,
-      order:
-        event.sortOrder === 1
-          ? Order.Asc
-          : event.sortOrder === -1
-            ? Order.Desc
-            : undefined,
+      order: event.sortOrder === 1 ? Order.Asc : event.sortOrder === -1 ? Order.Desc : undefined,
     });
   }
 
@@ -258,11 +243,8 @@ export class UsersMain {
     }
 
     if (filters.extraFilters !== undefined) {
-      const extraFilterKeys =
-        this.filtersConfig.menu?.map((c) => c.filter) ?? [];
-      const clearedKeys = Object.fromEntries(
-        extraFilterKeys.map((key) => [key, undefined]),
-      );
+      const extraFilterKeys = this.filtersConfig.menu?.map((c) => c.filter) ?? [];
+      const clearedKeys = Object.fromEntries(extraFilterKeys.map((key) => [key, undefined]));
       this.updateFiltersAndLoad({
         ...clearedKeys,
         ...filters.extraFilters,

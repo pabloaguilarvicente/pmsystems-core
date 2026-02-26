@@ -1,15 +1,16 @@
 import { Component, inject, signal } from '@angular/core';
 import { User } from '../../models/users.model';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { LocaleDatePipe } from '../../../../core/pipes/locale-date-pipe.pipe';
 import { ButtonModule } from 'primeng/button';
 import { TranslateModule } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { AvatarModule } from 'primeng/avatar';
+import { TagModule } from 'primeng/tag';
+import { DatePipe, NgClass } from '@angular/common';
 
 @Component({
   selector: 'user-detail-dialog',
-  imports: [LocaleDatePipe, ButtonModule, TranslateModule, AvatarModule],
+  imports: [ButtonModule, TranslateModule, AvatarModule, TagModule, DatePipe, NgClass],
   templateUrl: './user-detail-dialog.html',
 })
 export class UserDetailDialog {
@@ -18,6 +19,12 @@ export class UserDetailDialog {
   public router = inject(Router);
 
   public readonly user = signal<User>(this.config.data);
+
+  public getInitials(): string {
+    const first = this.user().firstName?.charAt(0) ?? '';
+    const last = this.user().lastName?.charAt(0) ?? '';
+    return (first + last).toUpperCase();
+  }
 
   public close() {
     this.ref.close();

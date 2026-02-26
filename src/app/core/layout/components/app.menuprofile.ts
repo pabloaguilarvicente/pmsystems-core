@@ -26,7 +26,7 @@ import { TranslateModule } from '@ngx-translate/core';
       pTooltip="Profile"
       [tooltipDisabled]="isTooltipDisabled()"
     >
-      <img src="images/user.jpg" alt="avatar" width="25" class="rounded-sm" />
+      <img src="images/user.png" alt="avatar" width="25" class="rounded-sm" />
       <span class="text-start">
         <strong>Pablo Aguilar</strong>
         <small>Software Developer</small>

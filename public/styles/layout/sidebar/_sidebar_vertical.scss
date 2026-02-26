@@ -52,27 +52,12 @@
 
         li.active-menuitem {
             > a {
-                color: var(--active-menuitem-text-color);
-
-                .layout-menuitem-icon {
-                    color: var(--active-menuitem-text-color);
-                }
-
                 .layout-submenu-toggler {
                     transform: rotate(-180deg);
                 }
             }
         }
-        a:has(.layout-submenu-toggler) {
-            color: var(--menuitem-text-color) !important;
 
-            .layout-menuitem-icon {
-                color: var(--menuitem-text-color) !important;
-            }
-            .layout-submenu-toggler {
-                color: var(--menuitem-text-color) !important;
-            }
-        }
         ul {
             margin: 0;
             padding: 0;

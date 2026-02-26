@@ -1,4 +1,4 @@
-import { Order, UiSettings } from '../../../core/models/core.model';
+import { Gender, Order, UiSettings } from '../../../core/models/core.model';
 
 export const Role = {
   Admin: 'ADMIN',
@@ -12,14 +12,6 @@ export const Status = {
   Inactive: 'INACTIVE',
 } as const;
 export type Status = (typeof Status)[keyof typeof Status];
-
-export const Gender = {
-  Male: 'MALE',
-  Female: 'FEMALE',
-  Other: 'OTHER',
-  PreferNotToSay: 'PREFER_NOT_TO_SAY',
-} as const;
-export type Gender = (typeof Gender)[keyof typeof Gender];
 
 export interface User {
   id: string;
@@ -38,12 +30,16 @@ export interface User {
 }
 
 export interface UserProfile {
-  picture: File | string;
+  picture: Picture;
   birthDate: string;
-  gender: Gender;
+  gender: UserGender;
   phone: string;
   bio: string;
   address: UserAddress;
+}
+
+export interface Picture {
+  url: string;
 }
 
 export interface UserAddress {
@@ -94,19 +90,20 @@ export interface CreateUserRequest {
   firstName: string;
   lastName: string;
   email: string;
-  username: string;
-  password: string;
   role: UserRole;
+  status: UserStatus;
+  profile: Omit<UserProfile, 'address'>;
 }
 
 export interface UpdateUserRequest {
   firstName: string;
   lastName: string;
   email: string;
-  username: string;
-  password: string;
   role: UserRole;
-  status: boolean;
+  status: UserStatus;
+  profile: UserProfile;
+  preferences: UserPreferences;
+  security: UserSecurity;
 }
 
 export interface UserFiltersParams {

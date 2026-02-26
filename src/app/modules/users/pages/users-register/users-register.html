@@ -5,7 +5,7 @@
         <div class="grid grid-cols-12 gap-x-4 gap-y-6" formGroupName="profile">
           <div class="col-span-12">
             <form-label for="picture" label="crud.profilePhoto"></form-label>
-            <form-picture formControlName="picture" mode="upload"></form-picture>
+            <form-picture formControlName="picture" [disabled]="true"></form-picture>
           </div>
           <div class="col-span-12">
             <form-label for="bio" label="bio.label"></form-label>
@@ -74,7 +74,6 @@
               [options]="roles"
               formControlName="role"
               optionLabel="name"
-              optionValue="code"
               [placeholder]="'select.placeholder' | translate"
               fluid="true"
               size="large"
@@ -88,7 +87,6 @@
               [options]="status"
               formControlName="status"
               optionLabel="name"
-              optionValue="code"
               [placeholder]="'select.placeholder' | translate"
               fluid="true"
               size="large"
@@ -110,6 +108,7 @@
                   [iconDisplay]="'input'"
                   [showIcon]="true"
                   size="large"
+                  fluid="true"
                 />
               </div>
               <div class="col-span-12 md:col-span-4">
@@ -119,7 +118,6 @@
                   [options]="genders"
                   formControlName="gender"
                   optionLabel="name"
-                  optionValue="code"
                   [placeholder]="'select.placeholder' | translate"
                   fluid="true"
                   size="large"
@@ -134,6 +132,7 @@
                   [placeholder]="'phone.placeholder' | translate"
                   fluid="true"
                   size="large"
+                  inputmode="numeric"
                 />
               </div>
             </div>
@@ -144,6 +143,7 @@
             <div class="flex justify-end">
               <p-button
                 (onClick)="register()"
+                [loading]="loading()"
                 [label]="'crud.register' | translate"
                 icon="ph-bold ph-floppy-disk"
                 iconPos="right"

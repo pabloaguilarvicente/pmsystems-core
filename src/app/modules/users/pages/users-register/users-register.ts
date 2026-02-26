@@ -1,19 +1,10 @@
-import { Component, inject } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Component, inject, signal } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
-import { UserGender, UserRole, UserStatus } from '../../models/users.model';
-import {
-  GENDERS,
-  ROLES,
-  STATUS,
-} from '../../../../core/helpers/constant.helper';
+import { CreateUserRequest, UserGender, UserRole, UserStatus } from '../../models/users.model';
+import { GENDERS, ROLES, STATUS } from '../../../../core/helpers/constant.helper';
 import { ButtonModule } from 'primeng/button';
 import { FormLabel } from '../../../../core/components/app-forms/form-label';
 import { FormPicture } from '../../../../core/components/app-forms/form-picture';
@@ -23,6 +14,9 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { TextareaModule } from 'primeng/textarea';
 import { MessageService } from 'primeng/api';
 import { markAllDirty } from '../../../../core/helpers/utils.helper';
+import { ToastService } from '../../../../core/services/toast.service';
+import { UsersService } from '../../services/users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'users-register',
@@ -39,34 +33,52 @@ import { markAllDirty } from '../../../../core/helpers/utils.helper';
     InputMaskModule,
     TextareaModule,
   ],
+  providers: [UsersService],
   templateUrl: './users-register.html',
 })
 export class UsersRegister {
   public readonly toast = inject(MessageService);
-  public readonly translateService = inject(TranslateService);
+  public readonly toastService = inject(ToastService);
+  public readonly usersService = inject(UsersService);
+  public readonly router = inject(Router);
+
+  public loading = signal<boolean>(false);
 
   public readonly roles: UserRole[] = ROLES;
   public readonly status: UserStatus[] = STATUS;
   public readonly genders: UserGender[] = GENDERS;
 
   public mainForm = new FormGroup({
-    firstName: new FormControl<string>('', [Validators.required]),
-    lastName: new FormControl<string>('', [Validators.required]),
-    email: new FormControl<string>('', [Validators.required]),
-    role: new FormControl<string>('', [Validators.required]),
-    status: new FormControl<string>('', [Validators.required]),
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required]),
+    role: new FormControl('', [Validators.required]),
+    status: new FormControl('', [Validators.required]),
     profile: new FormGroup({
-      picture: new FormControl<string>(''),
-      birthDate: new FormControl<string>(''),
-      gender: new FormControl<string>('', [Validators.required]),
-      phone: new FormControl<string>(''),
-      bio: new FormControl<string>(''),
+      picture: new FormControl(''),
+      birthDate: new FormControl(''),
+      gender: new FormControl('', [Validators.required]),
+      phone: new FormControl(''),
+      bio: new FormControl(''),
     }),
   });
 
   public register() {
     if (this.mainForm.valid) {
-      console.log(this.mainForm.getRawValue());
+      this.loading.set(true);
+      const formValue = this.mainForm.getRawValue();
+
+      this.usersService.create(formValue as unknown as CreateUserRequest).subscribe({
+        next: (response) => {
+          this.toastService.success({ title: 'Éxito', description: response.message });
+          this.loading.set(false);
+          this.redirectBack();
+        },
+        error: (error) => {
+          this.loading.set(false);
+          this.toastService.error({ title: 'Error', description: error.error.message });
+        },
+      });
     } else {
       this.handleInvalidForm();
     }
@@ -74,10 +86,10 @@ export class UsersRegister {
 
   private handleInvalidForm() {
     markAllDirty(this.mainForm);
-    this.toast.add({
-      severity: 'error',
-      summary: this.translateService.instant('status.pending'),
-      detail: this.translateService.instant('form.invalid'),
-    });
+    this.toastService.error({ title: 'status.pending', description: 'form.invalid', translate: true });
+  }
+
+  private redirectBack() {
+    this.router.navigate(['/users']);
   }
 }

@@ -21,6 +21,13 @@
         "update": "Actualizar",
         "upload": "Subir"
     },
+    "address": {
+        "city": "Ciudad",
+        "country": "País",
+        "state": "Estado / Región",
+        "street": "Dirección",
+        "zipCode": "Código postal"
+    },
     "analytics": {
         "label": "Analítica",
         "overview": "Resumen",
@@ -50,6 +57,12 @@
     "columns": {
         "hint": "Columnas que no se muestran en la tabla",
         "label": "Columnas"
+    },
+    "common": {
+        "disabled": "Deshabilitado",
+        "enabled": "Habilitado",
+        "notVerified": "No verificado",
+        "verified": "Verificado"
     },
     "confirmations": {
         "delete": {
@@ -105,7 +118,9 @@
         "updateEntity": "Actualizar {{value}}"
     },
     "date": {
-        "label": "Fecha"
+        "createdAt": "Fecha de creación",
+        "label": "Fecha",
+        "updatedAt": "Fecha de actualización"
     },
     "dateFilter": {
         "lastMonth": "Último mes",
@@ -229,7 +244,10 @@
         "placeholder": "Ingrese su número de teléfono"
     },
     "preferences": {
-        "label": "Preferencias"
+        "emailNotifications": "Notificaciones por correo",
+        "label": "Preferencias",
+        "notifications": "Notificaciones",
+        "timezone": "Zona horaria"
     },
     "primeng": {
         "accept": "Sí",
@@ -436,7 +454,13 @@
     },
     "security": {
         "credentials": "Credenciales",
-        "label": "Seguridad"
+        "emailVerified": "Correo verificado",
+        "failedAttempts": "Intentos fallidos de inicio de sesión",
+        "label": "Seguridad",
+        "lastLogin": "Último inicio de sesión",
+        "passwordChanged": "Última vez que cambió la contraseña",
+        "phoneVerified": "Teléfono verificado",
+        "twoFactor": "Autenticación en dos factores"
     },
     "select": {
         "label": "Seleccionar",

@@ -63,7 +63,7 @@ import { TranslateModule } from '@ngx-translate/core';
           routerLinkActive="active-route"
           [routerLinkActiveOptions]="
             item.routerLinkActiveOptions || {
-              paths: 'exact',
+              paths: 'subset',
               queryParams: 'ignored',
               matrixParams: 'ignored',
               fragment: 'ignored',
@@ -291,7 +291,7 @@ export class AppMenuitem implements OnInit, OnDestroy {
       if (
         link &&
         this.router.isActive(link, {
-          paths: 'exact',
+          paths: 'subset',
           queryParams: 'ignored',
           matrixParams: 'ignored',
           fragment: 'ignored',
@@ -308,7 +308,7 @@ export class AppMenuitem implements OnInit, OnDestroy {
 
   updateActiveStateFromRoute() {
     let activeRoute = this.router.isActive(this.item.routerLink[0], {
-      paths: 'exact',
+      paths: 'subset',
       queryParams: 'ignored',
       matrixParams: 'ignored',
       fragment: 'ignored',

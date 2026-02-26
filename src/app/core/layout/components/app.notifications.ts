@@ -11,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
       </li>
       <li class="p-4">
         <div class="flex items-center">
-          <img src="images/user.jpg" width="25" />
+          <img src="images/user.png" width="25" />
           <div class="flex flex-col ml-4 flex-1">
             <div class="flex items-center justify-between mb-1">
               <span class="font-bold">Jerome Bell</span>
@@ -23,7 +23,7 @@ import { TranslateModule } from '@ngx-translate/core';
       </li>
       <li class="p-4">
         <div class="flex items-center">
-          <img src="images/user.jpg" width="25" />
+          <img src="images/user.png" width="25" />
           <div class="flex flex-col ml-4 flex-1">
             <div class="flex items-center justify-between mb-1">
               <span class="fs-small font-bold">Cameron Williamson</span>
@@ -35,7 +35,7 @@ import { TranslateModule } from '@ngx-translate/core';
       </li>
       <li class="p-4">
         <div class="flex items-center">
-          <img src="images/user.jpg" width="25" />
+          <img src="images/user.png" width="25" />
           <div class="flex flex-col ml-4 flex-1">
             <div class="flex items-center justify-between mb-1">
               <span class="fs-small font-bold">Anna Miles</span>
@@ -47,7 +47,7 @@ import { TranslateModule } from '@ngx-translate/core';
       </li>
       <li class="p-4">
         <div class="flex items-center">
-          <img src="images/user.jpg" width="25" />
+          <img src="images/user.png" width="25" />
           <div class="flex flex-col ml-4 flex-1">
             <div class="flex items-center justify-between mb-1">
               <span class="fs-small font-bold">Arlene Mccoy</span>

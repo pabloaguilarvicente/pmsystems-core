@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
 import { Observable } from 'rxjs';
 import { ApiListResponse, ApiResponse, buildHttpParams } from '../../../core/helpers/api.helper';
-import { User, UserFiltersParams } from '../models/users.model';
+import { CreateUserRequest, UpdateUserRequest, User, UserFiltersParams } from '../models/users.model';
 import { PROGRESS_BAR } from '../../../core/interceptors/progress-bar.interceptor';
 
 @Injectable()
@@ -14,21 +14,18 @@ export class UsersService {
 
   getAll(queryParams: UserFiltersParams): Observable<ApiListResponse<User>> {
     let params = buildHttpParams(queryParams);
-    return this.http.get<ApiListResponse<User>>(`${this.API_URL}/${this.PATH}`, {
-      params,
-      headers: { [PROGRESS_BAR]: 'true' },
-    });
+    return this.http.get<ApiListResponse<User>>(`${this.API_URL}/${this.PATH}`, { params });
   }
 
   getById(id: number): Observable<ApiResponse<User>> {
     return this.http.get<ApiResponse<User>>(`${this.API_URL}/${this.PATH}/${id}`);
   }
 
-  create(user: Partial<User>): Observable<ApiResponse<User>> {
+  create(user: CreateUserRequest): Observable<ApiResponse<User>> {
     return this.http.post<ApiResponse<User>>(`${this.API_URL}/${this.PATH}`, user);
   }
 
-  update(id: number, user: User): Observable<ApiResponse<User>> {
+  update(id: number, user: UpdateUserRequest): Observable<ApiResponse<User>> {
     return this.http.put<ApiResponse<User>>(`${this.API_URL}/${this.PATH}/${id}`, user);
   }
 
@@ -37,6 +34,8 @@ export class UsersService {
   }
 
   delete(id: number): Observable<ApiResponse<User>> {
-    return this.http.delete<ApiResponse<User>>(`${this.API_URL}/${this.PATH}/${id}`);
+    return this.http.delete<ApiResponse<User>>(`${this.API_URL}/${this.PATH}/${id}`, {
+      headers: { [PROGRESS_BAR]: 'false' },
+    });
   }
 }

@@ -1,12 +1,5 @@
-import {
-  Gender,
-  Role,
-  Status,
-  UserGender,
-  UserRole,
-  UserStatus,
-} from '../../modules/users/models/users.model';
-import { SelectModel } from '../models/core.model';
+import { Role, Status, UserGender, UserRole, UserStatus } from '../../modules/users/models/users.model';
+import { Gender, SelectModel } from '../models/core.model';
 
 export const PRIMARY_COLOR: string = '#000f85';
 export const I18N_PATH: string = 'i18n/';
@@ -14,15 +7,15 @@ export const BREAKPOINTS = { '960px': '75vw', '640px': '90vw' };
 
 export const PRESET_COLORS: string[] = [
   PRIMARY_COLOR,
-  '#212121',   
-  '#2563EB',   
-  '#16A34A',   
-  '#DC2626',   
-  '#D97706',   
-  '#7C3AED',   
-  '#DB2777',   
-  '#0891B2',   
-  '#84CC16',   
+  '#212121',
+  '#2563EB',
+  '#16A34A',
+  '#DC2626',
+  '#D97706',
+  '#7C3AED',
+  '#DB2777',
+  '#0891B2',
+  '#84CC16',
 ];
 
 export const VIEW_AS: SelectModel[] = [
@@ -53,5 +46,4 @@ export const LOCAL_STORAGE_KEYS = {
   appSettings: 'appSettings',
 } as const;
 
-export type LocalStorageKey =
-  (typeof LOCAL_STORAGE_KEYS)[keyof typeof LOCAL_STORAGE_KEYS];
+export type LocalStorageKey = (typeof LOCAL_STORAGE_KEYS)[keyof typeof LOCAL_STORAGE_KEYS];
