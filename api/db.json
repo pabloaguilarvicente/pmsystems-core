@@ -78,50 +78,29 @@
       "deletedAt": null
     },
     {
-      "id": 2,
       "firstName": "María",
       "lastName": "García",
       "email": "maria.garcia@example.com",
-      "username": "mgarcia",
-      "roleId": 2,
-      "statusId": 1,
+      "role": {
+        "id": 2,
+        "code": "MODERATOR",
+        "name": "Moderador"
+      },
+      "status": {
+        "id": 1,
+        "code": "ACTIVE",
+        "name": "Activo"
+      },
       "profile": {
         "picture": "https://i.pravatar.cc/150?img=5",
-        "birthDate": "1992-07-22",
+        "birthDate": "1992-07-22T00:00:00.000Z",
         "gender": "FEMALE",
         "phone": "+34 623 456 789",
-        "bio": "Moderadora de contenido y comunidad.",
-        "address": {
-          "street": "Avenida de la Paz 34",
-          "city": "Barcelona",
-          "state": "Cataluña",
-          "country": "España",
-          "zipCode": "08001"
-        }
+        "bio": "Moderadora de contenido y comunidad."
       },
-      "preferences": {
-        "timezone": "Europe/Madrid",
-        "ui": {
-          "theme": "dark",
-          "language": "es",
-          "sidebarCollapsed": true
-        },
-        "notificationsEnabled": true,
-        "emailNotifications": false
-      },
-      "security": {
-        "emailVerified": true,
-        "phoneVerified": false,
-        "twoFactorEnabled": false,
-        "lastLoginAt": "2024-02-19T11:00:00.000Z",
-        "lastLoginIp": "10.0.0.5",
-        "passwordChangedAt": "2024-01-15T08:00:00.000Z",
-        "failedLoginAttempts": 0,
-        "lockedUntil": null
-      },
-      "createdAt": "2024-01-20T09:15:00.000Z",
-      "updatedAt": null,
-      "deletedAt": null
+      "updatedAt": "2026-03-04T16:16:35.921Z",
+      "deletedAt": null,
+      "id": 2
     },
     {
       "id": 3,
@@ -1224,8 +1203,8 @@
         "lockedUntil": null
       },
       "createdAt": "2024-02-21T10:00:00.000Z",
-      "updatedAt": null,
-      "deletedAt": null
+      "updatedAt": "2026-03-04T15:36:56.721Z",
+      "deletedAt": "2026-03-04T15:36:56.721Z"
     },
     {
       "id": 27,
@@ -1270,8 +1249,8 @@
         "lockedUntil": null
       },
       "createdAt": "2024-02-22T09:00:00.000Z",
-      "updatedAt": null,
-      "deletedAt": null
+      "updatedAt": "2026-03-04T15:35:36.467Z",
+      "deletedAt": "2026-03-04T15:35:36.467Z"
     },
     {
       "id": 28,
@@ -1408,8 +1387,8 @@
         "lockedUntil": null
       },
       "createdAt": "2024-02-22T12:00:00.000Z",
-      "updatedAt": null,
-      "deletedAt": null
+      "updatedAt": "2026-03-04T15:32:56.046Z",
+      "deletedAt": "2026-03-04T15:32:56.046Z"
     },
     {
       "firstName": "Pablo Mahir",
@@ -1437,71 +1416,41 @@
         "bio": "Desarrollador de software"
       },
       "createdAt": "2026-02-26T06:40:06.011Z",
-      "updatedAt": "2026-02-26T06:40:06.011Z",
-      "deletedAt": null,
+      "updatedAt": "2026-03-04T15:30:48.110Z",
+      "deletedAt": "2026-03-04T15:30:48.110Z",
       "username": "pabloaguilar",
       "id": 31
     },
     {
-
-  "firstName": "Pablo Mahir",
-  "lastName": "Aguilar Vicente",
-  "email": "pabloaguilar@gmail.com",
-  "username": "pabloaguilar",
-  "role": {
-    "id": 1,
-    "code": "ADMIN",
-    "name": "Administrador"
-  },
-  "status": {
-    "id": 1,
-    "code": "ACTIVE",
-    "name": "Activo"
-  },
-  "profile": {
-    "picture": {
-      "url": "https://i.pravatar.cc/150?img=12"
-    },
-    "birthDate": "1995-06-15T05:00:00.000Z",
-    "gender": {
-      "id": 1,
-      "code": "MALE",
-      "name": "Masculino"
-    },
-    "phone": "978 787 878",
-    "bio": "Desarrollador de software con más de 5 años de experiencia en aplicaciones web.",
-    "address": {
-      "street": "Av. Los Pinos 342",
-      "city": "Lima",
-      "state": "Lima",
-      "country": "Perú",
-      "zipCode": "15001"
+      "firstName": "Pablo Mahir",
+      "lastName": "Aguilar Vicente",
+      "email": "pabloaguilar@gmail.com",
+      "role": {
+        "id": 1,
+        "code": "ADMIN",
+        "name": "Administrador"
+      },
+      "status": {
+        "id": 1,
+        "code": "ACTIVE",
+        "name": "Activo"
+      },
+      "profile": {
+        "picture": {
+          "url": "https://i.pravatar.cc/150?img=12"
+        },
+        "birthDate": "1995-06-15T05:00:00.000Z",
+        "gender": {
+          "id": 1,
+          "code": "MALE",
+          "name": "Masculino"
+        },
+        "phone": "913 682 410",
+        "bio": "Desarrollador de software con más de 5 años de experiencia en aplicaciones web."
+      },
+      "updatedAt": "2026-03-04T16:16:19.080Z",
+      "deletedAt": "2026-03-04T16:16:19.080Z",
+      "id": 32
     }
-  },
-  "preferences": {
-    "timezone": "America/Lima",
-    "ui": {
-      "theme": "dark",
-      "language": "es",
-      "density": "comfortable"
-    },
-    "notificationsEnabled": true,
-    "emailNotifications": false
-  },
-  "security": {
-    "emailVerified": true,
-    "phoneVerified": false,
-    "twoFactorEnabled": false,
-    "lastLoginAt": "2026-02-25T14:32:00.000Z",
-    "lastLoginIp": "190.232.45.12",
-    "passwordChangedAt": "2026-01-10T08:00:00.000Z",
-    "failedLoginAttempts": 0,
-    "lockedUntil": null
-  },
-  "createdAt": "2026-02-26T06:40:06.011Z",
-  "updatedAt": "2026-02-26T06:40:06.011Z",
-  "deletedAt": null,
-    "id": 32
-}
   ]
 }

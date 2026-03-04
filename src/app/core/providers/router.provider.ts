@@ -1,5 +1,6 @@
 import {
   provideRouter,
+  withComponentInputBinding,
   withEnabledBlockingInitialNavigation,
   withInMemoryScrolling,
   withViewTransitions,
@@ -8,6 +9,7 @@ import { appRoutes } from '../../app.routes';
 
 export const PROVIDE_ROUTER = provideRouter(
   appRoutes,
+  withComponentInputBinding(),
   withViewTransitions(),
   withInMemoryScrolling({
     anchorScrolling: 'enabled',

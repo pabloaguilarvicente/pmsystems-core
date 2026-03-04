@@ -14,7 +14,7 @@ export const Status = {
 export type Status = (typeof Status)[keyof typeof Status];
 
 export interface User {
-  id: string;
+  id: number;
   firstName: string;
   lastName: string;
   email: string;

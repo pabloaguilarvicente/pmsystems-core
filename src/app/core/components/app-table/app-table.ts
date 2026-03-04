@@ -1,4 +1,4 @@
-import { Component, computed, input, output, ViewChild } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
@@ -7,7 +7,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LocaleDatePipe } from '../../pipes/locale-date-pipe.pipe';
 import { AppMessages } from '../app-messages';
 import { AppPaginator, PaginatorChangeEvent } from '../app-paginator';
-import { AppConfirmationDialog } from '../app-confirmation-dialog/app-confirmation-dialog';
 import { SkeletonPaginator } from '../app-skeletons/skeleton-paginator';
 import { Column, TableInput } from './app-table.model';
 
@@ -22,14 +21,11 @@ import { Column, TableInput } from './app-table.model';
     LocaleDatePipe,
     AppMessages,
     AppPaginator,
-    AppConfirmationDialog,
     SkeletonPaginator,
   ],
   templateUrl: './app-table.html',
 })
 export class AppTable {
-  @ViewChild(AppConfirmationDialog) confirmDialog!: AppConfirmationDialog;
-
   public readonly config = input.required<TableInput>();
 
   public readonly lazyLoad = output<any>();
@@ -51,12 +47,12 @@ export class AppTable {
     this.pageChange.emit(event);
   }
 
-  confirm(config: any) {
-    this.confirmDialog.confirm(config);
-  }
-
   getSkeletonRows(): any[] {
     const rowCount = this.config().pagination?.pageSize ?? 5;
     return Array.from({ length: rowCount }, (_, i) => ({ id: `skeleton-${i}` }));
+  }
+
+  public onRowSelect(event: any) {
+    this.config().onRowClick?.(event.data);
   }
 }

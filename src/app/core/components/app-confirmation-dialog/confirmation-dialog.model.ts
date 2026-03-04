@@ -1,4 +1,5 @@
 import { ButtonSeverity } from 'primeng/button';
+import { Observable } from 'rxjs';
 
 export type ConfirmationType = 'delete' | 'save' | 'warn' | 'info' | 'success' | 'primary';
 
@@ -15,7 +16,7 @@ export interface ConfirmationConfig {
   successMessage?: string;
   errorMessage?: string;
   showSuccessToast?: boolean;
-  onAccept?: () => void | Promise<void>;
+  action$?: Observable<any>;
   onReject?: () => void;
 }
 

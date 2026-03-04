@@ -4,6 +4,9 @@
   [lazy]="config().lazy ?? true"
   (onLazyLoad)="onLazyLoad($event)"
   [sortOrder]="-1"
+  [selectionMode]="config().onRowClick ? 'single' : null"
+  (onRowSelect)="onRowSelect($event)"
+  [rowHover]="!!config().onRowClick"
 >
   <!-- Header dinámico -->
   <ng-template pTemplate="header" let-columns>
@@ -26,7 +29,7 @@
 
   <!-- Body dinámico -->
   <ng-template pTemplate="body" let-item let-columns="columns">
-    <tr>
+    <tr [pSelectableRow]="item">
       @for (col of columns; track col.field) {
       <td
         [style.text-align]="col.cellAlign || 'left'"
@@ -90,5 +93,3 @@
 } @if (config().loading) {
 <skeleton-paginator />
 }
-
-<app-confirmation-dialog />

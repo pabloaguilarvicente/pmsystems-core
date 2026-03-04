@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal, ViewChild } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { User, UserFiltersParams } from '../../models/users.model';
 import { ApiListResponse } from '../../../../core/helpers/api.helper';
@@ -8,7 +8,8 @@ import { AppTitlePage } from '../../../../core/components/app-title-page';
 import { Router } from '@angular/router';
 import { PaginatorChangeEvent } from '../../../../core/components/app-paginator';
 import { AppTable } from '../../../../core/components/app-table/app-table';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService } from 'primeng/dynamicdialog';
+import { AppConfirmationDialog } from '../../../../core/components/app-confirmation-dialog/app-confirmation-dialog';
 import { UserDetailDialog } from '../../components/user-detail-dialog/user-detail-dialog';
 import { BREAKPOINTS, ROLES, STATUS } from '../../../../core/helpers/constant.helper';
 import { AppFilters } from '../../../../core/components/app-filters/app-filters';
@@ -23,9 +24,6 @@ import { Order } from '../../../../core/models/core.model';
   providers: [UsersService, DialogService],
 })
 export class UsersMain {
-  public ref: DynamicDialogRef | undefined;
-  @ViewChild(AppTable) table!: AppTable;
-
   public readonly userService = inject(UsersService);
   public readonly router = inject(Router);
   public readonly dialogService = inject(DialogService);
@@ -107,24 +105,16 @@ export class UsersMain {
     columns: this.cols(),
     data: this.response()?.data ?? [],
     loading: this.isLoading(),
-    pagination: this.response()?.pagination
-      ? {
-          ...this.response()!.pagination,
-          restoreParams: true,
-        }
-      : null,
+    pagination: this.response()?.pagination ? { ...this.response()!.pagination, restoreParams: true } : null,
     lazy: true,
+    onRowClick: (item: User) => this.showDetail(item),
   }));
 
   public filtersConfig: AppFiltersConfig = {
     search: { restoreParams: true },
     columns: { restoreParams: true, columns: this.cols() },
     viewAs: { restoreParams: true, defaultView: 'LIST' },
-    date: {
-      restoreParams: true,
-      selectionMode: 'range',
-      showQuickFilters: true,
-    },
+    date: { restoreParams: true, selectionMode: 'range', showQuickFilters: true },
     menu: [
       {
         filter: 'role',
@@ -208,21 +198,34 @@ export class UsersMain {
   }
 
   private confirmDelete(item: User) {
-    this.table.confirm({
-      type: 'delete',
-      header: item.firstName + ' ' + item.lastName,
+    const ref = this.dialogService.open(AppConfirmationDialog, {
+      width: '30vw',
+      modal: true,
+      breakpoints: BREAKPOINTS,
+      dismissableMask: false,
+      closable: false,
+      showHeader: false,
+      data: {
+        type: 'delete',
+        header: item.firstName + ' ' + item.lastName,
+        action$: this.userService.delete(item.id),
+      },
+    });
+
+    ref?.onClose.subscribe((confirmed) => {
+      if (confirmed) this.getAll();
     });
   }
 
   private showDetail(data: User) {
-    this.ref = this.dialogService.open(UserDetailDialog, {
+    this.dialogService.open(UserDetailDialog, {
       width: '60vw',
       modal: true,
       breakpoints: BREAKPOINTS,
       data: data,
       dismissableMask: true,
       closable: true,
-    })!;
+    });
   }
 
   public onFiltersChange(filters: AppFiltersOutput): void {

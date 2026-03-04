@@ -65,4 +65,6 @@ export interface TableInput<T = any> {
 
   /** Indica si es lazy loading */
   lazy?: boolean;
+
+  onRowClick?: (rowData: T) => void;
 }

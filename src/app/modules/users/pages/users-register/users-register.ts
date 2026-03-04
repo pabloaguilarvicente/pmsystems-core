@@ -12,7 +12,6 @@ import { FormTitle } from '../../../../core/components/app-forms/form-title';
 import { DatePickerModule } from 'primeng/datepicker';
 import { InputMaskModule } from 'primeng/inputmask';
 import { TextareaModule } from 'primeng/textarea';
-import { MessageService } from 'primeng/api';
 import { markAllDirty } from '../../../../core/helpers/utils.helper';
 import { ToastService } from '../../../../core/services/toast.service';
 import { UsersService } from '../../services/users.service';
@@ -37,7 +36,6 @@ import { Router } from '@angular/router';
   templateUrl: './users-register.html',
 })
 export class UsersRegister {
-  public readonly toast = inject(MessageService);
   public readonly toastService = inject(ToastService);
   public readonly usersService = inject(UsersService);
   public readonly router = inject(Router);
