@@ -69,7 +69,7 @@
             "error": "Error al eliminar el registro",
             "header": "Confirmar eliminación",
             "message": "¿Está seguro que desea eliminar este registro? Esta acción no se puede deshacer.",
-            "success": "registro eliminado correctamente"
+            "success": "Registro eliminado correctamente"
         },
         "info": {
             "error": "Error al procesar",
