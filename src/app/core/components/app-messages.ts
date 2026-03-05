@@ -21,7 +21,7 @@ export interface AppMessage {
   imports: [NgClass, TranslateModule],
   template: `
     <div
-      class="flex flex-col items-center justify-center text-center p-6 
+      class="h-full w-full flex flex-col items-center justify-center text-center p-6 
             text-gray-900 dark:text-gray-100"
     >
       @if (message().image) {

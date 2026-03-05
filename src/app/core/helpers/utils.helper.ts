@@ -1,4 +1,5 @@
 import { FormGroup } from '@angular/forms';
+import { LOCAL_STORAGE_KEYS, PRIMARY_COLOR } from './constant.helper';
 
 export function markAllDirty(group: FormGroup): void {
   group.markAsTouched();
@@ -12,4 +13,10 @@ export function markAllDirty(group: FormGroup): void {
       control?.markAsDirty();
     }
   });
+}
+
+export function getPrimaryColor(): string {
+  const savedSettings = localStorage.getItem(LOCAL_STORAGE_KEYS.uiSettings);
+  const color = savedSettings ? (JSON.parse(savedSettings)?.primaryColor ?? PRIMARY_COLOR) : PRIMARY_COLOR;
+  return color;
 }

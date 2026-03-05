@@ -1,7 +1,23 @@
 <div class="grid grid-cols-12 gap-4">
   <div class="col-span-12">
+    <app-title-page title="analytics.overview" />
+  </div>
+
+  <div class="col-span-12 md:col-span-4">
     <div class="card">
-      <app-title-page title="analytics.overview" />
+      <app-chart type="line" [series]="revenueSeries" [config]="revenueConfig" />
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-4">
+    <div class="card">
+      <app-chart type="area" [series]="activeUsersSeries" [config]="activeUsersConfig"  />
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-4">
+    <div class="card">
+      <app-chart type="donut" [series]="deviceDistributionSeries" [config]="deviceDistributionConfig"  />
     </div>
   </div>
 </div>

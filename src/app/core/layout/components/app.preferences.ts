@@ -43,9 +43,7 @@ import { PRESET_COLORS, PRIMARY_COLOR } from '../../helpers/constant.helper';
               <div
                 class="flex h-20 items-center justify-center overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
                 [ngClass]="
-                  currentLanguage === 'es'
-                    ? 'border-primary border-3'
-                    : 'border-surface-200 dark:border-surface-700'
+                  currentLanguage === 'es' ? 'border-primary border-3' : 'border-surface-200 dark:border-surface-700'
                 "
               >
                 <img src="images/flags/PE.png" alt="" width="30" />
@@ -63,9 +61,7 @@ import { PRESET_COLORS, PRIMARY_COLOR } from '../../helpers/constant.helper';
               <div
                 class="flex h-20 items-center justify-center overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
                 [ngClass]="
-                  currentLanguage === 'en'
-                    ? 'border-primary border-3'
-                    : 'border-surface-200 dark:border-surface-700'
+                  currentLanguage === 'en' ? 'border-primary border-3' : 'border-surface-200 dark:border-surface-700'
                 "
               >
                 <img src="images/flags/US.png" alt="" width="30" />
@@ -88,11 +84,7 @@ import { PRESET_COLORS, PRIMARY_COLOR } from '../../helpers/constant.helper';
             <div class="flex cursor-pointer flex-col" (click)="darkTheme = false">
               <div
                 class="flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
-                [ngClass]="
-                  !darkTheme
-                    ? 'border-primary border-3'
-                    : 'border-surface-200 dark:border-surface-700'
-                "
+                [ngClass]="!darkTheme ? 'border-primary border-3' : 'border-surface-200 dark:border-surface-700'"
               >
                 <div class="flex flex-auto flex-col bg-white">
                   <div class="h-3 bg-gray-100 border-b border-gray-200">
@@ -122,11 +114,7 @@ import { PRESET_COLORS, PRIMARY_COLOR } from '../../helpers/constant.helper';
             <div class="flex cursor-pointer flex-col" (click)="darkTheme = true">
               <div
                 class="flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
-                [ngClass]="
-                  darkTheme
-                    ? 'border-primary border-3'
-                    : 'border-surface-200 dark:border-surface-700'
-                "
+                [ngClass]="darkTheme ? 'border-primary border-3' : 'border-surface-200 dark:border-surface-700'"
               >
                 <div class="flex flex-auto flex-col bg-gray-900">
                   <div class="h-3 bg-gray-800 border-b border-gray-700">
@@ -175,9 +163,7 @@ import { PRESET_COLORS, PRIMARY_COLOR } from '../../helpers/constant.helper';
                 <div
                   class="flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
                   [ngClass]="
-                    menuMode === 'static'
-                      ? 'border-primary border-3'
-                      : 'border-surface-200 dark:border-surface-700'
+                    menuMode === 'static' ? 'border-primary border-3' : 'border-surface-200 dark:border-surface-700'
                   "
                 >
                   <div class="w-8 bg-surface-100 dark:bg-surface-800">
@@ -188,17 +174,11 @@ import { PRESET_COLORS, PRIMARY_COLOR } from '../../helpers/constant.helper';
                       <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
                     </div>
                   </div>
-                  <div
-                    class="flex flex-auto flex-col border-l border-surface-200 dark:border-surface-700"
-                  >
+                  <div class="flex flex-auto flex-col border-l border-surface-200 dark:border-surface-700">
                     <div class="h-3 bg-surface-100 dark:bg-surface-800">
                       <div class="mr-1.5 flex h-full items-center justify-end">
-                        <div
-                          class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
-                        ></div>
-                        <div
-                          class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
-                        ></div>
+                        <div class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"></div>
+                        <div class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"></div>
                       </div>
                     </div>
                     <div
@@ -219,20 +199,14 @@ import { PRESET_COLORS, PRIMARY_COLOR } from '../../helpers/constant.helper';
                 <div
                   class="flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
                   [ngClass]="
-                    menuMode === 'overlay'
-                      ? 'border-primary border-3'
-                      : 'border-surface-200 dark:border-surface-700'
+                    menuMode === 'overlay' ? 'border-primary border-3' : 'border-surface-200 dark:border-surface-700'
                   "
                 >
                   <div class="flex flex-auto flex-col">
                     <div class="h-3 bg-surface-100 dark:bg-surface-800">
                       <div class="mr-1.5 flex h-full items-center justify-end">
-                        <div
-                          class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
-                        ></div>
-                        <div
-                          class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
-                        ></div>
+                        <div class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"></div>
+                        <div class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"></div>
                       </div>
                     </div>
                     <div
@@ -261,9 +235,7 @@ import { PRESET_COLORS, PRIMARY_COLOR } from '../../helpers/constant.helper';
                 <div
                   class="flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
                   [ngClass]="
-                    menuMode === 'slim'
-                      ? 'border-primary border-3'
-                      : 'border-surface-200 dark:border-surface-700'
+                    menuMode === 'slim' ? 'border-primary border-3' : 'border-surface-200 dark:border-surface-700'
                   "
                 >
                   <div class="w-5 bg-surface-100 dark:bg-surface-800">
@@ -274,17 +246,11 @@ import { PRESET_COLORS, PRIMARY_COLOR } from '../../helpers/constant.helper';
                       <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
                     </div>
                   </div>
-                  <div
-                    class="flex flex-auto flex-col border-l border-surface-200 dark:border-surface-700"
-                  >
+                  <div class="flex flex-auto flex-col border-l border-surface-200 dark:border-surface-700">
                     <div class="h-3 bg-surface-100 dark:bg-surface-800">
                       <div class="mr-1.5 flex h-full items-center justify-end">
-                        <div
-                          class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
-                        ></div>
-                        <div
-                          class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
-                        ></div>
+                        <div class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"></div>
+                        <div class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"></div>
                       </div>
                     </div>
                     <div
@@ -305,9 +271,7 @@ import { PRESET_COLORS, PRIMARY_COLOR } from '../../helpers/constant.helper';
                 <div
                   class="flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
                   [ngClass]="
-                    menuMode === 'slim-plus'
-                      ? 'border-primary border-3'
-                      : 'border-surface-200 dark:border-surface-700'
+                    menuMode === 'slim-plus' ? 'border-primary border-3' : 'border-surface-200 dark:border-surface-700'
                   "
                 >
                   <div class="w-7 bg-surface-100 dark:bg-surface-800">
@@ -318,17 +282,11 @@ import { PRESET_COLORS, PRIMARY_COLOR } from '../../helpers/constant.helper';
                       <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
                     </div>
                   </div>
-                  <div
-                    class="flex flex-auto flex-col border-l border-surface-200 dark:border-surface-700"
-                  >
+                  <div class="flex flex-auto flex-col border-l border-surface-200 dark:border-surface-700">
                     <div class="h-3 bg-surface-100 dark:bg-surface-800">
                       <div class="mr-1.5 flex h-full items-center justify-end">
-                        <div
-                          class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
-                        ></div>
-                        <div
-                          class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"
-                        ></div>
+                        <div class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"></div>
+                        <div class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"></div>
                       </div>
                     </div>
                     <div
@@ -349,9 +307,7 @@ import { PRESET_COLORS, PRIMARY_COLOR } from '../../helpers/constant.helper';
                 <div
                   class="flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
                   [ngClass]="
-                    menuMode === 'drawer'
-                      ? 'border-primary border-3'
-                      : 'border-surface-200 dark:border-surface-700'
+                    menuMode === 'drawer' ? 'border-primary border-3' : 'border-surface-200 dark:border-surface-700'
                   "
                 >
                   <div class="flex flex-auto flex-col">
@@ -386,9 +342,7 @@ import { PRESET_COLORS, PRIMARY_COLOR } from '../../helpers/constant.helper';
                 <div
                   class="flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
                   [ngClass]="
-                    menuMode === 'horizontal'
-                      ? 'border-primary border-3'
-                      : 'border-surface-200 dark:border-surface-700'
+                    menuMode === 'horizontal' ? 'border-primary border-3' : 'border-surface-200 dark:border-surface-700'
                   "
                 >
                   <div
@@ -427,12 +381,8 @@ import { PRESET_COLORS, PRIMARY_COLOR } from '../../helpers/constant.helper';
                   "
                 >
                   <div class="w-8 bg-surface-100 dark:bg-surface-800">
-                    <div
-                      class="mx-1.5 mt-2 mb-2 pb-2 border-b border-surface-200 dark:border-surface-700"
-                    >
-                      <div
-                        class="h-3 w-3 mx-auto rounded-full bg-surface-300 dark:bg-surface-600"
-                      ></div>
+                    <div class="mx-1.5 mt-2 mb-2 pb-2 border-b border-surface-200 dark:border-surface-700">
+                      <div class="h-3 w-3 mx-auto rounded-full bg-surface-300 dark:bg-surface-600"></div>
                     </div>
                     <div class="mx-1.5 space-y-1">
                       <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
@@ -440,9 +390,7 @@ import { PRESET_COLORS, PRIMARY_COLOR } from '../../helpers/constant.helper';
                       <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
                     </div>
                   </div>
-                  <div
-                    class="flex flex-auto flex-col border-l border-surface-200 dark:border-surface-700"
-                  >
+                  <div class="flex flex-auto flex-col border-l border-surface-200 dark:border-surface-700">
                     <div class="h-3 bg-surface-100 dark:bg-surface-800"></div>
                     <div
                       class="flex flex-auto border-t border-surface-200 bg-surface-0 dark:border-surface-700 dark:bg-surface-900"
@@ -473,17 +421,11 @@ import { PRESET_COLORS, PRIMARY_COLOR } from '../../helpers/constant.helper';
                       <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
                       <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
                     </div>
-                    <div
-                      class="mx-1.5 mt-6 pt-2 border-t border-surface-200 dark:border-surface-700"
-                    >
-                      <div
-                        class="h-3 w-3 mx-auto rounded-full bg-surface-300 dark:bg-surface-600"
-                      ></div>
+                    <div class="mx-1.5 mt-6 pt-2 border-t border-surface-200 dark:border-surface-700">
+                      <div class="h-3 w-3 mx-auto rounded-full bg-surface-300 dark:bg-surface-600"></div>
                     </div>
                   </div>
-                  <div
-                    class="flex flex-auto flex-col border-l border-surface-200 dark:border-surface-700"
-                  >
+                  <div class="flex flex-auto flex-col border-l border-surface-200 dark:border-surface-700">
                     <div class="h-3 bg-surface-100 dark:bg-surface-800"></div>
                     <div
                       class="flex flex-auto border-t border-surface-200 bg-surface-0 dark:border-surface-700 dark:bg-surface-900"
@@ -551,6 +493,14 @@ export class AppPreferences {
 
   get primaryColor(): string {
     return this.layoutService.layoutConfig().primaryColor ?? PRIMARY_COLOR;
+  }
+
+  get isDarkTheme(): boolean {
+    return this.layoutService.isDarkTheme();
+  }
+
+  get currentPrimaryColor(): string {
+    return this.layoutService.currentPrimaryColor();
   }
 
   get visible() {

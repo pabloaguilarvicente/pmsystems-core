@@ -1,7 +1,23 @@
 <div class="grid grid-cols-12 gap-4">
   <div class="col-span-12">
+    <app-title-page title="analytics.reports" />
+  </div>
+
+  <div class="col-span-12 md:col-span-4">
     <div class="card">
-      <app-title-page title="analytics.reports" />
+      <app-chart type="column" [series]="annualRevenueSeries" [config]="annualRevenueConfig" />
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-4">
+    <div class="card">
+      <app-chart type="bar" [series]="conversionFunnelSeries" [config]="conversionFunnelConfig" />
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-4">
+    <div class="card">
+      <app-chart type="donut" [series]="revenueByCategorySeries" [config]="revenueByCategoryConfig" />
     </div>
   </div>
 </div>

@@ -66,6 +66,9 @@
               "node_modules/@phosphor-icons/web/src/duotone/style.css",
               "public/styles/layout/layout.scss",
               "src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/apexcharts/dist/apexcharts.min.js"
             ]
           },
           "configurations": {

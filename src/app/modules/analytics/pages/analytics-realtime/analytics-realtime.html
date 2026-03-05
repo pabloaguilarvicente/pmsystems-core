@@ -1,7 +1,23 @@
 <div class="grid grid-cols-12 gap-4">
   <div class="col-span-12">
+    <app-title-page title="analytics.realtime" />
+  </div>
+
+  <div class="col-span-12 md:col-span-4">
     <div class="card">
-      <app-title-page title="analytics.realtime" />
+      <app-chart type="area" [series]="onlineUsersSeries" [config]="onlineUsersConfig" />
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-4">
+    <div class="card">
+      <app-chart type="line" [series]="eventsPerSecondSeries" [config]="eventsPerSecondConfig" />
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-4">
+    <div class="card">
+      <app-chart type="bar" [series]="latencyByRegionSeries" [config]="latencyByRegionConfig" />
     </div>
   </div>
 </div>
