@@ -22,8 +22,12 @@ export const appRoutes: Routes = [
         component: AppErrorPage,
         canActivate: [errorGuard],
       },
-      { path: '', redirectTo: 'analytics', pathMatch: 'full' },
+      { path: '', redirectTo: '/auth', pathMatch: 'full' },
     ],
   },
-  { path: '**', redirectTo: 'analytics' },
+  {
+    path: 'auth',
+    loadChildren: () => import('./modules/auth/auth.routes').then((m) => m.default),
+  },
+  { path: '**', redirectTo: '/auth' },
 ];

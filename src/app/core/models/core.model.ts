@@ -28,6 +28,11 @@ export interface AppSettings {
   global: GlobalState;
 }
 
+export interface AppAuth {
+  token: string;
+  expiresAt?: number;
+}
+
 export interface GlobalState {
   role: string;
   rememberMe: boolean | null;

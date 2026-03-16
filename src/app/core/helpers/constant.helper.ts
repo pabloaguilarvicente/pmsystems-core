@@ -25,8 +25,7 @@ export const VIEW_AS: SelectModel[] = [
 
 export const ROLES: UserRole[] = [
   { id: 1, code: Role.Admin, name: 'Administrador' },
-  { id: 2, code: Role.Moderator, name: 'Moderador' },
-  { id: 3, code: Role.User, name: 'Usuario' },
+  { id: 2, code: Role.User, name: 'Usuario' },
 ];
 
 export const STATUS: UserStatus[] = [
@@ -44,6 +43,7 @@ export const GENDERS: UserGender[] = [
 export const LOCAL_STORAGE_KEYS = {
   uiSettings: 'uiSettings',
   appSettings: 'appSettings',
+  auth: 'auth',
 } as const;
 
 export type LocalStorageKey = (typeof LOCAL_STORAGE_KEYS)[keyof typeof LOCAL_STORAGE_KEYS];

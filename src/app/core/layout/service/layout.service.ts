@@ -3,21 +3,15 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { MenuItem } from 'primeng/api';
 import { LocalStorageService } from '../../services/localstorage.service';
-import { LOCAL_STORAGE_KEYS, PRIMARY_COLOR } from '../../helpers/constant.helper';
+import { LOCAL_STORAGE_KEYS } from '../../helpers/constant.helper';
 import { TranslateService } from '@ngx-translate/core';
 import { PrimeNG } from 'primeng/config';
 import { UiSettings } from '../../models/core.model';
 import { applyPrimaryPalette } from '../preset';
+import { getPrimaryColor } from '../../helpers/utils.helper';
 
 export type ColorScheme = 'light' | 'dark';
-export type MenuMode =
-  | 'static'
-  | 'overlay'
-  | 'slim-plus'
-  | 'slim'
-  | 'horizontal'
-  | 'reveal'
-  | 'drawer';
+export type MenuMode = 'static' | 'overlay' | 'slim-plus' | 'slim' | 'horizontal' | 'reveal' | 'drawer';
 export type MenuProfilePosition = 'start' | 'end';
 export type Language = 'es' | 'en';
 
@@ -77,7 +71,7 @@ export class LayoutService {
     topbarTheme: 'light',
     menuProfilePosition: 'end',
     language: 'es',
-    primaryColor: PRIMARY_COLOR,
+    primaryColor: getPrimaryColor(),
   };
 
   private readonly DEFAULT_STATE: LayoutState = {
@@ -125,13 +119,9 @@ export class LayoutService {
 
   readonly isSlim: Signal<boolean> = computed(() => this.layoutConfig().menuMode === 'slim');
 
-  readonly isSlimPlus: Signal<boolean> = computed(
-    () => this.layoutConfig().menuMode === 'slim-plus',
-  );
+  readonly isSlimPlus: Signal<boolean> = computed(() => this.layoutConfig().menuMode === 'slim-plus');
 
-  readonly isHorizontal: Signal<boolean> = computed(
-    () => this.layoutConfig().menuMode === 'horizontal',
-  );
+  readonly isHorizontal: Signal<boolean> = computed(() => this.layoutConfig().menuMode === 'horizontal');
 
   readonly isStatic: Signal<boolean> = computed(() => this.layoutConfig().menuMode === 'static');
 
@@ -205,7 +195,7 @@ export class LayoutService {
 
     const isDark = savedSettings.colorScheme === 'dark';
     const language = savedSettings.language || 'es';
-    const primaryColor = savedSettings.primaryColor || PRIMARY_COLOR;
+    const primaryColor = getPrimaryColor();
 
     this.layoutConfig.set({
       ...this.DEFAULT_CONFIG,

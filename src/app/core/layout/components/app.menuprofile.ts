@@ -1,12 +1,4 @@
-import {
-  Component,
-  computed,
-  effect,
-  ElementRef,
-  inject,
-  OnDestroy,
-  Renderer2,
-} from '@angular/core';
+import { Component, computed, effect, ElementRef, inject, OnDestroy, Renderer2 } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
@@ -15,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LayoutService } from '../service/layout.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthService } from '../../../modules/auth/services/auth.service';
 
 @Component({
   selector: '[app-menu-profile]',
@@ -61,7 +54,7 @@ import { TranslateModule } from '@ngx-translate/core';
         </li>
 
         <li [pTooltip]="'auth.logout' | translate" [tooltipDisabled]="isTooltipDisabled()">
-          <button class="cursor-pointer">
+          <button class="cursor-pointer" (click)="logout()">
             <i class="ph-thin ph-power"></i>
             <span>{{ 'auth.logout' | translate }}</span>
           </button>
@@ -89,15 +82,13 @@ import { TranslateModule } from '@ngx-translate/core';
   },
 })
 export class AppMenuProfile implements OnDestroy {
-  layoutService = inject(LayoutService);
-
-  renderer = inject(Renderer2);
+  public readonly layoutService = inject(LayoutService);
+  private readonly authService = inject(AuthService);
+  private readonly renderer = inject(Renderer2);
 
   el = inject(ElementRef);
 
-  isHorizontal = computed(
-    () => this.layoutService.isHorizontal() && this.layoutService.isDesktop(),
-  );
+  isHorizontal = computed(() => this.layoutService.isHorizontal() && this.layoutService.isDesktop());
 
   menuProfileActive = computed(() => this.layoutService.layoutState().menuProfileActive);
 
@@ -132,8 +123,7 @@ export class AppMenuProfile implements OnDestroy {
       this.outsideClickListener = this.renderer.listen(document, 'click', (event: MouseEvent) => {
         if (this.menuProfileActive()) {
           const isOutsideClicked = !(
-            this.el.nativeElement.isSameNode(event.target) ||
-            this.el.nativeElement.contains(event.target)
+            this.el.nativeElement.isSameNode(event.target) || this.el.nativeElement.contains(event.target)
           );
           if (isOutsideClicked) {
             this.layoutService.layoutState.update((value) => ({
@@ -175,5 +165,9 @@ export class AppMenuProfile implements OnDestroy {
     }
     layoutState.configSidebarVisible = !layoutState.configSidebarVisible;
     this.layoutService.layoutState.set({ ...layoutState });
+  }
+
+  public logout() {
+    this.authService.logout();
   }
 }

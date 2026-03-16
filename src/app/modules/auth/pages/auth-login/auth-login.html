@@ -1,0 +1,144 @@
+<div class="min-h-screen flex bg-surface-ground">
+  <!-- Panel formulario 35% -->
+  <div class="w-full lg:w-[35%] flex items-center justify-center px-8 py-12 bg-surface-0 relative z-10">
+    <!-- Separador derecho sutil -->
+    <div class="hidden lg:block absolute top-0 right-0 w-px h-full bg-linear-to-b from-transparent via-primary/30 to-transparent"></div>
+
+    <div class="w-full max-w-sm flex flex-col gap-3">
+      <!-- Logo -->
+      <div class="flex flex-col items-center gap-1 text-center">
+        <div class="flex flex-col items-center gap-2">
+          <i class="ph-duotone ph-chalkboard-simple logo-icon text-8xl! text-primary"></i>
+          <span class="font-black whitespace-nowrap text-primary tracking-wide text-xl">PM SYSTEMS</span>
+        </div>
+        <p class="text-sm font-light text-surface-500 mt-1">{{ 'auth.loginDescription' | translate }}</p>
+      </div>
+
+      <!-- Card formulario -->
+      <div class="card">
+        <form [formGroup]="mainForm" class="flex flex-col gap-6">
+          <!-- Selector de rol -->
+          <div class="flex flex-col gap-2">
+            <label class="text-sm font-medium text-surface-700">{{ 'auth.loginAs' | translate }}</label>
+            <div class="flex gap-2">
+              <button
+                type="button"
+                class="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg border-2 transition-all duration-200 text-sm font-medium cursor-pointer"
+                [ngClass]="mainForm.controls.role.value === Role.User
+                  ? 'border-primary bg-primary text-white shadow-sm'
+                  : 'border-surface-200 bg-surface-0 text-surface-600 hover:border-primary hover:text-primary'"
+                (click)="setRole(Role.User)"
+              >
+                <i class="ph ph-user text-base"></i>
+                {{ 'role.user' | translate }}
+              </button>
+              <button
+                type="button"
+                class="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg border-2 transition-all duration-200 text-sm font-medium cursor-pointer"
+                [ngClass]="mainForm.controls.role.value === Role.Admin
+                  ? 'border-primary bg-primary text-white shadow-sm'
+                  : 'border-surface-200 bg-surface-0 text-surface-600 hover:border-primary hover:text-primary'"
+                (click)="setRole(Role.Admin)"
+              >
+                <i class="ph ph-shield-check text-base"></i>
+                {{ 'role.admin' | translate }}
+              </button>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="flex flex-col gap-2">
+            <label for="email" class="text-sm font-medium text-surface-700">{{ 'email.label' | translate }}</label>
+            <input
+              id="email"
+              formControlName="email"
+              [placeholder]="'email.placeholder' | translate"
+              type="email"
+              fluid="true"
+              pSize="large"
+              pInputText
+              autocomplete="email"
+            />
+          </div>
+
+          <!-- Contraseña -->
+          <div class="flex flex-col gap-2">
+            <div class="flex items-center justify-between">
+              <label for="password" class="text-sm font-medium text-surface-700">{{ 'password.label' | translate }}</label>
+              <a
+                (click)="forgotPassword()"
+                class="text-xs text-primary hover:text-primary-600 cursor-pointer transition-colors duration-150 font-medium"
+              >
+                {{ 'auth.forgotPassword' | translate }}
+              </a>
+            </div>
+            <p-password
+              id="password"
+              formControlName="password"
+              [placeholder]="'password.placeholder' | translate"
+              [feedback]="false"
+              [toggleMask]="true"
+              fluid="true"
+              size="large"
+              autocomplete="current-password"
+            />
+          </div>
+
+          <!-- Recordarme -->
+          <div class="flex items-center gap-2">
+            <p-checkbox formControlName="rememberMe" inputId="rememberMe" [binary]="true" />
+            <label for="rememberMe" class="text-sm font-thin! text-surface-600 cursor-pointer m-0!">
+              {{ 'auth.rememberMe' | translate }}
+            </label>
+          </div>
+
+          <!-- Botón -->
+          <p-button
+            (onClick)="login()"
+            [loading]="loading()"
+            [label]="'auth.login' | translate"
+            iconPos="right"
+            [raised]="true"
+            size="large"
+            fluid="true"
+            styleClass="py-3!"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel imagen 65% -->
+  <div class="hidden lg:block lg:w-[65%] relative overflow-hidden">
+    <img src="images/login.jpg" alt="Login visual" class="w-full h-full object-cover" />
+
+    <!-- Tint color primario diagonal -->
+    <div class="absolute inset-0 pointer-events-none bg-linear-to-br from-primary/50 via-black/20 to-transparent"></div>
+
+    <!-- Fade inferior para el badge -->
+    <div class="absolute inset-x-0 bottom-0 h-2/5 pointer-events-none bg-linear-to-t from-black/60 to-transparent"></div>
+
+    <!-- Línea separadora izquierda con color primario -->
+    <div
+      class="absolute top-0 left-0 bottom-0 w-px pointer-events-none bg-linear-to-b from-transparent via-primary/60 to-transparent"
+    ></div>
+
+    <!-- Badge inferior izquierdo -->
+    <div
+      class="absolute bottom-8 left-8 max-w-100 bg-white/13 backdrop-blur-[14px] border border-white/[.28] rounded-2xl px-5 py-4 text-white"
+    >
+      <p class="text-base font-semibold leading-snug mb-1">{{'auth.welcome' | translate}}</p>
+      <p class="text-xs opacity-70 font-light">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae incidunt tempore earum non qui quod.
+      </p>
+    </div>
+
+    <!-- Badge superior derecho - Sistema en línea -->
+    <div
+      class="absolute top-6 right-6 flex items-center gap-2 bg-white/13 backdrop-blur-[10px] border border-white/22 rounded-full px-3 py-1.5"
+    >
+      <span class="w-1.75 h-1.75 rounded-full bg-green-500 shadow-[0_0_0_3px_rgba(34,197,94,0.25)] inline-block"></span>
+      <span class="text-[11px] text-white font-medium">Lorem, ipsum dolor.</span>
+    </div>
+  </div>
+</div>

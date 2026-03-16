@@ -2,7 +2,6 @@ import { Gender, Order, UiSettings } from '../../../core/models/core.model';
 
 export const Role = {
   Admin: 'ADMIN',
-  Moderator: 'MODERATOR',
   User: 'USER',
 } as const;
 export type Role = (typeof Role)[keyof typeof Role];

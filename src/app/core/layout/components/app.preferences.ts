@@ -9,7 +9,7 @@ import { Language, LayoutService, MenuMode, MenuProfilePosition } from '../servi
 import { applyPrimaryPalette } from '../preset';
 import { TooltipModule } from 'primeng/tooltip';
 import { ColorTwitterModule } from 'ngx-color/twitter';
-import { PRESET_COLORS, PRIMARY_COLOR } from '../../helpers/constant.helper';
+import { PRESET_COLORS } from '../../helpers/constant.helper';
 
 @Component({
   selector: 'app-preferences',
@@ -492,7 +492,7 @@ export class AppPreferences {
   }
 
   get primaryColor(): string {
-    return this.layoutService.layoutConfig().primaryColor ?? PRIMARY_COLOR;
+    return this.layoutService.layoutConfig().primaryColor;
   }
 
   get isDarkTheme(): boolean {
