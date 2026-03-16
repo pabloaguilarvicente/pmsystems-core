@@ -38,7 +38,13 @@
         "label": "Aplicaciones"
     },
     "auth": {
-        "logout": "Cerrar sesión"
+        "forgotPassword": "¿Olvidaste tu contraseña?",
+        "login": "Iniciar sesión",
+        "loginAs": "Ingresar como",
+        "loginDescription": "Inicia sesión en tu cuenta para continuar",
+        "logout": "Cerrar sesión",
+        "rememberMe": "Recordarme",
+        "welcome": "Bienvenido de nuevo"
     },
     "balance": {
         "label": "Balance"
@@ -235,6 +241,10 @@
         "page": "Página",
         "perPage": "por página",
         "results": "resultados"
+    },
+    "password": {
+        "label": "Contraseña",
+        "placeholder": "Ingresar contraseña"
     },
     "permissions": {
         "label": "Permisos"
@@ -438,6 +448,7 @@
         "label": "Registrado"
     },
     "role": {
+        "admin": "Administrador",
         "info": "Información del Rol",
         "placeholder": "Seleccionar rol",
         "plural": {
@@ -445,7 +456,8 @@
         },
         "singular": {
             "label": "Rol"
-        }
+        },
+        "user": "Usuario"
     },
     "screen": {
         "exit": "Salir de pantalla completa",

@@ -38,7 +38,13 @@
         "label": "Apps"
     },
     "auth": {
-        "logout": "Logout"
+        "forgotPassword": "Forgot your password?",
+        "login": "Sign in",
+        "loginAs": "Sign in as",
+        "loginDescription": "Sign in to your account to continue",
+        "logout": "Sign out",
+        "rememberMe": "Remember me",
+        "welcome": "Welcome back"
     },
     "balance": {
         "label": "Balance"
@@ -242,6 +248,10 @@
         "perPage": "per page",
         "results": "results"
     },
+    "password": {
+        "label": "Password",
+        "placeholder": "Enter a password"
+    },
     "permissions": {
         "label": "Permissions"
     },
@@ -444,6 +454,7 @@
         "label": "Registered"
     },
     "role": {
+        "admin": "Admin",
         "info": "Role information",
         "placeholder": "Select role",
         "plural": {
@@ -451,7 +462,8 @@
         },
         "singular": {
             "label": "Role"
-        }
+        },
+        "user": "User"
     },
     "screen": {
         "exit": "Exit full screen",
