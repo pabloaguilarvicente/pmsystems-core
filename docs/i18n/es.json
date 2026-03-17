@@ -1,4 +1,7 @@
 {
+    "account": {
+        "label": "Cuenta"
+    },
     "actions": {
         "accept": "Aceptar",
         "apply": "Aplicar",

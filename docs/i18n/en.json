@@ -1,4 +1,7 @@
 {
+    "account": {
+        "label": "Account"
+    },
     "actions": {
         "accept": "Accept",
         "apply": "Apply",
