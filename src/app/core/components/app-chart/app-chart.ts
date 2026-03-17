@@ -80,7 +80,7 @@ export interface ApexChartConfig {
   standalone: true,
   imports: [SkeletonChart, AppMessages],
   template: `
-    @if (loading()) {
+    @if (skeleton()) {
       <skeleton-chart [type]="type()" [height]="height()" [columns]="columnsSkeleton()" />
     } @else if (isEmpty()) {
       <div [style.height.px]="height()">
@@ -104,7 +104,7 @@ export class AppChart implements OnDestroy {
   readonly height = input<number>(350);
   readonly width = input<number | string>('100%');
   readonly config = input<ApexChartConfig>({});
-  readonly loading = input<boolean>(false);
+  readonly skeleton = input<boolean>(false);
   readonly columnsSkeleton = input<number>(6);
   readonly emptyMessage = input<string>('messages.noRecords');
 

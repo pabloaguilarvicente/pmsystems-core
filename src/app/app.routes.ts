@@ -9,6 +9,10 @@ export const appRoutes: Routes = [
     component: AppLayout,
     children: [
       {
+        path: 'account',
+        loadChildren: () => import('./modules/account/account.routes').then((m) => m.default),
+      },
+      {
         path: 'analytics',
         loadChildren: () => import('./modules/analytics/analytics.routes').then((m) => m.default),
       },

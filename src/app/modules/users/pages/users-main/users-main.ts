@@ -15,7 +15,7 @@ import { BREAKPOINTS, ROLES, STATUS } from '../../../../core/helpers/constant.he
 import { AppFilters } from '../../../../core/components/app-filters/app-filters';
 import { AppFiltersConfig, AppFiltersOutput } from '../../../../core/components/app-filters/app-filters.model';
 import { Column, TableInput } from '../../../../core/components/app-table/app-table.model';
-import { Order } from '../../../../core/models/core.model';
+import { LoadingState, Order } from '../../../../core/models/core.model';
 
 @Component({
   selector: 'users-main',
@@ -29,7 +29,9 @@ export class UsersMain {
   public readonly dialogService = inject(DialogService);
 
   public response = signal<ApiListResponse<User> | null>(null);
-  public isLoading = signal<boolean>(false);
+  
+  public loading = { list: signal(false) } satisfies Partial<LoadingState>;
+
   public filterParams = signal<UserFiltersParams>({
     currentPage: 1,
     pageSize: 5,
@@ -104,7 +106,7 @@ export class UsersMain {
   public tableConfig = computed<TableInput<User>>(() => ({
     columns: this.cols(),
     data: this.response()?.data ?? [],
-    loading: this.isLoading(),
+    loading: this.loading.list(),
     pagination: this.response()?.pagination ? { ...this.response()!.pagination, restoreParams: true } : null,
     lazy: true,
     onRowClick: (item: User) => this.showDetail(item),
@@ -159,14 +161,14 @@ export class UsersMain {
   }
 
   getAll() {
-    this.isLoading.set(true);
+    this.loading.list.set(true);
     this.userService.getAll(this.filterParams()).subscribe({
       next: (response) => {
         this.response.set(response);
-        this.isLoading.set(false);
+        this.loading.list.set(false);
       },
       error: () => {
-        this.isLoading.set(false);
+        this.loading.list.set(false);
       },
     });
   }

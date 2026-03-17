@@ -16,6 +16,7 @@ import { markAllDirty } from '../../../../core/helpers/utils.helper';
 import { ToastService } from '../../../../core/services/toast.service';
 import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
+import { LoadingState } from '../../../../core/models/core.model';
 
 @Component({
   selector: 'users-register',
@@ -40,7 +41,7 @@ export class UsersRegister {
   public readonly usersService = inject(UsersService);
   public readonly router = inject(Router);
 
-  public loading = signal<boolean>(false);
+  public loading = { register: signal(false) } satisfies Partial<LoadingState>;
 
   public readonly roles: UserRole[] = ROLES;
   public readonly status: UserStatus[] = STATUS;
@@ -63,17 +64,17 @@ export class UsersRegister {
 
   public register() {
     if (this.mainForm.valid) {
-      this.loading.set(true);
+      this.loading.register.set(true);
       const formValue = this.mainForm.getRawValue();
 
       this.usersService.create(formValue as unknown as CreateUserRequest).subscribe({
         next: (response) => {
           this.toastService.success({ title: 'Éxito', description: response.message });
-          this.loading.set(false);
+          this.loading.register.set(false);
           this.redirectBack();
         },
         error: (error) => {
-          this.loading.set(false);
+          this.loading.register.set(false);
           this.toastService.error({ title: 'Error', description: error.error.message });
         },
       });

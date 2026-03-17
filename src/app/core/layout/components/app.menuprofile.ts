@@ -3,7 +3,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LayoutService } from '../service/layout.service';
 import { TranslateModule } from '@ngx-translate/core';
@@ -47,7 +47,7 @@ import { AuthService } from '../../../modules/auth/services/auth.service';
         </li>
 
         <li [pTooltip]="'profile.label' | translate" [tooltipDisabled]="isTooltipDisabled()">
-          <button class="cursor-pointer">
+          <button class="cursor-pointer" (click)="redirectProfile()">
             <i class="ph-thin ph-user-rectangle"></i>
             <span>{{ 'profile.label' | translate }}</span>
           </button>
@@ -85,6 +85,7 @@ export class AppMenuProfile implements OnDestroy {
   public readonly layoutService = inject(LayoutService);
   private readonly authService = inject(AuthService);
   private readonly renderer = inject(Renderer2);
+  private readonly router = inject(Router);
 
   el = inject(ElementRef);
 
@@ -169,5 +170,9 @@ export class AppMenuProfile implements OnDestroy {
 
   public logout() {
     this.authService.logout();
+  }
+
+  public redirectProfile() {
+    this.router.navigate(['account']);
   }
 }

@@ -1,3 +1,4 @@
+import { Signal } from '@angular/core';
 import { RouteFiltersState } from '../components/app-filters/app-filters.model';
 import { ColorScheme, Language, MenuMode, MenuProfilePosition } from '../layout/service/layout.service';
 
@@ -43,3 +44,14 @@ export interface SelectModel {
   label: string;
   icon?: string;
 }
+
+export const LOADING_KEYS = {
+  LIST: 'list',
+  REGISTER: 'register',
+  UPDATE: 'update',
+  DETAIL: 'detail',
+  DELETE: 'delete',
+  API: 'api',
+} as const;
+export type LoadingKey = (typeof LOADING_KEYS)[keyof typeof LOADING_KEYS];
+export type LoadingState = Record<LoadingKey, Signal<boolean>>;

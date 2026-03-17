@@ -31,7 +31,7 @@ export interface PaginatorChangeEvent {
         <p-button
           icon="ph-bold ph-caret-double-left"
           variant="text"
-          [disabled]="!pagination().hasPreviousPage || loading()"
+          [disabled]="!pagination().hasPreviousPage || skeleton()"
           (onClick)="goToFirstPage()"
           [pTooltip]="'primeng.aria.firstPageLabel' | translate"
           tooltipPosition="top"
@@ -44,7 +44,7 @@ export interface PaginatorChangeEvent {
         <p-button
           icon="ph-bold ph-caret-left"
           variant="text"
-          [disabled]="!pagination().hasPreviousPage || loading()"
+          [disabled]="!pagination().hasPreviousPage || skeleton()"
           (onClick)="goToPreviousPage()"
           [pTooltip]="'primeng.aria.prevPageLabel' | translate"
           tooltipPosition="top"
@@ -65,7 +65,7 @@ export interface PaginatorChangeEvent {
         <p-button
           icon="ph-bold ph-caret-right"
           variant="text"
-          [disabled]="!pagination().hasNextPage || loading()"
+          [disabled]="!pagination().hasNextPage || skeleton()"
           (onClick)="goToNextPage()"
           [pTooltip]="'primeng.aria.nextPageLabel' | translate"
           tooltipPosition="top"
@@ -78,7 +78,7 @@ export interface PaginatorChangeEvent {
         <p-button
           icon="ph-bold ph-caret-double-right"
           variant="text"
-          [disabled]="!pagination().hasNextPage || loading()"
+          [disabled]="!pagination().hasNextPage || skeleton()"
           (onClick)="goToLastPage()"
           [pTooltip]="'primeng.aria.lastPageLabel' | translate"
           tooltipPosition="top"
@@ -97,7 +97,7 @@ export interface PaginatorChangeEvent {
           [options]="pageSizeDropdownOptions()"
           [ngModel]="selectedPageSize()"
           (onChange)="onPageSizeChange($event)"
-          [readonly]="loading()"
+          [readonly]="skeleton()"
           class="w-21 border-none! shadow-sm!"
           appendTo="body"
           size="small"
@@ -119,7 +119,7 @@ export class AppPaginator {
   private readonly filtersService = inject(FiltersService);
 
   public pagination = input.required<Pagination>();
-  public loading = input<boolean>(false);
+  public skeleton = input<boolean>(false);
   public pageSizeOptions = input<number[]>([5, 10, 25, 50, 100]);
   public pageChange = output<PaginatorChangeEvent>();
 

@@ -1,4 +1,4 @@
-@if(loadingPage()) {<skeleton-form />} @else {
+@if(loading.detail()) {<skeleton-form />} @else {
 <form [formGroup]="mainForm" class="mainForm">
   <div class="grid grid-cols-12 gap-4">
     <div class="col-span-12 md:col-span-4">
@@ -145,7 +145,7 @@
             <div class="flex justify-end">
               <p-button
                 (onClick)="update()"
-                [loading]="loading()"
+                [loading]="loading.update()"
                 [label]="'crud.register' | translate"
                 icon="ph-bold ph-floppy-disk"
                 iconPos="right"

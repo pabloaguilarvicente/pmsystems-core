@@ -89,7 +89,7 @@
 </p-table>
 
 @if (config().pagination && !config().loading && config().pagination!.totalItems > 0) {
-<app-paginator [pagination]="config().pagination!" [loading]="config().loading ?? false" (pageChange)="onPaginatorChange($event)" />
+<app-paginator [pagination]="config().pagination!" [skeleton]="config().loading ?? false" (pageChange)="onPaginatorChange($event)" />
 } @if (config().loading) {
 <skeleton-paginator />
 }

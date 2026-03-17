@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
@@ -10,6 +10,7 @@ import {
 } from './confirmation-dialog.model';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { LoadingState } from '../../models/core.model';
 
 @Component({
   selector: 'app-confirmation-dialog',
@@ -36,7 +37,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
             [severity]="currentConfig.rejectButtonSeverity"
             fluid="true"
             [size]="'large'"
-            [disabled]="loading"
+            [disabled]="loading.api()"
           ></p-button>
 
           <p-button
@@ -46,7 +47,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
             [severity]="currentConfig.acceptButtonSeverity"
             fluid="true"
             [size]="'large'"
-            [loading]="loading"
+            [loading]="loading.api()"
           ></p-button>
         </div>
       </div>
@@ -55,7 +56,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 })
 export class AppConfirmationDialog implements OnInit {
   public currentConfig?: ConfirmationTypeConfig;
-  public loading = false;
+  public loading = { api: signal(false) } satisfies Partial<LoadingState>;
 
   private config!: ConfirmationConfig;
   private readonly typeConfigs: Record<ConfirmationType, ConfirmationTypeConfig> = CONFIRMATION_TYPE_CONFIGS;
@@ -92,7 +93,7 @@ export class AppConfirmationDialog implements OnInit {
       return;
     }
 
-    this.loading = true;
+    this.loading.api.set(true);
 
     this.config.action$.subscribe({
       next: () => {
@@ -103,7 +104,7 @@ export class AppConfirmationDialog implements OnInit {
             detail: this.translateService.instant(this.currentConfig!.successMessage),
           });
         }
-        this.loading = false;
+        this.loading.api.set(false);
         this.ref.close(true);
       },
       error: () => {
@@ -112,7 +113,7 @@ export class AppConfirmationDialog implements OnInit {
           summary: this.translateService.instant('status.error'),
           detail: this.translateService.instant(this.currentConfig!.errorMessage),
         });
-        this.loading = false;
+        this.loading.api.set(false);
       },
     });
   }

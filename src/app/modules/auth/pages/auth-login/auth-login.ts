@@ -9,19 +9,9 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { markAllDirty } from '../../../../core/helpers/utils.helper';
 import { ToastService } from '../../../../core/services/toast.service';
 import { Router } from '@angular/router';
-
-export const Role = {
-  Admin: 'ADMIN',
-  User: 'USER',
-} as const;
-export type Role = (typeof Role)[keyof typeof Role];
-
-export interface LoginRequest {
-  email: string;
-  password: string;
-  rememberMe: boolean;
-  role: Role;
-}
+import { LoadingState } from '../../../../core/models/core.model';
+import { Role } from '../../../users/models/users.model';
+import { LoginRequest } from '../../models/auth.model';
 
 @Component({
   selector: 'auth-login',
@@ -41,7 +31,8 @@ export class AuthLogin {
   private readonly router = inject(Router);
 
   public readonly Role = Role;
-  public loading = signal(false);
+  public loading = { api: signal(false) } satisfies Partial<LoadingState>;
+  public imageVisible = signal(true);
 
   public mainForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -51,12 +42,15 @@ export class AuthLogin {
   });
 
   public setRole(role: Role) {
-    this.mainForm.controls.role.setValue(role);
+    this.imageVisible.set(false);
+    setTimeout(() => {
+      this.mainForm.controls.role.setValue(role);
+      this.imageVisible.set(true);
+    }, 250);
   }
-
   public login() {
     if (this.mainForm.valid) {
-      this.loading.set(true);
+      this.loading.api.set(true);
       const payload: LoginRequest = {
         email: this.mainForm.controls.email.value!,
         password: this.mainForm.controls.password.value!,
@@ -72,4 +66,8 @@ export class AuthLogin {
   }
 
   public forgotPassword() {}
+
+  public roleImage() {
+    return this.mainForm.controls.role.value === Role.Admin ? 'images/login/admin.jpg' : 'images/login/user.jpg';
+  }
 }

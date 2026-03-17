@@ -1,9 +1,6 @@
 <div class="min-h-screen flex bg-surface-ground">
-  <!-- Panel formulario 35% -->
+  <!-- Panel formulario -->
   <div class="w-full lg:w-[35%] flex items-center justify-center px-8 py-12 bg-surface-0 relative z-10">
-    <!-- Separador derecho sutil -->
-    <div class="hidden lg:block absolute top-0 right-0 w-px h-full bg-linear-to-b from-transparent via-primary/30 to-transparent"></div>
-
     <div class="w-full max-w-sm flex flex-col gap-3">
       <!-- Logo -->
       <div class="flex flex-col items-center gap-1 text-center">
@@ -95,7 +92,7 @@
           <!-- Botón -->
           <p-button
             (onClick)="login()"
-            [loading]="loading()"
+            [loading]="loading.api()"
             [label]="'auth.login' | translate"
             iconPos="right"
             [raised]="true"
@@ -108,20 +105,21 @@
     </div>
   </div>
 
-  <!-- Panel imagen 65% -->
+  <!-- Panel imagen -->
   <div class="hidden lg:block lg:w-[65%] relative overflow-hidden">
-    <img src="images/login.jpg" alt="Login visual" class="w-full h-full object-cover" />
+    <img
+      [src]="roleImage()"
+      alt=""
+      class="w-full h-full object-cover transition-all duration-500"
+      [class.scale-105]="!imageVisible()"
+      [class.opacity-0]="!imageVisible()"
+    />
 
     <!-- Tint color primario diagonal -->
-    <div class="absolute inset-0 pointer-events-none bg-linear-to-br from-primary/50 via-black/20 to-transparent"></div>
+    <div class="absolute inset-0 pointer-events-none bg-linear-to-br from-primary/50 via-black/15 to-transparent"></div>
 
     <!-- Fade inferior para el badge -->
     <div class="absolute inset-x-0 bottom-0 h-2/5 pointer-events-none bg-linear-to-t from-black/60 to-transparent"></div>
-
-    <!-- Línea separadora izquierda con color primario -->
-    <div
-      class="absolute top-0 left-0 bottom-0 w-px pointer-events-none bg-linear-to-b from-transparent via-primary/60 to-transparent"
-    ></div>
 
     <!-- Badge inferior izquierdo -->
     <div
@@ -133,7 +131,7 @@
       </p>
     </div>
 
-    <!-- Badge superior derecho - Sistema en línea -->
+    <!-- Badge superior derecho -->
     <div
       class="absolute top-6 right-6 flex items-center gap-2 bg-white/13 backdrop-blur-[10px] border border-white/22 rounded-full px-3 py-1.5"
     >
