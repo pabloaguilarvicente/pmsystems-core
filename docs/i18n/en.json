@@ -1,5 +1,6 @@
 {
     "account": {
+        "description": "Manage and update your personal information and account details",
         "label": "Account"
     },
     "actions": {
@@ -19,6 +20,7 @@
         "return": "Return",
         "save": "Save",
         "search": "Search",
+        "share": "Share",
         "show": "Show",
         "unpin": "Unpin",
         "update": "Update",
@@ -36,6 +38,10 @@
         "overview": "Overview",
         "realtime": "Real time",
         "reports": "Reports"
+    },
+    "appearance": {
+        "description": "Customize the theme, language, and overall visual experience",
+        "label": "Appearance"
     },
     "apps": {
         "label": "Apps"
@@ -475,12 +481,13 @@
     },
     "security": {
         "credentials": "Credentials",
-        "emailVerified": "Email verified",
+        "description": "Protect your account by managing access, authentication, and security settings",
+        "emailVerified": "Verified email",
         "failedAttempts": "Failed login attempts",
         "label": "Security",
         "lastLogin": "Last login",
-        "passwordChanged": "Password last changed",
-        "phoneVerified": "Phone verified",
+        "passwordChanged": "Last password change",
+        "phoneVerified": "Verified phone",
         "twoFactor": "Two-factor authentication"
     },
     "select": {

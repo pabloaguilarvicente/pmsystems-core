@@ -1,5 +1,6 @@
 {
     "account": {
+        "description": "Administra y actualiza tu información personal y datos de la cuenta",
         "label": "Cuenta"
     },
     "actions": {
@@ -22,7 +23,8 @@
         "show": "Mostrar",
         "unpin": "Desanclar",
         "update": "Actualizar",
-        "upload": "Subir"
+        "upload": "Subir",
+        "share":"Compartir"
     },
     "address": {
         "city": "Ciudad",
@@ -36,6 +38,10 @@
         "overview": "Resumen",
         "realtime": "Tiempo real",
         "reports": "Reportes"
+    },
+    "appearance": {
+        "description": "Personaliza el tema, idioma y opciones visuales de la aplicación",
+        "label": "Aspecto"
     },
     "apps": {
         "label": "Aplicaciones"
@@ -469,11 +475,12 @@
     },
     "security": {
         "credentials": "Credenciales",
+        "description": "Protege tu cuenta gestionando accesos y opciones de seguridad",
         "emailVerified": "Correo verificado",
         "failedAttempts": "Intentos fallidos de inicio de sesión",
         "label": "Seguridad",
         "lastLogin": "Último inicio de sesión",
-        "passwordChanged": "Última vez que cambió la contraseña",
+        "passwordChanged": "Último cambio de contraseña",
         "phoneVerified": "Teléfono verificado",
         "twoFactor": "Autenticación en dos factores"
     },

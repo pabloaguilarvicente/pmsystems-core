@@ -1,1 +1,0 @@
-import{fb as o}from"./chunk-M47FV36Y.js";var t=class e{static \u0275fac=function(n){return new(n||e)};static \u0275cmp=o({type:e,selectors:[["account-main"]],decls:0,vars:0,template:function(n,c){},encapsulation:2})};var r=[{path:"",component:t,data:{breadcrumb:"account.label"}}];export{r as default};
