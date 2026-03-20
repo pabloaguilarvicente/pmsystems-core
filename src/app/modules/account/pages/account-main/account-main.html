@@ -1,0 +1,29 @@
+<div class="grid grid-cols-12 gap-4">
+  <div class="col-span-12">
+    <account-visuals />
+  </div>
+  <div class="col-span-12">
+    <div class="card">
+      <p-tabs value="0">
+        <p-tablist>
+          @for (tab of tabs; track tab.value) {
+          <p-tab [value]="tab.value" class="w-70" #tabRef>
+            <div class="flex items-center gap-2">
+              <i [class]="(tabRef.active() ? 'ph-duotone' : 'ph') + ' ' + tab.icon.split(' ')[1] + ' text-2xl'"></i>
+              <div class="flex flex-col items-start">
+                <span [class]="tabRef.active() ? 'font-bold' : 'font-normal'">{{ tab.title | translate}}</span>
+                <span class="text-xs text-muted-color font-light whitespace-normal wrap-break-word">{{ tab.description | translate}}</span>
+              </div>
+            </div>
+          </p-tab>
+          }
+        </p-tablist>
+        <p-tabpanels>
+          <p-tabpanel value="0"><account-basic-information /></p-tabpanel>
+          <p-tabpanel value="1"><account-appearence /></p-tabpanel>
+          <p-tabpanel value="2"><account-security /></p-tabpanel>
+        </p-tabpanels>
+      </p-tabs>
+    </div>
+  </div>
+</div>

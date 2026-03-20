@@ -38,15 +38,11 @@ const SIZE_CLASSES: Record<PictureSize, string> = {
       />
 
       <div class="relative inline-block">
-        <img
-          [src]="previewUrl() || fallback()"
-          alt="Profile picture"
-          [class]="imgClasses()"
-        />
+        <img [src]="previewUrl() || fallback()" alt="Profile picture" [class]="imgClasses()" />
 
         @if (!disabled()) {
           <button
-            class="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center shadow-md hover:bg-primary-emphasis transition-colors cursor-pointer border-2 border-white"
+            class="absolute bottom-3 right-0 w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center shadow-md hover:bg-primary-emphasis transition-colors cursor-pointer border-2 border-white"
             type="button"
             [pTooltip]="'actions.update' | translate"
             (click)="fileInput.click()"
@@ -72,7 +68,7 @@ export class FormPicture implements ControlValueAccessor {
   protected readonly imgClasses = computed(() => {
     const sizeClass = SIZE_CLASSES[this.size()];
     const shapeClass = this.shape() === 'round' ? 'rounded-full' : 'rounded-md';
-    return `${sizeClass} ${shapeClass} object-contain border-4 border-primary`;
+    return `${sizeClass} ${shapeClass} object-cover border-4 border-primary`;
   });
 
   writeValue(value: string | null): void {

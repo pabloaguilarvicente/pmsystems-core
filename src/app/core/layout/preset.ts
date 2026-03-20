@@ -40,20 +40,11 @@ const MainPreset = definePreset(Aura, {
     },
   },
   components: {
-    tooltip: {
-      root: { padding: '0.2rem 0.7rem' },
-    },
-    drawer: {
-      header: { padding: '0.5rem' },
-      root: { borderColor: 'transparent' },
-    },
+    tooltip: { root: { padding: '0.2rem 0.7rem' } },
+    drawer: { header: { padding: '0.5rem' }, root: { borderColor: 'transparent' } },
     dialog: {
       content: { padding: '2rem' },
-      root: {
-        borderRadius: 'var(--border-radius)',
-        borderColor: 'none',
-        shadow: '0 0 20px 5px rgba(0,0,0,0.1)',
-      },
+      root: { borderRadius: 'var(--border-radius)', borderColor: 'none', shadow: '0 0 20px 5px rgba(0,0,0,0.1)' },
       header: { padding: '0' },
     },
     button: { root: { borderRadius: 'var(--border-radius)' } },
@@ -63,9 +54,10 @@ const MainPreset = definePreset(Aura, {
       overlay: {
         shadow: '0 2px 5px 0 rgba(0, 0, 0, 0.26)',
         borderColor: 'transparent',
-        borderRadius: '0 0 var(--border-radius) var(--border-radius);',
+        borderRadius: '0 0 var(--border-radius) var(--border-radius)',
       },
     },
+    tabs: { tab: { color: 'var(--text-color)' } },
   },
 });
 

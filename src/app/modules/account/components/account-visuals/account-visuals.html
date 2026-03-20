@@ -1,0 +1,40 @@
+<div class="card">
+  <div class="flex flex-col gap-4">
+    <div class="relative w-full">
+      <input #coverInput type="file" accept="image/*" class="hidden" (change)="onCoverSelected($event)" />
+
+      <div
+        class="w-full h-45 rounded-xl bg-cover bg-center cursor-pointer group"
+        [class.bg-primary-100]="!coverPreviewUrl()"
+        [style.background-image]="coverPreviewUrl() ? 'url(' + coverPreviewUrl() + ')' : null"
+        (click)="coverInput.click()"
+      >
+        <div
+          class="w-full h-full rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20"
+        >
+          <i class="ph ph-camera text-white text-4xl"></i>
+        </div>
+      </div>
+
+      <div class="absolute -bottom-12 left-1 lg:left-6">
+        <form-picture [formControl]="profilePictureControl" [size]="isSmallScreen ? 'md' : 'lg'" shape="round" />
+      </div>
+
+      <div class="absolute -bottom-10 right-0 flex items-center gap-2">
+        <p-button icon="ph ph-share-network" [label]="'actions.share' | translate" severity="secondary" size="small" outlined />
+        <p-button icon="ph ph-pencil-simple" [label]="'actions.update' | translate" severity="secondary" size="small" outlined />
+      </div>
+    </div>
+
+    <div class="h-8"></div>
+
+    <div class="flex flex-col gap-1 lg:px-10">
+      <span class="text-xl font-bold text-color">{{ user.fullName }}</span>
+      <span class="text-sm text-muted-color">{{ user.role }}</span>
+      <div class="flex items-center gap-1">
+        <i class="ph ph-map-pin text-muted-color text-sm"></i>
+        <span class="text-xs text-muted-color">{{ user.location }}</span>
+      </div>
+    </div>
+  </div>
+</div>
