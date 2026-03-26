@@ -49,10 +49,8 @@ export const LOCAL_STORAGE_KEYS = {
 export type LocalStorageKey = (typeof LOCAL_STORAGE_KEYS)[keyof typeof LOCAL_STORAGE_KEYS];
 
 export const TIMEZONES: Timezone[] = [
-  // UTC
   { code: 'UTC', name: '(UTC+00:00) UTC' },
 
-  // América
   { code: 'America/New_York', name: '(UTC-05:00) Nueva York' },
   { code: 'America/Chicago', name: '(UTC-06:00) Chicago' },
   { code: 'America/Los_Angeles', name: '(UTC-08:00) Los Ángeles' },
@@ -63,21 +61,18 @@ export const TIMEZONES: Timezone[] = [
   { code: 'America/Buenos_Aires', name: '(UTC-03:00) Buenos Aires' },
   { code: 'America/Sao_Paulo', name: '(UTC-03:00) São Paulo' },
 
-  // Europa
   { code: 'Europe/London', name: '(UTC+00:00) Londres' },
   { code: 'Europe/Madrid', name: '(UTC+01:00) Madrid' },
   { code: 'Europe/Paris', name: '(UTC+01:00) París' },
   { code: 'Europe/Berlin', name: '(UTC+01:00) Berlín' },
   { code: 'Europe/Moscow', name: '(UTC+03:00) Moscú' },
 
-  // Asia / Medio Oriente
   { code: 'Asia/Dubai', name: '(UTC+04:00) Dubái' },
   { code: 'Asia/Kolkata', name: '(UTC+05:30) Kolkata' },
   { code: 'Asia/Shanghai', name: '(UTC+08:00) Shanghái' },
   { code: 'Asia/Singapore', name: '(UTC+08:00) Singapur' },
   { code: 'Asia/Tokyo', name: '(UTC+09:00) Tokio' },
 
-  // Oceanía
   { code: 'Australia/Sydney', name: '(UTC+10:00) Sídney' },
   { code: 'Pacific/Auckland', name: '(UTC+12:00) Auckland' },
 ];
