@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { TranslateModule } from '@ngx-translate/core';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
-import { UpdateUserRequest, UserGender, UserRole, UserStatus } from '../../models/users.model';
+import { UpdateUserRequest } from '../../models/users.model';
 import { GENDERS, ROLES, STATUS } from '../../../../core/helpers/constant.helper';
 import { ButtonModule } from 'primeng/button';
 import { FormLabel } from '../../../../core/components/app-forms/form-label';
@@ -18,6 +18,7 @@ import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
 import { SkeletonForm } from '../../../../core/components/app-skeletons/skeleton-form';
 import { LoadingState } from '../../../../core/models/core.model';
+import { UserGender, UserRole, UserStatus } from '../../../account/models/account.model';
 
 @Component({
   selector: 'users-update',
@@ -40,7 +41,7 @@ import { LoadingState } from '../../../../core/models/core.model';
 })
 export class UsersUpdate {
   public id = input<number>();
-  
+
   public readonly toastService = inject(ToastService);
   public readonly usersService = inject(UsersService);
   public readonly router = inject(Router);

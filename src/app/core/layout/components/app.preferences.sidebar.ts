@@ -12,7 +12,7 @@ import { ColorTwitterModule } from 'ngx-color/twitter';
 import { PRESET_COLORS } from '../../helpers/constant.helper';
 
 @Component({
-  selector: 'app-preferences',
+  selector: 'app-preferences-sidebar',
   standalone: true,
   imports: [
     CommonModule,
@@ -446,7 +446,7 @@ import { PRESET_COLORS } from '../../helpers/constant.helper';
     </p-drawer>
   `,
 })
-export class AppPreferences {
+export class AppPreferencesSidebar {
   @Input({ transform: booleanAttribute }) simple: boolean = false;
 
   public readonly layoutService: LayoutService = inject(LayoutService);

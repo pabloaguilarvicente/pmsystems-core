@@ -1,6 +1,6 @@
 import { Signal } from '@angular/core';
 import { RouteFiltersState } from '../components/app-filters/app-filters.model';
-import { ColorScheme, Language, MenuMode, MenuProfilePosition } from '../layout/service/layout.service';
+import { Theme, Language, MenuMode, MenuProfilePosition } from '../layout/service/layout.service';
 
 export const Order = {
   Asc: 'asc',
@@ -16,10 +16,10 @@ export const Gender = {
 } as const;
 export type Gender = (typeof Gender)[keyof typeof Gender];
 
-export interface UiSettings {
-  colorScheme: ColorScheme;
+export interface AppearanceSettings {
+  theme: Theme;
   menuMode: MenuMode;
-  menuProfileMode: MenuProfilePosition;
+  menuProfilePosition: MenuProfilePosition;
   language: Language;
   primaryColor?: string;
 }
@@ -55,3 +55,8 @@ export const LOADING_KEYS = {
 } as const;
 export type LoadingKey = (typeof LOADING_KEYS)[keyof typeof LOADING_KEYS];
 export type LoadingState = Record<LoadingKey, Signal<boolean>>;
+
+export interface Timezone {
+  code: string;
+  name: string;
+}

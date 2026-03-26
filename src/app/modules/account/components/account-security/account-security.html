@@ -1,1 +1,99 @@
-<p>account-security works!</p>
+<form [formGroup]="mainForm" class="grid grid-cols-12 gap-x-4 gap-y-6">
+  <div class="col-span-12 lg:col-span-7">
+    <div class="grid grid-cols-12 gap-x-4 gap-y-6">
+      <div class="col-span-12">
+        <div class="flex items-center justify-between gap-4">
+          <div class="flex flex-col gap-1">
+            <span class="font-medium">{{ 'security.twoFactorEnabled.label' | translate }}</span>
+            <span class="text-sm text-muted-color">{{ 'security.twoFactorEnabled.description' | translate }}</span>
+          </div>
+          <p-toggle-switch formControlName="twoFactorEnabled" />
+        </div>
+      </div>
+
+      <div class="col-span-12">
+        <div class="flex items-center justify-between gap-4">
+          <div class="flex flex-col gap-1">
+            <span class="font-medium">{{ 'security.emailVerified.label' | translate }}</span>
+            <span class="text-sm text-muted-color">{{ 'security.emailVerified.description' | translate }}</span>
+          </div>
+          <p-tag
+            [value]="mainForm.get('emailVerified')?.value ? ('status.verified' | translate) : ('status.unverified' | translate)"
+            [severity]="mainForm.get('emailVerified')?.value ? 'success' : 'warn'"
+          />
+        </div>
+      </div>
+
+      <div class="col-span-12">
+        <div class="flex items-center justify-between gap-4">
+          <div class="flex flex-col gap-1">
+            <span class="font-medium">{{ 'security.phoneVerified.label' | translate }}</span>
+            <span class="text-sm text-muted-color">{{ 'security.phoneVerified.description' | translate }}</span>
+          </div>
+          <p-tag
+            [value]="mainForm.get('phoneVerified')?.value ? ('status.verified' | translate) : ('status.unverified' | translate)"
+            [severity]="mainForm.get('phoneVerified')?.value ? 'success' : 'warn'"
+          />
+        </div>
+      </div>
+
+      <div class="col-span-12 md:col-span-6">
+        <form-label for="lastLoginAt" label="security.lastLoginAt.label"></form-label>
+        <input id="lastLoginAt" formControlName="lastLoginAt" type="text" fluid="true" pSize="large" pInputText [readOnly]="true" />
+      </div>
+
+      <div class="col-span-12 md:col-span-6">
+        <form-label for="lastLoginIp" label="security.lastLoginIp.label"></form-label>
+        <input id="lastLoginIp" formControlName="lastLoginIp" type="text" fluid="true" pSize="large" pInputText [readOnly]="true" />
+      </div>
+
+      <div class="col-span-12 md:col-span-6">
+        <form-label for="passwordChangedAt" label="security.passwordChangedAt.label"></form-label>
+        <input
+          id="passwordChangedAt"
+          formControlName="passwordChangedAt"
+          type="text"
+          fluid="true"
+          pSize="large"
+          pInputText
+          [readOnly]="true"
+        />
+      </div>
+
+      <div class="col-span-12 md:col-span-6">
+        <form-label for="failedLoginAttempts" label="security.failedLoginAttempts.label"></form-label>
+        <input
+          id="failedLoginAttempts"
+          formControlName="failedLoginAttempts"
+          type="text"
+          fluid="true"
+          pSize="large"
+          pInputText
+          [readOnly]="true"
+        />
+      </div>
+
+      <div class="col-span-12 md:col-span-6">
+        <form-label for="lockedUntil" label="security.lockedUntil.label"></form-label>
+        <input id="lockedUntil" formControlName="lockedUntil" type="text" fluid="true" pSize="large" pInputText [readOnly]="true" />
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 lg:col-span-5">
+    <div class="flex justify-end">
+      <p-button
+        (onClick)="saveChanges()"
+        [loading]="loading.update()"
+        [label]="'actions.saveChanges' | translate"
+        icon="ph-bold ph-floppy-disk"
+        iconPos="right"
+        [raised]="true"
+        size="large"
+        fluid="true"
+        styleClass="py-3! px-8!"
+        class="w-full sm:w-auto"
+      />
+    </div>
+  </div>
+</form>

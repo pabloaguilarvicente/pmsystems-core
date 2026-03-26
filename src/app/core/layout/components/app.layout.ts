@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 import { AppTopbar } from './app.topbar';
-import { AppPreferences } from './app.preferences';
+import { AppPreferencesSidebar } from './app.preferences.sidebar';
 import { AppBreadcrumb } from './app.breadcrumb';
 import { AppSidebar } from './app.sidebar';
 import { AppRightMenu } from './app.rightmenu';
@@ -18,7 +18,7 @@ import { AppProgressBar } from '../../components/app-progress-bar';
     AppTopbar,
     AppSidebar,
     RouterModule,
-    AppPreferences,
+    AppPreferencesSidebar,
     AppBreadcrumb,
     AppRightMenu,
     AppProgressBar,
@@ -36,7 +36,7 @@ import { AppProgressBar } from '../../components/app-progress-bar';
         </div>
       </div>
     </div>
-    <app-preferences />
+    <app-preferences-sidebar />
   `,
 })
 export class AppLayout implements OnDestroy {

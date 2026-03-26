@@ -10,8 +10,8 @@ import { markAllDirty } from '../../../../core/helpers/utils.helper';
 import { ToastService } from '../../../../core/services/toast.service';
 import { Router } from '@angular/router';
 import { LoadingState } from '../../../../core/models/core.model';
-import { Role } from '../../../users/models/users.model';
 import { LoginRequest } from '../../models/auth.model';
+import { Role } from '../../../account/models/account.model';
 
 @Component({
   selector: 'auth-login',

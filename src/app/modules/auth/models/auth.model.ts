@@ -1,4 +1,4 @@
-import { Role } from '../../users/models/users.model';
+import { Role } from '../../account/models/account.model';
 
 export interface LoginRequest {
   email: string;

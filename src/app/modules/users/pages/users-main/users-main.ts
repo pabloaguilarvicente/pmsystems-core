@@ -1,6 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { UsersService } from '../../services/users.service';
-import { User, UserFiltersParams } from '../../models/users.model';
+import { UserFiltersParams } from '../../models/users.model';
 import { ApiListResponse } from '../../../../core/helpers/api.helper';
 import { TranslateModule } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
@@ -16,6 +16,7 @@ import { AppFilters } from '../../../../core/components/app-filters/app-filters'
 import { AppFiltersConfig, AppFiltersOutput } from '../../../../core/components/app-filters/app-filters.model';
 import { Column, TableInput } from '../../../../core/components/app-table/app-table.model';
 import { LoadingState, Order } from '../../../../core/models/core.model';
+import { User } from '../../../account/models/account.model';
 
 @Component({
   selector: 'users-main',

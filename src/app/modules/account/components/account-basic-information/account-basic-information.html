@@ -1,1 +1,210 @@
-<p>account-basic-information works!</p>
+<form [formGroup]="mainForm" class="grid grid-cols-12 gap-x-4 gap-y-6">
+  <div class="col-span-12 lg:col-span-7">
+    <div class="grid grid-cols-12 gap-x-4 gap-y-6">
+      <div class="col-span-12">
+        <form-title title="crud.generalData" description="crud.generalDataDescription"></form-title>
+      </div>
+
+      <div class="col-span-12 md:col-span-6">
+        <form-label for="firstName" label="firstName.label" [required]="true"></form-label>
+        <input
+          id="firstName"
+          formControlName="firstName"
+          [placeholder]="'firstName.placeholder' | translate"
+          type="text"
+          fluid="true"
+          pSize="large"
+          pInputText
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="col-span-12 md:col-span-6">
+        <form-label for="lastName" label="lastName.label" [required]="true"></form-label>
+        <input
+          id="lastName"
+          formControlName="lastName"
+          [placeholder]="'lastName.placeholder' | translate"
+          type="text"
+          fluid="true"
+          pSize="large"
+          pInputText
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="col-span-12">
+        <form-label for="email" label="email.label" [required]="true"></form-label>
+        <input
+          id="email"
+          formControlName="email"
+          [placeholder]="'email.placeholder' | translate"
+          type="email"
+          fluid="true"
+          pSize="large"
+          pInputText
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="col-span-12" formGroupName="profile">
+        <div class="grid grid-cols-12 gap-x-4 gap-y-6">
+          <div class="col-span-12">
+            <form-title title="profile.label" description="profile.description" class="mt-6"></form-title>
+          </div>
+
+          <div class="col-span-12 md:col-span-4">
+            <form-label for="birthDate" label="birthDate.label"></form-label>
+            <p-datepicker
+              formControlName="birthDate"
+              id="birthDate"
+              [placeholder]="'select.placeholder' | translate"
+              [iconDisplay]="'input'"
+              [showIcon]="true"
+              size="large"
+              fluid="true"
+              appendTo="body"
+            />
+          </div>
+
+          <div class="col-span-12 md:col-span-4">
+            <form-label for="gender" label="gender.label" [required]="true"></form-label>
+            <p-select
+              id="gender"
+              [options]="genders"
+              formControlName="gender"
+              optionLabel="name"
+              [placeholder]="'select.placeholder' | translate"
+              fluid="true"
+              size="large"
+              appendTo="body"
+            />
+          </div>
+
+          <div class="col-span-12 md:col-span-4">
+            <form-label for="phone" label="phone.label"></form-label>
+            <p-inputmask
+              formControlName="phone"
+              mask="999 999 999"
+              [placeholder]="'phone.placeholder' | translate"
+              fluid="true"
+              size="large"
+              inputmode="numeric"
+            />
+          </div>
+
+          <div class="col-span-12" formGroupName="address">
+            <div class="grid grid-cols-12 gap-x-4 gap-y-6">
+              <div class="col-span-12">
+                <form-title title="address.label" description="address.description" class="mt-6"></form-title>
+              </div>
+
+              <div class="col-span-12 md:col-span-6">
+                <form-label for="street" label="address.street.label"></form-label>
+                <input
+                  id="street"
+                  formControlName="street"
+                  [placeholder]="'address.street.placeholder' | translate"
+                  type="text"
+                  fluid="true"
+                  pSize="large"
+                  pInputText
+                  autocomplete="off"
+                />
+              </div>
+
+              <div class="col-span-12 md:col-span-6">
+                <form-label for="city" label="address.city.label"></form-label>
+                <input
+                  id="city"
+                  formControlName="city"
+                  [placeholder]="'address.city.placeholder' | translate"
+                  type="text"
+                  fluid="true"
+                  pSize="large"
+                  pInputText
+                  autocomplete="off"
+                />
+              </div>
+
+              <div class="col-span-12 md:col-span-4">
+                <form-label for="state" label="address.state.label"></form-label>
+                <input
+                  id="state"
+                  formControlName="state"
+                  [placeholder]="'address.state.placeholder' | translate"
+                  type="text"
+                  fluid="true"
+                  pSize="large"
+                  pInputText
+                  autocomplete="off"
+                />
+              </div>
+
+              <div class="col-span-12 md:col-span-4">
+                <form-label for="country" label="address.country.label"></form-label>
+                <input
+                  id="country"
+                  formControlName="country"
+                  [placeholder]="'address.country.placeholder' | translate"
+                  type="text"
+                  fluid="true"
+                  pSize="large"
+                  pInputText
+                  autocomplete="off"
+                />
+              </div>
+
+              <div class="col-span-12 md:col-span-4">
+                <form-label for="zipCode" label="address.zipCode.label"></form-label>
+                <input
+                  id="zipCode"
+                  formControlName="zipCode"
+                  [placeholder]="'address.zipCode.placeholder' | translate"
+                  type="text"
+                  fluid="true"
+                  pSize="large"
+                  pInputText
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="col-span-12">
+            <form-label for="bio" label="bio.label"></form-label>
+            <textarea
+              id="bio"
+              formControlName="bio"
+              [placeholder]="'bio.placeholder' | translate"
+              rows="3"
+              cols="30"
+              autoResize="true"
+              fluid="true"
+              pTextarea
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTÓN -->
+  <div class="col-span-12 lg:col-span-5">
+    <div class="flex justify-end">
+      <p-button
+        (onClick)="saveChanges()"
+        [disabled]="mainForm.invalid"
+        [loading]="loading.update()"
+        [label]="'actions.saveChanges' | translate"
+        icon="ph-bold ph-floppy-disk"
+        iconPos="right"
+        [raised]="true"
+        size="large"
+        fluid="true"
+        styleClass="py-3! px-8!"
+        class="w-full sm:w-auto"
+      />
+    </div>
+  </div>
+</form>

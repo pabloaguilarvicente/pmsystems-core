@@ -6,11 +6,11 @@ import { LocalStorageService } from '../../services/localstorage.service';
 import { LOCAL_STORAGE_KEYS } from '../../helpers/constant.helper';
 import { TranslateService } from '@ngx-translate/core';
 import { PrimeNG } from 'primeng/config';
-import { UiSettings } from '../../models/core.model';
+import { AppearanceSettings } from '../../models/core.model';
 import { applyPrimaryPalette } from '../preset';
 import { getPrimaryColor } from '../../helpers/utils.helper';
 
-export type ColorScheme = 'light' | 'dark';
+export type Theme = 'light' | 'dark';
 export type MenuMode = 'static' | 'overlay' | 'slim-plus' | 'slim' | 'horizontal' | 'reveal' | 'drawer';
 export type MenuProfilePosition = 'start' | 'end';
 export type Language = 'es' | 'en';
@@ -66,7 +66,7 @@ export class LayoutService {
     primary: 'primary',
     surface: null,
     darkTheme: false,
-    menuMode: 'drawer',
+    menuMode: 'static',
     menuTheme: 'light',
     topbarTheme: 'light',
     menuProfilePosition: 'end',
@@ -186,14 +186,14 @@ export class LayoutService {
   }
 
   private loadConfigFromStorage(): void {
-    const savedSettings = this.localStorageService.get<UiSettings>(LOCAL_STORAGE_KEYS.uiSettings);
+    const savedSettings = this.localStorageService.get<AppearanceSettings>(LOCAL_STORAGE_KEYS.appearanceSettings);
 
     if (!savedSettings) {
       this.toggleDarkMode();
       return;
     }
 
-    const isDark = savedSettings.colorScheme === 'dark';
+    const isDark = savedSettings.theme === 'dark';
     const language = savedSettings.language || 'es';
     const primaryColor = getPrimaryColor();
 
@@ -203,7 +203,7 @@ export class LayoutService {
       menuMode: savedSettings.menuMode,
       menuTheme: isDark ? 'dark' : 'light',
       topbarTheme: isDark ? 'dark' : 'light',
-      menuProfilePosition: savedSettings.menuProfileMode,
+      menuProfilePosition: savedSettings.menuProfilePosition,
       language,
       primaryColor,
     });
@@ -220,10 +220,10 @@ export class LayoutService {
 
   private saveConfigToStorage(): void {
     const config = this.layoutConfig();
-    const themeSettings: UiSettings = {
-      colorScheme: config.darkTheme ? 'dark' : 'light',
+    const themeSettings: AppearanceSettings = {
+      theme: config.darkTheme ? 'dark' : 'light',
       menuMode: config.menuMode,
-      menuProfileMode: config.menuProfilePosition,
+      menuProfilePosition: config.menuProfilePosition,
       language: config.language,
       primaryColor: config.primaryColor,
     };
@@ -232,7 +232,7 @@ export class LayoutService {
 
     // Solo guardar si la configuración cambió
     if (this.lastSavedConfig !== currentConfigStr) {
-      this.localStorageService.set(LOCAL_STORAGE_KEYS.uiSettings, themeSettings);
+      this.localStorageService.set(LOCAL_STORAGE_KEYS.appearanceSettings, themeSettings);
       this.lastSavedConfig = currentConfigStr;
     }
   }

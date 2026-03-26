@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { TranslateModule } from '@ngx-translate/core';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
-import { CreateUserRequest, UserGender, UserRole, UserStatus } from '../../models/users.model';
+import { CreateUserRequest } from '../../models/users.model';
 import { GENDERS, ROLES, STATUS } from '../../../../core/helpers/constant.helper';
 import { ButtonModule } from 'primeng/button';
 import { FormLabel } from '../../../../core/components/app-forms/form-label';
@@ -17,6 +17,7 @@ import { ToastService } from '../../../../core/services/toast.service';
 import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
 import { LoadingState } from '../../../../core/models/core.model';
+import { UserGender, UserRole, UserStatus } from '../../../account/models/account.model';
 
 @Component({
   selector: 'users-register',

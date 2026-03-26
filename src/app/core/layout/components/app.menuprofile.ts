@@ -39,13 +39,6 @@ import { AuthService } from '../../../modules/auth/services/auth.service';
 
     @if (menuProfileActive()) {
       <ul [@menu]="isHorizontal() ? 'overlay' : 'inline'">
-        <li [pTooltip]="'preferences.label' | translate" [tooltipDisabled]="isTooltipDisabled()">
-          <button class="cursor-pointer" (click)="toggleConfigSidebar()">
-            <i class="ph-thin ph-faders"></i>
-            <span>{{ 'preferences.label' | translate }}</span>
-          </button>
-        </li>
-
         <li [pTooltip]="'profile.label' | translate" [tooltipDisabled]="isTooltipDisabled()">
           <button class="cursor-pointer" (click)="redirectProfile()">
             <i class="ph-thin ph-user-rectangle"></i>
@@ -152,20 +145,6 @@ export class AppMenuProfile implements OnDestroy {
   toggleMenu(event: Event) {
     event.stopPropagation();
     this.layoutService.onMenuProfileToggle();
-  }
-
-  toggleConfigSidebar() {
-    let layoutState = this.layoutService.layoutState();
-
-    if (this.layoutService.isSidebarActive()) {
-      layoutState.overlayMenuActive = false;
-      layoutState.overlaySubmenuActive = false;
-      layoutState.staticMenuMobileActive = false;
-      layoutState.menuHoverActive = false;
-      layoutState.configSidebarVisible = false;
-    }
-    layoutState.configSidebarVisible = !layoutState.configSidebarVisible;
-    this.layoutService.layoutState.set({ ...layoutState });
   }
 
   public logout() {

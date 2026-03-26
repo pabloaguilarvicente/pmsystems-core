@@ -57,7 +57,7 @@ const MainPreset = definePreset(Aura, {
         borderRadius: '0 0 var(--border-radius) var(--border-radius)',
       },
     },
-    tabs: { tab: { color: 'var(--text-color)' } },
+    tabs: { tab: { color: 'var(--text-color)' }, tabpanel: { padding: '1.5rem 0 0 0' } },
   },
 });
 

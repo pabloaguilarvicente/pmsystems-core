@@ -3,8 +3,9 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
 import { Observable } from 'rxjs';
 import { ApiListResponse, ApiResponse, buildHttpParams } from '../../../core/helpers/api.helper';
-import { CreateUserRequest, UpdateUserRequest, User, UserFiltersParams } from '../models/users.model';
+import { CreateUserRequest, UpdateUserRequest, UserFiltersParams } from '../models/users.model';
 import { PROGRESS_BAR } from '../../../core/interceptors/progress-bar.interceptor';
+import { User } from '../../account/models/account.model';
 
 @Injectable()
 export class UsersService {

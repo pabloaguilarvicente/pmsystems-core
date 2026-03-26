@@ -16,7 +16,7 @@ export function markAllDirty(group: FormGroup): void {
 }
 
 export function getPrimaryColor(): string {
-  const savedSettings = localStorage.getItem(LOCAL_STORAGE_KEYS.uiSettings);
+  const savedSettings = localStorage.getItem(LOCAL_STORAGE_KEYS.appearanceSettings);
   const color = savedSettings ? (JSON.parse(savedSettings)?.primaryColor ?? PRIMARY_COLOR) : PRIMARY_COLOR;
   return color;
 }

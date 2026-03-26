@@ -1,16 +1,16 @@
 import { Component, inject, signal } from '@angular/core';
-import { User } from '../../models/users.model';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ButtonModule } from 'primeng/button';
 import { TranslateModule } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { AvatarModule } from 'primeng/avatar';
 import { TagModule } from 'primeng/tag';
-import { DatePipe, NgClass } from '@angular/common';
+import { DatePipe } from '@angular/common';
+import { User } from '../../../account/models/account.model';
 
 @Component({
   selector: 'user-detail-dialog',
-  imports: [ButtonModule, TranslateModule, AvatarModule, TagModule, DatePipe, NgClass],
+  imports: [ButtonModule, TranslateModule, AvatarModule, TagModule, DatePipe],
   templateUrl: './user-detail-dialog.html',
 })
 export class UserDetailDialog {

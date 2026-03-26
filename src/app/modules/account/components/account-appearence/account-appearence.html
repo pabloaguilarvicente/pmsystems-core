@@ -1,1 +1,403 @@
-<p>account-appearence works!</p>
+<div class="grid grid-cols-12 gap-x-4 gap-y-6">
+  <div class="col-span-12 lg:col-span-7">
+    <div class="grid grid-cols-12 gap-x-4 gap-y-6">
+      <!-- ── Language ─────────────────────────────────────────────────── -->
+      <div class="col-span-12">
+        <form-title title="language.label" description="language.description"></form-title>
+      </div>
+
+      <div class="col-span-12">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="flex cursor-pointer flex-col" (click)="setPendingLanguage('es')">
+            <div
+              class="relative flex h-20 items-center justify-center overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
+              [ngClass]="'border-surface-200 dark:border-surface-700'"
+            >
+              @if (pending().language === 'es') {
+              <div class="absolute top-1.5 right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-white shadow-sm">
+                <i class="ph-bold ph-check text-xs"></i>
+              </div>
+              }
+              <img src="images/flags/PE.png" alt="" width="30" />
+            </div>
+            <div
+              class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
+              [class.text-primary]="pending().language === 'es'"
+            >
+              {{ 'language.spanish' | translate }}
+            </div>
+          </div>
+
+          <div class="flex cursor-pointer flex-col" (click)="setPendingLanguage('en')">
+            <div
+              class="relative flex h-20 items-center justify-center overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
+              [ngClass]="'border-surface-200 dark:border-surface-700'"
+            >
+              @if (pending().language === 'en') {
+              <div class="absolute top-1.5 right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-white shadow-sm">
+                <i class="ph-bold ph-check text-xs"></i>
+              </div>
+              }
+              <img src="images/flags/US.png" alt="" width="30" />
+            </div>
+            <div
+              class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
+              [class.text-primary]="pending().language === 'en'"
+            >
+              {{ 'language.english' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Color Scheme ──────────────────────────────────────────────── -->
+      <div class="col-span-12">
+        <form-title title="theme.label" description="theme.description"></form-title>
+      </div>
+
+      <div class="col-span-12">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="flex cursor-pointer flex-col" (click)="setPendingDarkTheme(false)">
+            <div
+              class="relative flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
+              [ngClass]="'border-surface-200 dark:border-surface-700'"
+            >
+              @if (!pending().darkTheme) {
+              <div
+                class="absolute top-1.5 right-1.5 z-10 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-white shadow-sm"
+              >
+                <i class="ph-bold ph-check text-xs"></i>
+              </div>
+              }
+              <div class="flex flex-auto flex-col bg-white">
+                <div class="h-3 bg-gray-100 border-b border-gray-200">
+                  <div class="mr-1.5 flex h-full items-center justify-end">
+                    <div class="ml-1 h-1 w-1 rounded-full bg-gray-400"></div>
+                    <div class="ml-1 h-1 w-1 rounded-full bg-gray-400"></div>
+                  </div>
+                </div>
+                <div class="flex flex-auto bg-gray-50 p-2">
+                  <div class="w-full space-y-1">
+                    <div class="h-1 w-3/4 rounded-sm bg-gray-300"></div>
+                    <div class="h-1 w-full rounded-sm bg-gray-200"></div>
+                    <div class="h-1 w-2/3 rounded-sm bg-gray-200"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
+              [class.text-primary]="!pending().darkTheme"
+            >
+              {{ 'theme.light' | translate }}
+            </div>
+          </div>
+
+          <div class="flex cursor-pointer flex-col" (click)="setPendingDarkTheme(true)">
+            <div
+              class="relative flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
+              [ngClass]="'border-surface-200 dark:border-surface-700'"
+            >
+              @if (pending().darkTheme) {
+              <div
+                class="absolute top-1.5 right-1.5 z-10 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-white shadow-sm"
+              >
+                <i class="ph-bold ph-check text-xs"></i>
+              </div>
+              }
+              <div class="flex flex-auto flex-col bg-gray-900">
+                <div class="h-3 bg-gray-800 border-b border-gray-700">
+                  <div class="mr-1.5 flex h-full items-center justify-end">
+                    <div class="ml-1 h-1 w-1 rounded-full bg-gray-500"></div>
+                    <div class="ml-1 h-1 w-1 rounded-full bg-gray-500"></div>
+                  </div>
+                </div>
+                <div class="flex flex-auto bg-gray-950 p-2">
+                  <div class="w-full space-y-1">
+                    <div class="h-1 w-3/4 rounded-sm bg-gray-600"></div>
+                    <div class="h-1 w-full rounded-sm bg-gray-700"></div>
+                    <div class="h-1 w-2/3 rounded-sm bg-gray-700"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
+              [class.text-primary]="pending().darkTheme"
+            >
+              {{ 'theme.dark' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Primary Color ─────────────────────────────────────────────── -->
+      <div class="col-span-12">
+        <form-title title="theme.primaryColor" description="theme.primaryColorDescription"></form-title>
+      </div>
+
+      <div class="col-span-12">
+        <color-twitter
+          [color]="pending().primaryColor"
+          [colors]="colors"
+          (onChangeComplete)="setPendingColor($event.color.hex)"
+        ></color-twitter>
+      </div>
+
+      <!-- ── Menu Type ────────────────────────────────────────────────── -->
+      <div class="col-span-12">
+        <form-title title="menu.type" description="menu.description"></form-title>
+      </div>
+
+      <div class="col-span-12">
+        <div class="grid grid-cols-2 gap-4">
+          <!-- Static -->
+          <div class="flex cursor-pointer flex-col" (click)="setPendingMenuMode('static')">
+            <div
+              class="relative flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
+              [ngClass]="'border-surface-200 dark:border-surface-700'"
+            >
+              @if (pending().menuMode === 'static') {
+              <div
+                class="absolute top-1.5 right-1.5 z-10 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-white shadow-sm"
+              >
+                <i class="ph-bold ph-check text-xs"></i>
+              </div>
+              }
+              <div class="w-8 bg-surface-100 dark:bg-surface-800">
+                <div class="mx-1.5 mt-3 space-y-1">
+                  <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                  <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                  <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                  <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                </div>
+              </div>
+              <div class="flex flex-auto flex-col border-l border-surface-200 dark:border-surface-700">
+                <div class="h-3 bg-surface-100 dark:bg-surface-800">
+                  <div class="mr-1.5 flex h-full items-center justify-end">
+                    <div class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"></div>
+                    <div class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"></div>
+                  </div>
+                </div>
+                <div class="flex flex-auto border-t border-surface-200 bg-surface-0 dark:border-surface-700 dark:bg-surface-900"></div>
+              </div>
+            </div>
+            <div
+              class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
+              [class.text-primary]="pending().menuMode === 'static'"
+            >
+              {{ 'menu.static' | translate }}
+            </div>
+          </div>
+
+          <!-- Slim -->
+          <div class="flex cursor-pointer flex-col" (click)="setPendingMenuMode('slim')">
+            <div
+              class="relative flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
+              [ngClass]="'border-surface-200 dark:border-surface-700'"
+            >
+              @if (pending().menuMode === 'slim') {
+              <div
+                class="absolute top-1.5 right-1.5 z-10 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-white shadow-sm"
+              >
+                <i class="ph-bold ph-check text-xs"></i>
+              </div>
+              }
+              <div class="w-4 bg-surface-100 dark:bg-surface-800">
+                <div class="mx-1 mt-3 space-y-1">
+                  <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                  <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                  <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                  <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                </div>
+              </div>
+              <div class="flex flex-auto flex-col border-l border-surface-200 dark:border-surface-700">
+                <div class="h-3 bg-surface-100 dark:bg-surface-800">
+                  <div class="mr-1.5 flex h-full items-center justify-end">
+                    <div class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"></div>
+                    <div class="ml-1 h-1 w-1 rounded-full bg-surface-400 dark:bg-surface-600"></div>
+                  </div>
+                </div>
+                <div class="flex flex-auto border-t border-surface-200 bg-surface-0 dark:border-surface-700 dark:bg-surface-900"></div>
+              </div>
+            </div>
+            <div
+              class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
+              [class.text-primary]="pending().menuMode === 'slim'"
+            >
+              {{ 'menu.slim' | translate }}
+            </div>
+          </div>
+
+          <!-- Drawer -->
+          <div class="flex cursor-pointer flex-col" (click)="setPendingMenuMode('drawer')">
+            <div
+              class="relative flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
+              [ngClass]="'border-surface-200 dark:border-surface-700'"
+            >
+              @if (pending().menuMode === 'drawer') {
+              <div
+                class="absolute top-1.5 right-1.5 z-10 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-white shadow-sm"
+              >
+                <i class="ph-bold ph-check text-xs"></i>
+              </div>
+              }
+              <div class="flex flex-auto flex-col">
+                <div class="h-3 bg-surface-100 dark:bg-surface-800">
+                  <div class="ml-1.5 flex h-full items-center gap-1">
+                    <div class="h-1 w-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                  </div>
+                </div>
+                <div class="flex flex-auto bg-surface-0 dark:bg-surface-900">
+                  <div class="w-8 border-r border-surface-200 dark:border-surface-700 bg-surface-100 dark:bg-surface-800">
+                    <div class="mx-1.5 mt-2 space-y-1">
+                      <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                      <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                      <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
+              [class.text-primary]="pending().menuMode === 'drawer'"
+            >
+              {{ 'menu.drawer' | translate }}
+            </div>
+          </div>
+
+          <!-- Horizontal -->
+          <div class="flex cursor-pointer flex-col" (click)="setPendingMenuMode('horizontal')">
+            <div
+              class="relative flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
+              [ngClass]="'border-surface-200 dark:border-surface-700'"
+            >
+              @if (pending().menuMode === 'horizontal') {
+              <div
+                class="absolute top-1.5 right-1.5 z-10 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-white shadow-sm"
+              >
+                <i class="ph-bold ph-check text-xs"></i>
+              </div>
+              }
+              <div class="flex flex-auto flex-col">
+                <div class="h-3 bg-surface-100 dark:bg-surface-800">
+                  <div class="mx-1.5 flex h-full items-center gap-1">
+                    <div class="h-1 w-3 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                    <div class="h-1 w-3 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                    <div class="h-1 w-3 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                  </div>
+                </div>
+                <div class="flex flex-auto bg-surface-0 dark:bg-surface-900"></div>
+              </div>
+            </div>
+            <div
+              class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
+              [class.text-primary]="pending().menuMode === 'horizontal'"
+            >
+              {{ 'menu.horizontal' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Menu Profile Position ──────────────────────────────────── -->
+      <div class="col-span-12">
+        <form-title title="profile.position" description="profile.positionDescription"></form-title>
+      </div>
+
+      <div class="col-span-12">
+        <div class="grid grid-cols-2 gap-4">
+          <!-- Start -->
+          <div class="flex cursor-pointer flex-col" (click)="setPendingMenuProfilePosition('start')">
+            <div
+              class="relative flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
+              [ngClass]="'border-surface-200 dark:border-surface-700'"
+            >
+              @if (pending().menuProfilePosition === 'start') {
+              <div
+                class="absolute top-1.5 right-1.5 z-10 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-white shadow-sm"
+              >
+                <i class="ph-bold ph-check text-xs"></i>
+              </div>
+              }
+              <div class="w-8 bg-surface-100 dark:bg-surface-800">
+                <div class="mx-1.5 mt-2 mb-2 pb-2 border-b border-surface-200 dark:border-surface-700">
+                  <div class="h-3 w-3 mx-auto rounded-full bg-surface-300 dark:bg-surface-600"></div>
+                </div>
+                <div class="mx-1.5 space-y-1">
+                  <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                  <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                  <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                </div>
+              </div>
+              <div class="flex flex-auto flex-col border-l border-surface-200 dark:border-surface-700">
+                <div class="h-3 bg-surface-100 dark:bg-surface-800"></div>
+                <div class="flex flex-auto border-t border-surface-200 bg-surface-0 dark:border-surface-700 dark:bg-surface-900"></div>
+              </div>
+            </div>
+            <div
+              class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
+              [class.text-primary]="pending().menuProfilePosition === 'start'"
+            >
+              {{ 'time.start' | translate }}
+            </div>
+          </div>
+
+          <!-- End -->
+          <div class="flex cursor-pointer flex-col" (click)="setPendingMenuProfilePosition('end')">
+            <div
+              class="relative flex h-20 overflow-hidden rounded-md border-2 transition-all hover:opacity-80"
+              [ngClass]="'border-surface-200 dark:border-surface-700'"
+            >
+              @if (pending().menuProfilePosition === 'end') {
+              <div
+                class="absolute top-1.5 right-1.5 z-10 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-white shadow-sm"
+              >
+                <i class="ph-bold ph-check text-xs"></i>
+              </div>
+              }
+              <div class="w-8 bg-surface-100 dark:bg-surface-800">
+                <div class="mx-1.5 mt-2 space-y-1 flex-auto">
+                  <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                  <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                  <div class="h-1 rounded-sm bg-surface-300 dark:bg-surface-600"></div>
+                </div>
+                <div class="mx-1.5 mt-6 pt-2 border-t border-surface-200 dark:border-surface-700">
+                  <div class="h-3 w-3 mx-auto rounded-full bg-surface-300 dark:bg-surface-600"></div>
+                </div>
+              </div>
+              <div class="flex flex-auto flex-col border-l border-surface-200 dark:border-surface-700">
+                <div class="h-3 bg-surface-100 dark:bg-surface-800"></div>
+                <div class="flex flex-auto border-t border-surface-200 bg-surface-0 dark:border-surface-700 dark:bg-surface-900"></div>
+              </div>
+            </div>
+            <div
+              class="text-surface-600 dark:text-surface-400 mt-2 text-center text-sm font-thin"
+              [class.text-primary]="pending().menuProfilePosition === 'end'"
+            >
+              {{ 'time.end' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 lg:col-span-5">
+    <div class="flex justify-end">
+      <p-button
+        (onClick)="saveChanges()"
+        [disabled]="!hasChanges()"
+        [label]="'actions.saveChanges' | translate"
+        icon="ph-bold ph-floppy-disk"
+        iconPos="right"
+        [raised]="true"
+        size="large"
+        fluid="true"
+        styleClass="py-3! px-8!"
+        class="w-full sm:w-auto"
+      />
+    </div>
+  </div>
+</div>
