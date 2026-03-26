@@ -22,7 +22,7 @@ export class UsersService {
     return this.http.get<ApiResponse<User>>(`${this.API_URL}/${this.PATH}/${id}`);
   }
 
-  create(user: CreateUserRequest): Observable<ApiResponse<User>> {
+  register(user: CreateUserRequest): Observable<ApiResponse<User>> {
     return this.http.post<ApiResponse<User>>(`${this.API_URL}/${this.PATH}`, user);
   }
 

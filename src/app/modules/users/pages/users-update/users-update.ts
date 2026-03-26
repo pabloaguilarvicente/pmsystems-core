@@ -19,6 +19,7 @@ import { Router } from '@angular/router';
 import { SkeletonForm } from '../../../../core/components/app-skeletons/skeleton-form';
 import { LoadingState } from '../../../../core/models/core.model';
 import { UserGender, UserRole, UserStatus } from '../../../account/models/account.model';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'users-update',
@@ -96,17 +97,18 @@ export class UsersUpdate {
       this.loading.update.set(true);
       const formValue = this.mainForm.getRawValue();
 
-      this.usersService.update(this.id()!, formValue as unknown as UpdateUserRequest).subscribe({
-        next: (response) => {
-          this.toastService.success({ title: 'Éxito', description: response.message });
-          this.loading.update.set(false);
-          this.redirectBack();
-        },
-        error: (error) => {
-          this.loading.update.set(false);
-          this.toastService.error({ title: 'Error', description: error.error.message });
-        },
-      });
+      this.usersService
+        .update(this.id()!, formValue as unknown as UpdateUserRequest)
+        .pipe(finalize(() => this.loading.update.set(false)))
+        .subscribe({
+          next: (response) => {
+            this.toastService.success({ title: 'Éxito', description: response.message });
+            this.redirectBack();
+          },
+          error: (error) => {
+            this.toastService.error({ title: 'Error', description: error.error.message });
+          },
+        });
     } else {
       this.handleInvalidForm();
     }

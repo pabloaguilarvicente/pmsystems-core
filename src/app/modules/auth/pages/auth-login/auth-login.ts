@@ -6,11 +6,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { PasswordModule } from 'primeng/password';
 import { CheckboxModule } from 'primeng/checkbox';
-import { finalize } from 'rxjs/operators';
 import { markAllDirty } from '../../../../core/helpers/utils.helper';
 import { ToastService } from '../../../../core/services/toast.service';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 import { LoginRequest } from '../../models/auth.model';
 import { Role } from '../../../account/models/account.model';
 import { LocalStorageService } from '../../../../core/services/localstorage.service';
@@ -34,7 +32,6 @@ import { environment } from '../../../../../environments/environment.development
 export class AuthLogin {
   private readonly toastService = inject(ToastService);
   private readonly localStorageService = inject(LocalStorageService);
-  private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
 
   private readonly appSettings = this.localStorageService.get<AppSettings>(LOCAL_STORAGE_KEYS.appSettings);
@@ -74,23 +71,9 @@ export class AuthLogin {
         rememberMe: this.mainForm.controls.rememberMe.value,
         role: this.mainForm.controls.role.value,
       };
-
-      this.authService
-        .login(payload)
-        .pipe(finalize(() => this.loading.api.set(false)))
-        .subscribe({
-          next: () => {
-            this.persistRememberMe();
-            this.router.navigate(['/analytics']);
-          },
-          error: (err) => {
-            this.toastService.error({
-              title: 'auth.error',
-              description: err?.message ?? 'auth.invalid_credentials',
-              translate: true,
-            });
-          },
-        });
+      console.log(payload);
+      this.persistRememberMe();
+      this.router.navigate(['/analytics']);
     } else {
       markAllDirty(this.mainForm);
       this.toastService.error({ title: 'status.pending', description: 'form.invalid', translate: true });

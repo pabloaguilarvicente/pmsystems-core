@@ -18,6 +18,7 @@ import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
 import { LoadingState } from '../../../../core/models/core.model';
 import { UserGender, UserRole, UserStatus } from '../../../account/models/account.model';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'users-register',
@@ -68,17 +69,18 @@ export class UsersRegister {
       this.loading.register.set(true);
       const formValue = this.mainForm.getRawValue();
 
-      this.usersService.create(formValue as unknown as CreateUserRequest).subscribe({
-        next: (response) => {
-          this.toastService.success({ title: 'Éxito', description: response.message });
-          this.loading.register.set(false);
-          this.redirectBack();
-        },
-        error: (error) => {
-          this.loading.register.set(false);
-          this.toastService.error({ title: 'Error', description: error.error.message });
-        },
-      });
+      this.usersService
+        .register(formValue as unknown as CreateUserRequest)
+        .pipe(finalize(() => this.loading.register.set(false)))
+        .subscribe({
+          next: (response) => {
+            this.toastService.success({ title: 'Éxito', description: response.message });
+            this.redirectBack();
+          },
+          error: (error) => {
+            this.toastService.error({ title: 'Error', description: error.error.message });
+          },
+        });
     } else {
       this.handleInvalidForm();
     }
