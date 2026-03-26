@@ -19,19 +19,37 @@
         "pin": "Anclar",
         "return": "Regresar",
         "save": "Guardar",
+        "saveChanges": "Guardar cambios",
         "search": "Buscar",
+        "share": "Compartir",
         "show": "Mostrar",
         "unpin": "Desanclar",
         "update": "Actualizar",
-        "upload": "Subir",
-        "share":"Compartir"
+        "upload": "Subir"
     },
     "address": {
-        "city": "Ciudad",
-        "country": "País",
-        "state": "Estado / Región",
-        "street": "Dirección",
-        "zipCode": "Código postal"
+        "city": {
+            "label": "Ciudad",
+            "placeholder": "Ingrese la ciudad"
+        },
+        "country": {
+            "label": "País",
+            "placeholder": "Ingrese el país"
+        },
+        "description": "Sección que contiene la información de la dirección del usuario.",
+        "label": "Dirección",
+        "state": {
+            "label": "Estado / Provincia",
+            "placeholder": "Ingrese el estado o provincia"
+        },
+        "street": {
+            "label": "Calle",
+            "placeholder": "Ingrese la calle"
+        },
+        "zipCode": {
+            "label": "Código Postal",
+            "placeholder": "Ingrese el código postal"
+        }
     },
     "analytics": {
         "label": "Analítica",
@@ -209,6 +227,7 @@
         "placeholder": "Seleccionar género"
     },
     "language": {
+        "description": "Idioma en el que se utilizará la plataforma",
         "english": "Inglés",
         "label": "Idioma",
         "spanish": "Español"
@@ -222,6 +241,7 @@
         "label": "Administración"
     },
     "menu": {
+        "description": "Configuración del tipo y comportamiento del menú en la plataforma",
         "drawer": "Cajón",
         "horizontal": "Horizontal",
         "label": "Menú",
@@ -240,7 +260,16 @@
     },
     "notifications": {
         "count": "Tienes <strong>{{value}}</strong> notificaciones nuevas",
-        "label": "Notificaciones"
+        "description": "Administra cómo y cuándo deseas recibir notificaciones.",
+        "emailNotifications": {
+            "description": "Recibe notificaciones importantes a través de tu correo electrónico.",
+            "label": "Notificaciones por correo"
+        },
+        "label": "Notificaciones",
+        "notificationsEnabled": {
+            "description": "Habilita o deshabilita todas las notificaciones de la aplicación.",
+            "label": "Activar notificaciones"
+        }
     },
     "options": {
         "label": "Opciones"
@@ -263,6 +292,7 @@
         "placeholder": "Ingrese su número de teléfono"
     },
     "preferences": {
+        "description": "Define tus preferencias para una mejor experiencia de uso",
         "emailNotifications": "Notificaciones por correo",
         "label": "Preferencias",
         "notifications": "Notificaciones",
@@ -451,7 +481,8 @@
     "profile": {
         "description": "Sección que contiene la información personal y complementaria del usuario.",
         "label": "Perfil",
-        "position": "Posición del Perfil"
+        "position": "Posición del Perfil",
+        "positionDescription": "Define si el widget de perfil se muestra en la parte superior o inferior del menu"
     },
     "registered": {
         "label": "Registrado"
@@ -476,13 +507,45 @@
     "security": {
         "credentials": "Credenciales",
         "description": "Protege tu cuenta gestionando accesos y opciones de seguridad",
-        "emailVerified": "Correo verificado",
+        "emailVerified": {
+            "description": "Tu dirección de correo ha sido confirmada.",
+            "label": "Correo electrónico verificado"
+        },
         "failedAttempts": "Intentos fallidos de inicio de sesión",
+        "failedLoginAttempts": {
+            "label": "Intentos fallidos"
+        },
         "label": "Seguridad",
         "lastLogin": "Último inicio de sesión",
+        "lastLoginAt": {
+            "label": "Último inicio de sesión"
+        },
+        "lastLoginIp": {
+            "label": "IP del último acceso"
+        },
+        "lockedUntil": {
+            "label": "Bloqueado hasta"
+        },
         "passwordChanged": "Último cambio de contraseña",
-        "phoneVerified": "Teléfono verificado",
-        "twoFactor": "Autenticación en dos factores"
+        "passwordChangedAt": {
+            "label": "Contraseña modificada el"
+        },
+        "phoneVerified": {
+            "description": "Tu número de teléfono ha sido confirmado.",
+            "label": "Teléfono verificado"
+        },
+        "twoFactor": {
+            "description": "Añade una capa adicional de seguridad a tu cuenta.",
+            "label": "Autenticación de dos factores"
+        },
+        "twoFactorEnabled": {
+            "description": "Al iniciar sesión se te pedirá un código adicional además de tu contraseña.",
+            "label": "Activar autenticación de dos factores"
+        },
+        "verification": {
+            "description": "Indica si tu correo electrónico y teléfono han sido verificados.",
+            "label": "Estado de verificación"
+        }
     },
     "select": {
         "label": "Seleccionar",
@@ -500,7 +563,9 @@
         "loading": "Cargando",
         "pending": "Pendiente",
         "placeholder": "Seleccionar estado",
-        "success": "Éxito"
+        "success": "Éxito",
+        "unverified": "No verificado",
+        "verified": "Verificado"
     },
     "support": {
         "contact": "Contactar soporte",
@@ -513,9 +578,11 @@
     "theme": {
         "customColor": "Color personalizado",
         "dark": "Oscuro",
-        "label": "Esquema de Color",
+        "description": "Tema visual que se utilizará en la plataforma",
+        "label": "Tema",
         "light": "Claro",
-        "primaryColor": "Color primario"
+        "primaryColor": "Color primario",
+        "primaryColorDescription": "Color principal que define la apariencia de la plataforma"
     },
     "time": {
         "ago": "atrás",
@@ -523,6 +590,10 @@
         "realtime": "Tiempo real",
         "start": "Inicio",
         "today": "Hoy"
+    },
+    "timezone": {
+        "description": "Selecciona tu zona horaria para mostrar correctamente la fecha y hora.",
+        "label": "Zona horaria"
     },
     "tools": {
         "label": "Herramientas"

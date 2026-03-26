@@ -19,6 +19,7 @@
         "pin": "Pin",
         "return": "Return",
         "save": "Save",
+        "saveChanges": "Guardar cambios",
         "search": "Search",
         "share": "Share",
         "show": "Show",
@@ -27,11 +28,28 @@
         "upload": "Upload"
     },
     "address": {
-        "city": "City",
-        "country": "Country",
-        "state": "State",
-        "street": "Street",
-        "zipCode": "ZIP Code"
+        "city": {
+            "label": "City",
+            "placeholder": "Enter city"
+        },
+        "country": {
+            "label": "Country",
+            "placeholder": "Enter country"
+        },
+        "description": "Section containing the user's address information.",
+        "label": "Address",
+        "state": {
+            "label": "State / Province",
+            "placeholder": "Enter state or province"
+        },
+        "street": {
+            "label": "Street",
+            "placeholder": "Enter street"
+        },
+        "zipCode": {
+            "label": "ZIP Code",
+            "placeholder": "Enter ZIP code"
+        }
     },
     "analytics": {
         "label": "Analytics",
@@ -215,6 +233,7 @@
         "placeholder": "Select gender"
     },
     "language": {
+        "description": "Language in which the platform will be used",
         "english": "English",
         "label": "Language",
         "spanish": "Spanish"
@@ -228,6 +247,7 @@
         "label": "Management"
     },
     "menu": {
+        "description": "Configuration of the menu type and behavior in the platform",
         "drawer": "Drawer",
         "horizontal": "Horizontal",
         "label": "Menu",
@@ -246,7 +266,16 @@
     },
     "notifications": {
         "count": "You have <strong>{{value}}</strong> new notifications",
-        "label": "Notifications"
+        "description": "Manage how and when you want to receive notifications.",
+        "emailNotifications": {
+            "description": "Receive important notifications via email.",
+            "label": "Email notifications"
+        },
+        "label": "Notifications",
+        "notificationsEnabled": {
+            "description": "Turn all application notifications on or off.",
+            "label": "Enable notifications"
+        }
     },
     "options": {
         "label": "Options"
@@ -269,6 +298,7 @@
         "placeholder": "Enter your phone number"
     },
     "preferences": {
+        "description": "Set your preferences for a better user experience",
         "emailNotifications": "Email notifications",
         "label": "Preferences",
         "notifications": "Notifications",
@@ -457,7 +487,8 @@
     "profile": {
         "description": "Section containing the user's personal and additional information.",
         "label": "Profile",
-        "position": "Profile position"
+        "position": "Profile position",
+        "positionDescription": "Defines whether the profile widget is displayed at the top or bottom of the menu"
     },
     "registered": {
         "label": "Registered"
@@ -482,13 +513,45 @@
     "security": {
         "credentials": "Credentials",
         "description": "Protect your account by managing access, authentication, and security settings",
-        "emailVerified": "Verified email",
+        "emailVerified": {
+            "description": "Your email address has been confirmed.",
+            "label": "Email verified"
+        },
         "failedAttempts": "Failed login attempts",
+        "failedLoginAttempts": {
+            "label": "Failed attempts"
+        },
         "label": "Security",
         "lastLogin": "Last login",
+        "lastLoginAt": {
+            "label": "Last login"
+        },
+        "lastLoginIp": {
+            "label": "Last login IP"
+        },
+        "lockedUntil": {
+            "label": "Locked until"
+        },
         "passwordChanged": "Last password change",
-        "phoneVerified": "Verified phone",
-        "twoFactor": "Two-factor authentication"
+        "passwordChangedAt": {
+            "label": "Password changed on"
+        },
+        "phoneVerified": {
+            "description": "Your phone number has been confirmed.",
+            "label": "Phone verified"
+        },
+        "twoFactor": {
+            "description": "Add an extra layer of security to your account.",
+            "label": "Two-factor authentication"
+        },
+        "twoFactorEnabled": {
+            "description": "When signing in, you will be asked for an additional code along with your password.",
+            "label": "Enable two-factor authentication"
+        },
+        "verification": {
+            "description": "Shows whether your email address and phone number have been verified.",
+            "label": "Verification status"
+        }
     },
     "select": {
         "label": "Select",
@@ -506,7 +569,9 @@
         "loading": "Loading",
         "pending": "Pending",
         "placeholder": "Select status",
-        "success": "Success"
+        "success": "Success",
+        "unverified": "Unverified",
+        "verified": "Verified"
     },
     "support": {
         "contact": "Contact support",
@@ -519,9 +584,11 @@
     "theme": {
         "customColor": "Custom Color",
         "dark": "Dark",
-        "label": "Color scheme",
+        "description": "Visual theme that will be used on the platform",
+        "label": "Theme",
         "light": "Light",
-        "primaryColor": "Primary color"
+        "primaryColor": "Primary color",
+        "primaryColorDescription": "Main color that defines the platform's appearance"
     },
     "time": {
         "ago": "ago",
@@ -529,6 +596,10 @@
         "realtime": "Real time",
         "start": "Start",
         "today": "Today"
+    },
+    "timezone": {
+        "description": "Select your time zone to display the correct date and time.",
+        "label": "Time zone"
     },
     "tools": {
         "label": "Tools"
